@@ -72,6 +72,9 @@
 		// Initialize dark mode toggle
 		initDarkMode();
 
+		// Register Service Worker
+		initServiceWorker();
+
 		// Re-initialize carousels when new posts are loaded (infinite scroll, etc.)
 		// Also handle post edits by clearing the processed flag
 		$(window).on(
@@ -1615,4 +1618,65 @@
 			);
 		}
 	}
+	// ========================================
+	// SERVICE WORKER REGISTRATION
+	// ========================================
+
+	function initServiceWorker() {
+		// Service Workers require HTTPS (or localhost)
+		if (!("serviceWorker" in navigator)) {
+			return;
+		}
+
+		var swUrl = (config.relative_path || "") + "/vasak-sw.js";
+
+		navigator.serviceWorker
+			.register(swUrl, {
+				// Scope "/" lets the SW intercept all requests on the origin.
+				// This works because the server sets Service-Worker-Allowed: /
+				scope: "/",
+				// updateViaCache: 'none' ensures the browser always fetches
+				// the SW script fresh (bypassing HTTP cache), so version
+				// bumps in sw.js are picked up immediately.
+				updateViaCache: "none",
+			})
+			.then(function (registration) {
+				console.log("[Vasak SW] Registrado, scope:", registration.scope);
+
+				// Check for updates on every page load
+				registration.update();
+
+				// When a new SW is waiting, activate it on next navigation
+				registration.addEventListener("updatefound", function () {
+					var newWorker = registration.installing;
+					if (!newWorker) return;
+
+					newWorker.addEventListener("statechange", function () {
+						if (
+							newWorker.state === "installed" &&
+							navigator.serviceWorker.controller
+						) {
+							// New version available — tell it to skip waiting
+							// so it activates without requiring a full browser close.
+							newWorker.postMessage({ type: "SKIP_WAITING" });
+							console.log("[Vasak SW] Nueva versión activada");
+						}
+					});
+				});
+			})
+			.catch(function (err) {
+				// SW registration failure is non-fatal — the site works without it
+				console.warn("[Vasak SW] Registro fallido:", err.message);
+			});
+
+		// When the SW takes control (after SKIP_WAITING), reload to use
+		// the new SW for all subsequent fetches.
+		var refreshing = false;
+		navigator.serviceWorker.addEventListener("controllerchange", function () {
+			if (refreshing) return;
+			refreshing = true;
+			window.location.reload();
+		});
+	}
+
 })();

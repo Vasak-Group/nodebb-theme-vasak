@@ -27,7 +27,7 @@ const defaults = {
 
 /**
  * Hook: static:app.load
- * Initialize routes for admin panel
+ * Initialize routes for admin panel + Service Worker route
  */
 theme.init = async function (params) {
 	const { router } = params;
@@ -44,6 +44,29 @@ theme.init = async function (params) {
 			});
 		},
 	);
+
+	// Service Worker route
+	// Serve the SW from /vasak-sw.js at the root origin so it can
+	// claim scope "/" via the Service-Worker-Allowed header.
+	// The actual file lives at static/sw.js (served by NodeBB's staticDirs).
+	const path = require("path");
+	const fs   = require("fs");
+
+	const swPath = path.join(__dirname, "static", "sw.js");
+
+	router.get("/vasak-sw.js", (req, res) => {
+		// Required: allow the SW to control the entire origin
+		res.setHeader("Service-Worker-Allowed", "/");
+		res.setHeader("Content-Type", "application/javascript; charset=utf-8");
+		// No-cache the SW itself so browsers always get the latest version
+		res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+
+		if (fs.existsSync(swPath)) {
+			res.sendFile(swPath);
+		} else {
+			res.status(404).send("// Service Worker not found");
+		}
+	});
 };
 
 /**
