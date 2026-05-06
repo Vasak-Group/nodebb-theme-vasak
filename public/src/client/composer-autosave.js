@@ -16,7 +16,10 @@
  *
  * STORAGE KEY: "vasak:draft:{cid}:{tid|new}" → { title, content, cid, tid, ts }
  */
-define("forum/vasak-autosave", ["alerts"], function (alerts) {
+define("forum/vasak-autosave", ["alerts", "forum/vasak-storage"], function (
+	alerts,
+	VasakStorage,
+) {
 	var Autosave = {};
 
 	// ── Configuración ──────────────────────────────────────────────────────
@@ -153,10 +156,9 @@ define("forum/vasak-autosave", ["alerts"], function (alerts) {
 		};
 
 		try {
-			localStorage.setItem(currentKey, JSON.stringify(draft));
+			VasakStorage.set(currentKey, draft);
 			showIndicatorSaved(draft.ts);
 		} catch (e) {
-			// localStorage lleno
 			showIndicatorError();
 		}
 	}
@@ -165,26 +167,18 @@ define("forum/vasak-autosave", ["alerts"], function (alerts) {
 
 	function loadDraft(key) {
 		if (!key) return null;
-		try {
-			var raw = localStorage.getItem(key);
-			if (!raw) return null;
-			var draft = JSON.parse(raw);
-			// Verificar expiración
-			if (Date.now() - draft.ts > EXPIRY_MS) {
-				localStorage.removeItem(key);
-				return null;
-			}
-			return draft;
-		} catch (e) {
+		var draft = VasakStorage.get(key);
+		if (!draft) return null;
+		if (Date.now() - draft.ts > EXPIRY_MS) {
+			VasakStorage.remove(key);
 			return null;
 		}
+		return draft;
 	}
 
 	function clearDraft(key) {
 		if (!key) return;
-		try {
-			localStorage.removeItem(key);
-		} catch (e) {}
+		VasakStorage.remove(key);
 		currentKey = null;
 	}
 

@@ -88,7 +88,12 @@
 					<div class="p-1 position-relative feed-image-section">
 						<div class="overflow-hidden rounded-1" style="max-height: 300px;">
 							<a href="{config.relative_path}/topic/{./topic.slug}">
-								<img class="w-100" src="{./topic.thumbs.0.url}" loading="lazy">
+								<img class="w-100"
+									src="{./topic.thumbs.0.url}"
+									alt=""
+									loading="lazy"
+									decoding="async"
+									sizes="(max-width: 576px) 100vw, (max-width: 992px) 80vw, 600px" />
 							</a>
 						</div>
 

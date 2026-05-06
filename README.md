@@ -59,6 +59,9 @@ Tema premium para NodeBB, construido sobre [Harmony](https://github.com/NodeBB/n
 | **Modo compacto** | Toggle feed/lista compacto (solo título + meta), persistido en localStorage |
 | **Búsqueda en topic** | Panel con input, resultados y navegación, activado con Ctrl+F |
 | **TOC automático** | Tabla de contenidos en sidebar para posts con 3+ headings, scroll spy |
+| **Panel de preferencias** | Modal accesible desde el sidebar: tema, fuente, densidad, shortcuts |
+| **Panel de admin mejorado** | Secciones organizadas, estado VAPID, stats del SW, botones de caché |
+| **Compresión de storage** | LZString para borradores largos del autosave (>512 bytes) |
 | **Carousels** | Múltiples imágenes en posts se convierten automáticamente en carousels Bootstrap |
 | **Animaciones** | Sistema completo: page transitions, slide-up en cards, ripple en botones, spring easing |
 
@@ -214,7 +217,9 @@ nodebb-theme-vasak/
 │       ├── user-card.js           # Popover de usuario al hover
 │       ├── compact-mode.js        # Modo compacto para feed/listas
 │       ├── topic-search.js        # Búsqueda dentro de un topic (Ctrl+F)
-│       └── topic-toc.js           # Tabla de contenidos automática
+│       ├── topic-toc.js           # Tabla de contenidos automática
+│       ├── storage-utils.js       # localStorage con compresión LZString
+│       └── user-settings.js       # Panel de preferencias del usuario
 │       └── account/
 │           └── categories.js      # Página de categorías del perfil
 │
@@ -340,6 +345,8 @@ El JS del tema está dividido en módulos AMD que NodeBB carga bajo demanda:
 | `forum/vasak-compact` | `compact-mode.js` | Global |
 | `forum/vasak-topic-search` | `topic-search.js` | Global |
 | `forum/vasak-toc` | `topic-toc.js` | Topics |
+| `forum/vasak-storage` | `storage-utils.js` | Global (dependencia) |
+| `forum/vasak-settings` | `user-settings.js` | Global |
 
 El core `static/lib/theme.js` solo contiene comportamientos globales (sidebar, dark mode, lazy loading, animaciones) y carga los módulos de página bajo demanda con `require()`.
 

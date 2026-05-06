@@ -11,23 +11,27 @@
             <img src="{brand:logo}?{config.cache-buster}"
                 alt="{{{ if brand:logo:alt }}}{brand:logo:alt}{{{ else }}}{config.siteTitle}{{{ end }}}"
                 class="vasak-logo-icon visible-closed"
-                loading="eager" />
+                loading="eager"
+                decoding="async" />
             <img src="{brand:logo}?{config.cache-buster}"
                 alt="{{{ if brand:logo:alt }}}{brand:logo:alt}{{{ else }}}{config.siteTitle}{{{ end }}}"
                 class="vasak-logo-full visible-open"
                 style="height:44px;width:auto;"
-                loading="eager" />
+                loading="eager"
+                decoding="async" />
             {{{ else }}}
             <!-- Fallback: imágenes del tema si no hay logo configurado en el ACP -->
             <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-icon.png"
                 alt="{{{ if config.siteTitle }}}{config.siteTitle}{{{ else }}}Vasak{{{ end }}}"
                 class="vasak-logo-icon visible-closed"
-                loading="eager" />
+                loading="eager"
+                decoding="async" />
             <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-full.png"
                 alt="{{{ if config.siteTitle }}}{config.siteTitle}{{{ else }}}Vasak Community{{{ end }}}"
                 class="vasak-logo-full visible-open"
                 style="height:44px;width:auto;"
-                loading="eager" />
+                loading="eager"
+                decoding="async" />
             {{{ end }}}
 
         </a>

@@ -45,7 +45,9 @@
 		"forum/vasak-user-card": "public/src/client/user-card.js",
 		"forum/vasak-compact": "public/src/client/compact-mode.js",
 		"forum/vasak-topic-search": "public/src/client/topic-search.js",
-		"forum/vasak-toc": "public/src/client/topic-toc.js"
+		"forum/vasak-toc": "public/src/client/topic-toc.js",
+		"forum/vasak-storage": "public/src/client/storage-utils.js",
+		"forum/vasak-settings": "public/src/client/user-settings.js"
 	},
 	"templates": "templates",
 	"screenshot": "screenshot.png",

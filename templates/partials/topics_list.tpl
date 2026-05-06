@@ -68,7 +68,11 @@
 			<!-- Thumbnail Preview (if exists) -->
 			{{{ if ./thumbs.length }}}
 			<a class="topic-thumbnail" href="{config.relative_path}/topic/{./slug}{{{ if ./bookmark }}}/{./bookmark}{{{ end }}}">
-				<img src="{./thumbs.0.url}" alt="" loading="lazy" />
+				<img src="{./thumbs.0.url}"
+					alt=""
+					loading="lazy"
+					decoding="async"
+					sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
 				{{{ if ./thumbs.1 }}}
 				<span class="thumb-count">+{subtract(./thumbs.length, 1)}</span>
 				{{{ end }}}

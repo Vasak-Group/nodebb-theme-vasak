@@ -143,6 +143,11 @@
 			UserCard.init();
 		});
 
+		// User settings panel (preferences modal)
+		require(["forum/vasak-settings"], function (UserSettings) {
+			UserSettings.init();
+		});
+
 		// Compact mode toggle
 		require(["forum/vasak-compact"], function (Compact) {
 			Compact.init();
