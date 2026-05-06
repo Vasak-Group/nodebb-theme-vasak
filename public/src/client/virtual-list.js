@@ -26,7 +26,7 @@
  *    Cada item se observa. Al salir del viewport + buffer, se oculta.
  *    Al entrar, se muestra. El buffer evita flashes al hacer scroll rápido.
  */
-define("forum/vasak-virtual-list", [], function () {
+define("vasak/virtual-list", [], function () {
 	var VirtualList = {};
 
 	// ── Configuración ──────────────────────────────────────────────────────
