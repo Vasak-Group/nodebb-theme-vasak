@@ -141,17 +141,11 @@ define("forum/vasak-feed", [], function () {
 	}
 
 	// ── Share Handlers ─────────────────────────────────────────────────────
-
+	// El share mejorado se inicializa globalmente desde theme.js.
+	// Esta función queda como no-op para compatibilidad.
 	function initShareHandlers() {
-		if (!$(".feed").length) return;
-
-		require(["share"], function (share) {
-			var pageTitle =
-				$('meta[property="og:title"]').attr("content") ||
-				document.title ||
-				"Vasak Community";
-			share.addShareHandlers(pageTitle);
-		});
+		// forum/vasak-share se carga en theme.js y usa delegación de eventos,
+		// por lo que no necesita re-inicializarse por página.
 	}
 
 	// ── Mobile Feed Category Dropdown Fix ─────────────────────────────────

@@ -88,7 +88,7 @@
 					<i class="fa-regular fa-comment"></i>
 					<span>{humanReadableNumber(./postcount, 0)} Comments</span>
 				</a>
-				<button class="action-btn share-btn" data-url="{config.relative_path}/topic/{./slug}">
+				<button class="action-btn share-btn" data-vasak-share="{config.relative_path}/topic/{./slug}" data-share-title="{./title}" aria-label="Share this topic">
 					<i class="fa fa-share"></i>
 					<span>Share</span>
 				</button>

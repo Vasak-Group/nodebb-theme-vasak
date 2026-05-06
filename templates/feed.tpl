@@ -109,7 +109,7 @@
 
 						<a href="{config.relative_path}/post/{{{ if ./topic.teaserPid }}}{./topic.teaserPid}{{{ else }}}{./pid}{{{ end }}}" class="btn btn-link btn-sm text-body {{{ if !./isMainPost }}}invisible{{{ end }}}"><i class="fa-fw fa-regular fa-message text-muted"></i> {humanReadableNumber(./topic.postcount)}</a>
 
-						<a href="#" data-pid="{./pid}" component="share/linkedin" class="btn btn-link btn-sm text-body"><i class="fa-fw fa-brands fa-linkedin text-muted"></i> [[topic:share]]</a>
+						<a href="#" data-pid="{./pid}" data-vasak-share="{config.relative_path}/post/{./pid}" data-share-title="{./topic.title}" component="share/linkedin" class="btn btn-link btn-sm text-body" aria-label="Share this post"><i class="fa-fw fa-share-alt text-muted"></i> [[topic:share]]</a>
 					</div>
 				</li>
 				{{{ end }}}

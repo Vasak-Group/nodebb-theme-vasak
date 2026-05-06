@@ -36,6 +36,11 @@
 			virtualList.init();
 		});
 
+		// Enhanced share (Web Share API + modal)
+		require(["forum/vasak-share"], function (Share) {
+			Share.init();
+		});
+
 		// ── Lazy-load page-specific modules ─────────────────────────────
 		loadPageModules();
 
@@ -1018,25 +1023,12 @@
 
 	/**
 	 * Initialize share button handlers on feed page
-	 * Ensures share buttons work on initial load and after ajaxify navigation
+	 * forum/vasak-share se carga globalmente y usa delegación de eventos.
+	 * Esta función queda como no-op para compatibilidad con el event handler
+	 * de ajaxify.end que la llama.
 	 */
 	function initShareHandlers() {
-		// Only run on feed page
-		if (!$(".feed").length) {
-			return;
-		}
-
-		// Check if share module is available
-		require(["share"], function (share) {
-			// Get page title from meta tag or default
-			var pageTitle =
-				$('meta[property="og:title"]').attr("content") ||
-				document.title ||
-				"Vasak Community";
-
-			// Initialize share handlers for all share buttons on the page
-			share.addShareHandlers(pageTitle);
-		});
+		// No-op: forum/vasak-share handles all share buttons via event delegation
 	}
 
 	// ========================================

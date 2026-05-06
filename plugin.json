@@ -28,7 +28,8 @@
 		"forum/vasak-list": "public/src/client/list-enhancements.js",
 		"forum/vasak-scroll-ux": "public/src/client/infinite-scroll-ux.js",
 		"forum/vasak-virtual-list": "public/src/client/virtual-list.js",
-		"forum/vasak-reactions": "public/src/client/reactions.js"
+		"forum/vasak-reactions": "public/src/client/reactions.js",
+		"forum/vasak-share": "public/src/client/share-enhanced.js"
 	},
 	"templates": "templates",
 	"screenshot": "screenshot.png",
