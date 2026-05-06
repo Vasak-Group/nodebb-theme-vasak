@@ -1,0 +1,465 @@
+// ============================================
+// VASAK ANIMATIONS & TRANSITIONS
+// ============================================
+// Sistema completo de animaciones y transiciones.
+// Respeta prefers-reduced-motion en todos los casos.
+//
+// Secciones:
+//  1. Keyframes
+//  2. Utility classes
+//  3. Page transitions (SPA navigation)
+//  4. Component-level transitions
+//  5. Micro-interactions
+//  6. Reduced motion overrides
+// ============================================
+
+// ── 1. KEYFRAMES ──────────────────────────────────────────────────────────
+
+// Fade
+@keyframes vasak-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes vasak-fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+// Slide up (cards, posts entrando desde abajo)
+@keyframes vasak-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Slide down (dropdowns, notificaciones)
+@keyframes vasak-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Scale in (modales, composer)
+@keyframes vasak-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// Scale out
+@keyframes vasak-scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+// Slide in from left (sidebar en mobile)
+@keyframes vasak-slide-in-left {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
+// Pulse suave (badges de notificación)
+@keyframes vasak-pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.08); }
+}
+
+// Bounce sutil (botones de acción)
+@keyframes vasak-bounce-in {
+  0%   { transform: scale(0.9); opacity: 0; }
+  60%  { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+// Shimmer (ya definido en _skeletons.scss, referenciado aquí para documentación)
+// @keyframes vasak-shimmer { ... }
+
+// Spin (loading spinners)
+@keyframes vasak-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+// ── 2. UTILITY CLASSES ────────────────────────────────────────────────────
+
+// Durations
+.vasak-duration-fast   { animation-duration: 150ms !important; }
+.vasak-duration-base   { animation-duration: 250ms !important; }
+.vasak-duration-slow   { animation-duration: 400ms !important; }
+
+// Easings
+.vasak-ease-out        { animation-timing-function: cubic-bezier(0, 0, 0.2, 1) !important; }
+.vasak-ease-in-out     { animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important; }
+.vasak-ease-spring     { animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1) !important; }
+
+// Fill modes
+.vasak-fill-both       { animation-fill-mode: both !important; }
+
+// Stagger delays (para listas de items)
+.vasak-stagger-1  { animation-delay: 0ms; }
+.vasak-stagger-2  { animation-delay: 50ms; }
+.vasak-stagger-3  { animation-delay: 100ms; }
+.vasak-stagger-4  { animation-delay: 150ms; }
+.vasak-stagger-5  { animation-delay: 200ms; }
+
+// ── 3. PAGE TRANSITIONS (SPA navigation) ──────────────────────────────────
+// NodeBB usa ajaxify para navegación SPA. Animamos el contenido
+// principal al entrar y salir de cada página.
+
+// Estado inicial antes de que entre el contenido
+#content {
+  // La animación se aplica via JS añadiendo/quitando clases
+  &.vasak-page-entering {
+    animation: vasak-fade-in 220ms cubic-bezier(0, 0, 0.2, 1) both;
+  }
+
+  &.vasak-page-leaving {
+    animation: vasak-fade-out 150ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+}
+
+// ── 4. COMPONENT-LEVEL TRANSITIONS ────────────────────────────────────────
+
+// Cards (topic cards, feed posts) — hover lift
+.topic-card,
+li[component="post"].posts-list-item,
+li[component="categories/category"] {
+  transition:
+    box-shadow    200ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color  150ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform     200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+// Feed posts — entrada con slide-up al cargar (infinite scroll)
+// La clase .vasak-post-entering se añade via JS
+[component="post"].vasak-post-entering {
+  animation: vasak-slide-up 280ms cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+// Sidebar — transición de ancho (open/close)
+nav[component="sidebar/left"],
+.sidebar-left {
+  transition:
+    width         250ms cubic-bezier(0.4, 0, 0.2, 1),
+    min-width     250ms cubic-bezier(0.4, 0, 0.2, 1),
+    max-width     250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 300ms ease;
+}
+
+// Nav links en sidebar
+.sidebar .nav-link,
+.sidebar-left .nav-link {
+  transition:
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    color            150ms cubic-bezier(0.4, 0, 0.2, 1),
+    padding          200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Texto visible-open (aparece/desaparece al expandir sidebar)
+.nav-text.visible-open {
+  transition:
+    opacity   200ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sidebar-left:not(.open) .nav-text.visible-open {
+  opacity: 0;
+  transform: translateX(-4px);
+  pointer-events: none;
+}
+.sidebar-left.open .nav-text.visible-open {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+// Dropdowns — slide down
+.dropdown-menu {
+  animation: vasak-slide-down 180ms cubic-bezier(0, 0, 0.2, 1) both;
+
+  // Cuando se cierra (Bootstrap añade .hiding)
+  &.hiding {
+    animation: vasak-fade-out 120ms cubic-bezier(0.4, 0, 1, 1) both;
+  }
+}
+
+// Composer modal — scale in
+html.composing .composer {
+  animation: vasak-scale-in 220ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+// Notificaciones dropdown
+.notifications-dropdown {
+  animation: vasak-slide-down 200ms cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+// Badges de notificación — pulse cuando hay nuevas
+[component="notifications/count"]:not(.hidden) {
+  animation: vasak-pulse-soft 2s ease-in-out infinite;
+}
+
+// Botones — transición de estado
+.btn {
+  transition:
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color     150ms cubic-bezier(0.4, 0, 0.2, 1),
+    color            150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       150ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform        100ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+// Botón primario — efecto de presión más pronunciado
+.btn-primary:active {
+  transform: scale(0.96);
+}
+
+// Links
+a {
+  transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Inputs y form controls
+.form-control,
+.form-select,
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+textarea {
+  transition:
+    border-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow   150ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 200ms ease;
+}
+
+// Avatares — hover scale
+.avatar,
+[component="user/picture"] img,
+[component="avatar/picture"] {
+  transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: scale(1.06);
+  }
+}
+
+// Tags / badges — hover
+.topic-tag,
+.tag,
+.badge {
+  transition:
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    color            150ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform        150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+// Vote buttons (topic list)
+.vote-btn {
+  transition:
+    color            150ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform        100ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:active {
+    transform: scale(0.88);
+  }
+}
+
+// Upvote en feed (corazón)
+a[data-action="upvote"] i {
+  transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+a[data-action="upvote"]:hover i,
+a[data-action="upvote"][data-upvoted="true"] i {
+  transform: scale(1.2);
+}
+
+// Subcategory pills
+.subcategory-pill {
+  transition:
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color     150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       150ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform        150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Sidebar toggle icon (flechas)
+.sidebar-toggle [component="sidebar/toggle"] i {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.sidebar-left.open .sidebar-toggle .fa-angles-right {
+  transform: rotate(180deg);
+}
+
+// Dark mode toggle icon
+#vasak-dark-toggle i {
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+#vasak-dark-toggle:hover i {
+  transform: rotate(20deg) scale(1.1);
+}
+
+// Post actions (reply, quote, vote) — fade in on hover
+[component="post/actions"] {
+  transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Teaser content — expand on hover
+.teaser-enhanced {
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Composer prompt card input
+.composer-prompt-input {
+  transition:
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color     150ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// ── 5. MICRO-INTERACTIONS ─────────────────────────────────────────────────
+
+// Spinner de carga
+.vasak-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--use-ui-border);
+  border-top-color: var(--use-primary);
+  border-radius: 50%;
+  animation: vasak-spin 0.7s linear infinite;
+}
+
+.vasak-spinner-sm {
+  width: 14px;
+  height: 14px;
+  border-width: 2px;
+}
+
+.vasak-spinner-lg {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+// Checkmark animado (para confirmaciones)
+@keyframes vasak-check-draw {
+  from { stroke-dashoffset: 24; }
+  to   { stroke-dashoffset: 0; }
+}
+
+// Focus ring animado
+@keyframes vasak-focus-ring-in {
+  from { box-shadow: 0 0 0 0 var(--use-primary-soft); }
+  to   { box-shadow: var(--use-focus-ring); }
+}
+
+:focus-visible {
+  animation: vasak-focus-ring-in 150ms cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+// Ripple effect en botones (activado via JS)
+.btn {
+  position: relative;
+  overflow: hidden;
+
+  .vasak-ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: vasak-ripple-expand 500ms cubic-bezier(0, 0, 0.2, 1) forwards;
+    pointer-events: none;
+  }
+}
+
+@keyframes vasak-ripple-expand {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+// Entrada de nuevos posts en feed (infinite scroll)
+// JS añade esta clase a los nuevos <li> antes de insertarlos
+.vasak-new-post {
+  animation: vasak-slide-up 300ms cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+// Entrada de nuevos topics
+.vasak-new-topic {
+  animation: vasak-slide-up 280ms cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+// ── 6. REDUCED MOTION OVERRIDES ───────────────────────────────────────────
+// Respeta la preferencia del sistema operativo.
+// Desactiva todas las animaciones y reduce las transiciones al mínimo.
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  // Mantener transiciones de color para dark mode (no son molestas)
+  body,
+  .brand-container,
+  nav[component="sidebar/left"],
+  .sidebar-left,
+  .topic-card,
+  li[component="post"].posts-list-item {
+    transition-duration: 0.01ms !important;
+  }
+
+  // Desactivar animaciones de skeleton
+  [class*="skeleton-"] {
+    animation: none !important;
+    background: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  // Desactivar pulse de badges
+  [component="notifications/count"] {
+    animation: none !important;
+  }
+
+  // Desactivar ripple
+  .vasak-ripple {
+    display: none !important;
+  }
+}

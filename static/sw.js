@@ -26,9 +26,9 @@
 const CACHE_VERSION = "v1";
 
 // Nombres de caché por categoría
-const CACHE_STATIC  = `vasak-static-${CACHE_VERSION}`;
-const CACHE_PAGES   = `vasak-pages-${CACHE_VERSION}`;
-const CACHE_IMAGES  = `vasak-images-${CACHE_VERSION}`;
+const CACHE_STATIC = `vasak-static-${CACHE_VERSION}`;
+const CACHE_PAGES = `vasak-pages-${CACHE_VERSION}`;
+const CACHE_IMAGES = `vasak-images-${CACHE_VERSION}`;
 
 // Todas las cachés que este SW gestiona (para limpiar versiones viejas)
 const ALL_CACHES = [CACHE_STATIC, CACHE_PAGES, CACHE_IMAGES];
@@ -49,7 +49,8 @@ const PATTERNS = {
 	themeStatic: /\/plugins\/nodebb-theme-vasak\/static\//,
 
 	// Assets compilados de NodeBB (CSS/JS con hash en query string)
-	nodeBBAssets: /\/assets\/(client\.css|nodebb\.min\.js|vendor\.min\.js|stylesheet\.css)/,
+	nodeBBAssets:
+		/\/assets\/(client\.css|nodebb\.min\.js|vendor\.min\.js|stylesheet\.css)/,
 
 	// Fuentes (Google Fonts, etc.)
 	fonts: /\.(woff2?|ttf|eot|otf)(\?|$)/i,
@@ -59,7 +60,7 @@ const PATTERNS = {
 
 	// API calls
 	apiWrite: /^(POST|PUT|DELETE|PATCH)$/,
-	apiRead:  /\/api\/(v3\/)?(?!admin)/,  // API de lectura, excluye admin
+	apiRead: /\/api\/(v3\/)?(?!admin)/, // API de lectura, excluye admin
 
 	// Páginas HTML (navegación)
 	htmlPage: /text\/html/,
@@ -226,7 +227,10 @@ async function networkFirst(request, cacheName) {
 	} catch (err) {
 		const cached = await cache.match(request);
 		if (cached) {
-			console.log("[SW] Network-First: sirviendo desde caché (offline)", request.url);
+			console.log(
+				"[SW] Network-First: sirviendo desde caché (offline)",
+				request.url,
+			);
 			return cached;
 		}
 		throw err;

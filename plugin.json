@@ -9,7 +9,9 @@
 		{ "hook": "static:app.load", "method": "init" },
 		{ "hook": "filter:widgets.getAreas", "method": "defineWidgetAreas" },
 		{ "hook": "filter:admin.header.build", "method": "addAdminNavigation" },
-		{ "hook": "filter:config.get", "method": "getThemeConfig" }
+		{ "hook": "filter:config.get", "method": "getThemeConfig" },
+		{ "hook": "filter:middleware.render", "method": "injectCriticalCSS" },
+		{ "hook": "filter:scripts.get", "method": "addHeadContent" }
 	],
 	"staticDirs": {
 		"static": "./static"

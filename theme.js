@@ -27,44 +27,51 @@ const defaults = {
 
 /**
  * Hook: static:app.load
- * Initialize routes for admin panel + Service Worker route
+ * Initialize routes for admin panel + Service Worker route + Critical CSS
  */
 theme.init = async function (params) {
 	const { router } = params;
 	const routeHelpers = require.main.require("./src/routes/helpers");
+	const path = require("path");
+	const fs = require("fs");
 
-	// Admin panel route - render using Harmony's admin template structure
+	// Admin panel route
 	routeHelpers.setupAdminPageRoute(
 		router,
 		"/admin/plugins/vasak",
 		[],
 		(req, res) => {
-			res.render("admin/plugins/vasak", {
-				title: "Vasak Theme",
-			});
+			res.render("admin/plugins/vasak", { title: "Vasak Theme" });
 		},
 	);
 
-	// Service Worker route
-	// Serve the SW from /vasak-sw.js at the root origin so it can
-	// claim scope "/" via the Service-Worker-Allowed header.
-	// The actual file lives at static/sw.js (served by NodeBB's staticDirs).
-	const path = require("path");
-	const fs   = require("fs");
-
+	// ── Service Worker route ──────────────────────────────────────────────
 	const swPath = path.join(__dirname, "static", "sw.js");
 
 	router.get("/vasak-sw.js", (req, res) => {
-		// Required: allow the SW to control the entire origin
 		res.setHeader("Service-Worker-Allowed", "/");
 		res.setHeader("Content-Type", "application/javascript; charset=utf-8");
-		// No-cache the SW itself so browsers always get the latest version
 		res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
 		if (fs.existsSync(swPath)) {
 			res.sendFile(swPath);
 		} else {
 			res.status(404).send("// Service Worker not found");
+		}
+	});
+
+	// ── Critical CSS route ────────────────────────────────────────────────
+	// Serve the critical CSS file so it can be read server-side for inlining.
+	const criticalCssPath = path.join(__dirname, "static", "critical.css");
+
+	router.get("/vasak-critical.css", (req, res) => {
+		res.setHeader("Content-Type", "text/css; charset=utf-8");
+		res.setHeader("Cache-Control", "public, max-age=86400"); // 1 day
+
+		if (fs.existsSync(criticalCssPath)) {
+			res.sendFile(criticalCssPath);
+		} else {
+			res.status(404).send("/* Critical CSS not found */");
 		}
 	});
 };
@@ -109,6 +116,68 @@ theme.getThemeConfig = async function (config) {
 	config.theme = await loadThemeConfig(config.uid);
 	config.openDraftsOnPageLoad = false;
 	return config;
+};
+
+/**
+ * Hook: filter:middleware.render
+ * Injects critical CSS inline into every page's <head> via
+ * NodeBB's res.locals.extraCSS mechanism.
+ * Eliminates render-blocking for above-the-fold styles.
+ */
+theme.injectCriticalCSS = async function (data) {
+	const path = require("path");
+	const fs = require("fs");
+
+	const criticalPath = path.join(__dirname, "static", "critical.css");
+
+	try {
+		const css = fs.readFileSync(criticalPath, "utf8");
+
+		// Minify: strip comments and collapse whitespace
+		const minified = css
+			.replace(/\/\*[\s\S]*?\*\//g, "")
+			.replace(/\s{2,}/g, " ")
+			.replace(/\n/g, "")
+			.trim();
+
+		// NodeBB's filter:middleware.render passes { req, res, templateData }
+		// We inject a <style> tag via templateData.extraCSS (Harmony/NodeBB convention)
+		if (data.templateData) {
+			data.templateData.vasak_critical_css = minified;
+		}
+	} catch (e) {
+		// Non-fatal
+	}
+
+	return data;
+};
+
+/**
+ * Hook: filter:scripts.get
+ * Injects the critical CSS <style> block into the page <head>.
+ * NodeBB calls this hook to collect extra <head> content.
+ */
+theme.addHeadContent = async function (scripts) {
+	const path = require("path");
+	const fs = require("fs");
+
+	const criticalPath = path.join(__dirname, "static", "critical.css");
+
+	try {
+		const css = fs.readFileSync(criticalPath, "utf8");
+		const minified = css
+			.replace(/\/\*[\s\S]*?\*\//g, "")
+			.replace(/\s{2,}/g, " ")
+			.replace(/\n/g, "")
+			.trim();
+
+		// Prepend so it loads before any other scripts/styles
+		scripts.unshift(`<style id="vasak-critical">${minified}</style>`);
+	} catch (e) {
+		// Non-fatal
+	}
+
+	return scripts;
 };
 
 theme.defineWidgetAreas = async (areas) => {

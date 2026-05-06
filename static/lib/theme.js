@@ -75,6 +75,9 @@
 		// Register Service Worker
 		initServiceWorker();
 
+		// Initialize page transitions and micro-interactions
+		initAnimations();
+
 		// Re-initialize carousels when new posts are loaded (infinite scroll, etc.)
 		// Also handle post edits by clearing the processed flag
 		$(window).on(
@@ -1679,4 +1682,128 @@
 		});
 	}
 
+	// ========================================
+	// ANIMATIONS & MICRO-INTERACTIONS
+	// ========================================
+
+	function initAnimations() {
+		// ── Page transitions (SPA navigation) ───────────────────────────
+		// Fade out on navigate away, fade in on new content
+		$(window).on("action:ajaxify.start", function () {
+			var $content = $("#content");
+			$content.addClass("vasak-page-leaving");
+		});
+
+		$(window).on("action:ajaxify.end", function () {
+			var $content = $("#content");
+			$content.removeClass("vasak-page-leaving");
+			// Force reflow so the animation restarts cleanly
+			void $content[0] && $content[0].offsetWidth;
+			$content.addClass("vasak-page-entering");
+			// Remove class after animation completes
+			setTimeout(function () {
+				$content.removeClass("vasak-page-entering");
+			}, 250);
+		});
+
+		// ── Animate new posts entering (infinite scroll) ─────────────────
+		$(window).on("action:posts.loaded", function (ev, data) {
+			if (!data || !data.posts) return;
+			// NodeBB appends new posts to the DOM after this event.
+			// Use a small delay to let the DOM update first.
+			setTimeout(function () {
+				$('[component="post"]:not([data-vasak-animated])').each(
+					function (index) {
+						var $post = $(this);
+						$post.attr("data-vasak-animated", "true");
+						$post.css("animation-delay", index * 40 + "ms");
+						$post.addClass("vasak-new-post");
+						// Clean up after animation
+						setTimeout(
+							function () {
+								$post.removeClass("vasak-new-post");
+								$post.css("animation-delay", "");
+							},
+							400 + index * 40,
+						);
+					},
+				);
+			}, 50);
+		});
+
+		// ── Animate new topics entering ───────────────────────────────────
+		$(window).on("action:topics.loaded", function (ev, data) {
+			if (!data || !data.topics) return;
+			setTimeout(function () {
+				$('[component="category/topic"]:not([data-vasak-animated])').each(
+					function (index) {
+						var $topic = $(this);
+						$topic.attr("data-vasak-animated", "true");
+						$topic.css("animation-delay", index * 35 + "ms");
+						$topic.addClass("vasak-new-topic");
+						setTimeout(
+							function () {
+								$topic.removeClass("vasak-new-topic");
+								$topic.css("animation-delay", "");
+							},
+							380 + index * 35,
+						);
+					},
+				);
+			}, 50);
+		});
+
+		// ── Ripple effect on buttons ──────────────────────────────────────
+		// Respects prefers-reduced-motion
+		var prefersReducedMotion =
+			window.matchMedia &&
+			window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+		if (!prefersReducedMotion) {
+			$(document).on("click.vasak-ripple", ".btn", function (e) {
+				var $btn = $(this);
+
+				// Skip if button has overflow:hidden disabled or is disabled
+				if ($btn.prop("disabled") || $btn.hasClass("disabled")) return;
+
+				var offset = $btn.offset();
+				var x = e.pageX - offset.left;
+				var y = e.pageY - offset.top;
+				var size = Math.max($btn.outerWidth(), $btn.outerHeight());
+
+				var $ripple = $("<span>")
+					.addClass("vasak-ripple")
+					.css({
+						width: size + "px",
+						height: size + "px",
+						left: x - size / 2 + "px",
+						top: y - size / 2 + "px",
+					});
+
+				$btn.append($ripple);
+
+				// Remove after animation
+				setTimeout(function () {
+					$ripple.remove();
+				}, 520);
+			});
+		}
+
+		// ── Animate sidebar nav items on expand ───────────────────────────
+		$(window).on("action:sidebar.toggle", function () {
+			var $sidebar = $(".sidebar-left");
+			var isOpen = $sidebar.hasClass("open");
+
+			if (isOpen) {
+				// Stagger nav text appearance
+				$sidebar.find(".nav-text.visible-open").each(function (index) {
+					$(this).css("transition-delay", index * 20 + "ms");
+				});
+				// Reset delays after transition
+				setTimeout(function () {
+					$sidebar.find(".nav-text.visible-open").css("transition-delay", "");
+				}, 300);
+			}
+		});
+	}
 })();
