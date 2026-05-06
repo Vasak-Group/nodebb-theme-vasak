@@ -344,8 +344,20 @@ define("forum/vasak-reactions", ["api", "alerts"], function (api, alerts) {
 					$wrapper,
 				);
 			},
-			error: function () {
-				alerts.error("Could not update reaction");
+			error: function (xhr) {
+				var msg =
+					(xhr.responseJSON &&
+						xhr.responseJSON.status &&
+						xhr.responseJSON.status.message) ||
+					"No se pudo actualizar la reacción";
+				alerts.error(msg);
+				// Revertir estado visual si falló
+				if ($existingBtn && $existingBtn.length) {
+					$existingBtn.toggleClass(
+						"vasak-reaction-active",
+						!isCurrentlyUpvoted,
+					);
+				}
 			},
 		});
 	}

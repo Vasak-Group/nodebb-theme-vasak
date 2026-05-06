@@ -144,7 +144,14 @@ define("forum/vasak-autocomplete", ["api"], function (api) {
 	// ── Fetch de sugerencias ───────────────────────────────────────────────
 
 	function fetchSuggestions(term) {
-		// Usar la API de búsqueda de NodeBB
+		// Timeout de 5s para no bloquear la UI si la API tarda
+		var timedOut = false;
+		var timeout = setTimeout(function () {
+			timedOut = true;
+			// Fallback: mostrar historial si la API no responde
+			showHistory();
+		}, 5000);
+
 		api
 			.get("/api/search", {
 				term: term,
@@ -152,6 +159,8 @@ define("forum/vasak-autocomplete", ["api"], function (api) {
 				showAs: "topics",
 			})
 			.then(function (data) {
+				if (timedOut) return; // ya mostramos el fallback
+				clearTimeout(timeout);
 				var topics =
 					data && data.topics ? data.topics.slice(0, MAX_RESULTS) : [];
 				currentResults = topics.map(function (t) {
@@ -166,7 +175,9 @@ define("forum/vasak-autocomplete", ["api"], function (api) {
 				renderDropdown(term, currentResults);
 			})
 			.catch(function () {
-				// Silenciar errores de red — el usuario puede seguir escribiendo
+				clearTimeout(timeout);
+				// Error de red — mostrar historial como fallback
+				if (!timedOut) showHistory();
 			});
 	}
 

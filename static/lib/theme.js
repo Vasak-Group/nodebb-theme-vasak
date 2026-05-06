@@ -12,11 +12,46 @@
 (function () {
 	"use strict";
 
+	// ── Debug logger ───────────────────────────────────────────────────────
+	// Activar en consola: localStorage.setItem('VASAK_DEBUG', 'true')
+	// Desactivar:         localStorage.removeItem('VASAK_DEBUG')
+	var _debug = (function () {
+		try {
+			return localStorage.getItem("VASAK_DEBUG") === "true";
+		} catch (e) {
+			return false;
+		}
+	})();
+
+	var vasak = {
+		log: function () {
+			if (_debug)
+				console.log.apply(
+					console,
+					["[Vasak]"].concat(Array.prototype.slice.call(arguments)),
+				);
+		},
+		warn: function () {
+			if (_debug)
+				console.warn.apply(
+					console,
+					["[Vasak]"].concat(Array.prototype.slice.call(arguments)),
+				);
+		},
+		err: function () {
+			console.error.apply(
+				console,
+				["[Vasak]"].concat(Array.prototype.slice.call(arguments)),
+			);
+		},
+	};
+
 	// ── Global init ────────────────────────────────────────────────────────
 	$(document).ready(function () {
 		// Global behaviors (run on every page)
 		initSidebarToggle();
 		initSidebarAutoExpand();
+		fixBookmarkAlert(); // #23 — was defined but never called
 		fixMobileComposerCategoryDropdown();
 		fixNotificationDropdown();
 		initLazyLoading();
@@ -169,12 +204,8 @@
 	 */
 	function initSidebarToggle() {
 		var $toggle = $('[component="sidebar/toggle"]');
-		if (!$toggle.length) {
-			console.log("Vasak: Sidebar toggle element not found");
-			return;
-		}
+		if (!$toggle.length) return;
 
-		// Remove any existing handlers to avoid duplicates, then add our handler
 		$toggle.off("click.vasak").on("click.vasak", function (e) {
 			e.preventDefault();
 			e.stopPropagation();
@@ -182,9 +213,6 @@
 			var $sidebar = $(".sidebar-left");
 			$sidebar.toggleClass("open");
 
-			console.log("Vasak: Sidebar toggled, open:", $sidebar.hasClass("open"));
-
-			// Save preference if user is logged in
 			if (typeof app !== "undefined" && app.user && app.user.uid) {
 				require(["api"], function (api) {
 					api
@@ -194,15 +222,13 @@
 							},
 						})
 						.catch(function (err) {
-							console.warn("Vasak: Could not save sidebar preference", err);
+							vasak.warn("Could not save sidebar preference", err);
 						});
 				});
 			}
 
 			$(window).trigger("action:sidebar.toggle");
 		});
-
-		console.log("Vasak: Sidebar toggle initialized");
 	}
 
 	/**
@@ -211,27 +237,17 @@
 	 * Their preference is saved and respected on subsequent visits.
 	 */
 	function initSidebarAutoExpand() {
-		// Only run on desktop (min-width: 992px)
-		if ($(window).width() < 992) {
-			return;
-		}
+		if ($(window).width() < 992) return;
 
 		var $sidebar = $(".sidebar-left");
-		if (!$sidebar.length) {
-			return;
-		}
+		if (!$sidebar.length) return;
 
-		// Check if user has a saved preference (via config.theme.openSidebars)
-		// If they've explicitly closed the sidebar before, respect that
 		var hasUserPreference =
 			typeof config !== "undefined" &&
 			config.theme &&
 			typeof config.theme.openSidebars !== "undefined";
 
-		// If sidebar is not already open and user hasn't explicitly closed it, expand it
 		if (!$sidebar.hasClass("open")) {
-			// If no user preference set, auto-expand (first-time visitors)
-			// If user preference is 'on', also expand
 			if (
 				!hasUserPreference ||
 				config.theme.openSidebars === "on" ||
@@ -239,7 +255,6 @@
 			) {
 				$sidebar.addClass("open");
 				$(window).trigger("action:sidebar.toggle");
-				console.log("Vasak: Auto-expanded sidebar (Reddit-style default)");
 			}
 		}
 	}
@@ -288,12 +303,12 @@
 
 					if (shouldRemoveAlert) {
 						alerts.remove("bookmark");
-						console.log(
-							"Vasak: Removed unnecessary bookmark alert (bookmark: " +
-								bookmarkInt +
-								", current: " +
-								postIndexInt +
-								")",
+						vasak.log(
+							"Removed bookmark alert (bookmark:",
+							bookmarkInt,
+							"current:",
+							postIndexInt,
+							")",
 						);
 					}
 				});
@@ -716,292 +731,139 @@
 		}
 		$categoryFilter.attr("data-vasak-patched", "true");
 
-		console.log("Vasak: Patching search category filter");
-
-		// Function to remove "Watched categories" from the dropdown
 		function removeWatchedCategories() {
-			// Method 1: Remove by data-cid="watched"
 			var $watchedItem = $categoryFilter.find(
 				'[component="category/list"] li[data-cid="watched"]',
 			);
 			if ($watchedItem.length) {
 				$watchedItem.remove();
-				console.log('Vasak: Removed "Watched categories" by data-cid');
 				return true;
 			}
-
-			// Method 2: Remove by text content (fallback)
 			$categoryFilter.find('[component="category/list"] li').each(function () {
 				var $li = $(this);
 				var text = $li.text().toLowerCase().trim();
 				if (text.includes("watched") && text.includes("categor")) {
 					$li.remove();
-					console.log('Vasak: Removed "Watched categories" by text match');
-					return false; // break the loop
+					return false;
 				}
 			});
 		}
 
-		// Remove immediately
 		removeWatchedCategories();
 
-		// Also remove when dropdown opens (in case categories are loaded dynamically)
 		$categoryFilter.on("shown.bs.dropdown", function () {
 			setTimeout(removeWatchedCategories, 100);
 		});
 
-		// Add immediate search trigger on category selection
 		$categoryFilter.on(
 			"click",
 			'[component="category/list"] [data-cid]',
-			function (e) {
-				var $item = $(this);
-				var cid = $item.attr("data-cid");
-
-				// Let the original handler update the selection state first
+			function () {
 				setTimeout(function () {
-					// Trigger the search by closing the dropdown (which triggers the existing onHidden handler)
 					$categoryFilter.find(".dropdown-toggle").dropdown("hide");
-					console.log("Vasak: Auto-triggering search for category:", cid);
 				}, 50);
 			},
 		);
 	}
 
+	// ── #22 Refactor: función genérica para fix de dropdowns en mobile ────────
+	// Reemplaza fixMobileFeedCategoryDropdown, fixMobileComposerCategoryDropdown
+	// y fixNotificationDropdown que tenían ~80% de código duplicado.
+
 	/**
-	 * Fix mobile category dropdown positioning on feed page
-	 * Aggressively overrides Popper.js positioning on mobile to prevent bottom-left corner issue
+	 * Corrige el posicionamiento de dropdowns en mobile donde Popper.js
+	 * los coloca en la esquina inferior izquierda.
+	 *
+	 * @param {string} containerSel  Selector del contenedor del dropdown
+	 * @param {object} [opts]
+	 * @param {string} [opts.eventNs]    Namespace del evento Bootstrap (default: "vasakFix")
+	 * @param {string} [opts.align]      "right" | "left" (default: "right")
+	 * @param {Function} [opts.guard]    Función que devuelve false para saltear la ejecución
 	 */
+	function fixDropdownPositioning(containerSel, opts) {
+		opts = opts || {};
+		var ns = opts.eventNs || "vasakFix";
+		var align = opts.align || "right";
+		var guard = opts.guard;
+
+		var $container = $(containerSel);
+		if (!$container.length) return;
+		if (guard && !guard()) return;
+
+		var $btn = $container.find(".dropdown-toggle");
+		var $menu = $container.find(".dropdown-menu");
+		if (!$btn.length || !$menu.length) return;
+
+		if (window.innerWidth <= 767) {
+			$btn.attr("data-bs-display", "static");
+		}
+
+		$container
+			.off("shown.bs.dropdown." + ns)
+			.on("shown.bs.dropdown." + ns, function () {
+				if (window.innerWidth > 767) return;
+
+				requestAnimationFrame(function () {
+					$menu.css({
+						position: "absolute",
+						top: "100%",
+						right: align === "right" ? "0" : "auto",
+						left: align === "right" ? "auto" : "0",
+						bottom: "auto",
+						transform: "none",
+						margin: "4px 0 0 0",
+						inset: "auto",
+					});
+					$menu.removeAttr("data-popper-placement");
+				});
+			});
+	}
+
 	function fixMobileFeedCategoryDropdown() {
-		console.log(
-			"Vasak: fixMobileFeedCategoryDropdown called, window width:",
-			window.innerWidth,
-		);
-
-		// Only run on feed page
-		if (!$(".feed").length) {
-			console.log("Vasak: Not on feed page, exiting");
-			return;
-		}
-
-		console.log("Vasak: On feed page, looking for category filter");
-
-		var $categoryFilter = $(
+		if (!$(".feed").length) return;
+		fixDropdownPositioning(
 			'.feed-category-filter [component="category/dropdown"]',
+			{ eventNs: "vasakFeedFix", align: "right" },
 		);
-		if (!$categoryFilter.length) {
-			console.log("Vasak: Category filter not found");
-			return;
-		}
-
-		console.log("Vasak: Category filter found, setting up mobile fix");
-
-		// Find the dropdown button and menu
-		var $dropdownButton = $categoryFilter.find(".dropdown-toggle");
-		var $dropdownMenu = $categoryFilter.find(".dropdown-menu");
-
-		if (!$dropdownButton.length || !$dropdownMenu.length) {
-			console.log("Vasak: Dropdown button or menu not found");
-			return;
-		}
-
-		// Disable Popper immediately on mobile to prevent animation from bottom-left
-		if (window.innerWidth <= 767) {
-			$dropdownButton.attr("data-bs-display", "static");
-			console.log("Vasak: Disabled Popper positioning on mobile");
-		}
-
-		// Always bind the event, but check window width when it fires
-		$categoryFilter
-			.off("shown.bs.dropdown.vasakMobileFix")
-			.on("shown.bs.dropdown.vasakMobileFix", function () {
-				console.log(
-					"Vasak: Dropdown shown event fired, window width:",
-					window.innerWidth,
-				);
-
-				// Only apply fix on mobile
-				if (window.innerWidth > 767) {
-					console.log("Vasak: Not mobile, skipping positioning fix");
-					return;
-				}
-
-				console.log("Vasak: Applying mobile positioning fix");
-
-				// Use requestAnimationFrame to ensure we override after Popper runs
-				requestAnimationFrame(function () {
-					$dropdownMenu.css({
-						position: "absolute",
-						top: "100%",
-						right: "0",
-						left: "auto",
-						bottom: "auto",
-						transform: "none",
-						margin: "4px 0 0 0",
-						inset: "auto",
-					});
-
-					// Also remove Popper attributes
-					$dropdownMenu.removeAttr("data-popper-placement");
-
-					console.log("Vasak: Mobile positioning applied successfully");
-				});
-			});
-
-		console.log("Vasak: Mobile fix event listener attached");
 	}
 
-	/**
-	 * Fix mobile category dropdown positioning in composer
-	 * Aggressively overrides Popper.js positioning on mobile to prevent bottom-left corner issue
-	 */
 	function fixMobileComposerCategoryDropdown() {
-		console.log(
-			"Vasak: fixMobileComposerCategoryDropdown called, window width:",
-			window.innerWidth,
-		);
-
-		// Find the composer category selector
-		var $categorySelector = $('.composer [component="category-selector"]');
-		if (!$categorySelector.length) {
-			console.log("Vasak: Composer category selector not found");
-			return;
-		}
-
-		console.log(
-			"Vasak: Composer category selector found, setting up mobile fix",
-		);
-
-		// Find the dropdown button and menu
-		var $dropdownButton = $categorySelector.find(".dropdown-toggle");
-		var $dropdownMenu = $categorySelector.find(".dropdown-menu");
-
-		if (!$dropdownButton.length || !$dropdownMenu.length) {
-			console.log("Vasak: Composer dropdown button or menu not found");
-			return;
-		}
-
-		// Disable Popper immediately on mobile to prevent animation from bottom-left
-		if (window.innerWidth <= 767) {
-			$dropdownButton.attr("data-bs-display", "static");
-			console.log("Vasak: Disabled Popper positioning on mobile for composer");
-		}
-
-		// Always bind the event, but check window width when it fires
-		$categorySelector
-			.off("shown.bs.dropdown.vasakComposerMobileFix")
-			.on("shown.bs.dropdown.vasakComposerMobileFix", function () {
-				console.log(
-					"Vasak: Composer dropdown shown event fired, window width:",
-					window.innerWidth,
-				);
-
-				// Only apply fix on mobile
-				if (window.innerWidth > 767) {
-					console.log("Vasak: Not mobile, skipping composer positioning fix");
-					return;
-				}
-
-				console.log("Vasak: Applying mobile positioning fix for composer");
-
-				// Use requestAnimationFrame to ensure we override after Popper runs
-				requestAnimationFrame(function () {
-					$dropdownMenu.css({
-						position: "absolute",
-						top: "100%",
-						left: "0",
-						right: "auto",
-						bottom: "auto",
-						transform: "none",
-						margin: "4px 0 0 0",
-						inset: "auto",
-					});
-
-					// Also remove Popper attributes
-					$dropdownMenu.removeAttr("data-popper-placement");
-
-					console.log(
-						"Vasak: Composer mobile positioning applied successfully",
-					);
-				});
-			});
-
-		console.log("Vasak: Composer mobile fix event listener attached");
+		fixDropdownPositioning('.composer [component="category-selector"]', {
+			eventNs: "vasakComposerFix",
+			align: "left",
+		});
 	}
 
-	/**
-	 * Fix notification dropdown width and text styling
-	 * Removes Popper inline width styles and applies proper text wrapping
-	 */
 	function fixNotificationDropdown() {
-		console.log("Vasak: fixNotificationDropdown called");
+		var $notif = $('[component="notifications"]');
+		if (!$notif.length) return;
 
-		// Find the notification component
-		var $notificationComponent = $('[component="notifications"]');
-		if (!$notificationComponent.length) {
-			console.log("Vasak: Notification component not found");
-			return;
-		}
-
-		console.log("Vasak: Notification component found, setting up fix");
-
-		// Listen for when dropdown is shown
-		$notificationComponent
+		$notif
 			.off("shown.bs.dropdown.vasakNotificationFix")
 			.on("shown.bs.dropdown.vasakNotificationFix", function () {
-				console.log("Vasak: Notification dropdown shown");
-
-				// Use requestAnimationFrame to ensure we override after Popper runs
 				requestAnimationFrame(function () {
-					var $dropdownMenu = $notificationComponent.find(
-						".notifications-dropdown",
-					);
+					var $menu = $notif.find(".notifications-dropdown");
+					if (!$menu.length) return;
 
-					if ($dropdownMenu.length) {
-						// Remove width-related inline styles from dropdown
-						var currentStyle = $dropdownMenu.attr("style") || "";
-						var newStyle = currentStyle
-							.replace(/min-width:\s*[^;]+;?/gi, "")
-							.replace(/max-width:\s*[^;]+;?/gi, "")
-							.replace(/width:\s*[^;]+;?/gi, "");
-						$dropdownMenu.attr("style", newStyle);
+					// Strip Popper inline width overrides
+					var style = ($menu.attr("style") || "")
+						.replace(/min-width:\s*[^;]+;?/gi, "")
+						.replace(/max-width:\s*[^;]+;?/gi, "")
+						.replace(/width:\s*[^;]+;?/gi, "");
+					$menu.attr("style", style);
 
-						// Apply styling to notification items (.unread and .read are the actual classes)
-						$dropdownMenu.find(".unread, .read").css({
-							padding: "8px",
-						});
-
-						// Style the notification link text
-						$dropdownMenu.find('a[component="notifications/item/link"]').css({
-							"font-size": "12px",
-							"line-height": "1.5",
-							"word-wrap": "break-word",
-							"overflow-wrap": "break-word",
-							"word-break": "break-word",
-							"white-space": "normal",
-							"text-overflow": "clip",
-							display: "block",
-						});
-
-						// Style strong tags within notifications
-						$dropdownMenu
-							.find('a[component="notifications/item/link"] strong')
-							.css({
-								"font-size": "12px",
-								"font-weight": "600",
-							});
-
-						// Style timestamps
-						$dropdownMenu.find(".text-xs.text-muted").css({
-							"font-size": "11px",
-						});
-
-						console.log("Vasak: Notification dropdown styling applied");
-					}
+					// Compact text in notification items
+					$menu.find('a[component="notifications/item/link"]').css({
+						"font-size": "12px",
+						"line-height": "1.5",
+						"word-wrap": "break-word",
+						"overflow-wrap": "break-word",
+						"white-space": "normal",
+						"text-overflow": "clip",
+						display: "block",
+					});
 				});
 			});
-
-		console.log("Vasak: Notification dropdown fix event listener attached");
 	}
 
 	/**
@@ -1478,7 +1340,7 @@
 				updateViaCache: "none",
 			})
 			.then(function (registration) {
-				console.log("[Vasak SW] Registrado, scope:", registration.scope);
+				vasak.log("SW registrado, scope:", registration.scope);
 
 				// Check for updates on every page load
 				registration.update();
@@ -1496,14 +1358,13 @@
 							// New version available — tell it to skip waiting
 							// so it activates without requiring a full browser close.
 							newWorker.postMessage({ type: "SKIP_WAITING" });
-							console.log("[Vasak SW] Nueva versión activada");
+							vasak.log("SW nueva versión activada");
 						}
 					});
 				});
 			})
 			.catch(function (err) {
-				// SW registration failure is non-fatal — the site works without it
-				console.warn("[Vasak SW] Registro fallido:", err.message);
+				vasak.warn("SW registro fallido:", err.message);
 			});
 
 		// When the SW takes control (after SKIP_WAITING), reload to use

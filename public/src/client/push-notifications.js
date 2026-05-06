@@ -187,9 +187,8 @@ define("forum/vasak-push", [], function () {
 				} catch (e) {}
 				showSuccessToast();
 			})
-			.catch(function (err) {
-				// VAPID no configurado o error de red — silencioso
-				console.info("[Vasak Push] No disponible:", err.message);
+			.catch(function () {
+				// VAPID no configurado o error de red — silencioso en producción
 			});
 	}
 
