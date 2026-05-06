@@ -36,11 +36,11 @@ theme.init = async function (params) {
 	// Admin panel route - render using Harmony's admin template structure
 	routeHelpers.setupAdminPageRoute(
 		router,
-		"/admin/plugins/javis",
+		"/admin/plugins/vasak",
 		[],
 		(req, res) => {
-			res.render("admin/plugins/javis", {
-				title: "JAVIS Theme",
+			res.render("admin/plugins/vasak", {
+				title: "Vasak Theme",
 			});
 		},
 	);

@@ -110,7 +110,7 @@
 
     // Hover state
     &:hover {
-      background: darken($jv-bg, 2%);
+      background: rgba(0, 0, 0, 0.03);
     }
 
     // Focus-within state
@@ -308,17 +308,17 @@
 // ===========================================================
 // MOBILE HEADER LOGO (hidden on desktop)
 // ===========================================================
-.javis-mobile-header-logo {
+.vasak-mobile-header-logo {
   display: none !important; // Hidden by default on desktop
 
-  .javis-mobile-logo-link {
+  .vasak-mobile-logo-link {
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
   }
 
-  .javis-mobile-logo-img {
+  .vasak-mobile-logo-img {
     max-width: 120px; // Logo width on mobile
     height: 32px; // Logo height on mobile
     object-fit: contain;
@@ -337,7 +337,7 @@
     }
 
     // Show mobile logo on mobile devices only
-    .javis-mobile-header-logo {
+    .vasak-mobile-header-logo {
       display: flex !important; // Show on mobile
       align-items: center;
       justify-content: center;

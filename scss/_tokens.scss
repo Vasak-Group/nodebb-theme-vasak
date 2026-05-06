@@ -1,0 +1,166 @@
+// ============================================
+// VASAK DESIGN TOKENS — CSS Custom Properties
+// Paleta: Catppuccin Latte (light) / Mocha (dark)
+//
+// Naming convention matches all other Vasak projects.
+// Toggle dark mode by adding/removing .dark on <html>.
+// ============================================
+
+:root {
+  // ----------------------------------------------------------
+  // RAW PALETTE — Catppuccin Latte (light)
+  // ----------------------------------------------------------
+
+  // Brand
+  --primary:          #dd7878;   // Catppuccin Red
+  --secondary:        #8839ef;   // Catppuccin Mauve
+  --primary-dark:     #eba0ac;   // Catppuccin Flamingo (dark variant)
+  --secondary-dark:   #cba6f7;   // Catppuccin Mauve (dark variant)
+
+  // UI surfaces
+  --ui-background:    #eff1f5;   // Catppuccin Base
+  --ui-surface:       #ccd0da;   // Catppuccin Surface0
+  --ui-border:        #dce0e8;   // Catppuccin Crust
+
+  // UI surfaces — dark (Catppuccin Mocha)
+  --ui-background-dark: #1e1e2e; // Mocha Base
+  --ui-surface-dark:    #313244; // Mocha Surface0
+  --ui-border-dark:     #11111b; // Mocha Crust
+
+  // Text
+  --text-main:          #4c4f69; // Catppuccin Text
+  --text-muted:         #6c6f85; // Catppuccin Subtext1
+  --text-on-primary:    #5c5f77; // Catppuccin Subtext0
+
+  // Text — dark
+  --text-main-dark:     #cdd6f4; // Mocha Text
+  --text-muted-dark:    #a6adc8; // Mocha Subtext1
+  --text-on-primary-dark: #cdd6f4;
+
+  // Status
+  --status-error:       #d20f39; // Catppuccin Red
+  --status-success:     #40a02b; // Catppuccin Green
+  --status-warning:     #df8e1d; // Catppuccin Yellow
+
+  // Status — dark
+  --status-error-dark:   #f38ba8; // Mocha Red
+  --status-success-dark: #a6e3a1; // Mocha Green
+  --status-warning-dark: #f9e2af; // Mocha Yellow
+
+  // Corner radius (matches --corner-radius in other Vasak projects)
+  --corner-radius: 10px;
+
+  // ----------------------------------------------------------
+  // LOGIC ASSIGNMENTS — light mode defaults
+  // These are what all components actually consume.
+  // ----------------------------------------------------------
+  --use-primary:          var(--primary);
+  --use-primary-hover:    #c96060;          // slightly darker red
+  --use-primary-soft:     rgba(221, 120, 120, 0.12);
+  --use-secondary:        var(--secondary);
+
+  --use-ui-background:    var(--ui-background);
+  --use-ui-surface:       #ffffff;          // cards stay white in light mode
+  --use-ui-border:        var(--ui-border);
+  --use-ui-border-strong: rgba(0, 0, 0, 0.15);
+
+  --use-text-main:        var(--text-main);
+  --use-text-muted:       var(--text-muted);
+  --use-text-soft:        #9ca3af;
+  --use-text-on-primary:  var(--text-on-primary);
+
+  --use-status-error:         var(--status-error);
+  --use-status-error-hover:   #a80c2d;
+  --use-status-success:       var(--status-success);
+  --use-status-success-hover: #2d7a1f;
+  --use-status-warning:       var(--status-warning);
+  --use-status-warning-hover: #b87318;
+
+  // Interactive states
+  --use-state-hover:    rgba(0, 0, 0, 0.04);
+  --use-state-active:   rgba(0, 0, 0, 0.08);
+  --use-state-selected: rgba(221, 120, 120, 0.10);
+  --use-focus-ring:        0 0 0 3px rgba(221, 120, 120, 0.20);
+  --use-focus-ring-offset: 0 0 0 2px #ffffff, 0 0 0 4px var(--primary);
+
+  // Body background (used by Bootstrap override)
+  --use-body-bg:    var(--ui-background);
+  --use-body-color: var(--text-main);
+}
+
+// ----------------------------------------------------------
+// DARK MODE — flip logic assignments
+// Applied when JS adds .dark to <html>
+// ----------------------------------------------------------
+html.dark {
+  --use-primary:          var(--primary-dark);
+  --use-primary-hover:    #d48a8a;
+  --use-primary-soft:     rgba(235, 160, 172, 0.15);
+  --use-secondary:        var(--secondary-dark);
+
+  --use-ui-background:    var(--ui-background-dark);
+  --use-ui-surface:       var(--ui-surface-dark);
+  --use-ui-border:        rgba(255, 255, 255, 0.08);
+  --use-ui-border-strong: rgba(255, 255, 255, 0.14);
+
+  --use-text-main:        var(--text-main-dark);
+  --use-text-muted:       var(--text-muted-dark);
+  --use-text-soft:        #6c7086;           // Mocha Overlay0
+  --use-text-on-primary:  var(--text-on-primary-dark);
+
+  --use-status-error:         var(--status-error-dark);
+  --use-status-error-hover:   #f5a3b5;
+  --use-status-success:       var(--status-success-dark);
+  --use-status-success-hover: #b8ecb0;
+  --use-status-warning:       var(--status-warning-dark);
+  --use-status-warning-hover: #fbecc0;
+
+  --use-state-hover:    rgba(255, 255, 255, 0.06);
+  --use-state-active:   rgba(255, 255, 255, 0.10);
+  --use-state-selected: rgba(235, 160, 172, 0.12);
+  --use-focus-ring:        0 0 0 3px rgba(235, 160, 172, 0.25);
+  --use-focus-ring-offset: 0 0 0 2px var(--ui-surface-dark), 0 0 0 4px var(--primary-dark);
+
+  --use-body-bg:    var(--ui-background-dark);
+  --use-body-color: var(--text-main-dark);
+}
+
+// ----------------------------------------------------------
+// SYSTEM PREFERENCE FALLBACK
+// If the user has never toggled manually, respect their OS.
+// The JS toggle overrides this by adding .dark / removing it.
+// ----------------------------------------------------------
+@media (prefers-color-scheme: dark) {
+  html:not(.light) {
+    --use-primary:          var(--primary-dark);
+    --use-primary-hover:    #d48a8a;
+    --use-primary-soft:     rgba(235, 160, 172, 0.15);
+    --use-secondary:        var(--secondary-dark);
+
+    --use-ui-background:    var(--ui-background-dark);
+    --use-ui-surface:       var(--ui-surface-dark);
+    --use-ui-border:        rgba(255, 255, 255, 0.08);
+    --use-ui-border-strong: rgba(255, 255, 255, 0.14);
+
+    --use-text-main:        var(--text-main-dark);
+    --use-text-muted:       var(--text-muted-dark);
+    --use-text-soft:        #6c7086;
+    --use-text-on-primary:  var(--text-on-primary-dark);
+
+    --use-status-error:         var(--status-error-dark);
+    --use-status-error-hover:   #f5a3b5;
+    --use-status-success:       var(--status-success-dark);
+    --use-status-success-hover: #b8ecb0;
+    --use-status-warning:       var(--status-warning-dark);
+    --use-status-warning-hover: #fbecc0;
+
+    --use-state-hover:    rgba(255, 255, 255, 0.06);
+    --use-state-active:   rgba(255, 255, 255, 0.10);
+    --use-state-selected: rgba(235, 160, 172, 0.12);
+    --use-focus-ring:        0 0 0 3px rgba(235, 160, 172, 0.25);
+    --use-focus-ring-offset: 0 0 0 2px var(--ui-surface-dark), 0 0 0 4px var(--primary-dark);
+
+    --use-body-bg:    var(--ui-background-dark);
+    --use-body-color: var(--text-main-dark);
+  }
+}

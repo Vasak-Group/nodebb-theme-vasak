@@ -3,14 +3,16 @@
 // Extends NodeBB Harmony Theme
 // ============================================
 
-// Note: When using baseTheme, NodeBB loads the parent theme (Harmony) first.
-// This file contains Vasak specific style overrides that are applied on top.
-
 // Import Harmony's theme styles (required for inheritance)
 @import "nodebb-theme-harmony/scss/harmony";
 
-// Vasak Custom Styles
+// 1. Design tokens — CSS custom properties (:root + .dark)
+@import "./scss/tokens";
+
+// 2. SCSS bridge variables (reference the custom properties)
 @import "./scss/variables";
+
+// 3. Component styles
 @import "./scss/base";
 @import "./scss/header";
 @import "./scss/buttons";

@@ -483,7 +483,7 @@
   .content[component="post/content"] {
     font-size: 15px !important; // Slightly larger for better readability
     line-height: 1.6 !important;
-    color: #000000 !important; // Black text for feed body copy
+    color: var(--use-text-main) !important;
     margin-top: $jv-space-3; // Better spacing from meta
 
     // Truncation styles (from plugin)
@@ -499,7 +499,7 @@
         left: 0;
         right: 0;
         height: 50px; // Taller gradient
-        background: linear-gradient(transparent, $jv-surface);
+        background: linear-gradient(transparent, var(--use-ui-surface));
         pointer-events: none;
       }
     }
@@ -1141,7 +1141,7 @@ ul.categories-list {
 // ===========================================================
 // SUGGESTED USERS – Following Empty State
 // ===========================================================
-.javis-suggested-users {
+.vasak-suggested-users {
   background: $jv-surface;
   border: 1px solid $jv-border-subtle;
   border-radius: $jv-radius-lg;
@@ -1150,7 +1150,7 @@ ul.categories-list {
   box-shadow: $jv-shadow-sm;
 }
 
-.javis-suggested-users-title {
+.vasak-suggested-users-title {
   font-size: $jv-font-size-xs;
   font-weight: 700;
   text-transform: uppercase;
@@ -1160,7 +1160,7 @@ ul.categories-list {
   margin: 0;
 }
 
-.javis-sug-card {
+.vasak-sug-card {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
@@ -1185,7 +1185,7 @@ ul.categories-list {
   }
 }
 
-.javis-sug-avatar {
+.vasak-sug-avatar {
   width: 40px !important;
   height: 40px !important;
   min-width: 40px;
@@ -1196,7 +1196,7 @@ ul.categories-list {
   object-fit: cover;
 }
 
-.javis-sug-avatar-icon {
+.vasak-sug-avatar-icon {
   color: #fff;
   display: inline-flex !important;
   align-items: center !important;
@@ -1207,7 +1207,7 @@ ul.categories-list {
   line-height: 1;
 }
 
-.javis-sug-info {
+.vasak-sug-info {
   flex: 1 1 0;
   min-width: 0;
   display: flex;
@@ -1216,7 +1216,7 @@ ul.categories-list {
   overflow: hidden;
 }
 
-.javis-sug-name {
+.vasak-sug-name {
   font-size: $jv-font-size-sm;
   font-weight: 600;
   color: $jv-text-main;
@@ -1231,7 +1231,7 @@ ul.categories-list {
   }
 }
 
-.javis-sug-meta {
+.vasak-sug-meta {
   font-size: $jv-font-size-xs;
   color: $jv-text-soft;
 }

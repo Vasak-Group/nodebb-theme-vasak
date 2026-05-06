@@ -1,7 +1,7 @@
 {
 	"name": "nodebb-theme-vasak",
 	"version": "6.0.4",
-	"description": "Modern, premium NodeBB theme for JAVIS Community - Extends Harmony with custom styling",
+	"description": "Modern, premium NodeBB theme for Vasak Community - Extends Harmony with custom styling",
 	"main": "theme.js",
 	"scripts": {
 		"lint": "bunx --bun @biomejs/biome format ./",

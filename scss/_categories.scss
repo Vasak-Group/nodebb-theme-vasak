@@ -176,7 +176,7 @@ li[component="categories/category"] {
       transition: background $jv-transition-fast;
 
       &:hover {
-        background: darken($jv-bg, 2%);
+        background: rgba(0, 0, 0, 0.03);
       }
 
       .teaser-header {
@@ -231,7 +231,7 @@ li[component="categories/category"] {
         transition: color $jv-transition-fast;
 
         &:hover {
-          color: darken($jv-primary, 10%);
+          color: var(--use-primary-hover);
           text-decoration: underline;
         }
       }

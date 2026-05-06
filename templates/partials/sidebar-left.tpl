@@ -87,6 +87,16 @@
         <!-- IMPORT partials/skin-switcher.tpl -->
         {{{ end }}}
 
+        <div class="dark-mode-toggle m-2">
+            <button id="vasak-dark-toggle"
+                class="nav-link d-flex gap-2 align-items-center p-2 pointer w-100 text-nowrap btn btn-ghost"
+                title="Toggle dark mode" aria-label="Toggle dark mode">
+                <i class="fa fa-fw fa-moon toggle-icon-moon"></i>
+                <i class="fa fa-fw fa-sun toggle-icon-sun"></i>
+                <span class="nav-text visible-open fw-semibold small lh-1">Dark mode</span>
+            </button>
+        </div>
+
         <div class="sidebar-toggle m-2 d-none d-lg-block">
             <a href="#" role="button" component="sidebar/toggle"
                 class="nav-link d-flex gap-2 align-items-center p-2 pointer w-100 text-nowrap"

@@ -69,6 +69,9 @@
 		// Initialize skeleton screens for AJAX-loaded content
 		initSkeletonScreens();
 
+		// Initialize dark mode toggle
+		initDarkMode();
+
 		// Re-initialize carousels when new posts are loaded (infinite scroll, etc.)
 		// Also handle post edits by clearing the processed flag
 		$(window).on(
@@ -1540,4 +1543,74 @@
 			removeSkeleton($("#content > .vasak-skeleton-list"));
 		});
 	}
+	// ========================================
+	// DARK MODE TOGGLE
+	// ========================================
+	// Adds/removes .dark on <html>.
+	// Persists choice in localStorage.
+	// Respects prefers-color-scheme on first visit.
+
+	function initDarkMode() {
+		var STORAGE_KEY = "vasak:theme";
+		var $html = $("html");
+
+		// ── Determine initial state ──────────────────────────────
+		var saved = localStorage.getItem(STORAGE_KEY);
+		var prefersDark =
+			window.matchMedia &&
+			window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+		// Priority: saved preference > OS preference
+		var isDark = saved !== null ? saved === "dark" : prefersDark;
+
+		// Apply immediately (before paint) to avoid flash
+		applyTheme(isDark, false);
+
+		// ── Button click ─────────────────────────────────────────
+		$(document).on("click", "#vasak-dark-toggle", function () {
+			isDark = !$html.hasClass("dark");
+			applyTheme(isDark, true);
+		});
+
+		// Re-bind after SPA navigation (button is re-rendered)
+		$(window).on("action:ajaxify.end", function () {
+			// State is already on <html>, just ensure button icon is correct
+			syncToggleIcon($html.hasClass("dark"));
+		});
+
+		// ── OS preference change ─────────────────────────────────
+		if (window.matchMedia) {
+			window
+				.matchMedia("(prefers-color-scheme: dark)")
+				.addEventListener("change", function (e) {
+					// Only follow OS if user hasn't made a manual choice
+					if (localStorage.getItem(STORAGE_KEY) === null) {
+						applyTheme(e.matches, false);
+					}
+				});
+		}
+
+		function applyTheme(dark, save) {
+			if (dark) {
+				$html.addClass("dark").removeClass("light");
+			} else {
+				$html.removeClass("dark").addClass("light");
+			}
+
+			syncToggleIcon(dark);
+
+			if (save) {
+				localStorage.setItem(STORAGE_KEY, dark ? "dark" : "light");
+			}
+		}
+
+		function syncToggleIcon(dark) {
+			var $btn = $("#vasak-dark-toggle");
+			if (!$btn.length) return;
+			$btn.attr("aria-pressed", dark ? "true" : "false");
+			$btn.attr("title", dark ? "Switch to light mode" : "Switch to dark mode");
+			$btn.attr("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+		}
+	}
+
 })();

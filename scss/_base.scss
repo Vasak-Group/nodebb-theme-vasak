@@ -78,11 +78,17 @@ body {
   font-family: $jv-font-sans;
   font-size: $jv-font-size-base;
   line-height: $jv-line-height-base;
-  color: $jv-text-main;
-  background: linear-gradient(180deg, #ffffff 0%, #e0f0ff 100%);
+  color: var(--use-text-main);
+  background-color: var(--use-ui-background);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+// Dark mode body gradient
+html.dark body {
+  background-color: var(--use-ui-background);
 }
 
 // Typography Reset
@@ -477,4 +483,280 @@ img.not-responsive {
       flex-shrink: 0 !important;
     }
   }
+}
+
+// ===========================================================
+// DARK MODE — Global overrides
+// The CSS custom properties in _tokens.scss handle most of
+// the theming automatically. These rules cover elements that
+// use hardcoded colors or Bootstrap defaults.
+// ===========================================================
+
+html.dark {
+  // Smooth transition on theme switch
+  * {
+    transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
+  }
+
+  // Prevent transition on images (avoids flash)
+  img, video, svg {
+    transition: none !important;
+  }
+
+  // NodeBB / Bootstrap base elements
+  body {
+    color: var(--use-text-main);
+    background-color: var(--use-ui-background);
+  }
+
+  // Cards, panels, modals
+  .card,
+  .modal-content,
+  .dropdown-menu,
+  .popover,
+  .tooltip-inner {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+    color: var(--use-text-main);
+  }
+
+  // Inputs
+  .form-control,
+  .form-select,
+  input[type="text"],
+  input[type="search"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+    color: var(--use-text-main);
+
+    &::placeholder {
+      color: var(--use-text-soft);
+    }
+  }
+
+  // Sidebar
+  .sidebar,
+  nav[component="sidebar/left"],
+  .sidebar.bg-light,
+  nav.sidebar.bg-light {
+    background-color: var(--use-ui-surface) !important;
+    border-color: var(--use-ui-border) !important;
+  }
+
+  // Header / brand container
+  .brand-container {
+    background-color: var(--use-ui-surface);
+    border-bottom-color: var(--use-ui-border);
+  }
+
+  // Topic cards, feed posts
+  .topic-card,
+  li[component="post"].posts-list-item,
+  li[component="categories/category"],
+  .skeleton-feed-post,
+  .skeleton-topic-card,
+  .skeleton-post-item {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+  }
+
+  // Composer
+  html.dark .composer {
+    background-color: var(--use-ui-surface) !important;
+    border-color: var(--use-ui-border) !important;
+  }
+
+  // Alerts
+  .alert {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+    color: var(--use-text-main);
+  }
+
+  // Badges
+  .badge.border {
+    border-color: var(--use-ui-border) !important;
+    color: var(--use-text-muted) !important;
+  }
+
+  // Horizontal rules
+  hr {
+    border-color: var(--use-ui-border);
+  }
+
+  // Notification dropdown
+  .notifications-dropdown {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+  }
+
+  // Skeleton shimmer — darker in dark mode
+  @keyframes vasak-shimmer {
+    0%   { background-position: -600px 0; }
+    100% { background-position:  600px 0; }
+  }
+
+  %skeleton-bone,
+  [class*="skeleton-"] {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.10) 40%,
+      rgba(255, 255, 255, 0.04) 80%
+    ) !important;
+    background-size: 600px 100% !important;
+  }
+
+  // Feed content section
+  .feed-content-section,
+  .feed-action-bar {
+    background-color: var(--use-ui-surface);
+  }
+
+  // Topic page
+  .post-container-parent {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+  }
+
+  // Quick reply
+  .quick-reply,
+  [component="topic/quickreply"] {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+  }
+
+  // Topic sidebar
+  .topic-sidebar {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+  }
+
+  // Composer prompt card
+  .composer-prompt-card {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+  }
+
+  .composer-prompt-input {
+    background-color: var(--use-ui-background);
+    border-color: var(--use-ui-border);
+    color: var(--use-text-main);
+  }
+
+  // Vote column
+  .vote-column {
+    background-color: rgba(255, 255, 255, 0.02);
+  }
+
+  // Teaser enhanced
+  .teaser-enhanced {
+    background-color: var(--use-ui-background) !important;
+  }
+
+  // Subcategory pills
+  .subcategory-pill {
+    background-color: var(--use-ui-background);
+  }
+
+  // Activity badge
+  .activity-badge {
+    background-color: var(--use-ui-background);
+    color: var(--use-text-muted);
+  }
+
+  // Formatting bar in composer
+  .formatting-bar {
+    background-color: var(--use-ui-background) !important;
+    border-color: var(--use-ui-border) !important;
+  }
+
+  // Tag row in composer
+  .tag-row {
+    background-color: var(--use-ui-surface) !important;
+    border-color: var(--use-ui-border) !important;
+  }
+
+  // Tags container
+  .tags-container {
+    background-color: var(--use-ui-background) !important;
+    border-color: var(--use-ui-border) !important;
+  }
+
+  // Pagination
+  .pagination .page-link {
+    color: var(--use-text-main);
+    background-color: transparent;
+
+    &:hover {
+      background-color: var(--use-state-hover);
+    }
+  }
+
+  // Tables
+  .table {
+    color: var(--use-text-main);
+    border-color: var(--use-ui-border);
+
+    th, td {
+      border-color: var(--use-ui-border);
+    }
+  }
+
+  // List groups
+  .list-group-item {
+    background-color: var(--use-ui-surface);
+    border-color: var(--use-ui-border);
+    color: var(--use-text-main);
+  }
+
+  // Nav tabs
+  .nav-tabs {
+    border-color: var(--use-ui-border);
+
+    .nav-link {
+      color: var(--use-text-muted);
+
+      &.active {
+        color: var(--use-primary);
+        background-color: transparent;
+        border-bottom-color: var(--use-primary);
+      }
+    }
+  }
+
+  // Vasak sidebar logo area
+  .vasak-sidebar-logo {
+    border-bottom-color: var(--use-ui-border);
+  }
+
+  // User section border
+  .sidebar-user-section {
+    border-top-color: var(--use-ui-border);
+  }
+
+  .sidebar-auth-section {
+    border-top-color: var(--use-ui-border);
+  }
+
+  // Feed truncation gradient
+  .content.truncate-post-content::after {
+    background: linear-gradient(transparent, var(--use-ui-surface)) !important;
+  }
+}
+
+// ===========================================================
+// DARK MODE TOGGLE BUTTON — in sidebar
+// ===========================================================
+.dark-mode-toggle {
+  .toggle-icon-moon { display: inline-block; }
+  .toggle-icon-sun  { display: none; }
+}
+
+html.dark .dark-mode-toggle {
+  .toggle-icon-moon { display: none; }
+  .toggle-icon-sun  { display: inline-block; }
 }
