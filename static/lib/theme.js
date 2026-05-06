@@ -25,6 +25,12 @@
 		initServiceWorker();
 		initAnimations();
 
+		// Infinite scroll UX (progress bar, back-to-top, end state)
+		// Loaded as AMD module so it's cached after first load
+		require(["forum/vasak-scroll-ux"], function (scrollUX) {
+			scrollUX.init();
+		});
+
 		// ── Lazy-load page-specific modules ─────────────────────────────
 		loadPageModules();
 
