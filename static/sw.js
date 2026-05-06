@@ -23,7 +23,7 @@
 
 // ── Versión ────────────────────────────────────────────────────────────────
 // Incrementar cuando cambie el contenido de los assets cacheados.
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 
 // Nombres de caché por categoría
 const CACHE_STATIC = `vasak-static-${CACHE_VERSION}`;
@@ -34,14 +34,10 @@ const CACHE_IMAGES = `vasak-images-${CACHE_VERSION}`;
 const ALL_CACHES = [CACHE_STATIC, CACHE_PAGES, CACHE_IMAGES];
 
 // ── Assets a pre-cachear en install ───────────────────────────────────────
-// Solo assets que sabemos que existen y son estables.
-// Los assets de NodeBB (client.css, nodebb.min.js) NO se pre-cachean
-// porque sus URLs cambian con cada rebuild (query string con hash).
-const PRECACHE_ASSETS = [
-	"/plugins/nodebb-theme-vasak/static/images/logo-icon.png",
-	"/plugins/nodebb-theme-vasak/static/images/logo-full.png",
-	"/plugins/nodebb-theme-vasak/static/offline.html",
-];
+// Mantener esta lista mínima — solo assets que existen con certeza.
+// Las imágenes del tema y el offline.html se cachean on-demand (cache-first)
+// cuando el usuario los solicita por primera vez.
+const PRECACHE_ASSETS = [];
 
 // ── Patrones de URL ────────────────────────────────────────────────────────
 const PATTERNS = {
@@ -231,9 +227,7 @@ async function networkFirst(request, cacheName) {
 		}
 		// Fallback a la página offline para navegación HTML
 		if (request.headers.get("accept")?.includes("text/html")) {
-			const offline = await caches.match(
-				"/plugins/nodebb-theme-vasak/static/offline.html",
-			);
+			const offline = await caches.match("/offline.html");
 			if (offline) return offline;
 		}
 		throw err;
@@ -279,10 +273,8 @@ self.addEventListener("push", (event) => {
 	const title = data.title || "Vasak Community";
 	const options = {
 		body: data.body || "",
-		icon:
-			data.icon || "/plugins/nodebb-theme-vasak/static/images/logo-icon.png",
-		badge:
-			data.badge || "/plugins/nodebb-theme-vasak/static/images/logo-icon.png",
+		icon: data.icon || "/assets/favicon.ico",
+		badge: data.badge || "/assets/favicon.ico",
 		tag: data.tag || "vasak-notification",
 		data: { url: data.url || "/" },
 		vibrate: [100, 50, 100],

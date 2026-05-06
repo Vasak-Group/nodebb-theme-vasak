@@ -155,9 +155,9 @@ theme.getThemeConfig = async function (config) {
 
 /**
  * Hook: filter:middleware.render
- * Injects critical CSS inline into every page's <head> via
- * NodeBB's res.locals.extraCSS mechanism.
- * Eliminates render-blocking for above-the-fold styles.
+ * Injects into templateData:
+ *   - vasak_critical_css: minified critical CSS string (inlined via template)
+ *   - vasak_head_html: resource hints HTML string (inlined via template)
  */
 theme.injectCriticalCSS = async function (data) {
 	const path = require("path");
@@ -175,10 +175,15 @@ theme.injectCriticalCSS = async function (data) {
 			.replace(/\n/g, "")
 			.trim();
 
-		// NodeBB's filter:middleware.render passes { req, res, templateData }
-		// We inject a <style> tag via templateData.extraCSS (Harmony/NodeBB convention)
 		if (data.templateData) {
 			data.templateData.vasak_critical_css = minified;
+
+			// Resource hints — injected here, not via filter:scripts.get,
+			// to avoid Cloudflare Rocket Loader treating HTML tags as scripts.
+			data.templateData.vasak_head_html = [
+				'<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">',
+				'<link rel="dns-prefetch" href="//use.fontawesome.com">',
+			].join("\n");
 		}
 	} catch (e) {
 		// Non-fatal
@@ -189,44 +194,13 @@ theme.injectCriticalCSS = async function (data) {
 
 /**
  * Hook: filter:scripts.get
- * Injects into the page <head>:
- *   1. Resource hints (dns-prefetch for Font Awesome)
- *   2. Critical CSS <style> block (above-the-fold styles)
- * NodeBB calls this hook to collect extra <head> content.
+ * NodeBB uses this array for JS scripts only.
+ * We do NOT inject HTML tags here — Cloudflare Rocket Loader would
+ * URL-encode them and try to load them as scripts.
+ * Resource hints and critical CSS are handled via filter:middleware.render
+ * writing directly to templateData instead.
  */
 theme.addHeadContent = async function (scripts) {
-	const path = require("path");
-	const fs = require("fs");
-
-	const criticalPath = path.join(__dirname, "static", "critical.css");
-
-	// ── Resource hints ────────────────────────────────────────────────────
-	// Font Awesome is loaded by NodeBB/Harmony for icons.
-	// dns-prefetch resolves the DNS in parallel with other page resources.
-	// We do NOT add preconnect for Google Fonts — we use system fonts only.
-	const resourceHints = [
-		'<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">',
-		'<link rel="dns-prefetch" href="//use.fontawesome.com">',
-	].join("\n");
-
-	// ── Critical CSS ──────────────────────────────────────────────────────
-	let criticalStyle = "";
-	try {
-		const css = fs.readFileSync(criticalPath, "utf8");
-		const minified = css
-			.replace(/\/\*[\s\S]*?\*\//g, "")
-			.replace(/\s{2,}/g, " ")
-			.replace(/\n/g, "")
-			.trim();
-		criticalStyle = `<style id="vasak-critical">${minified}</style>`;
-	} catch (e) {
-		// Non-fatal — page renders fine without critical CSS
-	}
-
-	// Prepend both so they load before any other scripts/styles
-	if (criticalStyle) scripts.unshift(criticalStyle);
-	scripts.unshift(resourceHints);
-
 	return scripts;
 };
 
