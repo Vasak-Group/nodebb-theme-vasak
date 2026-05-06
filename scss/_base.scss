@@ -754,3 +754,18 @@ html.dark .dark-mode-toggle {
   .toggle-icon-moon { display: none; }
   .toggle-icon-sun  { display: inline-block; }
 }
+
+
+// ===========================================================
+// BOOTSTRAP OVERRIDES
+// ===========================================================
+.bg-body {
+  background-color: var(--use-ui-surface) !important;
+  color: var(--use-text-main) !important;
+}
+
+.container-lg {
+  max-width: 100% !important;
+  padding-left: $vsk-space-4 !important;
+  padding-right: $vsk-space-4 !important;
+}
