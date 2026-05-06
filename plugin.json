@@ -29,7 +29,9 @@
 		"forum/vasak-scroll-ux": "public/src/client/infinite-scroll-ux.js",
 		"forum/vasak-virtual-list": "public/src/client/virtual-list.js",
 		"forum/vasak-reactions": "public/src/client/reactions.js",
-		"forum/vasak-share": "public/src/client/share-enhanced.js"
+		"forum/vasak-share": "public/src/client/share-enhanced.js",
+		"forum/vasak-autosave": "public/src/client/composer-autosave.js",
+		"forum/vasak-autocomplete": "public/src/client/search-autocomplete.js"
 	},
 	"templates": "templates",
 	"screenshot": "screenshot.png",

@@ -41,6 +41,16 @@
 			Share.init();
 		});
 
+		// Composer autosave
+		require(["forum/vasak-autosave"], function (Autosave) {
+			Autosave.init();
+		});
+
+		// Search autocomplete (header input)
+		require(["forum/vasak-autocomplete"], function (AC) {
+			AC.init();
+		});
+
 		// ── Lazy-load page-specific modules ─────────────────────────────
 		loadPageModules();
 
