@@ -43,8 +43,8 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: $jv-space-1;
-  padding: $jv-space-2 0 $jv-space-1;
+  gap: $vsk-space-1;
+  padding: $vsk-space-2 0 $vsk-space-1;
   min-height: 0;
 
   // Animación de entrada de la barra completa
@@ -62,7 +62,7 @@
   padding: 3px 8px 3px 6px;
   background: var(--use-state-hover);
   border: 1px solid var(--use-ui-border);
-  border-radius: $jv-radius-pill;
+  border-radius: $vsk-radius-pill;
   cursor: pointer;
   font-size: 13px;
   line-height: 1;
@@ -129,7 +129,7 @@
     font-size: 11px;
     font-weight: 500;
     padding: 4px 8px;
-    border-radius: $jv-radius-xs;
+    border-radius: $vsk-radius-xs;
     white-space: nowrap;
     max-width: 200px;
     overflow: hidden;
@@ -163,7 +163,7 @@
   height: 26px;
   background: transparent;
   border: 1px dashed var(--use-ui-border);
-  border-radius: $jv-radius-pill;
+  border-radius: $vsk-radius-pill;
   cursor: pointer;
   color: var(--use-text-soft);
   font-size: 14px;
@@ -208,9 +208,9 @@
   z-index: 200;
   background: var(--use-ui-surface);
   border: 1px solid var(--use-ui-border);
-  border-radius: $jv-radius-lg;
-  box-shadow: $jv-shadow-lg;
-  padding: $jv-space-2;
+  border-radius: $vsk-radius-lg;
+  box-shadow: $vsk-shadow-lg;
+  padding: $vsk-space-2;
   display: flex;
   gap: 2px;
   animation: vasak-picker-in 180ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
@@ -232,7 +232,7 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: $jv-radius-sm;
+  border-radius: $vsk-radius-sm;
   cursor: pointer;
   font-size: 20px;
   line-height: 1;
@@ -266,7 +266,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: $jv-space-1;
+  gap: $vsk-space-1;
 }
 
 // ── Integración con post footer ───────────────────────────────────────────
@@ -275,8 +275,8 @@
 [component="post/footer"] {
   .vasak-reactions-bar {
     border-top: 1px solid var(--use-ui-border);
-    margin-top: $jv-space-2;
-    padding-top: $jv-space-2;
+    margin-top: $vsk-space-2;
+    padding-top: $vsk-space-2;
   }
 }
 

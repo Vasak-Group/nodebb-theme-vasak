@@ -66,18 +66,18 @@
 // LINKEDIN-STYLE COMPOSER PROMPT CARD
 // ===========================================================
 .composer-prompt-card {
-  background: $jv-surface;
-  border: 1px solid $jv-border-subtle;
-  border-radius: $jv-radius-lg;
-  padding: $jv-space-4 $jv-space-6; // 16px top/bottom, 24px left/right
-  margin-top: $jv-space-4; // Align with trending tags padding-top
-  margin-bottom: $jv-space-2; // Reduced bottom margin for tighter spacing
-  box-shadow: $jv-shadow-sm;
-  transition: box-shadow $jv-transition-fast, border-color $jv-transition-fast;
+  background: $vsk-surface;
+  border: 1px solid $vsk-border-subtle;
+  border-radius: $vsk-radius-lg;
+  padding: $vsk-space-4 $vsk-space-6; // 16px top/bottom, 24px left/right
+  margin-top: $vsk-space-4; // Align with trending tags padding-top
+  margin-bottom: $vsk-space-2; // Reduced bottom margin for tighter spacing
+  box-shadow: $vsk-shadow-sm;
+  transition: box-shadow $vsk-transition-fast, border-color $vsk-transition-fast;
 
   &:hover {
-    box-shadow: $jv-shadow-md;
-    border-color: $jv-border-strong;
+    box-shadow: $vsk-shadow-md;
+    border-color: $vsk-border-strong;
   }
 
   // Guest variant
@@ -91,7 +91,7 @@
 .composer-prompt-inner {
   display: flex;
   align-items: center;
-  gap: $jv-space-3;
+  gap: $vsk-space-3;
 }
 
 .composer-prompt-avatar {
@@ -120,11 +120,11 @@
     min-width: 32px !important;
     min-height: 32px !important;
     border-radius: 50% !important;
-    background: $jv-border-subtle;
+    background: $vsk-border-subtle;
     display: flex !important;
     align-items: center;
     justify-content: center;
-    color: $jv-text-soft;
+    color: $vsk-text-soft;
 
     i {
       font-size: 14px;
@@ -136,24 +136,24 @@
   flex: 1;
   display: flex;
   align-items: center;
-  padding: $jv-space-3 $jv-space-4;
-  background: $jv-bg;
-  border: 1px solid $jv-border-subtle;
-  border-radius: $jv-radius-pill;
+  padding: $vsk-space-3 $vsk-space-4;
+  background: $vsk-bg;
+  border: 1px solid $vsk-border-subtle;
+  border-radius: $vsk-radius-pill;
   cursor: pointer;
-  transition: all $jv-transition-fast;
+  transition: all $vsk-transition-fast;
   text-decoration: none;
   min-height: 48px;
 
   &:hover {
     background: rgba(0, 0, 0, 0.04);
-    border-color: $jv-border-strong;
+    border-color: $vsk-border-strong;
   }
 
   &:focus {
     outline: none;
-    border-color: $jv-primary;
-    box-shadow: $jv-focus-ring;
+    border-color: $vsk-primary;
+    box-shadow: $vsk-focus-ring;
   }
 
   // Reset button styles
@@ -165,14 +165,14 @@
 }
 
 .composer-prompt-placeholder {
-  color: $jv-text-muted;
-  font-size: $jv-font-size-base;
+  color: $vsk-text-muted;
+  font-size: $vsk-font-size-base;
   font-weight: 500;
 }
 
 .composer-prompt-actions {
   display: flex;
-  gap: $jv-space-1;
+  gap: $vsk-space-1;
   flex-shrink: 0;
 }
 
@@ -185,18 +185,18 @@
   border: none;
   background: transparent;
   border-radius: 50%;
-  color: $jv-text-muted;
+  color: $vsk-text-muted;
   cursor: pointer;
-  transition: all $jv-transition-fast;
+  transition: all $vsk-transition-fast;
 
   &:hover {
-    background: $jv-hover-bg;
-    color: $jv-primary;
+    background: $vsk-hover-bg;
+    color: $vsk-primary;
   }
 
   &:focus {
     outline: none;
-    box-shadow: $jv-focus-ring;
+    box-shadow: $vsk-focus-ring;
   }
 
   i {
@@ -206,15 +206,15 @@
 
 // Feed options row (settings dropdown only)
 .feed-options-row {
-  margin-bottom: $jv-space-2 !important;
-  padding: $jv-space-2 0 !important;
+  margin-bottom: $vsk-space-2 !important;
+  padding: $vsk-space-2 0 !important;
 }
 
 // Mobile responsive
 @media (max-width: 576px) {
   .composer-prompt-card {
-    padding: $jv-space-3;
-    border-radius: $jv-radius-md;
+    padding: $vsk-space-3;
+    border-radius: $vsk-radius-md;
   }
 
   .composer-prompt-avatar {
@@ -230,12 +230,12 @@
   }
 
   .composer-prompt-input {
-    padding: $jv-space-2 $jv-space-3;
+    padding: $vsk-space-2 $vsk-space-3;
     min-height: 40px;
   }
 
   .composer-prompt-placeholder {
-    font-size: $jv-font-size-sm;
+    font-size: $vsk-font-size-sm;
   }
 
   .composer-prompt-actions {
@@ -252,48 +252,48 @@
 
   // Header controls row (keeping for reference, but hidden above)
   .d-flex.justify-content-between.py-2.mb-2 {
-    padding: $jv-space-4 0 !important;
-    margin-bottom: $jv-space-6 !important;
+    padding: $vsk-space-4 0 !important;
+    margin-bottom: $vsk-space-6 !important;
 
     // New Topic button (hidden above)
     #new_topic,
     .btn-primary {
       font-weight: 600;
       padding: 10px 20px;
-      border-radius: $jv-radius-sm;
+      border-radius: $vsk-radius-sm;
     }
 
     // Settings dropdown button
     #options-dropdown {
       .btn-ghost {
-        background: $jv-surface;
-        border: 1px solid $jv-border-subtle;
-        border-radius: $jv-radius-sm;
+        background: $vsk-surface;
+        border: 1px solid $vsk-border-subtle;
+        border-radius: $vsk-radius-sm;
         padding: 8px 12px;
 
         &:hover {
           background: rgba(0, 0, 0, 0.02);
-          border-color: $jv-border-strong;
+          border-color: $vsk-border-strong;
         }
       }
 
       .dropdown-menu {
-        background: $jv-surface;
-        border: 1px solid $jv-border-subtle;
-        border-radius: $jv-radius-md;
-        box-shadow: $jv-shadow-card;
-        padding: $jv-space-2;
+        background: $vsk-surface;
+        border: 1px solid $vsk-border-subtle;
+        border-radius: $vsk-radius-md;
+        box-shadow: $vsk-shadow-card;
+        padding: $vsk-space-2;
       }
     }
   }
 
   // Empty state alert
   .alert-warning {
-    background: $jv-surface;
-    border: 1px solid $jv-border-subtle;
-    border-radius: $jv-radius-lg;
-    color: $jv-text-muted;
-    padding: $jv-space-12;
+    background: $vsk-surface;
+    border: 1px solid $vsk-border-subtle;
+    border-radius: $vsk-radius-lg;
+    color: $vsk-text-muted;
+    padding: $vsk-space-12;
   }
 }
 
@@ -313,22 +313,22 @@
 // POST CARD – Main Styling (shadcn + Modern Polish)
 // ===========================================================
 .feed li[component="post"].posts-list-item {
-  background: $jv-surface !important;
-  border: 1px solid $jv-border-subtle !important;
-  border-radius: $jv-radius-lg !important; // Match composer and widgets (16px)
-  margin-bottom: $jv-space-2 !important;
-  box-shadow: $jv-shadow-sm !important;
+  background: $vsk-surface !important;
+  border: 1px solid $vsk-border-subtle !important;
+  border-radius: $vsk-radius-lg !important; // Match composer and widgets (16px)
+  margin-bottom: $vsk-space-2 !important;
+  box-shadow: $vsk-shadow-sm !important;
   overflow: hidden !important;
-  transition: $jv-transition-shadow, border-color $jv-transition-fast;
+  transition: $vsk-transition-shadow, border-color $vsk-transition-fast;
 
   &:hover {
-    box-shadow: $jv-shadow-md !important;
-    border-color: $jv-border-strong !important;
+    box-shadow: $vsk-shadow-md !important;
+    border-color: $vsk-border-strong !important;
   }
 
   &:focus-within {
     outline: none;
-    box-shadow: $jv-shadow-md, $jv-focus-ring !important;
+    box-shadow: $vsk-shadow-md, $vsk-focus-ring !important;
   }
 
   &.deleted {
@@ -348,7 +348,7 @@
     padding: 0 !important;
 
     .overflow-hidden {
-      border-radius: $jv-radius-md !important;
+      border-radius: $vsk-radius-md !important;
       max-height: 280px !important;
       background: rgba(0, 0, 0, 0.02);
 
@@ -372,12 +372,12 @@
 .feed li[component="post"].posts-list-item {
   // Change layout to vertical stack instead of horizontal
   > .d-flex.gap-2.p-3 {
-    padding: $jv-space-4 !important; // 16dp all sides - equal spacing
+    padding: $vsk-space-4 !important; // 16dp all sides - equal spacing
     flex-direction: column !important; // Stack vertically
     gap: 0 !important; // Remove gap, we'll use margins
 
     @media (max-width: 768px) {
-      padding: $jv-space-3 !important; // 12dp all sides on mobile
+      padding: $vsk-space-3 !important; // 12dp all sides on mobile
     }
   }
 
@@ -388,7 +388,7 @@
 
   // Post body - full width, contains everything
   .post-body {
-    gap: $jv-space-2 !important; // 8dp - Material grid
+    gap: $vsk-space-2 !important; // 8dp - Material grid
     width: 100% !important;
   }
 }
@@ -401,12 +401,12 @@
     font-size: 20px !important; // Larger for prominence (Reddit/LinkedIn style)
     font-weight: 700 !important; // Bolder for better hierarchy
     line-height: 1.4 !important; // Better readability
-    color: $jv-text-main !important;
+    color: $vsk-text-main !important;
     margin-bottom: 0;
     letter-spacing: -0.02em; // Tighter for modern feel
 
     &:hover {
-      color: $jv-primary !important;
+      color: $vsk-primary !important;
     }
   }
 }
@@ -417,24 +417,24 @@
 .feed li[component="post"].posts-list-item {
   .post-info {
     font-size: 14px !important;
-    color: $jv-text-soft;
-    gap: $jv-space-2 !important;
+    color: $vsk-text-soft;
+    gap: $vsk-space-2 !important;
     display: flex !important;
     align-items: center !important;
-    margin-bottom: $jv-space-2 !important; // Space before title
+    margin-bottom: $vsk-space-2 !important; // Space before title
 
     .post-author {
       display: flex !important;
       align-items: center !important;
-      gap: $jv-space-2 !important;
+      gap: $vsk-space-2 !important;
 
       a {
-        color: $jv-text-soft;
+        color: $vsk-text-soft;
         font-weight: 400;
         font-size: 14px;
 
         &:hover {
-          color: $jv-primary;
+          color: $vsk-primary;
         }
 
         // Avatar inside the anchor - sized correctly
@@ -453,7 +453,7 @@
     }
 
     .timeago {
-      color: $jv-text-soft !important;
+      color: $vsk-text-soft !important;
       font-size: 13px;
 
       &::before {
@@ -471,7 +471,7 @@
     .post-info .post-author a.d-inline.d-lg-none {
       display: inline-flex !important;
       align-items: center !important;
-      gap: $jv-space-2 !important;
+      gap: $vsk-space-2 !important;
     }
   }
 }
@@ -484,7 +484,7 @@
     font-size: 15px !important; // Slightly larger for better readability
     line-height: 1.6 !important;
     color: var(--use-text-main) !important;
-    margin-top: $jv-space-3; // Better spacing from meta
+    margin-top: $vsk-space-3; // Better spacing from meta
 
     // Truncation styles (from plugin)
     &.truncate-post-content {
@@ -506,7 +506,7 @@
 
     // Links in content
     a:not(.stretched-link) {
-      color: $jv-primary;
+      color: $vsk-primary;
 
       &:hover {
         text-decoration: underline;
@@ -516,18 +516,18 @@
     // Images in content
     img {
       max-width: 100%;
-      border-radius: $jv-radius-sm;
+      border-radius: $vsk-radius-sm;
     }
 
     // Code blocks
     pre, code {
       background: rgba(0, 0, 0, 0.03);
-      border-radius: $jv-radius-xs;
+      border-radius: $vsk-radius-xs;
       font-size: 13px;
     }
 
     pre {
-      padding: $jv-space-4;
+      padding: $vsk-space-4;
     }
 
     code {
@@ -537,16 +537,16 @@
 
   // See more button
   [component="show/more"] {
-    background: $jv-surface !important;
-    border: 1px solid $jv-border-subtle !important;
-    color: $jv-primary !important;
+    background: $vsk-surface !important;
+    border: 1px solid $vsk-border-subtle !important;
+    color: $vsk-primary !important;
     font-weight: 600;
     padding: 6px 16px;
-    box-shadow: $jv-shadow-soft;
+    box-shadow: $vsk-shadow-soft;
 
     &:hover {
-      background: $jv-primary-soft !important;
-      border-color: $jv-primary !important;
+      background: $vsk-primary-soft !important;
+      border-color: $vsk-primary !important;
     }
   }
 
@@ -554,13 +554,13 @@
   // FEED IMAGE CAROUSEL (matching topic page design)
   // ===========================================================
   .post-image-carousel {
-    border-radius: $jv-radius-md;
+    border-radius: $vsk-radius-md;
     overflow: hidden;
-    margin: $jv-space-4 0;
+    margin: $vsk-space-4 0;
     background: rgba(0, 0, 0, 0.03);
 
     .carousel-inner {
-      border-radius: $jv-radius-md;
+      border-radius: $vsk-radius-md;
     }
 
     .carousel-item {
@@ -585,7 +585,7 @@
       background: rgba(0, 0, 0, 0.5);
       border-radius: 50%;
       opacity: 0;
-      transition: opacity $jv-transition-fast;
+      transition: opacity $vsk-transition-fast;
 
       &:hover {
         background: rgba(0, 0, 0, 0.7);
@@ -599,11 +599,11 @@
     }
 
     .carousel-control-prev {
-      left: $jv-space-3;
+      left: $vsk-space-3;
     }
 
     .carousel-control-next {
-      right: $jv-space-3;
+      right: $vsk-space-3;
     }
 
     &:hover {
@@ -615,8 +615,8 @@
 
     // Indicator dots - matching topic page
     .carousel-indicators {
-      margin-bottom: $jv-space-3;
-      gap: $jv-space-2;
+      margin-bottom: $vsk-space-3;
+      gap: $vsk-space-2;
 
       button {
         width: 8px;
@@ -625,7 +625,7 @@
         background: rgba(255, 255, 255, 0.5);
         border: none;
         opacity: 1;
-        transition: background-color $jv-transition-fast, transform $jv-transition-fast;
+        transition: background-color $vsk-transition-fast, transform $vsk-transition-fast;
 
         &.active {
           background: #fff;
@@ -656,32 +656,32 @@
 .feed li[component="post"].posts-list-item {
   // Action bar - now a direct child of the post card
   .feed-action-bar {
-    background: $jv-surface !important;
-    border-radius: 0 0 $jv-radius-lg $jv-radius-lg; // Match card's bottom corners (16px)
+    background: $vsk-surface !important;
+    border-radius: 0 0 $vsk-radius-lg $vsk-radius-lg; // Match card's bottom corners (16px)
 
     .btn-link {
       display: inline-flex;
       align-items: center;
-      gap: $jv-space-2; // 8dp consistent spacing
-      padding: $jv-space-2 $jv-space-3 !important; // 8dp vertical, 12dp horizontal
+      gap: $vsk-space-2; // 8dp consistent spacing
+      padding: $vsk-space-2 $vsk-space-3 !important; // 8dp vertical, 12dp horizontal
       font-size: 14px !important;
       font-weight: 600 !important;
-      color: $jv-text-muted !important;
+      color: $vsk-text-muted !important;
       background: transparent;
       border: none;
-      border-radius: $jv-radius-sm; // 8px shadcn standard
+      border-radius: $vsk-radius-sm; // 8px shadcn standard
       text-decoration: none !important;
-      transition: background-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions, NO transform
+      transition: background-color $vsk-transition-fast, color $vsk-transition-fast; // Modern transitions, NO transform
 
       &:hover {
-        background: $jv-hover-bg; // Consistent hover state
-        color: $jv-text-main !important;
+        background: $vsk-hover-bg; // Consistent hover state
+        color: $vsk-text-main !important;
       }
 
       // Focus state for accessibility
       &:focus-visible {
         outline: none;
-        box-shadow: $jv-focus-ring;
+        box-shadow: $vsk-focus-ring;
       }
 
       i {
@@ -696,14 +696,14 @@
       // Comments button
       &[href*="post"]:first-child {
         i {
-          color: $jv-text-muted;
+          color: $vsk-text-muted;
         }
 
         &:hover {
           background: rgba(0, 81, 255, 0.08);
 
           i {
-            color: $jv-primary;
+            color: $vsk-primary;
           }
         }
       }
@@ -711,19 +711,19 @@
       // Bookmark button
       &[data-action="bookmark"] {
         &[data-bookmarked="true"] {
-          color: $jv-primary !important;
-          background: $jv-selected-bg !important; // Consistent selected state
+          color: $vsk-primary !important;
+          background: $vsk-selected-bg !important; // Consistent selected state
 
           i {
-            color: $jv-primary !important;
+            color: $vsk-primary !important;
           }
         }
 
         &:hover {
-          background: $jv-selected-bg;
+          background: $vsk-selected-bg;
 
           i {
-            color: $jv-primary;
+            color: $vsk-primary;
           }
         }
       }
@@ -750,14 +750,14 @@
 
       // Reply button (Primary CTA)
       &[data-action="reply"] {
-        color: $jv-primary !important;
+        color: $vsk-primary !important;
         font-weight: 700 !important;
 
         &:hover {
-          background: $jv-selected-bg;
+          background: $vsk-selected-bg;
 
           i {
-            color: $jv-primary;
+            color: $vsk-primary;
           }
         }
       }
@@ -770,11 +770,11 @@
 // ===========================================================
 @media (max-width: 992px) {
   .feed li[component="post"].posts-list-item {
-    border-radius: $jv-radius-md !important;
-    margin-bottom: $jv-space-2 !important;
+    border-radius: $vsk-radius-md !important;
+    margin-bottom: $vsk-space-2 !important;
 
     > .d-flex.gap-2.p-3 {
-      padding: $jv-space-4 !important;
+      padding: $vsk-space-4 !important;
     }
 
     .topic-title {
@@ -837,24 +837,24 @@ ul.categories-list {
 // CATEGORY CARD – Main Styling
 // ===========================================================
 .categories-list > li[component="categories/category"] {
-  background: $jv-surface !important;
-  border: 1px solid $jv-border-subtle !important;
-  border-radius: $jv-radius-lg !important;
-  margin-bottom: $jv-space-4 !important;
-  padding: $jv-space-6 !important;
+  background: $vsk-surface !important;
+  border: 1px solid $vsk-border-subtle !important;
+  border-radius: $vsk-radius-lg !important;
+  margin-bottom: $vsk-space-4 !important;
+  padding: $vsk-space-6 !important;
   overflow: hidden;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 
   &:hover {
-    border-color: $jv-border-strong !important;
-    box-shadow: $jv-shadow-soft !important;
+    border-color: $vsk-border-strong !important;
+    box-shadow: $vsk-shadow-soft !important;
   }
 
   // Category icon
   .category-icon {
     width: 48px !important;
     height: 48px !important;
-    border-radius: $jv-radius-md !important;
+    border-radius: $vsk-radius-md !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -866,7 +866,7 @@ ul.categories-list {
   .category-header {
     display: flex;
     align-items: flex-start;
-    gap: $jv-space-4;
+    gap: $vsk-space-4;
   }
 
   // Category title
@@ -876,11 +876,11 @@ ul.categories-list {
     font-size: 18px !important;
     font-weight: 600 !important;
     line-height: 1.35 !important;
-    color: $jv-text-main !important;
+    color: $vsk-text-main !important;
     text-decoration: none !important;
 
     &:hover {
-      color: $jv-primary !important;
+      color: $vsk-primary !important;
     }
   }
 
@@ -889,8 +889,8 @@ ul.categories-list {
   .description {
     font-size: 14px !important;
     line-height: 1.5 !important;
-    color: $jv-text-muted;
-    margin-top: $jv-space-2;
+    color: $vsk-text-muted;
+    margin-top: $vsk-space-2;
     margin-bottom: 0;
   }
 
@@ -898,11 +898,11 @@ ul.categories-list {
   .category-stat,
   .stat {
     font-size: 13px !important;
-    color: $jv-text-soft;
+    color: $vsk-text-soft;
 
     strong,
     .human-readable-number {
-      color: $jv-text-muted;
+      color: $vsk-text-muted;
       font-weight: 600;
     }
   }
@@ -910,9 +910,9 @@ ul.categories-list {
   // Teaser (latest post preview)
   .category-teaser,
   .teaser {
-    margin-top: $jv-space-4;
-    padding-top: $jv-space-4;
-    border-top: 1px solid $jv-border-subtle;
+    margin-top: $vsk-space-4;
+    padding-top: $vsk-space-4;
+    border-top: 1px solid $vsk-border-subtle;
 
     .avatar {
       width: 24px !important;
@@ -922,40 +922,40 @@ ul.categories-list {
 
     .timeago {
       font-size: 12px !important;
-      color: $jv-text-soft;
+      color: $vsk-text-soft;
     }
 
     a {
-      color: $jv-text-muted;
+      color: $vsk-text-muted;
       font-size: 13px;
 
       &:hover {
-        color: $jv-primary;
+        color: $vsk-primary;
       }
     }
   }
 
   // Children categories
   .category-children {
-    margin-top: $jv-space-4;
-    padding-top: $jv-space-4;
-    border-top: 1px solid $jv-border-subtle;
+    margin-top: $vsk-space-4;
+    padding-top: $vsk-space-4;
+    border-top: 1px solid $vsk-border-subtle;
 
     .category-children-item {
       display: inline-flex;
       align-items: center;
-      gap: $jv-space-2;
-      padding: $jv-space-2 $jv-space-4;
+      gap: $vsk-space-2;
+      padding: $vsk-space-2 $vsk-space-4;
       background: rgba(0, 0, 0, 0.02);
-      border-radius: $jv-radius-sm;
-      margin-right: $jv-space-2;
-      margin-bottom: $jv-space-2;
+      border-radius: $vsk-radius-sm;
+      margin-right: $vsk-space-2;
+      margin-bottom: $vsk-space-2;
       font-size: 13px;
-      color: $jv-text-muted;
+      color: $vsk-text-muted;
 
       &:hover {
         background: rgba(0, 0, 0, 0.04);
-        color: $jv-primary;
+        color: $vsk-primary;
       }
     }
   }
@@ -966,9 +966,9 @@ ul.categories-list {
 // ===========================================================
 @media (max-width: 992px) {
   .categories-list > li[component="categories/category"] {
-    border-radius: $jv-radius-md !important;
-    margin-bottom: $jv-space-2 !important;
-    padding: $jv-space-4 !important;
+    border-radius: $vsk-radius-md !important;
+    margin-bottom: $vsk-space-2 !important;
+    padding: $vsk-space-4 !important;
 
     .category-icon {
       width: 40px !important;
@@ -1035,7 +1035,7 @@ ul.categories-list {
       padding: 4px 8px !important;
       font-size: 12px !important;
       font-weight: 400 !important;
-      color: $jv-text-muted !important;
+      color: $vsk-text-muted !important;
       background: transparent !important;
       background-color: transparent !important;
       border: none !important;
@@ -1063,14 +1063,14 @@ ul.categories-list {
           display: inline !important;
           font-size: 12px !important;
           font-weight: 600 !important;
-          color: $jv-text-main !important;
+          color: $vsk-text-main !important;
         }
       }
 
       // "All Categories" state
       > i.fa-list {
         font-size: 12px !important;
-        color: $jv-text-muted !important;
+        color: $vsk-text-muted !important;
       }
 
       // Show "All Categories" text
@@ -1079,14 +1079,14 @@ ul.categories-list {
         display: inline !important;
         font-size: 12px !important;
         font-weight: 600 !important;
-        color: $jv-text-main !important;
+        color: $vsk-text-main !important;
       }
 
       // Dropdown arrow - smaller
       &::after {
         font-size: 8px !important;
         margin-left: 4px !important;
-        color: $jv-text-muted !important;
+        color: $vsk-text-muted !important;
         border-top-width: 4px !important;
         border-right-width: 4px !important;
         border-left-width: 4px !important;
@@ -1095,7 +1095,7 @@ ul.categories-list {
       &:hover {
         background: rgba(0, 0, 0, 0.04) !important;
         background-color: rgba(0, 0, 0, 0.04) !important;
-        color: $jv-text-main !important;
+        color: $vsk-text-main !important;
         border: none !important;
         box-shadow: none !important;
       }
@@ -1113,10 +1113,10 @@ ul.categories-list {
     .dropdown-menu {
       min-width: 180px;
       max-width: 240px;
-      border-radius: $jv-radius-md !important;
-      border: 1px solid $jv-border-subtle !important;
-      box-shadow: $jv-shadow-card !important;
-      padding: $jv-space-1 !important;
+      border-radius: $vsk-radius-md !important;
+      border: 1px solid $vsk-border-subtle !important;
+      box-shadow: $vsk-shadow-card !important;
+      padding: $vsk-space-1 !important;
       margin-top: 4px !important;
 
       .category-dropdown-menu {
@@ -1127,11 +1127,11 @@ ul.categories-list {
       .dropdown-item {
         font-size: 13px !important;
         padding: 6px 12px !important;
-        border-radius: $jv-radius-xs !important;
-        color: $jv-text-main !important;
+        border-radius: $vsk-radius-xs !important;
+        color: $vsk-text-main !important;
 
         &:hover {
-          background: $jv-hover-bg !important;
+          background: $vsk-hover-bg !important;
         }
       }
     }
@@ -1142,21 +1142,21 @@ ul.categories-list {
 // SUGGESTED USERS – Following Empty State
 // ===========================================================
 .vasak-suggested-users {
-  background: $jv-surface;
-  border: 1px solid $jv-border-subtle;
-  border-radius: $jv-radius-lg;
-  padding: $jv-space-4 $jv-space-6;
-  margin-bottom: $jv-space-4;
-  box-shadow: $jv-shadow-sm;
+  background: $vsk-surface;
+  border: 1px solid $vsk-border-subtle;
+  border-radius: $vsk-radius-lg;
+  padding: $vsk-space-4 $vsk-space-6;
+  margin-bottom: $vsk-space-4;
+  box-shadow: $vsk-shadow-sm;
 }
 
 .vasak-suggested-users-title {
-  font-size: $jv-font-size-xs;
+  font-size: $vsk-font-size-xs;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.6px;
-  color: $jv-text-muted;
-  padding: $jv-space-3 0 $jv-space-2;
+  color: $vsk-text-muted;
+  padding: $vsk-space-3 0 $vsk-space-2;
   margin: 0;
 }
 
@@ -1164,17 +1164,17 @@ ul.categories-list {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  gap: $jv-space-3;
-  padding: $jv-space-3 0;
-  border-bottom: 1px solid $jv-border-subtle;
+  gap: $vsk-space-3;
+  padding: $vsk-space-3 0;
+  border-bottom: 1px solid $vsk-border-subtle;
 
   &:last-child {
     border-bottom: none;
-    padding-bottom: $jv-space-2;
+    padding-bottom: $vsk-space-2;
   }
 
   &:first-child {
-    padding-top: $jv-space-2;
+    padding-top: $vsk-space-2;
   }
 
   // Anchor wrapping the avatar — must be inline-flex
@@ -1203,7 +1203,7 @@ ul.categories-list {
   justify-content: center !important;
   font-size: 16px;
   font-weight: 700;
-  font-family: $jv-font-sans;
+  font-family: $vsk-font-sans;
   line-height: 1;
 }
 
@@ -1217,9 +1217,9 @@ ul.categories-list {
 }
 
 .vasak-sug-name {
-  font-size: $jv-font-size-sm;
+  font-size: $vsk-font-size-sm;
   font-weight: 600;
-  color: $jv-text-main;
+  color: $vsk-text-main;
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
@@ -1227,13 +1227,13 @@ ul.categories-list {
   display: block;
 
   &:hover {
-    color: $jv-primary;
+    color: $vsk-primary;
   }
 }
 
 .vasak-sug-meta {
-  font-size: $jv-font-size-xs;
-  color: $jv-text-soft;
+  font-size: $vsk-font-size-xs;
+  color: $vsk-text-soft;
 }
 
 // ===========================================================

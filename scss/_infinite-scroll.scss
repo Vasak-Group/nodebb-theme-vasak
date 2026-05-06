@@ -66,8 +66,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: $jv-space-3;
-  padding: $jv-space-8 $jv-space-4;
+  gap: $vsk-space-3;
+  padding: $vsk-space-8 $vsk-space-4;
   color: var(--use-text-muted);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -117,8 +117,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $jv-space-3;
-  padding: $jv-space-10 $jv-space-4;
+  gap: $vsk-space-3;
+  padding: $vsk-space-10 $vsk-space-4;
   text-align: center;
   animation: vasak-fade-in 300ms ease both;
 
@@ -155,7 +155,7 @@
     height: 2px;
     background: var(--use-ui-border);
     border-radius: 1px;
-    margin-bottom: $jv-space-2;
+    margin-bottom: $vsk-space-2;
   }
 }
 
@@ -168,11 +168,11 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: $jv-space-4 $jv-space-6;
-  margin: $jv-space-4 0;
+  padding: $vsk-space-4 $vsk-space-6;
+  margin: $vsk-space-4 0;
   background: var(--use-ui-surface);
   border: 1px solid var(--use-ui-border);
-  border-radius: $jv-radius-lg;
+  border-radius: $vsk-radius-lg;
   color: var(--use-text-muted);
   font-size: var(--text-sm);
   font-weight: 600;
@@ -182,7 +182,7 @@
     border-color     150ms ease,
     color            150ms ease,
     transform        100ms ease;
-  gap: $jv-space-2;
+  gap: $vsk-space-2;
   text-decoration: none;
   animation: vasak-fade-in 200ms ease both;
 
@@ -218,12 +218,12 @@
 .vasak-scroll-error {
   display: flex;
   align-items: center;
-  gap: $jv-space-3;
-  padding: $jv-space-4 $jv-space-6;
-  margin: $jv-space-2 0;
+  gap: $vsk-space-3;
+  padding: $vsk-space-4 $vsk-space-6;
+  margin: $vsk-space-2 0;
   background: rgba(var(--status-error), 0.06);
   border: 1px solid rgba(var(--status-error), 0.15);
-  border-radius: $jv-radius-md;
+  border-radius: $vsk-radius-md;
   animation: vasak-fade-in 200ms ease both;
 
   // Usar colores semánticos directamente para el error
@@ -262,8 +262,8 @@
 
 #vasak-back-to-top {
   position: fixed;
-  bottom: $jv-space-8;
-  right: $jv-space-8;
+  bottom: $vsk-space-8;
+  right: $vsk-space-8;
   z-index: 1000;
   width: 44px;
   height: 44px;
@@ -275,7 +275,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: $jv-shadow-md;
+  box-shadow: $vsk-shadow-md;
   // Oculto por defecto — JS añade .visible
   opacity: 0;
   transform: translateY(12px) scale(0.9);
@@ -297,7 +297,7 @@
     background: var(--use-state-hover);
     border-color: var(--use-ui-border-strong);
     color: var(--use-primary);
-    box-shadow: $jv-shadow-lg;
+    box-shadow: $vsk-shadow-lg;
     transform: translateY(-2px) scale(1.05);
   }
 
@@ -316,8 +316,8 @@
 
   // En mobile, posicionar más cerca del borde
   @media (max-width: 768px) {
-    bottom: $jv-space-6;
-    right: $jv-space-4;
+    bottom: $vsk-space-6;
+    right: $vsk-space-4;
     width: 40px;
     height: 40px;
   }

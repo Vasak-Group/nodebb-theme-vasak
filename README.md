@@ -246,13 +246,13 @@ Todos los componentes consumen CSS custom properties. Los SCSS bridge variables 
 
 ```scss
 // En _variables.scss
-$jv-primary:   var(--use-primary);
-$jv-surface:   var(--use-ui-surface);
-$jv-text-main: var(--use-text-main);
+$vsk-primary:   var(--use-primary);
+$vsk-surface:   var(--use-ui-surface);
+$vsk-text-main: var(--use-text-main);
 
 // Spacing (estático — no cambia en dark mode)
-$jv-space-4: 16px;
-$jv-space-6: 24px;
+$vsk-space-4: 16px;
+$vsk-space-6: 24px;
 ```
 
 ### Tipografía

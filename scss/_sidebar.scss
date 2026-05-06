@@ -13,9 +13,9 @@
   justify-content: center;
   height: 56px;
   min-height: 56px;
-  padding: 0 $jv-space-4;
-  margin-bottom: $jv-space-3;
-  border-bottom: 1px solid $jv-border-subtle;
+  padding: 0 $vsk-space-4;
+  margin-bottom: $vsk-space-3;
+  border-bottom: 1px solid $vsk-border-subtle;
   flex-shrink: 0;
   box-sizing: border-box;
 
@@ -42,7 +42,7 @@
 
 // Adjust when sidebar is open - same height, just different horizontal padding
 .sidebar-left.open .vasak-sidebar-logo {
-  padding: 0 $jv-space-6; // Only horizontal padding changes
+  padding: 0 $vsk-space-6; // Only horizontal padding changes
   justify-content: flex-start;
 }
 
@@ -54,11 +54,11 @@
 // Override Bootstrap's bg-light class on sidebar
 .sidebar.bg-light,
 nav.sidebar.bg-light {
-  background-color: $jv-surface !important; // Pure white - cohesive with header
+  background-color: $vsk-surface !important; // Pure white - cohesive with header
 }
 
 .sidebar {
-  background: $jv-surface !important; // Pure white - cohesive with header
+  background: $vsk-surface !important; // Pure white - cohesive with header
   border-right: none !important; // Clean look - no vertical divider
   padding-top: 0 !important; // Remove top padding so logo sits at top edge
 
@@ -73,7 +73,7 @@ nav.sidebar.bg-light {
 
   // Nav items - proper spacing between items
   .nav-item {
-    margin-bottom: $jv-space-2; // 4px between nav items - compact like Slack/Discord
+    margin-bottom: $vsk-space-2; // 4px between nav items - compact like Slack/Discord
 
     &:last-child {
       margin-bottom: 0; // No margin on last item
@@ -84,13 +84,13 @@ nav.sidebar.bg-light {
   .nav-link {
     display: flex;
     align-items: center;
-    gap: $jv-space-4;
-    padding: $jv-space-4 $jv-space-6;
-    color: $jv-text-muted;
-    font-size: $jv-font-size-sm;
+    gap: $vsk-space-4;
+    padding: $vsk-space-4 $vsk-space-6;
+    color: $vsk-text-muted;
+    font-size: $vsk-font-size-sm;
     font-weight: 500;
-    border-radius: $jv-radius-sm;
-    transition: background-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+    border-radius: $vsk-radius-sm;
+    transition: background-color $vsk-transition-fast, color $vsk-transition-fast; // Modern transitions
 
     i {
       width: 18px;
@@ -100,61 +100,61 @@ nav.sidebar.bg-light {
 
     &:hover {
       background: rgba(0, 81, 255, 0.06);
-      color: $jv-primary;
+      color: $vsk-primary;
     }
 
     &.active {
-      background: $jv-primary-soft;
-      color: $jv-primary;
+      background: $vsk-primary-soft;
+      color: $vsk-primary;
       font-weight: 600;
     }
 
     // Focus state for accessibility
     &:focus-visible {
       outline: none;
-      box-shadow: $jv-focus-ring;
+      box-shadow: $vsk-focus-ring;
     }
   }
 
   // Sidebar section headers
   .sidebar-header {
-    font-size: $jv-font-size-xs;
+    font-size: $vsk-font-size-xs;
     font-weight: 600;
-    color: $jv-text-soft;
+    color: $vsk-text-soft;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: $jv-space-6 $jv-space-6 $jv-space-2;
-    margin-top: $jv-space-4;
+    padding: $vsk-space-6 $vsk-space-6 $vsk-space-2;
+    margin-top: $vsk-space-4;
   }
 
   // Category list in sidebar
   .category-list-container {
-    padding: $jv-space-2 0;
+    padding: $vsk-space-2 0;
 
     .category-item {
       display: flex;
       align-items: center;
-      gap: $jv-space-4;
-      padding: $jv-space-4 $jv-space-6;
-      color: $jv-text-main;
-      font-size: $jv-font-size-sm;
-      border-radius: $jv-radius-sm;
-      transition: background-color $jv-transition-fast; // Modern transition
+      gap: $vsk-space-4;
+      padding: $vsk-space-4 $vsk-space-6;
+      color: $vsk-text-main;
+      font-size: $vsk-font-size-sm;
+      border-radius: $vsk-radius-sm;
+      transition: background-color $vsk-transition-fast; // Modern transition
 
       &:hover {
-        background: $jv-hover-bg; // Consistent hover state
+        background: $vsk-hover-bg; // Consistent hover state
       }
 
       // Focus state for accessibility
       &:focus-within {
         outline: none;
-        background: $jv-hover-bg;
+        background: $vsk-hover-bg;
       }
 
       .category-icon {
         width: 24px;
         height: 24px;
-        border-radius: $jv-radius-xs;
+        border-radius: $vsk-radius-xs;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -175,20 +175,20 @@ div[data-widget-area] {
 
 // Individual widget card
 .widget {
-  background: $jv-surface;
-  border: 1px solid $jv-border-subtle;
-  border-radius: $jv-radius-lg;
-  padding: $jv-space-8;
-  transition: $jv-transition-shadow; // Modern transition
+  background: $vsk-surface;
+  border: 1px solid $vsk-border-subtle;
+  border-radius: $vsk-radius-lg;
+  padding: $vsk-space-8;
+  transition: $vsk-transition-shadow; // Modern transition
 
   &:hover {
-    box-shadow: $jv-shadow-sm; // shadcn subtle shadow
+    box-shadow: $vsk-shadow-sm; // shadcn subtle shadow
   }
 
   // Focus state for accessibility
   &:focus-within {
     outline: none;
-    box-shadow: $jv-shadow-md, $jv-focus-ring;
+    box-shadow: $vsk-shadow-md, $vsk-focus-ring;
   }
 }
 
@@ -202,8 +202,8 @@ div[data-widget-area] {
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid $jv-surface;
-    transition: transform $jv-transition-fast; // Modern transition
+    border: 2px solid $vsk-surface;
+    transition: transform $vsk-transition-fast; // Modern transition
 
     &:hover {
       transform: scale(1.1);
@@ -213,7 +213,7 @@ div[data-widget-area] {
     // Focus state for accessibility
     &:focus {
       outline: none;
-      box-shadow: $jv-focus-ring;
+      box-shadow: $vsk-focus-ring;
     }
   }
 
@@ -239,33 +239,33 @@ div[data-widget-area] {
   .category-item {
     display: flex;
     align-items: center;
-    gap: $jv-space-4;
-    padding: $jv-space-4 0;
-    border-bottom: 1px solid $jv-border-subtle;
-    transition: background-color $jv-transition-fast; // Modern transition
+    gap: $vsk-space-4;
+    padding: $vsk-space-4 0;
+    border-bottom: 1px solid $vsk-border-subtle;
+    transition: background-color $vsk-transition-fast; // Modern transition
 
     &:last-child {
       border-bottom: none;
     }
 
     &:hover {
-      background: $jv-hover-bg; // Consistent hover state
-      margin: 0 (-$jv-space-4);
-      padding-left: $jv-space-4;
-      padding-right: $jv-space-4;
-      border-radius: $jv-radius-sm;
+      background: $vsk-hover-bg; // Consistent hover state
+      margin: 0 (-$vsk-space-4);
+      padding-left: $vsk-space-4;
+      padding-right: $vsk-space-4;
+      border-radius: $vsk-radius-sm;
     }
 
     // Focus state for accessibility
     &:focus-within {
       outline: none;
-      background: $jv-hover-bg;
+      background: $vsk-hover-bg;
     }
 
     .category-icon {
       width: 24px;
       height: 24px;
-      border-radius: $jv-radius-xs;
+      border-radius: $vsk-radius-xs;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -275,17 +275,17 @@ div[data-widget-area] {
 
     .category-name {
       flex: 1;
-      font-size: $jv-font-size-sm;
+      font-size: $vsk-font-size-sm;
       font-weight: 500;
-      color: $jv-text-main;
+      color: $vsk-text-main;
     }
 
     .category-count {
-      font-size: $jv-font-size-xs;
-      color: $jv-text-soft;
+      font-size: $vsk-font-size-xs;
+      color: $vsk-text-soft;
       background: rgba(0, 0, 0, 0.05);
       padding: 2px 6px;
-      border-radius: $jv-radius-pill;
+      border-radius: $vsk-radius-pill;
     }
   }
 }
@@ -296,25 +296,25 @@ div[data-widget-area] {
 .stats-widget {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: $jv-space-6;
+  gap: $vsk-space-6;
 
   .stat-item {
     text-align: center;
-    padding: $jv-space-4;
+    padding: $vsk-space-4;
     background: rgba(0, 0, 0, 0.02);
-    border-radius: $jv-radius-sm;
+    border-radius: $vsk-radius-sm;
 
     .stat-value {
-      font-size: $jv-font-size-xl;
+      font-size: $vsk-font-size-xl;
       font-weight: 700;
-      color: $jv-text-main;
+      color: $vsk-text-main;
       line-height: 1;
     }
 
     .stat-label {
-      font-size: $jv-font-size-xs;
-      color: $jv-text-muted;
-      margin-top: $jv-space-2;
+      font-size: $vsk-font-size-xs;
+      color: $vsk-text-muted;
+      margin-top: $vsk-space-2;
       text-transform: uppercase;
       letter-spacing: 0.3px;
     }
@@ -325,12 +325,12 @@ div[data-widget-area] {
 // INFO WIDGET
 // ===========================================================
 .info-widget {
-  font-size: $jv-font-size-sm;
-  color: $jv-text-muted;
-  line-height: $jv-line-height-base;
+  font-size: $vsk-font-size-sm;
+  color: $vsk-text-muted;
+  line-height: $vsk-line-height-base;
 
   p {
-    margin-bottom: $jv-space-4;
+    margin-bottom: $vsk-space-4;
 
     &:last-child {
       margin-bottom: 0;
@@ -338,7 +338,7 @@ div[data-widget-area] {
   }
 
   a {
-    color: $jv-primary;
+    color: $vsk-primary;
 
     &:hover {
       text-decoration: underline;
@@ -353,8 +353,8 @@ div[data-widget-area] {
   .user-header {
     display: flex;
     align-items: center;
-    gap: $jv-space-4;
-    margin-bottom: $jv-space-6;
+    gap: $vsk-space-4;
+    margin-bottom: $vsk-space-6;
 
     .user-avatar {
       width: 48px;
@@ -367,14 +367,14 @@ div[data-widget-area] {
       flex: 1;
 
       .user-name {
-        font-size: $jv-font-size-base;
+        font-size: $vsk-font-size-base;
         font-weight: 600;
-        color: $jv-text-main;
+        color: $vsk-text-main;
       }
 
       .user-title {
-        font-size: $jv-font-size-xs;
-        color: $jv-text-muted;
+        font-size: $vsk-font-size-xs;
+        color: $vsk-text-muted;
       }
     }
   }
@@ -382,23 +382,23 @@ div[data-widget-area] {
   .user-stats {
     display: flex;
     justify-content: space-around;
-    padding: $jv-space-4 0;
-    border-top: 1px solid $jv-border-subtle;
-    border-bottom: 1px solid $jv-border-subtle;
-    margin-bottom: $jv-space-6;
+    padding: $vsk-space-4 0;
+    border-top: 1px solid $vsk-border-subtle;
+    border-bottom: 1px solid $vsk-border-subtle;
+    margin-bottom: $vsk-space-6;
 
     .stat {
       text-align: center;
 
       .value {
-        font-size: $jv-font-size-lg;
+        font-size: $vsk-font-size-lg;
         font-weight: 600;
-        color: $jv-text-main;
+        color: $vsk-text-main;
       }
 
       .label {
-        font-size: $jv-font-size-xs;
-        color: $jv-text-muted;
+        font-size: $vsk-font-size-xs;
+        color: $vsk-text-muted;
       }
     }
   }
@@ -406,7 +406,7 @@ div[data-widget-area] {
   .user-actions {
     display: flex;
     flex-direction: column;
-    gap: $jv-space-2;
+    gap: $vsk-space-2;
 
     .btn {
       width: 100%;
@@ -420,9 +420,9 @@ div[data-widget-area] {
 .suggested-topics {
   .topic-item {
     display: flex;
-    gap: $jv-space-4;
-    padding: $jv-space-4 0;
-    border-bottom: 1px solid $jv-border-subtle;
+    gap: $vsk-space-4;
+    padding: $vsk-space-4 0;
+    border-bottom: 1px solid $vsk-border-subtle;
 
     &:last-child {
       border-bottom: none;
@@ -431,7 +431,7 @@ div[data-widget-area] {
     .topic-thumb {
       width: 48px;
       height: 48px;
-      border-radius: $jv-radius-sm;
+      border-radius: $vsk-radius-sm;
       object-fit: cover;
       flex-shrink: 0;
     }
@@ -441,24 +441,24 @@ div[data-widget-area] {
       min-width: 0;
 
       .topic-title {
-        font-size: $jv-font-size-sm;
+        font-size: $vsk-font-size-sm;
         font-weight: 500;
-        color: $jv-text-main;
-        line-height: $jv-line-height-tight;
+        color: $vsk-text-main;
+        line-height: $vsk-line-height-tight;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
 
         &:hover {
-          color: $jv-primary;
+          color: $vsk-primary;
         }
       }
 
       .topic-meta {
-        font-size: $jv-font-size-xs;
-        color: $jv-text-soft;
-        margin-top: $jv-space-2;
+        font-size: $vsk-font-size-xs;
+        color: $vsk-text-soft;
+        margin-top: $vsk-space-2;
       }
     }
   }
@@ -476,8 +476,8 @@ div[data-widget-area] {
     width: 280px;
     z-index: 1050;
     transform: translateX(-100%);
-    transition: transform $jv-transition-slow; // Modern transition
-    box-shadow: $jv-shadow-lg; // shadcn drawer shadow
+    transition: transform $vsk-transition-slow; // Modern transition
+    box-shadow: $vsk-shadow-lg; // shadcn drawer shadow
 
     &.open {
       transform: translateX(0);
@@ -494,7 +494,7 @@ div[data-widget-area] {
     z-index: 1040;
     opacity: 0;
     visibility: hidden;
-    transition: opacity $jv-transition-slow, visibility $jv-transition-slow; // Modern transitions
+    transition: opacity $vsk-transition-slow, visibility $vsk-transition-slow; // Modern transitions
 
     &.show {
       opacity: 1;
@@ -523,9 +523,9 @@ div[data-widget-area="right"].col-lg-3.col-sm-12,
 
   // Widget card container
   > div {
-    background: $jv-surface;
-    border: 1px solid $jv-border-subtle;
-    border-radius: $jv-radius-lg;
+    background: $vsk-surface;
+    border: 1px solid $vsk-border-subtle;
+    border-radius: $vsk-radius-lg;
     overflow: hidden; // Hide overflow on card itself
   }
 
@@ -567,8 +567,8 @@ div[data-widget-area="right"].col-lg-3.col-sm-12,
     font-weight: 700 !important;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: $jv-text-soft;
-    padding: $jv-space-4 0 $jv-space-3 0 !important; // top right bottom left - no horizontal padding (body handles it)
+    color: $vsk-text-soft;
+    padding: $vsk-space-4 0 $vsk-space-3 0 !important; // top right bottom left - no horizontal padding (body handles it)
     margin: 0 !important;
     border-bottom: none !important; // Removed border
   }
@@ -580,7 +580,7 @@ div[data-widget-area="right"].col-lg-3.col-sm-12,
 
   // Add spacing between widgets
   > div + div {
-    margin-top: $jv-space-3; // Reduced from 16px to 12px
+    margin-top: $vsk-space-3; // Reduced from 16px to 12px
   }
 }
 
@@ -594,7 +594,7 @@ div[data-widget-area="right"] {
     border: none !important;
     border-radius: 0 !important;
     overflow: visible !important;
-    padding: 0 $jv-space-4 !important; // Horizontal padding for alignment
+    padding: 0 $vsk-space-4 !important; // Horizontal padding for alignment
     margin-bottom: 0 !important; // Remove extra margin
   }
 
@@ -604,7 +604,7 @@ div[data-widget-area="right"] {
 
     // Override Bootstrap mb-3 class
     &.mb-3 {
-      margin-bottom: $jv-space-2 !important; // Space between widgets (reduced to 8px)
+      margin-bottom: $vsk-space-2 !important; // Space between widgets (reduced to 8px)
     }
   }
 
@@ -613,16 +613,16 @@ div[data-widget-area="right"] {
   .tag-list.row {
     display: flex !important;
     flex-wrap: wrap !important;
-    gap: $jv-space-2 !important; // 8px gap between pills
+    gap: $vsk-space-2 !important; // 8px gap between pills
     padding: 0 !important;
     margin: 0 !important;
-    margin-left: -$jv-space-3 !important; // Offset to align first pill's text with header (compensate for pill padding)
-    margin-bottom: $jv-space-2 !important; // Space between widgets (8px)
+    margin-left: -$vsk-space-3 !important; // Offset to align first pill's text with header (compensate for pill padding)
+    margin-bottom: $vsk-space-2 !important; // Space between widgets (8px)
 
     // Reset Bootstrap row/column styles
     &.row {
-      margin-left: -$jv-space-3 !important;
-      margin-bottom: $jv-space-2 !important;
+      margin-left: -$vsk-space-3 !important;
+      margin-bottom: $vsk-space-2 !important;
       display: flex !important;
       flex-wrap: wrap !important;
     }
@@ -642,50 +642,50 @@ div[data-widget-area="right"] {
       display: inline-flex !important;
       flex-direction: row !important;
       align-items: center !important;
-      gap: $jv-space-1 !important; // 4px between tag name and count
+      gap: $vsk-space-1 !important; // 4px between tag name and count
       background: rgba(0, 0, 0, 0.04) !important;
       border: 1px solid transparent !important;
-      border-radius: $jv-radius-pill !important;
+      border-radius: $vsk-radius-pill !important;
       // [Enhancement 5] Increased padding for better touch targets
-      padding: $jv-space-2 $jv-space-3 !important; // 8px vertical, 12px horizontal
-      transition: all $jv-transition-fast !important;
+      padding: $vsk-space-2 $vsk-space-3 !important; // 8px vertical, 12px horizontal
+      transition: all $vsk-transition-fast !important;
       text-decoration: none !important;
       width: auto !important;
       min-height: auto !important;
 
       &:hover {
-        background: $jv-primary-soft !important;
-        color: $jv-primary !important;
+        background: $vsk-primary-soft !important;
+        color: $vsk-primary !important;
         // [Enhancement 6] Subtle shadow on hover
-        box-shadow: $jv-shadow-xs !important;
+        box-shadow: $vsk-shadow-xs !important;
         transform: translateY(-1px);
 
         .tag-item {
-          color: $jv-primary !important;
+          color: $vsk-primary !important;
         }
 
         .tag-topic-count {
-          color: $jv-primary !important;
+          color: $vsk-primary !important;
           opacity: 0.7;
         }
       }
 
       &:focus-visible {
         outline: none;
-        box-shadow: $jv-focus-ring;
+        box-shadow: $vsk-focus-ring;
       }
 
       .tag-item {
-        font-size: $jv-font-size-xs !important; // 12px
+        font-size: $vsk-font-size-xs !important; // 12px
         font-weight: 500 !important;
-        color: $jv-text-main !important;
+        color: $vsk-text-main !important;
         line-height: 1.2 !important;
         margin: 0 !important;
 
         // [Enhancement 2] Add # icon before tag name
         &::before {
           content: "#";
-          color: $jv-text-soft;
+          color: $vsk-text-soft;
           margin-right: 2px;
           font-weight: 400;
         }
@@ -714,35 +714,35 @@ div[data-widget-area="right"] {
   // Recent posts container styling
   #recent_posts,
   ul[id*="recent"] {
-    padding: $jv-space-3 $jv-space-4 $jv-space-4 $jv-space-4 !important;
+    padding: $vsk-space-3 $vsk-space-4 $vsk-space-4 $vsk-space-4 !important;
     margin: 0;
     list-style: none;
     display: flex !important;
     flex-direction: column !important;
-    gap: $jv-space-3 !important;
+    gap: $vsk-space-3 !important;
   }
 
   // Style the actual widget-posts items
   .widget-posts {
-    padding: $jv-space-3 $jv-space-4 !important;
-    transition: $jv-transition-shadow, border-color $jv-transition-fast !important;
+    padding: $vsk-space-3 $vsk-space-4 !important;
+    transition: $vsk-transition-shadow, border-color $vsk-transition-fast !important;
     border: 1px solid rgba(0,0,0,0.05) !important;
-    border-radius: $jv-radius-md !important;
-    background: $jv-surface !important;
+    border-radius: $vsk-radius-md !important;
+    background: $vsk-surface !important;
     cursor: pointer;
     flex-shrink: 0 !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: $jv-space-3 !important;
+    gap: $vsk-space-3 !important;
 
     &:hover {
-      border-color: $jv-border-strong !important;
-      box-shadow: $jv-shadow-sm;
+      border-color: $vsk-border-strong !important;
+      box-shadow: $vsk-shadow-sm;
     }
 
     &:focus-within {
       outline: none;
-      box-shadow: $jv-shadow-md, $jv-focus-ring;
+      box-shadow: $vsk-shadow-md, $vsk-focus-ring;
     }
 
     // Hide hr elements
@@ -754,33 +754,33 @@ div[data-widget-area="right"] {
     .d-flex.gap-2 {
       display: flex !important;
       align-items: center !important;
-      gap: $jv-space-2 !important;
-      font-size: $jv-font-size-xs;
-      color: $jv-text-muted;
+      gap: $vsk-space-2 !important;
+      font-size: $vsk-font-size-xs;
+      color: $vsk-text-muted;
       flex-wrap: nowrap;
     }
 
     .timeago {
-      font-size: $jv-font-size-xs;
-      color: $jv-text-soft;
+      font-size: $vsk-font-size-xs;
+      color: $vsk-text-soft;
     }
 
     .post-author a {
-      font-size: $jv-font-size-xs !important;
+      font-size: $vsk-font-size-xs !important;
       font-weight: 500 !important;
-      color: $jv-text-main !important;
+      color: $vsk-text-main !important;
     }
 
     // Title link
     a {
       font-size: 14px;
       font-weight: 500;
-      color: $jv-text-main;
+      color: $vsk-text-main;
       text-decoration: none;
-      line-height: $jv-line-height-tight;
+      line-height: $vsk-line-height-tight;
 
       &:hover {
-        color: $jv-primary;
+        color: $vsk-primary;
       }
     }
 
@@ -792,16 +792,16 @@ div[data-widget-area="right"] {
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      font-size: $jv-font-size-sm !important;
-      color: $jv-text-muted !important;
-      line-height: $jv-line-height-base !important;
+      font-size: $vsk-font-size-sm !important;
+      color: $vsk-text-muted !important;
+      line-height: $vsk-line-height-base !important;
       margin: 0;
     }
 
     // Read more link
     a.stretched-link {
-      font-size: $jv-font-size-xs;
-      color: $jv-primary;
+      font-size: $vsk-font-size-xs;
+      color: $vsk-primary;
     }
 
     // Footer with "read more" link
@@ -809,24 +809,24 @@ div[data-widget-area="right"] {
       margin-top: auto;
 
       a {
-        font-size: $jv-font-size-xs !important;
+        font-size: $vsk-font-size-xs !important;
         font-weight: 600 !important;
-        color: $jv-primary !important;
+        color: $vsk-primary !important;
         text-decoration: none !important;
-        transition: color $jv-transition-fast !important;
+        transition: color $vsk-transition-fast !important;
         display: inline-flex;
         align-items: center;
-        gap: $jv-space-1;
+        gap: $vsk-space-1;
 
         &:hover {
-          color: $jv-primary-hover !important;
+          color: $vsk-primary-hover !important;
           text-decoration: underline !important;
         }
 
         &::after {
           content: "→";
           font-size: inherit;
-          transition: transform $jv-transition-fast;
+          transition: transform $vsk-transition-fast;
         }
 
         &:hover::after {

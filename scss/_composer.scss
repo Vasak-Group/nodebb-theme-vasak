@@ -33,10 +33,10 @@ html.composing .composer {
   max-width: calc(100vw - 32px) !important;
   height: 600px !important;
   max-height: 85vh !important;
-  background: $jv-surface !important;
-  border-radius: $jv-radius-lg !important;
-  border: 1px solid $jv-border-subtle !important;
-  box-shadow: $jv-shadow-xl !important;
+  background: $vsk-surface !important;
+  border-radius: $vsk-radius-lg !important;
+  border: 1px solid $vsk-border-subtle !important;
+  box-shadow: $vsk-shadow-xl !important;
   z-index: 1050 !important;
   overflow: visible !important; // Allow absolute children to overflow
   margin: 0 !important;
@@ -56,7 +56,7 @@ html.composing .composer .composer-container {
   padding: 0 !important;
   gap: 0 !important;
   overflow: hidden !important;
-  border-radius: $jv-radius-lg !important;
+  border-radius: $vsk-radius-lg !important;
 }
 
 html.composing .composer .composer-container > .p-2 {
@@ -88,13 +88,13 @@ html.composing .composer [data-action="help"] {
 html.composing .composer .title-container {
   display: flex !important;
   align-items: center !important;
-  gap: $jv-space-3 !important;
-  padding: $jv-space-4 $jv-space-5 !important;
-  border-bottom: 1px solid $jv-border-subtle !important;
-  background: $jv-surface !important;
+  gap: $vsk-space-3 !important;
+  padding: $vsk-space-4 $vsk-space-5 !important;
+  border-bottom: 1px solid $vsk-border-subtle !important;
+  background: $vsk-surface !important;
   flex-shrink: 0 !important;
   min-height: 56px !important;
-  border-radius: $jv-radius-lg $jv-radius-lg 0 0 !important;
+  border-radius: $vsk-radius-lg $vsk-radius-lg 0 0 !important;
 }
 
 // Category selector button
@@ -104,16 +104,16 @@ html.composing .composer .category-list-container {
 
   [component="category-selector"] {
     .btn {
-      background: $jv-bg !important;
-      border: 1px solid $jv-border-subtle !important;
-      border-radius: $jv-radius-sm !important;
-      padding: $jv-space-2 $jv-space-3 !important;
-      font-size: $jv-font-size-sm !important;
-      color: $jv-text-main !important;
+      background: $vsk-bg !important;
+      border: 1px solid $vsk-border-subtle !important;
+      border-radius: $vsk-radius-sm !important;
+      padding: $vsk-space-2 $vsk-space-3 !important;
+      font-size: $vsk-font-size-sm !important;
+      color: $vsk-text-main !important;
 
       &:hover {
-        border-color: $jv-border-strong !important;
-        background: $jv-hover-bg !important;
+        border-color: $vsk-border-strong !important;
+        background: $vsk-hover-bg !important;
       }
     }
   }
@@ -128,38 +128,38 @@ html.composing .composer .category-list-container {
 div.dropdown-menu.p-1.show {
   min-width: 280px !important;
   max-width: 320px !important;
-  padding: $jv-space-2 0 !important;
-  border: 1px solid $jv-border-subtle !important;
-  border-radius: $jv-radius-sm !important;
-  box-shadow: $jv-shadow-lg !important;
-  background: $jv-surface !important;
+  padding: $vsk-space-2 0 !important;
+  border: 1px solid $vsk-border-subtle !important;
+  border-radius: $vsk-radius-sm !important;
+  box-shadow: $vsk-shadow-lg !important;
+  background: $vsk-surface !important;
 }
 
 // Search input section
 div[component="category-selector-search"] {
-  padding: $jv-space-2 $jv-space-3 $jv-space-3 $jv-space-3 !important;
+  padding: $vsk-space-2 $vsk-space-3 $vsk-space-3 $vsk-space-3 !important;
   margin: 0 !important;
   border-bottom: none !important;
 
   .form-control {
     width: 100% !important;
     height: 36px !important;
-    padding: 0 $jv-space-3 !important;
-    font-size: $jv-font-size-sm !important;
+    padding: 0 $vsk-space-3 !important;
+    font-size: $vsk-font-size-sm !important;
     font-weight: 400 !important;
-    color: $jv-text-main !important;
-    border: 1px solid $jv-border-subtle !important;
-    border-radius: $jv-radius-xs !important;
-    background: $jv-surface !important;
+    color: $vsk-text-main !important;
+    border: 1px solid $vsk-border-subtle !important;
+    border-radius: $vsk-radius-xs !important;
+    background: $vsk-surface !important;
 
     &:focus {
-      border-color: $jv-primary !important;
-      box-shadow: $jv-focus-ring !important;
+      border-color: $vsk-primary !important;
+      box-shadow: $vsk-focus-ring !important;
       outline: none !important;
     }
 
     &::placeholder {
-      color: $jv-text-soft !important;
+      color: $vsk-text-soft !important;
     }
   }
 
@@ -204,15 +204,15 @@ li[role="presentation"].category {
 // The anchor - reduce spacing and remove border/card styling
 li.category > a.dropdown-item,
 li.category > a.dropdown-item.rounded-1 {
-  padding: $jv-space-1 $jv-space-3 !important;
-  margin: 2px $jv-space-2 !important;
+  padding: $vsk-space-1 $vsk-space-3 !important;
+  margin: 2px $vsk-space-2 !important;
   border: none !important;
-  border-radius: $jv-radius-xs !important;
+  border-radius: $vsk-radius-xs !important;
   background: transparent !important;
   box-shadow: none !important;
 
   &:hover {
-    background: $jv-hover-bg !important;
+    background: $vsk-hover-bg !important;
   }
 }
 
@@ -230,16 +230,16 @@ li.category a.dropdown-item [component="category/icon"] {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: $jv-font-size-xs !important;
+  font-size: $vsk-font-size-xs !important;
   flex-shrink: 0 !important;
   box-shadow: none !important;
 }
 
 // Category name text
 li.category a.dropdown-item > span:last-child {
-  font-size: $jv-font-size-sm !important;
+  font-size: $vsk-font-size-sm !important;
   font-weight: 400 !important;
-  color: $jv-text-main !important;
+  color: $vsk-text-main !important;
   white-space: nowrap !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
@@ -247,7 +247,7 @@ li.category a.dropdown-item > span:last-child {
 
 // Disabled categories
 li.category.disabled > a.dropdown-item > span:last-child {
-  color: $jv-text-soft !important;
+  color: $vsk-text-soft !important;
 }
 
 // No matches message
@@ -256,10 +256,10 @@ li[component="category/no-matches"].hidden {
 }
 
 li[component="category/no-matches"]:not(.hidden) {
-  padding: $jv-space-4 !important;
+  padding: $vsk-space-4 !important;
   text-align: center !important;
-  color: $jv-text-soft !important;
-  font-size: $jv-font-size-sm !important;
+  color: $vsk-text-soft !important;
+  font-size: $vsk-font-size-sm !important;
 }
 
 // Title input
@@ -269,16 +269,16 @@ html.composing .composer [data-component="composer/title"] {
 
   .title {
     width: 100% !important;
-    font-size: $jv-font-size-lg !important;
+    font-size: $vsk-font-size-lg !important;
     font-weight: 600 !important;
     border: none !important;
     background: transparent !important;
-    padding: $jv-space-2 0 !important;
-    color: $jv-text-main !important;
+    padding: $vsk-space-2 0 !important;
+    color: $vsk-text-main !important;
     box-shadow: none !important;
 
     &::placeholder {
-      color: $jv-text-soft !important;
+      color: $vsk-text-soft !important;
       font-weight: 400 !important;
     }
 
@@ -296,7 +296,7 @@ html.composing .composer .action-bar {
   flex-shrink: 0 !important;
   display: flex !important;
   align-items: center !important;
-  gap: $jv-space-2 !important;
+  gap: $vsk-space-2 !important;
 
   // HIDE minimize button
   .composer-minimize {
@@ -312,15 +312,15 @@ html.composing .composer .action-bar {
     height: 36px !important;
     padding: 0 !important;
     margin: 0 !important;
-    border-radius: $jv-radius-sm !important;
+    border-radius: $vsk-radius-sm !important;
     background: transparent !important;
     border: none !important;
-    color: $jv-text-muted !important;
+    color: $vsk-text-muted !important;
     cursor: pointer !important;
 
     &:hover {
-      background: $jv-hover-bg !important;
-      color: $jv-text-main !important;
+      background: $vsk-hover-bg !important;
+      color: $vsk-text-main !important;
     }
 
     // Hide text
@@ -348,7 +348,7 @@ html.composing .composer .action-bar {
 html.composing .composer .action-bar [component="composer/submit/container"] {
   position: absolute !important;
   bottom: 8px !important; // Centered: (56px footer - 40px button) / 2 = 8px
-  right: $jv-space-5 !important;
+  right: $vsk-space-5 !important;
   top: auto !important;
   left: auto !important;
   z-index: 1060 !important;
@@ -360,25 +360,25 @@ html.composing .composer .action-bar [component="composer/submit/container"] {
   }
 
   .composer-submit {
-    background: $jv-primary !important;
-    border-color: $jv-primary !important;
+    background: $vsk-primary !important;
+    border-color: $vsk-primary !important;
     color: white !important;
     font-weight: 600 !important;
-    padding: $jv-space-2 $jv-space-5 !important;
-    border-radius: $jv-radius-sm !important;
-    font-size: $jv-font-size-sm !important;
+    padding: $vsk-space-2 $vsk-space-5 !important;
+    border-radius: $vsk-radius-sm !important;
+    font-size: $vsk-font-size-sm !important;
     display: inline-flex !important;
     align-items: center !important;
-    gap: $jv-space-1 !important;
+    gap: $vsk-space-1 !important;
     height: 40px !important;
 
     &:hover {
-      background: $jv-primary-hover !important;
-      border-color: $jv-primary-hover !important;
+      background: $vsk-primary-hover !important;
+      border-color: $vsk-primary-hover !important;
     }
 
     i {
-      margin-right: $jv-space-1 !important;
+      margin-right: $vsk-space-1 !important;
     }
 
     span {
@@ -400,12 +400,12 @@ html.composing .composer .formatting-bar {
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
-  padding: $jv-space-2 $jv-space-4 !important;
-  background: $jv-bg !important;
-  border-bottom: 1px solid $jv-border-subtle !important;
+  padding: $vsk-space-2 $vsk-space-4 !important;
+  background: $vsk-bg !important;
+  border-bottom: 1px solid $vsk-border-subtle !important;
   margin: 0 !important;
   flex-shrink: 0 !important;
-  gap: $jv-space-3 !important;
+  gap: $vsk-space-3 !important;
   overflow: visible !important; // Allow dropdowns to show
 }
 
@@ -424,9 +424,9 @@ html.composing .composer .formatting-group {
     overflow: visible !important; // Allow badges to show
 
     .btn {
-      color: $jv-text-muted !important;
-      padding: $jv-space-2 !important;
-      border-radius: $jv-radius-sm !important;
+      color: $vsk-text-muted !important;
+      padding: $vsk-space-2 !important;
+      border-radius: $vsk-radius-sm !important;
       min-width: 32px !important;
       height: 32px !important;
       display: flex !important;
@@ -438,8 +438,8 @@ html.composing .composer .formatting-group {
       overflow: visible !important; // Allow badges to show
 
       &:hover {
-        background: $jv-hover-bg !important;
-        color: $jv-text-main !important;
+        background: $vsk-hover-bg !important;
+        color: $vsk-text-main !important;
       }
 
       // Badge on buttons (like thumbnail count)
@@ -477,33 +477,33 @@ html.composing .composer .formatting-group {
   .spacer {
     width: 1px !important;
     height: 20px !important;
-    background: $jv-border-subtle !important;
-    margin: 0 $jv-space-1 !important;
+    background: $vsk-border-subtle !important;
+    margin: 0 $vsk-space-1 !important;
   }
 }
 
 // Preview/Help buttons
 html.composing .composer .formatting-bar > .d-flex {
   flex-shrink: 0 !important;
-  gap: $jv-space-2 !important;
+  gap: $vsk-space-2 !important;
   align-items: center !important;
 
   .draft-icon {
-    color: $jv-success !important;
+    color: $vsk-success !important;
   }
 
   [data-action="preview"],
   [data-action="help"] {
-    color: $jv-text-muted !important;
-    font-size: $jv-font-size-sm !important;
-    padding: $jv-space-2 $jv-space-3 !important;
-    border-radius: $jv-radius-sm !important;
+    color: $vsk-text-muted !important;
+    font-size: $vsk-font-size-sm !important;
+    padding: $vsk-space-2 $vsk-space-3 !important;
+    border-radius: $vsk-radius-sm !important;
     background: transparent !important;
     border: none !important;
 
     &:hover {
-      background: $jv-hover-bg !important;
-      color: $jv-text-main !important;
+      background: $vsk-hover-bg !important;
+      color: $vsk-text-main !important;
     }
   }
 }
@@ -538,17 +538,17 @@ html.composing .composer .write-container {
     width: 100% !important;
     height: 100% !important;
     min-height: 150px !important;
-    padding: $jv-space-4 !important;
+    padding: $vsk-space-4 !important;
     border: none !important;
     border-radius: 0 !important;
     resize: none !important;
-    font-size: $jv-font-size-base !important;
-    line-height: $jv-line-height-relaxed !important;
-    color: $jv-text-main !important;
-    background: $jv-surface !important;
+    font-size: $vsk-font-size-base !important;
+    line-height: $vsk-line-height-relaxed !important;
+    color: $vsk-text-main !important;
+    background: $vsk-surface !important;
 
     &::placeholder {
-      color: $jv-text-soft !important;
+      color: $vsk-text-soft !important;
     }
 
     &:focus {
@@ -562,8 +562,8 @@ html.composing .composer .write-container {
 html.composing .composer .preview-container {
   width: 100% !important;
   overflow-y: auto !important;
-  padding: $jv-space-4 !important;
-  background: $jv-surface !important;
+  padding: $vsk-space-4 !important;
+  background: $vsk-surface !important;
   flex: 1 !important;
   flex-direction: column !important;
 
@@ -601,55 +601,55 @@ html.composing .composer .tag-row {
   display: flex !important;
   align-items: center !important;
   padding: 8px 20px !important;
-  border-top: 1px solid $jv-border-subtle !important;
-  background: $jv-surface !important;
+  border-top: 1px solid $vsk-border-subtle !important;
+  background: $vsk-surface !important;
   flex-shrink: 0 !important;
   min-height: 56px !important;
-  gap: $jv-space-4 !important;
-  border-radius: 0 0 $jv-radius-lg $jv-radius-lg !important;
+  gap: $vsk-space-4 !important;
+  border-radius: 0 0 $vsk-radius-lg $vsk-radius-lg !important;
 }
 
 html.composing .composer .tags-container {
   display: flex !important;
   align-items: center !important;
-  gap: $jv-space-2 !important;
+  gap: $vsk-space-2 !important;
   flex: 1 !important;
   min-width: 0 !important;
   max-width: calc(100% - 140px) !important; // Leave space for submit button
-  background: $jv-bg !important;
-  border: 1px solid $jv-border-subtle !important;
-  border-radius: $jv-radius-sm !important;
-  padding: $jv-space-1 $jv-space-3 !important;
+  background: $vsk-bg !important;
+  border: 1px solid $vsk-border-subtle !important;
+  border-radius: $vsk-radius-sm !important;
+  padding: $vsk-space-1 $vsk-space-3 !important;
   min-height: 40px !important;
   cursor: text !important;
   transition: border-color 0.15s ease !important;
 
   &:hover {
-    border-color: $jv-border-strong !important;
+    border-color: $vsk-border-strong !important;
   }
 
   &:focus-within {
-    border-color: $jv-primary !important;
-    box-shadow: 0 0 0 2px rgba($jv-primary, 0.1) !important;
+    border-color: $vsk-primary !important;
+    box-shadow: 0 0 0 2px rgba($vsk-primary, 0.1) !important;
   }
 
   [component="composer/tag/dropdown"] {
     flex-shrink: 0 !important;
 
     .btn {
-      color: $jv-text-muted !important;
-      font-size: $jv-font-size-sm !important;
-      padding: $jv-space-1 $jv-space-2 !important;
-      border-radius: $jv-radius-xs !important;
+      color: $vsk-text-muted !important;
+      font-size: $vsk-font-size-sm !important;
+      padding: $vsk-space-1 $vsk-space-2 !important;
+      border-radius: $vsk-radius-xs !important;
       background: transparent !important;
       border: none !important;
 
       i {
-        color: $jv-primary !important;
+        color: $vsk-primary !important;
       }
 
       &:hover {
-        background: $jv-hover-bg !important;
+        background: $vsk-hover-bg !important;
       }
     }
   }
@@ -660,7 +660,7 @@ html.composing .composer .tags-container {
     display: flex !important;
     flex-wrap: wrap !important;
     align-items: center !important;
-    gap: $jv-space-2 !important;
+    gap: $vsk-space-2 !important;
     background: transparent !important;
     border: none !important;
     padding: 0 !important;
@@ -672,11 +672,11 @@ html.composing .composer .tags-container {
       display: inline-flex !important;
       align-items: center !important;
       gap: 4px !important;
-      background: $jv-primary-soft !important;
-      color: $jv-primary !important;
-      border-radius: $jv-radius-pill !important;
+      background: $vsk-primary-soft !important;
+      color: $vsk-primary !important;
+      border-radius: $vsk-radius-pill !important;
       padding: 4px 10px !important;
-      font-size: $jv-font-size-xs !important;
+      font-size: $vsk-font-size-xs !important;
       font-weight: 500 !important;
       border: none !important;
       line-height: 1.4 !important;
@@ -700,13 +700,13 @@ html.composing .composer .tags-container {
       min-width: 80px !important;
       border: none !important;
       background: transparent !important;
-      font-size: $jv-font-size-sm !important;
-      color: $jv-text-main !important;
-      padding: $jv-space-1 0 !important;
+      font-size: $vsk-font-size-sm !important;
+      color: $vsk-text-main !important;
+      padding: $vsk-space-1 0 !important;
       outline: none !important;
 
       &::placeholder {
-        color: $jv-text-soft !important;
+        color: $vsk-text-soft !important;
       }
     }
   }
@@ -716,12 +716,12 @@ html.composing .composer .tags-container {
     flex: 1 !important;
     border: none !important;
     background: transparent !important;
-    font-size: $jv-font-size-sm !important;
-    color: $jv-text-main !important;
-    padding: $jv-space-1 0 !important;
+    font-size: $vsk-font-size-sm !important;
+    color: $vsk-text-main !important;
+    padding: $vsk-space-1 0 !important;
 
     &::placeholder {
-      color: $jv-text-soft !important;
+      color: $vsk-text-soft !important;
     }
 
     &:focus {
@@ -736,20 +736,20 @@ html.composing .composer .tags-container {
 html.composing .composer .imagedrop {
   position: absolute !important;
   inset: 0 !important;
-  background: rgba($jv-primary, 0.1) !important;
-  border: 2px dashed $jv-primary !important;
-  border-radius: $jv-radius-md !important;
+  background: rgba($vsk-primary, 0.1) !important;
+  border: 2px dashed $vsk-primary !important;
+  border-radius: $vsk-radius-md !important;
   display: none !important;
   align-items: center !important;
   justify-content: center !important;
   z-index: 100 !important;
 
   > div {
-    background: $jv-surface !important;
-    padding: $jv-space-4 $jv-space-8 !important;
-    border-radius: $jv-radius-sm !important;
+    background: $vsk-surface !important;
+    padding: $vsk-space-4 $vsk-space-8 !important;
+    border-radius: $vsk-radius-sm !important;
     font-weight: 500 !important;
-    color: $jv-primary !important;
+    color: $vsk-primary !important;
   }
 }
 
@@ -764,19 +764,19 @@ html.composing .composer .resizer {
 // DROPDOWN MENUS
 // ===========================================================
 html.composing .composer .dropdown-menu {
-  border: 1px solid $jv-border-subtle !important;
-  border-radius: $jv-radius-sm !important;
-  box-shadow: $jv-shadow-lg !important;
-  background: $jv-surface !important;
-  padding: $jv-space-2 !important;
+  border: 1px solid $vsk-border-subtle !important;
+  border-radius: $vsk-radius-sm !important;
+  box-shadow: $vsk-shadow-lg !important;
+  background: $vsk-surface !important;
+  padding: $vsk-space-2 !important;
 
   .dropdown-item {
-    font-size: $jv-font-size-sm !important;
-    padding: $jv-space-2 $jv-space-3 !important;
-    border-radius: $jv-radius-xs !important;
+    font-size: $vsk-font-size-sm !important;
+    padding: $vsk-space-2 $vsk-space-3 !important;
+    border-radius: $vsk-radius-xs !important;
 
     &:hover {
-      background: $jv-hover-bg !important;
+      background: $vsk-hover-bg !important;
     }
   }
 }
@@ -796,10 +796,10 @@ html.composing .composer .quick-search-container {
   top: 100% !important;
   left: 0 !important;
   right: 0 !important;
-  background: $jv-surface !important;
-  border: 1px solid $jv-border-subtle !important;
-  border-radius: $jv-radius-sm !important;
-  box-shadow: $jv-shadow-lg !important;
+  background: $vsk-surface !important;
+  border: 1px solid $vsk-border-subtle !important;
+  border-radius: $vsk-radius-sm !important;
+  box-shadow: $vsk-shadow-lg !important;
   z-index: 50 !important;
 }
 
@@ -836,13 +836,13 @@ html.composing .composer.reply {
   }
 
   html.composing .composer .title-container {
-    padding: $jv-space-3 $jv-space-4 !important;
-    padding-top: max($jv-space-3, env(safe-area-inset-top)) !important;
+    padding: $vsk-space-3 $vsk-space-4 !important;
+    padding-top: max($vsk-space-3, env(safe-area-inset-top)) !important;
     border-radius: 0 !important;
   }
 
   html.composing .composer .formatting-bar {
-    padding: $jv-space-2 $jv-space-3 !important;
+    padding: $vsk-space-2 $vsk-space-3 !important;
     overflow-x: auto !important;
 
     [data-action="preview"] span,
@@ -852,8 +852,8 @@ html.composing .composer.reply {
   }
 
   html.composing .composer .tag-row {
-    padding: $jv-space-3 $jv-space-4 !important;
-    padding-bottom: max($jv-space-3, env(safe-area-inset-bottom)) !important;
+    padding: $vsk-space-3 $vsk-space-4 !important;
+    padding-bottom: max($vsk-space-3, env(safe-area-inset-bottom)) !important;
     border-radius: 0 !important;
   }
 
@@ -943,8 +943,8 @@ html.composing .composer.reply {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $jv-space-3;
-  padding: $jv-space-3 $jv-space-5;
+  gap: $vsk-space-3;
+  padding: $vsk-space-3 $vsk-space-5;
   background: color-mix(in srgb, var(--use-primary) 8%, var(--use-ui-surface));
   border-bottom: 1px solid color-mix(in srgb, var(--use-primary) 20%, transparent);
   animation: vasak-slide-down 200ms ease both;
@@ -953,14 +953,14 @@ html.composing .composer.reply {
   @media (max-width: 576px) {
     flex-direction: column;
     align-items: flex-start;
-    gap: $jv-space-2;
+    gap: $vsk-space-2;
   }
 }
 
 .vasak-draft-banner-content {
   display: flex;
   align-items: flex-start;
-  gap: $jv-space-3;
+  gap: $vsk-space-3;
   flex: 1;
   min-width: 0;
 }
@@ -1001,12 +1001,12 @@ html.composing .composer.reply {
 
 .vasak-draft-actions {
   display: flex;
-  gap: $jv-space-2;
+  gap: $vsk-space-2;
   flex-shrink: 0;
 
   .btn {
     font-size: var(--text-xs) !important;
-    padding: $jv-space-1 $jv-space-3 !important;
+    padding: $vsk-space-1 $vsk-space-3 !important;
     height: auto !important;
   }
 }

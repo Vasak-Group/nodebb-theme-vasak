@@ -11,12 +11,12 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  border-radius: $jv-radius-pill;
+  border-radius: $vsk-radius-pill;
   padding: 8px 18px;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
-  transition: background-color $jv-transition-fast, border-color $jv-transition-fast, color $jv-transition-fast; // Modern specific transitions
+  transition: background-color $vsk-transition-fast, border-color $vsk-transition-fast, color $vsk-transition-fast; // Modern specific transitions
   border: 1px solid transparent;
   cursor: pointer;
   text-decoration: none;
@@ -25,7 +25,7 @@
   // Focus ring for accessibility
   &:focus {
     outline: none;
-    box-shadow: $jv-focus-ring;
+    box-shadow: $vsk-focus-ring;
   }
 
   &:focus:not(:focus-visible) {
@@ -34,7 +34,7 @@
 
   &:focus-visible {
     outline: none;
-    box-shadow: $jv-focus-ring;
+    box-shadow: $vsk-focus-ring;
   }
 
   // Disabled state
@@ -56,20 +56,20 @@
 // PRIMARY BUTTON
 // ===========================================================
 .btn-primary {
-  background-color: $jv-primary;
-  border-color: $jv-primary;
+  background-color: $vsk-primary;
+  border-color: $vsk-primary;
   color: #fff;
-  box-shadow: $jv-shadow-button;
+  box-shadow: $vsk-shadow-button;
 
   &:hover {
-    background-color: $jv-primary-hover;
-    border-color: $jv-primary-hover;
-    box-shadow: $jv-shadow-button-hover;
+    background-color: $vsk-primary-hover;
+    border-color: $vsk-primary-hover;
+    box-shadow: $vsk-shadow-button-hover;
     color: #fff;
   }
 
   &:active {
-    box-shadow: $jv-shadow-button;
+    box-shadow: $vsk-shadow-button;
   }
 }
 
@@ -78,37 +78,37 @@
 // ===========================================================
 .btn-outline-primary {
   background-color: transparent;
-  border-color: $jv-primary;
-  color: $jv-primary;
+  border-color: $vsk-primary;
+  color: $vsk-primary;
 
   &:hover {
-    background-color: $jv-primary-soft;
-    border-color: $jv-primary;
-    color: $jv-primary;
+    background-color: $vsk-primary-soft;
+    border-color: $vsk-primary;
+    color: $vsk-primary;
   }
 }
 
 .btn-outline-secondary {
   background-color: transparent;
-  border-color: $jv-border-strong;
-  color: $jv-text-main;
+  border-color: $vsk-border-strong;
+  color: $vsk-text-main;
 
   &:hover {
-    background-color: $jv-hover-bg; // Consistent hover state
-    border-color: $jv-border-strong;
-    color: $jv-text-main;
+    background-color: $vsk-hover-bg; // Consistent hover state
+    border-color: $vsk-border-strong;
+    color: $vsk-text-main;
   }
 }
 
 .btn-outline-danger {
   background-color: transparent;
-  border-color: $jv-danger;
-  color: $jv-danger;
+  border-color: $vsk-danger;
+  color: $vsk-danger;
 
   &:hover {
     background-color: rgba(239, 68, 68, 0.1);
-    border-color: $jv-danger;
-    color: $jv-danger;
+    border-color: $vsk-danger;
+    color: $vsk-danger;
   }
 }
 
@@ -118,13 +118,13 @@
 .btn-secondary,
 .btn-default {
   background-color: #f7f8fa;
-  border-color: $jv-border-subtle;
-  color: $jv-text-main;
+  border-color: $vsk-border-subtle;
+  color: $vsk-text-main;
 
   &:hover {
     background-color: #eef0f3;
-    border-color: $jv-border-strong;
-    color: $jv-text-main;
+    border-color: $vsk-border-strong;
+    color: $vsk-text-main;
   }
 
   &:active {
@@ -136,49 +136,49 @@
 // SEMANTIC BUTTONS (Success, Danger, Warning, Info)
 // ===========================================================
 .btn-success {
-  background-color: $jv-success;
-  border-color: $jv-success;
+  background-color: $vsk-success;
+  border-color: $vsk-success;
   color: #fff;
 
   &:hover {
-    background-color: $jv-success-hover;
-    border-color: $jv-success-hover;
+    background-color: $vsk-success-hover;
+    border-color: $vsk-success-hover;
     color: #fff;
   }
 }
 
 .btn-danger {
-  background-color: $jv-danger;
-  border-color: $jv-danger;
+  background-color: $vsk-danger;
+  border-color: $vsk-danger;
   color: #fff;
 
   &:hover {
-    background-color: $jv-danger-hover;
-    border-color: $jv-danger-hover;
+    background-color: $vsk-danger-hover;
+    border-color: $vsk-danger-hover;
     color: #fff;
   }
 }
 
 .btn-warning {
-  background-color: $jv-warning;
-  border-color: $jv-warning;
+  background-color: $vsk-warning;
+  border-color: $vsk-warning;
   color: #fff;
 
   &:hover {
-    background-color: $jv-warning-hover;
-    border-color: $jv-warning-hover;
+    background-color: $vsk-warning-hover;
+    border-color: $vsk-warning-hover;
     color: #fff;
   }
 }
 
 .btn-info {
-  background-color: $jv-info;
-  border-color: $jv-info;
+  background-color: $vsk-info;
+  border-color: $vsk-info;
   color: #fff;
 
   &:hover {
-    background-color: $jv-info-hover;
-    border-color: $jv-info-hover;
+    background-color: $vsk-info-hover;
+    border-color: $vsk-info-hover;
     color: #fff;
   }
 }
@@ -187,13 +187,13 @@
 // LIGHT/SUBTLE BUTTON
 // ===========================================================
 .btn-light {
-  background-color: $jv-hover-bg; // Consistent with hover state
+  background-color: $vsk-hover-bg; // Consistent with hover state
   border-color: transparent;
-  color: $jv-text-main;
+  color: $vsk-text-main;
 
   &:hover {
-    background-color: $jv-active-bg; // Consistent active state
-    color: $jv-text-main;
+    background-color: $vsk-active-bg; // Consistent active state
+    color: $vsk-text-main;
   }
 }
 
@@ -203,11 +203,11 @@
 .btn-ghost {
   background-color: transparent;
   border-color: transparent;
-  color: $jv-text-muted;
+  color: $vsk-text-muted;
 
   &:hover {
-    background-color: $jv-hover-bg; // Consistent hover state
-    color: $jv-text-main;
+    background-color: $vsk-hover-bg; // Consistent hover state
+    color: $vsk-text-main;
   }
 }
 
@@ -217,14 +217,14 @@
 .btn-link {
   background: transparent;
   border-color: transparent;
-  color: $jv-primary;
+  color: $vsk-primary;
   font-weight: 500;
   padding: 0;
   box-shadow: none;
 
   &:hover {
     text-decoration: underline;
-    color: $jv-primary-hover;
+    color: $vsk-primary-hover;
     background: transparent;
     box-shadow: none;
   }
@@ -239,7 +239,7 @@
 // ===========================================================
 .btn-sm {
   padding: 5px 12px;
-  font-size: $jv-font-size-xs;
+  font-size: $vsk-font-size-xs;
   gap: 4px;
 
   i, .fa, .fas, .far, .fab {
@@ -249,8 +249,8 @@
 
 .btn-lg {
   padding: 12px 24px;
-  font-size: $jv-font-size-base;
-  border-radius: $jv-radius-pill;
+  font-size: $vsk-font-size-base;
+  border-radius: $vsk-radius-pill;
   gap: 8px;
 
   i, .fa, .fas, .far, .fab {
@@ -299,13 +299,13 @@
     border-radius: 0;
 
     &:first-child {
-      border-top-left-radius: $jv-radius-pill;
-      border-bottom-left-radius: $jv-radius-pill;
+      border-top-left-radius: $vsk-radius-pill;
+      border-bottom-left-radius: $vsk-radius-pill;
     }
 
     &:last-child {
-      border-top-right-radius: $jv-radius-pill;
-      border-bottom-right-radius: $jv-radius-pill;
+      border-top-right-radius: $vsk-radius-pill;
+      border-bottom-right-radius: $vsk-radius-pill;
     }
 
     &:not(:first-child) {
@@ -322,11 +322,11 @@
   height: 56px;
   border-radius: 50%;
   padding: 0;
-  box-shadow: $jv-shadow-lg; // shadcn large shadow
-  transition: $jv-transition-shadow, transform $jv-transition-fast; // Modern transitions
+  box-shadow: $vsk-shadow-lg; // shadcn large shadow
+  transition: $vsk-transition-shadow, transform $vsk-transition-fast; // Modern transitions
 
   &:hover {
-    box-shadow: $jv-shadow-xl; // shadcn extra large shadow
+    box-shadow: $vsk-shadow-xl; // shadcn extra large shadow
     transform: translateY(-2px); // FABs are meant to lift on hover
   }
 
@@ -357,13 +357,13 @@
 [component="post/downvote"] {
   @extend .btn-ghost;
   padding: 6px 10px;
-  font-size: $jv-font-size-xs;
-  border-radius: $jv-radius-sm;
+  font-size: $vsk-font-size-xs;
+  border-radius: $vsk-radius-sm;
 }
 
 // Composer buttons
 .composer .btn {
-  border-radius: $jv-radius-sm;
+  border-radius: $vsk-radius-sm;
 }
 
 // Topic tools dropdown
@@ -388,7 +388,7 @@
   color: #fff !important;
   font-size: 16px !important;
   font-weight: 600 !important;
-  border-radius: $jv-radius-md !important;
+  border-radius: $vsk-radius-md !important;
   box-shadow: 0 4px 14px rgba(0, 119, 181, 0.35) !important;
   transition: all 0.2s ease !important;
 
@@ -414,11 +414,11 @@
 .linkedin-login-block {
   max-width: 400px;
   margin: 0 auto;
-  padding: $jv-space-6;
-  background: $jv-surface;
-  border-radius: $jv-radius-lg;
-  border: 1px solid $jv-border-subtle;
-  box-shadow: $jv-shadow-md;
+  padding: $vsk-space-6;
+  background: $vsk-surface;
+  border-radius: $vsk-radius-lg;
+  border: 1px solid $vsk-border-subtle;
+  box-shadow: $vsk-shadow-md;
 }
 
 // Hide admin login section by default (shown via JS when ?admin=true)

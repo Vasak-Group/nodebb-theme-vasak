@@ -20,40 +20,40 @@
 // ----------------------------------------------------------
 
 // Brand
-$jv-primary:        var(--use-primary);
-$jv-primary-hover:  var(--use-primary-hover);
-$jv-primary-soft:   var(--use-primary-soft);
+$vsk-primary:        var(--use-primary);
+$vsk-primary-hover:  var(--use-primary-hover);
+$vsk-primary-soft:   var(--use-primary-soft);
 
 // Surfaces
-$jv-bg:             var(--use-ui-background);
-$jv-surface:        var(--use-ui-surface);
-$jv-border-subtle:  var(--use-ui-border);
-$jv-border-strong:  var(--use-ui-border-strong);
+$vsk-bg:             var(--use-ui-background);
+$vsk-surface:        var(--use-ui-surface);
+$vsk-border-subtle:  var(--use-ui-border);
+$vsk-border-strong:  var(--use-ui-border-strong);
 
 // Text
-$jv-text-main:      var(--use-text-main);
-$jv-text-muted:     var(--use-text-muted);
-$jv-text-soft:      var(--use-text-soft);
+$vsk-text-main:      var(--use-text-main);
+$vsk-text-muted:     var(--use-text-muted);
+$vsk-text-soft:      var(--use-text-soft);
 
 // Semantic
-$jv-success:        var(--use-status-success);
-$jv-success-hover:  var(--use-status-success-hover);
-$jv-danger:         var(--use-status-error);
-$jv-danger-hover:   var(--use-status-error-hover);
-$jv-warning:        var(--use-status-warning);
-$jv-warning-hover:  var(--use-status-warning-hover);
-$jv-info:           #3b82f6;
-$jv-info-hover:     #2563eb;
+$vsk-success:        var(--use-status-success);
+$vsk-success-hover:  var(--use-status-success-hover);
+$vsk-danger:         var(--use-status-error);
+$vsk-danger-hover:   var(--use-status-error-hover);
+$vsk-warning:        var(--use-status-warning);
+$vsk-warning-hover:  var(--use-status-warning-hover);
+$vsk-info:           #3b82f6;
+$vsk-info-hover:     #2563eb;
 
 // Interactive states
 // These use rgba so they work on any background.
 // In dark mode the JS toggle adds .dark to <html>,
 // and the custom properties flip automatically.
-$jv-hover-bg:       var(--use-state-hover);
-$jv-active-bg:      var(--use-state-active);
-$jv-selected-bg:    var(--use-state-selected);
-$jv-focus-ring:     var(--use-focus-ring);
-$jv-focus-ring-offset: var(--use-focus-ring-offset);
+$vsk-hover-bg:       var(--use-state-hover);
+$vsk-active-bg:      var(--use-state-active);
+$vsk-selected-bg:    var(--use-state-selected);
+$vsk-focus-ring:     var(--use-focus-ring);
+$vsk-focus-ring-offset: var(--use-focus-ring-offset);
 
 // ----------------------------------------------------------
 // STATIC SCSS VARIABLES (no dark-mode variant needed)
@@ -61,65 +61,65 @@ $jv-focus-ring-offset: var(--use-focus-ring-offset);
 // ----------------------------------------------------------
 
 // Radii
-$jv-radius-xs:   4px;
-$jv-radius-sm:   8px;
-$jv-radius-md:   12px;
-$jv-radius-lg:   16px;
-$jv-radius-pill: 999px;
+$vsk-radius-xs:   4px;
+$vsk-radius-sm:   8px;
+$vsk-radius-md:   12px;
+$vsk-radius-lg:   16px;
+$vsk-radius-pill: 999px;
 
 // Shadows — kept as SCSS vars because they don't change in dark mode
-$jv-shadow-none:   none;
-$jv-shadow-xs:     0 1px 2px 0 rgba(0, 0, 0, 0.05);
-$jv-shadow-sm:     0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
-$jv-shadow-md:     0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -2px rgba(0, 0, 0, 0.10);
-$jv-shadow-lg:     0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10);
-$jv-shadow-xl:     0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 8px 10px -6px rgba(0, 0, 0, 0.10);
+$vsk-shadow-none:   none;
+$vsk-shadow-xs:     0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$vsk-shadow-sm:     0 1px 3px 0 rgba(0, 0, 0, 0.10), 0 1px 2px -1px rgba(0, 0, 0, 0.10);
+$vsk-shadow-md:     0 4px 6px -1px rgba(0, 0, 0, 0.10), 0 2px 4px -2px rgba(0, 0, 0, 0.10);
+$vsk-shadow-lg:     0 10px 15px -3px rgba(0, 0, 0, 0.10), 0 4px 6px -4px rgba(0, 0, 0, 0.10);
+$vsk-shadow-xl:     0 20px 25px -5px rgba(0, 0, 0, 0.10), 0 8px 10px -6px rgba(0, 0, 0, 0.10);
 
 // Legacy aliases
-$jv-shadow-soft:   $jv-shadow-sm;
-$jv-shadow-card:   $jv-shadow-sm;
-$jv-elevation-0:   $jv-shadow-none;
-$jv-elevation-1:   $jv-shadow-sm;
-$jv-elevation-2:   $jv-shadow-sm;
-$jv-elevation-4:   $jv-shadow-md;
-$jv-elevation-6:   $jv-shadow-md;
-$jv-elevation-8:   $jv-shadow-md;
+$vsk-shadow-soft:   $vsk-shadow-sm;
+$vsk-shadow-card:   $vsk-shadow-sm;
+$vsk-elevation-0:   $vsk-shadow-none;
+$vsk-elevation-1:   $vsk-shadow-sm;
+$vsk-elevation-2:   $vsk-shadow-sm;
+$vsk-elevation-4:   $vsk-shadow-md;
+$vsk-elevation-6:   $vsk-shadow-md;
+$vsk-elevation-8:   $vsk-shadow-md;
 
 // Button shadows — use raw hex because var() inside rgba() is tricky
-$jv-shadow-button:       0 4px 12px rgba(221, 120, 120, 0.30);
-$jv-shadow-button-hover: 0 6px 16px rgba(221, 120, 120, 0.45);
+$vsk-shadow-button:       0 4px 12px rgba(221, 120, 120, 0.30);
+$vsk-shadow-button-hover: 0 6px 16px rgba(221, 120, 120, 0.45);
 
 // Spacing (8dp baseline grid)
-$jv-space-1:  4px;
-$jv-space-2:  8px;
-$jv-space-3:  12px;
-$jv-space-4:  16px;
-$jv-space-5:  20px;
-$jv-space-6:  24px;
-$jv-space-8:  32px;
-$jv-space-10: 40px;
-$jv-space-12: 48px;
+$vsk-space-1:  4px;
+$vsk-space-2:  8px;
+$vsk-space-3:  12px;
+$vsk-space-4:  16px;
+$vsk-space-5:  20px;
+$vsk-space-6:  24px;
+$vsk-space-8:  32px;
+$vsk-space-10: 40px;
+$vsk-space-12: 48px;
 
 // Typography
 // Font stack apunta a la custom property definida en _typography.scss
-// Todos los componentes que usen $jv-font-sans heredan automáticamente
+// Todos los componentes que usen $vsk-font-sans heredan automáticamente
 // cualquier cambio en la stack sin necesidad de tocar cada archivo.
-$jv-font-sans:         var(--font-sans);
-$jv-font-mono:         var(--font-mono);
-$jv-font-size-base:    var(--text-base);
-$jv-font-size-sm:      var(--text-sm);
-$jv-font-size-xs:      var(--text-xs);
-$jv-font-size-lg:      var(--text-lg);
-$jv-font-size-xl:      var(--text-xl);
-$jv-font-size-xxl:     var(--text-3xl);
+$vsk-font-sans:         var(--font-sans);
+$vsk-font-mono:         var(--font-mono);
+$vsk-font-size-base:    var(--text-base);
+$vsk-font-size-sm:      var(--text-sm);
+$vsk-font-size-xs:      var(--text-xs);
+$vsk-font-size-lg:      var(--text-lg);
+$vsk-font-size-xl:      var(--text-xl);
+$vsk-font-size-xxl:     var(--text-3xl);
 
 // Line Heights
-$jv-line-height-base:    1.52;
-$jv-line-height-tight:   1.4;
-$jv-line-height-relaxed: 1.6;
+$vsk-line-height-base:    1.52;
+$vsk-line-height-tight:   1.4;
+$vsk-line-height-relaxed: 1.6;
 
 // Transitions
-$jv-transition-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
-$jv-transition-base:   200ms cubic-bezier(0.4, 0, 0.2, 1);
-$jv-transition-slow:   300ms cubic-bezier(0.4, 0, 0.2, 1);
-$jv-transition-shadow: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+$vsk-transition-fast:   150ms cubic-bezier(0.4, 0, 0.2, 1);
+$vsk-transition-base:   200ms cubic-bezier(0.4, 0, 0.2, 1);
+$vsk-transition-slow:   300ms cubic-bezier(0.4, 0, 0.2, 1);
+$vsk-transition-shadow: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);

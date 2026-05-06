@@ -5,11 +5,11 @@
 
 // Category Header
 .feed h2 {
-  font-size: $jv-font-size-base;
+  font-size: $vsk-font-size-base;
   font-weight: 600;
-  margin: 0 0 $jv-space-6 0;
+  margin: 0 0 $vsk-space-6 0;
   padding: 0;
-  color: $jv-text-main;
+  color: $vsk-text-main;
   letter-spacing: -0.2px;
 }
 
@@ -19,15 +19,15 @@ ul.categories-list.list-unstyled {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: $jv-space-3;
+  gap: $vsk-space-3;
 
   // First category gets subtle featured treatment
   > li[component="categories/category"]:first-child {
-    background: linear-gradient(135deg, rgba($jv-primary, 0.04) 0%, rgba($jv-primary, 0.01) 100%);
-    border-color: rgba($jv-primary, 0.2);
+    background: linear-gradient(135deg, rgba($vsk-primary, 0.04) 0%, rgba($vsk-primary, 0.01) 100%);
+    border-color: rgba($vsk-primary, 0.2);
 
     &:hover {
-      border-color: rgba($jv-primary, 0.35);
+      border-color: rgba($vsk-primary, 0.35);
     }
   }
 }
@@ -38,31 +38,31 @@ ul.categories-list.list-unstyled {
 
 li[component="categories/category"] {
   position: relative;
-  background: $jv-surface;
-  border-radius: $jv-radius-sm;
-  border: 1px solid $jv-border-subtle;
-  box-shadow: $jv-shadow-sm;
-  padding: $jv-space-5;
-  transition: box-shadow $jv-transition-base, border-color $jv-transition-fast, transform $jv-transition-fast;
+  background: $vsk-surface;
+  border-radius: $vsk-radius-sm;
+  border: 1px solid $vsk-border-subtle;
+  box-shadow: $vsk-shadow-sm;
+  padding: $vsk-space-5;
+  transition: box-shadow $vsk-transition-base, border-color $vsk-transition-fast, transform $vsk-transition-fast;
 
   &:hover {
-    box-shadow: $jv-shadow-md;
-    border-color: $jv-border-strong;
+    box-shadow: $vsk-shadow-md;
+    border-color: $vsk-border-strong;
     transform: translateY(-1px);
 
     .subcategory-pill {
-      background: $jv-surface;
+      background: $vsk-surface;
     }
   }
 
   &:focus-within {
     outline: none;
-    box-shadow: $jv-shadow-md, $jv-focus-ring;
+    box-shadow: $vsk-shadow-md, $vsk-focus-ring;
   }
 
   // Unread state
   &.unread {
-    border-left: 3px solid $jv-primary;
+    border-left: 3px solid $vsk-primary;
 
     .title a {
       font-weight: 700;
@@ -80,13 +80,13 @@ li[component="categories/category"] {
   // Title
   // ------------------------------------
   .title {
-    font-size: $jv-font-size-lg;
+    font-size: $vsk-font-size-lg;
     font-weight: 600;
-    color: $jv-text-main;
-    margin-bottom: $jv-space-1; // Tighter spacing to description
+    color: $vsk-text-main;
+    margin-bottom: $vsk-space-1; // Tighter spacing to description
     display: flex;
     align-items: center;
-    gap: $jv-space-3;
+    gap: $vsk-space-3;
     letter-spacing: -0.02em;
 
     a {
@@ -94,12 +94,12 @@ li[component="categories/category"] {
       color: inherit;
 
       &:hover {
-        color: $jv-primary;
+        color: $vsk-primary;
       }
     }
 
     i {
-      font-size: $jv-font-size-base;
+      font-size: $vsk-font-size-base;
       opacity: 0.95;
     }
   }
@@ -108,10 +108,10 @@ li[component="categories/category"] {
   // Description
   // ------------------------------------
   .description {
-    font-size: $jv-font-size-sm;
-    color: $jv-text-muted;
-    line-height: $jv-line-height-base;
-    margin-bottom: $jv-space-3;
+    font-size: $vsk-font-size-sm;
+    color: $vsk-text-muted;
+    line-height: $vsk-line-height-base;
+    margin-bottom: $vsk-space-3;
     max-width: 100%;
   }
 
@@ -122,13 +122,13 @@ li[component="categories/category"] {
   [component="category/icon"] {
     width: 48px !important;
     height: 48px !important;
-    border-radius: $jv-radius-sm !important;
+    border-radius: $vsk-radius-sm !important;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: $jv-font-size-lg !important;
+    font-size: $vsk-font-size-lg !important;
     flex-shrink: 0;
-    box-shadow: $jv-shadow-xs;
+    box-shadow: $vsk-shadow-xs;
   }
 
   // ------------------------------------
@@ -143,15 +143,15 @@ li[component="categories/category"] {
     }
 
     .stat-number {
-      font-size: $jv-font-size-lg;
+      font-size: $vsk-font-size-lg;
       font-weight: 600;
-      color: $jv-text-main;
+      color: $vsk-text-main;
       line-height: 1;
     }
 
     .stat-label {
-      font-size: $jv-font-size-xs;
-      color: $jv-text-soft;
+      font-size: $vsk-font-size-xs;
+      color: $vsk-text-soft;
       text-transform: uppercase;
       letter-spacing: 0.3px;
       font-weight: 500;
@@ -168,12 +168,12 @@ li[component="categories/category"] {
     border-top: none !important;
 
     .teaser-enhanced {
-      border-left: 3px solid var(--teaser-color, $jv-primary);
+      border-left: 3px solid var(--teaser-color, $vsk-primary);
       height: auto !important;
-      border-radius: 0 $jv-radius-sm $jv-radius-sm 0;
-      background: $jv-bg;
-      padding: $jv-space-3;
-      transition: background $jv-transition-fast;
+      border-radius: 0 $vsk-radius-sm $vsk-radius-sm 0;
+      background: $vsk-bg;
+      padding: $vsk-space-3;
+      transition: background $vsk-transition-fast;
 
       &:hover {
         background: rgba(0, 0, 0, 0.03);
@@ -184,7 +184,7 @@ li[component="categories/category"] {
         [component="user/picture"] {
           width: 24px !important;
           height: 24px !important;
-          border-radius: $jv-radius-pill;
+          border-radius: $vsk-radius-pill;
         }
 
         .teaser-meta {
@@ -194,14 +194,14 @@ li[component="categories/category"] {
           line-height: 1.2;
 
           .teaser-user {
-            font-size: $jv-font-size-xs;
+            font-size: $vsk-font-size-xs;
             font-weight: 600;
-            color: $jv-text-main;
+            color: $vsk-text-main;
           }
 
           .teaser-time {
-            font-size: $jv-font-size-xs;
-            color: $jv-text-soft;
+            font-size: $vsk-font-size-xs;
+            color: $vsk-text-soft;
             text-decoration: none;
           }
         }
@@ -210,13 +210,13 @@ li[component="categories/category"] {
       .teaser-content-wrapper {
         display: flex;
         flex-direction: column;
-        gap: $jv-space-1;
+        gap: $vsk-space-1;
       }
 
       .teaser-content {
-        font-size: $jv-font-size-sm;
-        color: $jv-text-muted;
-        line-height: $jv-line-height-base;
+        font-size: $vsk-font-size-sm;
+        color: $vsk-text-muted;
+        line-height: $vsk-line-height-base;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
@@ -224,11 +224,11 @@ li[component="categories/category"] {
       }
 
       .teaser-read-more {
-        font-size: $jv-font-size-xs;
+        font-size: $vsk-font-size-xs;
         font-weight: 500;
-        color: $jv-primary;
+        color: $vsk-primary;
         text-decoration: none;
-        transition: color $jv-transition-fast;
+        transition: color $vsk-transition-fast;
 
         &:hover {
           color: var(--use-primary-hover);
@@ -246,34 +246,34 @@ li[component="categories/category"] {
 .category-children {
   display: flex;
   flex-direction: column;
-  gap: $jv-space-2;
-  margin-top: $jv-space-1;
+  gap: $vsk-space-2;
+  margin-top: $vsk-space-1;
 }
 
 .category-children-item {
   small > .d-flex {
     display: flex;
     align-items: center;
-    gap: $jv-space-2;
-    font-size: $jv-font-size-sm;
-    color: $jv-text-main;
+    gap: $vsk-space-2;
+    font-size: $vsk-font-size-sm;
+    color: $vsk-text-main;
   }
 
   i {
     font-size: 6px;
-    color: $jv-text-soft;
+    color: $vsk-text-soft;
     margin-top: 1px;
   }
 
   a {
     text-decoration: none;
-    font-size: $jv-font-size-sm;
-    color: $jv-text-main;
-    transition: color $jv-transition-fast;
+    font-size: $vsk-font-size-sm;
+    color: $vsk-text-main;
+    transition: color $vsk-transition-fast;
 
     &:focus-visible {
       outline: none;
-      color: $jv-primary;
+      color: $vsk-primary;
       text-decoration: underline;
       text-decoration-thickness: 2px;
       text-underline-offset: 2px;
@@ -282,11 +282,11 @@ li[component="categories/category"] {
 
   &:hover {
     i {
-      color: $jv-primary;
+      color: $vsk-primary;
     }
 
     a {
-      color: $jv-primary;
+      color: $vsk-primary;
     }
   }
 }
@@ -296,24 +296,24 @@ li[component="categories/category"] {
 // ===========================================================
 
 .category-activity-row {
-  margin-top: $jv-space-1;
+  margin-top: $vsk-space-1;
 }
 
 .activity-badge {
   display: inline-flex;
   align-items: center;
-  gap: $jv-space-1;
-  padding: $jv-space-1 $jv-space-2;
-  font-size: $jv-font-size-xs;
+  gap: $vsk-space-1;
+  padding: $vsk-space-1 $vsk-space-2;
+  font-size: $vsk-font-size-xs;
   font-weight: 500;
-  color: $jv-text-soft;
-  background: $jv-bg;
-  border-radius: $jv-radius-pill;
-  transition: all $jv-transition-fast;
+  color: $vsk-text-soft;
+  background: $vsk-bg;
+  border-radius: $vsk-radius-pill;
+  transition: all $vsk-transition-fast;
   cursor: default;
 
   i {
-    font-size: $jv-font-size-xs;
+    font-size: $vsk-font-size-xs;
   }
 
   &:hover {
@@ -323,20 +323,20 @@ li[component="categories/category"] {
   // Removed .active green styling - now uses default muted style for time badge
 
   &.hot {
-    background: rgba($jv-warning, 0.12);
-    color: $jv-warning;
+    background: rgba($vsk-warning, 0.12);
+    color: $vsk-warning;
 
     i {
-      color: $jv-warning;
+      color: $vsk-warning;
     }
   }
 
   &.new {
-    background: $jv-primary-soft;
-    color: $jv-primary;
+    background: $vsk-primary-soft;
+    color: $vsk-primary;
 
     i {
-      color: $jv-primary;
+      color: $vsk-primary;
     }
   }
 }
@@ -365,7 +365,7 @@ li[component="categories/category"] {
 // ===========================================================
 
 .empty-state {
-  color: $jv-text-soft !important;
+  color: $vsk-text-soft !important;
   font-style: italic;
 }
 
@@ -380,15 +380,15 @@ li[component="categories/category"] {
     justify-content: center;
     width: 28px;
     height: 28px;
-    border-radius: $jv-radius-pill;
-    background: $jv-bg;
-    color: $jv-text-soft;
-    font-size: $jv-font-size-sm;
+    border-radius: $vsk-radius-pill;
+    background: $vsk-bg;
+    color: $vsk-text-soft;
+    font-size: $vsk-font-size-sm;
   }
 
   .empty-text {
-    font-size: $jv-font-size-xs;
-    color: $jv-text-soft;
+    font-size: $vsk-font-size-xs;
+    color: $vsk-text-soft;
     font-weight: 500;
   }
 }
@@ -398,19 +398,19 @@ li[component="categories/category"] {
 // ===========================================================
 
 .subcategory-pills {
-  margin-top: $jv-space-2;
+  margin-top: $vsk-space-2;
 }
 
 .subcategory-pill {
   display: inline-flex;
   align-items: center;
-  gap: $jv-space-2;
-  padding: $jv-space-1 $jv-space-3 $jv-space-1 $jv-space-1;
-  background: $jv-bg;
+  gap: $vsk-space-2;
+  padding: $vsk-space-1 $vsk-space-3 $vsk-space-1 $vsk-space-1;
+  background: $vsk-bg;
   border: 1px solid transparent;
-  border-radius: $jv-radius-pill;
+  border-radius: $vsk-radius-pill;
   text-decoration: none;
-  transition: all $jv-transition-fast;
+  transition: all $vsk-transition-fast;
 
   .pill-icon {
     display: flex;
@@ -418,9 +418,9 @@ li[component="categories/category"] {
     justify-content: center;
     width: 22px;
     height: 22px;
-    border-radius: $jv-radius-pill;
+    border-radius: $vsk-radius-pill;
     color: white;
-    font-size: $jv-font-size-xs;
+    font-size: $vsk-font-size-xs;
     flex-shrink: 0;
 
     i {
@@ -429,26 +429,26 @@ li[component="categories/category"] {
   }
 
   .pill-name {
-    font-size: $jv-font-size-xs;
+    font-size: $vsk-font-size-xs;
     font-weight: 500;
-    color: $jv-text-main;
+    color: $vsk-text-main;
     white-space: nowrap;
   }
 
   &:hover {
-    background: $jv-surface;
-    border-color: var(--pill-color, $jv-border-subtle);
-    box-shadow: $jv-shadow-sm;
+    background: $vsk-surface;
+    border-color: var(--pill-color, $vsk-border-subtle);
+    box-shadow: $vsk-shadow-sm;
     transform: translateY(-1px);
 
     .pill-name {
-      color: var(--pill-color, $jv-primary);
+      color: var(--pill-color, $vsk-primary);
     }
   }
 
   &:focus-visible {
     outline: none;
-    box-shadow: $jv-focus-ring;
+    box-shadow: $vsk-focus-ring;
   }
 }
 
@@ -471,29 +471,29 @@ li[component="categories/category"] {
 
 @media (max-width: 991px) {
   li[component="categories/category"] {
-    padding: $jv-space-4;
+    padding: $vsk-space-4;
 
     .teaser {
-      margin-top: $jv-space-3;
+      margin-top: $vsk-space-3;
     }
   }
 }
 
 @media (max-width: 576px) {
   ul.categories-list.list-unstyled {
-    gap: $jv-space-2;
+    gap: $vsk-space-2;
   }
 
   li[component="categories/category"] {
-    padding: $jv-space-4;
-    border-radius: $jv-radius-sm;
+    padding: $vsk-space-4;
+    border-radius: $vsk-radius-sm;
 
     .title {
-      font-size: $jv-font-size-base;
+      font-size: $vsk-font-size-base;
     }
 
     .description {
-      font-size: $jv-font-size-xs;
+      font-size: $vsk-font-size-xs;
     }
 
     .category-activity-row {
@@ -502,20 +502,20 @@ li[component="categories/category"] {
   }
 
   .subcategory-pills {
-    gap: $jv-space-1 !important;
+    gap: $vsk-space-1 !important;
   }
 
   .subcategory-pill {
-    padding: $jv-space-1 $jv-space-2 $jv-space-1 $jv-space-1;
+    padding: $vsk-space-1 $vsk-space-2 $vsk-space-1 $vsk-space-1;
 
     .pill-icon {
       width: 18px;
       height: 18px;
-      font-size: $jv-font-size-xs;
+      font-size: $vsk-font-size-xs;
     }
 
     .pill-name {
-      font-size: $jv-font-size-xs;
+      font-size: $vsk-font-size-xs;
     }
   }
 }

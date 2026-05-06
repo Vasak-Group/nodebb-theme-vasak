@@ -9,24 +9,24 @@ input[type="email"],
 input[type="password"],
 textarea,
 .form-select {
-  background: $jv-surface;
-  border: 1px solid $jv-border-subtle;
-  border-radius: $jv-radius-pill;
+  background: $vsk-surface;
+  border: 1px solid $vsk-border-subtle;
+  border-radius: $vsk-radius-pill;
   padding: 10px 16px;
-  font-size: $jv-font-size-base;
-  color: $jv-text-main;
-  line-height: $jv-line-height-tight;
+  font-size: $vsk-font-size-base;
+  color: $vsk-text-main;
+  line-height: $vsk-line-height-tight;
   box-shadow: none;
-  transition: border-color $jv-transition-fast, box-shadow $jv-transition-fast; // Modern transitions
+  transition: border-color $vsk-transition-fast, box-shadow $vsk-transition-fast; // Modern transitions
 
   &::placeholder {
-    color: $jv-text-muted;
+    color: $vsk-text-muted;
   }
 
   &:focus {
     outline: none;
-    border-color: $jv-primary;
-    box-shadow: $jv-focus-ring; // Consistent focus ring
+    border-color: $vsk-primary;
+    box-shadow: $vsk-focus-ring; // Consistent focus ring
   }
 }
 
@@ -34,7 +34,7 @@ textarea,
 textarea,
 textarea.form-control,
 .form-control[type="textarea"] {
-  border-radius: $jv-radius-sm !important; // 8px rounded rectangle, not pill
+  border-radius: $vsk-radius-sm !important; // 8px rounded rectangle, not pill
   resize: vertical;
   min-height: 100px;
 }
@@ -45,23 +45,23 @@ textarea.form-control,
 
 .jlc-trigger {
   width: 100%;
-  background: $jv-surface;
-  border: 1px solid $jv-border-subtle;
-  border-radius: $jv-radius-pill;
+  background: $vsk-surface;
+  border: 1px solid $vsk-border-subtle;
+  border-radius: $vsk-radius-pill;
   padding: 12px 18px;
-  font-size: $jv-font-size-base;
+  font-size: $vsk-font-size-base;
   font-weight: 400;
   text-align: left;
-  color: $jv-text-muted;
-  box-shadow: $jv-shadow-sm; // shadcn subtle shadow
-  transition: border-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+  color: $vsk-text-muted;
+  box-shadow: $vsk-shadow-sm; // shadcn subtle shadow
+  transition: border-color $vsk-transition-fast, color $vsk-transition-fast; // Modern transitions
 
   &:hover,
   &:focus {
-    background: $jv-surface;
-    border-color: $jv-primary;
-    color: $jv-primary;
-    box-shadow: $jv-shadow-sm; // shadcn subtle shadow
+    background: $vsk-surface;
+    border-color: $vsk-primary;
+    color: $vsk-primary;
+    box-shadow: $vsk-shadow-sm; // shadcn subtle shadow
     outline: none;
   }
 
@@ -70,17 +70,17 @@ textarea.form-control,
   &.btn:focus,
   &.btn:hover,
   &.btn:active {
-    background: $jv-surface;
-    border-radius: $jv-radius-pill;
-    box-shadow: $jv-shadow-sm; // shadcn subtle shadow
-    border-color: $jv-border-subtle;
+    background: $vsk-surface;
+    border-radius: $vsk-radius-pill;
+    box-shadow: $vsk-shadow-sm; // shadcn subtle shadow
+    border-color: $vsk-border-subtle;
     outline: none;
   }
 
   &.btn:hover,
   &.btn:focus {
-    border-color: $jv-primary;
-    color: $jv-primary;
+    border-color: $vsk-primary;
+    color: $vsk-primary;
   }
 }
 
@@ -88,13 +88,13 @@ textarea.form-control,
 // DROPDOWN MENUS
 // ===========================================================
 .dropdown-menu {
-  border: 1px solid $jv-border-subtle;
-  border-radius: $jv-radius-md;
-  box-shadow: $jv-shadow-lg; // shadcn large shadow for dropdowns
-  padding: $jv-space-2 0;
+  border: 1px solid $vsk-border-subtle;
+  border-radius: $vsk-radius-md;
+  box-shadow: $vsk-shadow-lg; // shadcn large shadow for dropdowns
+  padding: $vsk-space-2 0;
   min-width: 180px;
-  background: $jv-surface;
-  animation: dropdownFade $jv-transition-fast;
+  background: $vsk-surface;
+  animation: dropdownFade $vsk-transition-fast;
 
   @keyframes dropdownFade {
     from {
@@ -108,18 +108,18 @@ textarea.form-control,
   }
 
   .dropdown-item {
-    padding: $jv-space-4 $jv-space-8;
-    font-size: $jv-font-size-sm;
-    color: $jv-text-main;
-    transition: background-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+    padding: $vsk-space-4 $vsk-space-8;
+    font-size: $vsk-font-size-sm;
+    color: $vsk-text-main;
+    transition: background-color $vsk-transition-fast, color $vsk-transition-fast; // Modern transitions
     display: flex;
     align-items: center;
-    gap: $jv-space-4;
+    gap: $vsk-space-4;
 
     i {
       width: 16px;
       flex-shrink: 0;
-      color: $jv-text-muted;
+      color: $vsk-text-muted;
     }
 
     // Hide bookmark option from dropdown menu
@@ -129,20 +129,20 @@ textarea.form-control,
 
     &:hover {
       background: rgba(0, 81, 255, 0.06);
-      color: $jv-primary;
+      color: $vsk-primary;
 
       i {
-        color: $jv-primary;
+        color: $vsk-primary;
       }
     }
 
     &:active {
-      background: $jv-active-bg; // Consistent active state
+      background: $vsk-active-bg; // Consistent active state
     }
 
     &.active {
-      background: $jv-primary-soft;
-      color: $jv-primary;
+      background: $vsk-primary-soft;
+      color: $vsk-primary;
       font-weight: 500;
     }
 
@@ -150,20 +150,20 @@ textarea.form-control,
     &:focus-visible {
       outline: none;
       background: rgba(0, 81, 255, 0.06);
-      color: $jv-primary;
+      color: $vsk-primary;
     }
   }
 
   .dropdown-divider {
-    margin: $jv-space-2 0;
-    border-top-color: $jv-border-subtle;
+    margin: $vsk-space-2 0;
+    border-top-color: $vsk-border-subtle;
   }
 
   .dropdown-header {
-    padding: $jv-space-2 $jv-space-8;
-    font-size: $jv-font-size-xs;
+    padding: $vsk-space-2 $vsk-space-8;
+    font-size: $vsk-font-size-xs;
     font-weight: 600;
-    color: $jv-text-soft;
+    color: $vsk-text-soft;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -176,13 +176,13 @@ textarea.form-control,
   font-size: 11px;
   font-weight: 600;
   padding: 3px 8px;
-  border-radius: $jv-radius-pill;
+  border-radius: $vsk-radius-pill;
   line-height: 1.2;
 }
 
 .badge-primary,
 .bg-primary {
-  background-color: $jv-primary !important;
+  background-color: $vsk-primary !important;
   color: #fff;
 }
 
@@ -219,17 +219,17 @@ textarea.form-control,
 .badge-light,
 .bg-light {
   background-color: rgba(0, 0, 0, 0.06) !important;
-  color: $jv-text-main;
+  color: $vsk-text-main;
 }
 
 // ===========================================================
 // ALERTS
 // ===========================================================
 .alert {
-  border-radius: $jv-radius-md;
+  border-radius: $vsk-radius-md;
   border: none;
-  padding: $jv-space-8;
-  font-size: $jv-font-size-sm;
+  padding: $vsk-space-8;
+  font-size: $vsk-font-size-sm;
 
   .alert-link {
     font-weight: 600;
@@ -265,11 +265,11 @@ textarea.form-control,
 // TOOLTIPS
 // ===========================================================
 .tooltip {
-  font-size: $jv-font-size-xs;
+  font-size: $vsk-font-size-xs;
 
   .tooltip-inner {
     background: #1f2937;
-    border-radius: $jv-radius-xs;
+    border-radius: $vsk-radius-xs;
     padding: 4px 8px;
     max-width: 240px;
   }
@@ -284,22 +284,22 @@ textarea.form-control,
 // ===========================================================
 .modal-content {
   border: none;
-  border-radius: $jv-radius-lg;
-  box-shadow: $jv-shadow-xl; // shadcn extra large shadow for modals
+  border-radius: $vsk-radius-lg;
+  box-shadow: $vsk-shadow-xl; // shadcn extra large shadow for modals
 }
 
 .modal-header {
-  border-bottom: 1px solid $jv-border-subtle;
-  padding: $jv-space-8 $jv-space-10;
+  border-bottom: 1px solid $vsk-border-subtle;
+  padding: $vsk-space-8 $vsk-space-10;
 
   .modal-title {
     font-weight: 600;
-    font-size: $jv-font-size-lg;
+    font-size: $vsk-font-size-lg;
   }
 
   .btn-close {
     opacity: 0.5;
-    transition: opacity $jv-transition-fast; // Modern transition
+    transition: opacity $vsk-transition-fast; // Modern transition
 
     &:hover {
       opacity: 1;
@@ -308,19 +308,19 @@ textarea.form-control,
     // Focus state for accessibility
     &:focus-visible {
       outline: none;
-      box-shadow: $jv-focus-ring;
+      box-shadow: $vsk-focus-ring;
     }
   }
 }
 
 .modal-body {
-  padding: $jv-space-10;
+  padding: $vsk-space-10;
 }
 
 .modal-footer {
-  border-top: 1px solid $jv-border-subtle;
-  padding: $jv-space-8 $jv-space-10;
-  gap: $jv-space-4;
+  border-top: 1px solid $vsk-border-subtle;
+  padding: $vsk-space-8 $vsk-space-10;
+  gap: $vsk-space-4;
 }
 
 // ===========================================================
@@ -330,24 +330,24 @@ textarea.form-control,
   width: 18px;
   height: 18px;
   margin-top: 0;
-  border: 2px solid $jv-border-strong;
-  transition: background-color $jv-transition-fast, border-color $jv-transition-fast; // Modern transitions
+  border: 2px solid $vsk-border-strong;
+  transition: background-color $vsk-transition-fast, border-color $vsk-transition-fast; // Modern transitions
 
   &:checked {
-    background-color: $jv-primary;
-    border-color: $jv-primary;
+    background-color: $vsk-primary;
+    border-color: $vsk-primary;
   }
 
   &:focus {
     outline: none;
-    box-shadow: $jv-focus-ring; // Consistent focus ring
-    border-color: $jv-primary;
+    box-shadow: $vsk-focus-ring; // Consistent focus ring
+    border-color: $vsk-primary;
   }
 }
 
 .form-check-label {
-  margin-left: $jv-space-2;
-  font-size: $jv-font-size-sm;
+  margin-left: $vsk-space-2;
+  font-size: $vsk-font-size-sm;
   cursor: pointer;
 }
 
@@ -358,12 +358,12 @@ textarea.form-control,
   .form-check-input {
     width: 40px;
     height: 22px;
-    border-radius: $jv-radius-pill;
+    border-radius: $vsk-radius-pill;
     background-color: #d1d5db;
     border: none;
 
     &:checked {
-      background-color: $jv-primary;
+      background-color: $vsk-primary;
     }
   }
 }
@@ -373,28 +373,28 @@ textarea.form-control,
 // ===========================================================
 .list-group-item {
   border: none;
-  border-bottom: 1px solid $jv-border-subtle;
-  padding: $jv-space-6 $jv-space-8;
-  transition: background-color $jv-transition-fast; // Modern transition
+  border-bottom: 1px solid $vsk-border-subtle;
+  padding: $vsk-space-6 $vsk-space-8;
+  transition: background-color $vsk-transition-fast; // Modern transition
 
   &:last-child {
     border-bottom: none;
   }
 
   &:hover {
-    background: $jv-hover-bg; // Consistent hover state
+    background: $vsk-hover-bg; // Consistent hover state
   }
 
   &.active {
-    background: $jv-primary-soft;
+    background: $vsk-primary-soft;
     border-color: transparent;
-    color: $jv-primary;
+    color: $vsk-primary;
   }
 
   // Focus state for accessibility
   &:focus-visible {
     outline: none;
-    background: $jv-hover-bg;
+    background: $vsk-hover-bg;
   }
 }
 
@@ -404,10 +404,10 @@ textarea.form-control,
 .table {
   th {
     font-weight: 600;
-    font-size: $jv-font-size-xs;
+    font-size: $vsk-font-size-xs;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    color: $jv-text-muted;
+    color: $vsk-text-muted;
     border-bottom-width: 1px;
   }
 
@@ -416,10 +416,10 @@ textarea.form-control,
   }
 
   &.table-hover tbody tr {
-    transition: background-color $jv-transition-fast; // Modern transition
+    transition: background-color $vsk-transition-fast; // Modern transition
 
     &:hover {
-      background: $jv-hover-bg; // Consistent hover state
+      background: $vsk-hover-bg; // Consistent hover state
     }
   }
 }
@@ -432,32 +432,32 @@ textarea.form-control,
 
   .page-link {
     border: none;
-    border-radius: $jv-radius-sm;
+    border-radius: $vsk-radius-sm;
     padding: 6px 12px;
-    font-size: $jv-font-size-sm;
-    color: $jv-text-main;
+    font-size: $vsk-font-size-sm;
+    color: $vsk-text-main;
     background: transparent;
-    transition: background-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+    transition: background-color $vsk-transition-fast, color $vsk-transition-fast; // Modern transitions
 
     &:hover {
-      background: $jv-hover-bg; // Consistent hover state
-      color: $jv-primary;
+      background: $vsk-hover-bg; // Consistent hover state
+      color: $vsk-primary;
     }
 
     // Focus state for accessibility
     &:focus-visible {
       outline: none;
-      box-shadow: $jv-focus-ring;
+      box-shadow: $vsk-focus-ring;
     }
   }
 
   .page-item.active .page-link {
-    background: $jv-primary;
+    background: $vsk-primary;
     color: #fff;
   }
 
   .page-item.disabled .page-link {
-    color: $jv-text-soft;
+    color: $vsk-text-soft;
     background: transparent;
   }
 }
@@ -466,34 +466,34 @@ textarea.form-control,
 // NAV TABS
 // ===========================================================
 .nav-tabs {
-  border-bottom: 1px solid $jv-border-subtle;
+  border-bottom: 1px solid $vsk-border-subtle;
   gap: 4px;
 
   .nav-link {
     border: none;
     border-bottom: 2px solid transparent;
     border-radius: 0;
-    padding: $jv-space-4 $jv-space-6;
-    font-size: $jv-font-size-sm;
+    padding: $vsk-space-4 $vsk-space-6;
+    font-size: $vsk-font-size-sm;
     font-weight: 500;
-    color: $jv-text-muted;
-    transition: color $jv-transition-fast, border-bottom-color $jv-transition-fast; // Modern transitions
+    color: $vsk-text-muted;
+    transition: color $vsk-transition-fast, border-bottom-color $vsk-transition-fast; // Modern transitions
 
     &:hover {
-      color: $jv-text-main;
-      border-bottom-color: $jv-border-strong;
+      color: $vsk-text-main;
+      border-bottom-color: $vsk-border-strong;
     }
 
     &.active {
-      color: $jv-primary;
-      border-bottom-color: $jv-primary;
+      color: $vsk-primary;
+      border-bottom-color: $vsk-primary;
       background: transparent;
     }
 
     // Focus state for accessibility
     &:focus-visible {
       outline: none;
-      box-shadow: $jv-focus-ring;
+      box-shadow: $vsk-focus-ring;
     }
   }
 }
@@ -505,27 +505,27 @@ textarea.form-control,
   gap: 4px;
 
   .nav-link {
-    border-radius: $jv-radius-pill;
-    padding: $jv-space-4 $jv-space-8;
-    font-size: $jv-font-size-sm;
+    border-radius: $vsk-radius-pill;
+    padding: $vsk-space-4 $vsk-space-8;
+    font-size: $vsk-font-size-sm;
     font-weight: 500;
-    color: $jv-text-muted;
-    transition: background-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+    color: $vsk-text-muted;
+    transition: background-color $vsk-transition-fast, color $vsk-transition-fast; // Modern transitions
 
     &:hover {
-      background: $jv-hover-bg; // Consistent hover state
-      color: $jv-text-main;
+      background: $vsk-hover-bg; // Consistent hover state
+      color: $vsk-text-main;
     }
 
     &.active {
-      background: $jv-primary;
+      background: $vsk-primary;
       color: #fff;
     }
 
     // Focus state for accessibility
     &:focus-visible {
       outline: none;
-      box-shadow: $jv-focus-ring;
+      box-shadow: $vsk-focus-ring;
     }
   }
 }

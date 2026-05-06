@@ -33,7 +33,7 @@ body.template-topic {
     margin-bottom: 0;
     display: flex;
     align-items: center; // Center align items vertically
-    gap: $jv-space-3;
+    gap: $vsk-space-3;
 
     // Back button styling
     .topic-back-btn {
@@ -42,15 +42,15 @@ body.template-topic {
       justify-content: center;
       width: 36px;
       height: 36px;
-      border-radius: $jv-radius-sm;
-      color: $jv-text-muted;
+      border-radius: $vsk-radius-sm;
+      color: $vsk-text-muted;
       text-decoration: none;
-      transition: background-color $jv-transition-fast, color $jv-transition-fast;
+      transition: background-color $vsk-transition-fast, color $vsk-transition-fast;
       flex-shrink: 0;
 
       &:hover {
-        background: $jv-hover-bg;
-        color: $jv-text-main;
+        background: $vsk-hover-bg;
+        color: $vsk-text-main;
       }
 
       i {
@@ -61,20 +61,20 @@ body.template-topic {
     h1,
     [component="topic/title"],
     .topic-title {
-      font-size: $jv-font-size-xl;
+      font-size: $vsk-font-size-xl;
       font-weight: 700;
-      line-height: $jv-line-height-tight;
+      line-height: $vsk-line-height-tight;
       letter-spacing: -0.02em;
-      color: $jv-text-main;
+      color: $vsk-text-main;
       margin-bottom: 0;
       flex: 1;
     }
   }
 
   h1.fs-3 {
-    font-size: $jv-font-size-xl !important;
+    font-size: $vsk-font-size-xl !important;
     font-weight: 700 !important;
-    line-height: $jv-line-height-tight !important;
+    line-height: $vsk-line-height-tight !important;
     letter-spacing: -0.02em !important;
   }
 
@@ -85,23 +85,23 @@ body.template-topic {
   [component="topic/tags"] {
     display: flex;
     flex-wrap: wrap;
-    gap: $jv-space-2;
+    gap: $vsk-space-2;
     margin-bottom: 0;
 
     .badge,
     .tag {
-      font-size: $jv-font-size-xs;
+      font-size: $vsk-font-size-xs;
       font-weight: 500;
-      padding: $jv-space-1 $jv-space-3;
-      border-radius: $jv-radius-pill;
+      padding: $vsk-space-1 $vsk-space-3;
+      border-radius: $vsk-radius-pill;
       background: rgba(0, 0, 0, 0.05);
-      color: $jv-text-muted;
+      color: $vsk-text-muted;
       border: none;
-      transition: background-color $jv-transition-fast, color $jv-transition-fast;
+      transition: background-color $vsk-transition-fast, color $vsk-transition-fast;
 
       &:hover {
-        background: $jv-primary-soft;
-        color: $jv-primary;
+        background: $vsk-primary-soft;
+        color: $vsk-primary;
       }
     }
   }
@@ -109,7 +109,7 @@ body.template-topic {
   .category-badge,
   [component="category/link"] .badge {
     background: rgba(0, 0, 0, 0.06);
-    color: $jv-text-muted;
+    color: $vsk-text-muted;
     font-weight: 500;
   }
 
@@ -117,12 +117,12 @@ body.template-topic {
   .badge.stats,
   .topic-stats .badge {
     background: rgba(0, 0, 0, 0.04) !important;
-    border: 1px solid $jv-border-subtle !important;
-    color: $jv-text-muted !important;
-    font-size: $jv-font-size-xs;
+    border: 1px solid $vsk-border-subtle !important;
+    color: $vsk-text-muted !important;
+    font-size: $vsk-font-size-xs;
     font-weight: 500;
-    padding: $jv-space-1 $jv-space-3;
-    border-radius: $jv-radius-pill;
+    padding: $vsk-space-1 $vsk-space-3;
+    border-radius: $vsk-radius-pill;
   }
 
   // ===========================================================
@@ -142,7 +142,7 @@ body.template-topic {
 
     [component="post"] {
       background: transparent;
-      margin-bottom: $jv-space-3;
+      margin-bottom: $vsk-space-3;
       border: none;
       box-shadow: none;
 
@@ -167,18 +167,18 @@ body.template-topic {
 
       // Card styling - vertical stack layout (like feed page)
       .post-container-parent {
-        background: $jv-surface;
-        border-radius: $jv-radius-md;
-        border: 1px solid $jv-border-subtle;
-        padding: $jv-space-4;
-        gap: $jv-space-3 !important;
+        background: $vsk-surface;
+        border-radius: $vsk-radius-md;
+        border: 1px solid $vsk-border-subtle;
+        padding: $vsk-space-4;
+        gap: $vsk-space-3 !important;
       }
 
       // Author row - avatar + username + timestamp inline
       .post-author-row {
         display: flex;
         align-items: center;
-        gap: $jv-space-2;
+        gap: $vsk-space-2;
 
         // Avatar size 32px
         [component="user/picture"],
@@ -187,7 +187,7 @@ body.template-topic {
           height: 32px !important;
           min-width: 32px !important;
           min-height: 32px !important;
-          font-size: $jv-font-size-sm !important;
+          font-size: $vsk-font-size-sm !important;
           line-height: 32px !important;
           border-radius: 50% !important;
         }
@@ -195,19 +195,19 @@ body.template-topic {
         // Author name
         .post-author-name {
           font-weight: 600;
-          font-size: $jv-font-size-sm;
-          color: $jv-text-main;
+          font-size: $vsk-font-size-sm;
+          color: $vsk-text-main;
           text-decoration: none;
 
           &:hover {
-            color: $jv-primary;
+            color: $vsk-primary;
           }
         }
 
         // Timestamp
         .post-timestamp {
-          font-size: $jv-font-size-xs;
-          color: $jv-text-soft;
+          font-size: $vsk-font-size-xs;
+          color: $vsk-text-soft;
 
           &::before {
             content: "• ";
@@ -217,18 +217,18 @@ body.template-topic {
 
         // Edit indicator
         .edit-icon {
-          font-size: $jv-font-size-xs;
+          font-size: $vsk-font-size-xs;
         }
 
         // Post index
         .post-index {
-          font-size: $jv-font-size-xs;
-          color: $jv-text-soft;
+          font-size: $vsk-font-size-xs;
+          color: $vsk-text-soft;
           opacity: 0.6;
         }
 
         .bookmarked {
-          color: $jv-warning;
+          color: $vsk-warning;
         }
       }
 
@@ -240,7 +240,7 @@ body.template-topic {
       }
 
       &.selected .post-container-parent {
-        background: $jv-selected-bg;
+        background: $vsk-selected-bg;
       }
     }
   }
@@ -251,9 +251,9 @@ body.template-topic {
   .post-header {
     display: flex;
     align-items: center !important;
-    gap: $jv-space-2;
+    gap: $vsk-space-2;
     margin-bottom: 0 !important;
-    font-size: $jv-font-size-xs;
+    font-size: $vsk-font-size-xs;
 
     .avatar {
       width: 32px;
@@ -266,37 +266,37 @@ body.template-topic {
     .user-info {
       display: flex;
       flex-direction: column;
-      gap: $jv-space-1;
+      gap: $vsk-space-1;
     }
 
     .username,
     [component="post/header/username"] {
       font-weight: 600;
-      font-size: $jv-font-size-sm;
-      color: $jv-text-main;
+      font-size: $vsk-font-size-sm;
+      color: $vsk-text-main;
       text-decoration: none;
 
       &:hover {
-        color: $jv-primary;
+        color: $vsk-primary;
       }
     }
 
     .timeago,
     [component="post/timestamp"] {
-      color: $jv-text-soft;
-      font-size: $jv-font-size-xs;
+      color: $vsk-text-soft;
+      font-size: $vsk-font-size-xs;
     }
 
     .post-index,
     [component="post/header/index"] {
-      color: $jv-text-soft;
-      font-size: $jv-font-size-xs;
+      color: $vsk-text-soft;
+      font-size: $vsk-font-size-xs;
       font-weight: 400;
       opacity: 0.5;
     }
 
     .bookmarked {
-      color: $jv-warning;
+      color: $vsk-warning;
     }
   }
 
@@ -304,25 +304,25 @@ body.template-topic {
   // POST CONTENT – Typography
   // ===========================================================
   [component="post/content"] {
-    font-size: $jv-font-size-base;
-    line-height: $jv-line-height-relaxed;
-    color: $jv-text-main;
+    font-size: $vsk-font-size-base;
+    line-height: $vsk-line-height-relaxed;
+    color: $vsk-text-main;
 
     p {
-      margin-bottom: $jv-space-3;
+      margin-bottom: $vsk-space-3;
       &:last-child { margin-bottom: 0; }
     }
 
     pre, code {
       background: rgba(0, 0, 0, 0.04);
-      border-radius: $jv-radius-sm;
-      font-size: $jv-font-size-xs;
+      border-radius: $vsk-radius-sm;
+      font-size: $vsk-font-size-xs;
     }
 
     code { padding: 2px 5px; }
 
     pre {
-      padding: $jv-space-3;
+      padding: $vsk-space-3;
       overflow-x: auto;
       code {
         padding: 0;
@@ -331,29 +331,29 @@ body.template-topic {
     }
 
     blockquote {
-      border-left: 3px solid $jv-border-strong;
-      padding-left: $jv-space-4;
-      margin: $jv-space-4 0;
-      color: $jv-text-muted;
+      border-left: 3px solid $vsk-border-strong;
+      padding-left: $vsk-space-4;
+      margin: $vsk-space-4 0;
+      color: $vsk-text-muted;
       font-style: italic;
     }
 
     img {
       max-width: 100%;
-      border-radius: $jv-radius-sm;
+      border-radius: $vsk-radius-sm;
     }
 
     // ===========================================================
     // POST IMAGE CAROUSEL
     // ===========================================================
     .post-image-carousel {
-      border-radius: $jv-radius-md;
+      border-radius: $vsk-radius-md;
       overflow: hidden;
-      margin: $jv-space-4 0;
+      margin: $vsk-space-4 0;
       background: rgba(0, 0, 0, 0.03);
 
       .carousel-inner {
-        border-radius: $jv-radius-md;
+        border-radius: $vsk-radius-md;
       }
 
       .carousel-item {
@@ -378,7 +378,7 @@ body.template-topic {
         background: rgba(0, 0, 0, 0.5);
         border-radius: 50%;
         opacity: 0;
-        transition: opacity $jv-transition-fast;
+        transition: opacity $vsk-transition-fast;
 
         &:hover {
           background: rgba(0, 0, 0, 0.7);
@@ -392,11 +392,11 @@ body.template-topic {
       }
 
       .carousel-control-prev {
-        left: $jv-space-3;
+        left: $vsk-space-3;
       }
 
       .carousel-control-next {
-        right: $jv-space-3;
+        right: $vsk-space-3;
       }
 
       &:hover {
@@ -408,8 +408,8 @@ body.template-topic {
 
       // Indicator dots
       .carousel-indicators {
-        margin-bottom: $jv-space-3;
-        gap: $jv-space-2;
+        margin-bottom: $vsk-space-3;
+        gap: $vsk-space-2;
 
         button {
           width: 8px;
@@ -418,7 +418,7 @@ body.template-topic {
           background: rgba(255, 255, 255, 0.5);
           border: none;
           opacity: 1;
-          transition: background-color $jv-transition-fast, transform $jv-transition-fast;
+          transition: background-color $vsk-transition-fast, transform $vsk-transition-fast;
 
           &.active {
             background: #fff;
@@ -433,7 +433,7 @@ body.template-topic {
     }
 
     a {
-      color: $jv-primary;
+      color: $vsk-primary;
       &:hover { text-decoration: underline; }
     }
   }
@@ -443,17 +443,17 @@ body.template-topic {
   // ===========================================================
   [component="post/footer"],
   .post-footer {
-    padding-top: $jv-space-3 !important;
+    padding-top: $vsk-space-3 !important;
     padding-bottom: 0 !important;
-    margin-top: $jv-space-3;
-    border-top: 1px solid $jv-border-subtle;
+    margin-top: $vsk-space-3;
+    border-top: 1px solid $vsk-border-subtle;
     border-bottom: none !important; // Remove duplicate line from HTML class
   }
 
   [component="post/actions"] {
     display: flex;
     align-items: center;
-    gap: $jv-space-2;
+    gap: $vsk-space-2;
     flex-wrap: wrap;
 
     .btn,
@@ -465,40 +465,40 @@ body.template-topic {
     [component="post/tools"] {
       background: transparent !important;
       border: none !important;
-      color: $jv-text-muted;
-      padding: $jv-space-2 $jv-space-3;
-      border-radius: $jv-radius-sm;
-      font-size: $jv-font-size-sm;
+      color: $vsk-text-muted;
+      padding: $vsk-space-2 $vsk-space-3;
+      border-radius: $vsk-radius-sm;
+      font-size: $vsk-font-size-sm;
       font-weight: 500;
-      transition: background-color $jv-transition-fast, color $jv-transition-fast;
+      transition: background-color $vsk-transition-fast, color $vsk-transition-fast;
       display: inline-flex;
       align-items: center;
-      gap: $jv-space-2;
+      gap: $vsk-space-2;
 
       i { font-size: 16px; }
 
       &:hover {
-        background: $jv-hover-bg !important;
-        color: $jv-text-main;
+        background: $vsk-hover-bg !important;
+        color: $vsk-text-main;
       }
 
       &:focus-visible {
         outline: none;
-        box-shadow: $jv-focus-ring;
+        box-shadow: $vsk-focus-ring;
       }
 
       &.active,
       &.upvoted,
       &.downvoted,
       &.bookmarked {
-        background: $jv-primary-soft !important;
-        color: $jv-primary;
+        background: $vsk-primary-soft !important;
+        color: $vsk-primary;
       }
     }
 
     [component="post/vote-count"] {
       font-weight: 600;
-      color: $jv-text-muted;
+      color: $vsk-text-muted;
       min-width: 20px;
       text-align: center;
     }
@@ -509,7 +509,7 @@ body.template-topic {
   .topic .posts [component="post"] {
     [component="post/actions"] {
       opacity: 0;
-      transition: opacity $jv-transition-fast;
+      transition: opacity $vsk-transition-fast;
     }
 
     // Show actions only on the directly hovered post (JS adds .post-hovered class)
@@ -538,29 +538,29 @@ body.template-topic {
   .btn-ghost {
     background: transparent !important;
     border: 1px solid transparent !important;
-    color: $jv-text-muted;
-    padding: $jv-space-2 $jv-space-3;
-    border-radius: $jv-radius-sm;
-    font-size: $jv-font-size-sm;
+    color: $vsk-text-muted;
+    padding: $vsk-space-2 $vsk-space-3;
+    border-radius: $vsk-radius-sm;
+    font-size: $vsk-font-size-sm;
     font-weight: 500;
-    transition: background-color $jv-transition-fast, color $jv-transition-fast;
+    transition: background-color $vsk-transition-fast, color $vsk-transition-fast;
     display: inline-flex;
     align-items: center;
-    gap: $jv-space-2;
+    gap: $vsk-space-2;
 
     i {
       font-size: 16px;
-      color: $jv-primary;
+      color: $vsk-primary;
     }
 
     &:hover {
-      background: $jv-hover-bg !important;
-      color: $jv-text-main;
+      background: $vsk-hover-bg !important;
+      color: $vsk-text-main;
     }
 
     &:focus-visible {
       outline: none;
-      box-shadow: $jv-focus-ring;
+      box-shadow: $vsk-focus-ring;
     }
   }
 
@@ -568,13 +568,13 @@ body.template-topic {
   // PRIMARY BUTTON – Reply
   // ===========================================================
   .btn-primary {
-    background: $jv-primary !important;
-    border-color: $jv-primary !important;
+    background: $vsk-primary !important;
+    border-color: $vsk-primary !important;
     color: #fff !important;
 
     &:hover {
-      background: $jv-primary-hover !important;
-      border-color: $jv-primary-hover !important;
+      background: $vsk-primary-hover !important;
+      border-color: $vsk-primary-hover !important;
     }
   }
 
@@ -587,37 +587,37 @@ body.template-topic {
     }
 
     .scroller-thumb-icon {
-      background: $jv-primary !important;
-      border-radius: $jv-radius-xs;
-      transition: transform $jv-transition-fast;
+      background: $vsk-primary !important;
+      border-radius: $vsk-radius-xs;
+      transition: transform $vsk-transition-fast;
     }
 
     .pagetop,
     .pagebottom {
       background: transparent;
       border: none;
-      color: $jv-text-muted;
-      padding: $jv-space-2 $jv-space-3;
-      border-radius: $jv-radius-sm;
-      font-size: $jv-font-size-sm;
+      color: $vsk-text-muted;
+      padding: $vsk-space-2 $vsk-space-3;
+      border-radius: $vsk-radius-sm;
+      font-size: $vsk-font-size-sm;
 
       &:hover {
-        background: $jv-hover-bg;
-        color: $jv-text-main;
+        background: $vsk-hover-bg;
+        color: $vsk-text-main;
       }
 
-      i { color: $jv-primary; }
+      i { color: $vsk-primary; }
     }
 
     .thumb-text {
-      color: $jv-text-main;
+      color: $vsk-text-main;
       font-weight: 600;
-      font-size: $jv-font-size-sm;
+      font-size: $vsk-font-size-sm;
     }
 
     .thumb-timestamp {
-      color: $jv-text-soft;
-      font-size: $jv-font-size-xs;
+      color: $vsk-text-soft;
+      font-size: $vsk-font-size-xs;
     }
   }
 
@@ -637,10 +637,10 @@ body.template-topic {
   }
 
   .topic-sidebar {
-    background: $jv-surface;
-    border: 1px solid $jv-border-subtle;
-    border-radius: $jv-radius-md;
-    padding: $jv-space-4;
+    background: $vsk-surface;
+    border: 1px solid $vsk-border-subtle;
+    border-radius: $vsk-radius-md;
+    padding: $vsk-space-4;
     position: relative;
     pointer-events: auto;
 
@@ -667,9 +667,9 @@ body.template-topic {
 
         .btn-primary {
           flex: 1;
-          border-radius: $jv-radius-sm;
+          border-radius: $vsk-radius-sm;
           font-weight: 600;
-          padding: $jv-space-3 $jv-space-4;
+          padding: $vsk-space-3 $vsk-space-4;
         }
 
         // Hide the "Reply as topic" dropdown toggle and menu
@@ -697,19 +697,19 @@ body.template-topic {
       .thread-tools > .dropdown-toggle {
         background: transparent !important;
         border: 1px solid transparent !important;
-        color: $jv-text-muted;
-        padding: $jv-space-2 $jv-space-3;
-        border-radius: $jv-radius-sm;
-        font-size: $jv-font-size-sm;
+        color: $vsk-text-muted;
+        padding: $vsk-space-2 $vsk-space-3;
+        border-radius: $vsk-radius-sm;
+        font-size: $vsk-font-size-sm;
         font-weight: 500;
-        transition: background-color $jv-transition-fast, color $jv-transition-fast;
+        transition: background-color $vsk-transition-fast, color $vsk-transition-fast;
         display: inline-flex;
         align-items: center;
-        gap: $jv-space-2;
+        gap: $vsk-space-2;
 
         &:hover {
-          background: $jv-hover-bg !important;
-          color: $jv-text-main;
+          background: $vsk-hover-bg !important;
+          color: $vsk-text-main;
         }
       }
 
@@ -734,22 +734,22 @@ body.template-topic {
           min-width: 200px;
           max-width: 280px;
           z-index: 1050;
-          margin-top: $jv-space-1;
-          padding: $jv-space-2;
-          background: $jv-surface;
-          border: 1px solid $jv-border-subtle;
-          border-radius: $jv-radius-md;
-          box-shadow: $jv-shadow-lg;
+          margin-top: $vsk-space-1;
+          padding: $vsk-space-2;
+          background: $vsk-surface;
+          border: 1px solid $vsk-border-subtle;
+          border-radius: $vsk-radius-md;
+          box-shadow: $vsk-shadow-lg;
 
           // Dropdown items
           .dropdown-item {
-            padding: $jv-space-2 $jv-space-3;
-            border-radius: $jv-radius-sm;
-            font-size: $jv-font-size-sm;
+            padding: $vsk-space-2 $vsk-space-3;
+            border-radius: $vsk-radius-sm;
+            font-size: $vsk-font-size-sm;
             white-space: normal;
 
             .help-text {
-              font-size: $jv-font-size-xs;
+              font-size: $vsk-font-size-xs;
               line-height: 1.3;
               margin-top: 2px;
             }
@@ -767,14 +767,14 @@ body.template-topic {
     .pagination-block {
       position: relative;
       z-index: 0;
-      margin-top: $jv-space-4;
-      padding-top: $jv-space-4;
-      border-top: 1px solid $jv-border-subtle;
+      margin-top: $vsk-space-4;
+      padding-top: $vsk-space-4;
+      border-top: 1px solid $vsk-border-subtle;
 
-      .scroller-content { gap: $jv-space-2; }
+      .scroller-content { gap: $vsk-space-2; }
 
       .scroller-container {
-        padding: $jv-space-2 $jv-space-3;
+        padding: $vsk-space-2 $vsk-space-3;
         position: relative !important;
         left: auto !important;
         height: auto !important;
@@ -788,18 +788,18 @@ body.template-topic {
   // ===========================================================
   [data-widget-area="sidebar"] {
     .btn {
-      transition: background-color $jv-transition-fast, color $jv-transition-fast;
+      transition: background-color $vsk-transition-fast, color $vsk-transition-fast;
       &:focus-visible {
         outline: none;
-        box-shadow: $jv-focus-ring;
+        box-shadow: $vsk-focus-ring;
       }
     }
 
     .widget {
-      background: $jv-surface;
-      border: 1px solid $jv-border-subtle;
-      border-radius: $jv-radius-md;
-      padding: $jv-space-4;
+      background: $vsk-surface;
+      border: 1px solid $vsk-border-subtle;
+      border-radius: $vsk-radius-md;
+      padding: $vsk-space-4;
     }
   }
 
@@ -807,22 +807,22 @@ body.template-topic {
   // TOPIC NAVIGATOR (Floating)
   // ===========================================================
   [component="topic/navigator"] {
-    background: $jv-surface;
-    border-radius: $jv-radius-md;
-    box-shadow: $jv-shadow-lg;
-    border: 1px solid $jv-border-subtle;
-    padding: $jv-space-3;
+    background: $vsk-surface;
+    border-radius: $vsk-radius-md;
+    box-shadow: $vsk-shadow-lg;
+    border: 1px solid $vsk-border-subtle;
+    padding: $vsk-space-3;
 
     .btn {
       background: transparent;
       border: none;
-      color: $jv-text-muted;
-      padding: $jv-space-2;
-      border-radius: $jv-radius-sm;
+      color: $vsk-text-muted;
+      padding: $vsk-space-2;
+      border-radius: $vsk-radius-sm;
 
       &:hover {
-        background: $jv-hover-bg;
-        color: $jv-text-main;
+        background: $vsk-hover-bg;
+        color: $vsk-text-main;
       }
     }
   }
@@ -832,11 +832,11 @@ body.template-topic {
   // ===========================================================
   .quick-reply,
   [component="topic/quickreply"] {
-    background: $jv-surface;
-    border-radius: $jv-radius-md;
-    padding: $jv-space-6;
-    margin-top: $jv-space-6;
-    border: 1px solid $jv-border-subtle;
+    background: $vsk-surface;
+    border-radius: $vsk-radius-md;
+    padding: $vsk-space-6;
+    margin-top: $vsk-space-6;
+    border: 1px solid $vsk-border-subtle;
 
     // Reduce avatar size to 32px (matching post author avatars)
     [component="user/picture"],
@@ -845,7 +845,7 @@ body.template-topic {
       height: 32px !important;
       min-width: 32px !important;
       min-height: 32px !important;
-      font-size: $jv-font-size-sm !important;
+      font-size: $vsk-font-size-sm !important;
       line-height: 32px !important;
     }
 
@@ -855,37 +855,37 @@ body.template-topic {
     }
 
     .quick-reply-header {
-      margin-bottom: $jv-space-4;
+      margin-bottom: $vsk-space-4;
       font-weight: 600;
-      color: $jv-text-main;
+      color: $vsk-text-main;
     }
 
     textarea,
     .form-control {
-      border: 1px solid $jv-border-subtle;
-      border-radius: $jv-radius-sm;
-      padding: $jv-space-4;
-      font-size: $jv-font-size-base;
-      line-height: $jv-line-height-base;
+      border: 1px solid $vsk-border-subtle;
+      border-radius: $vsk-radius-sm;
+      padding: $vsk-space-4;
+      font-size: $vsk-font-size-base;
+      line-height: $vsk-line-height-base;
       resize: vertical;
       min-height: 120px;
-      transition: border-color $jv-transition-fast, box-shadow $jv-transition-fast;
+      transition: border-color $vsk-transition-fast, box-shadow $vsk-transition-fast;
 
       &:focus {
         outline: none;
-        border-color: $jv-primary;
-        box-shadow: $jv-focus-ring;
+        border-color: $vsk-primary;
+        box-shadow: $vsk-focus-ring;
       }
 
-      &::placeholder { color: $jv-text-soft; }
+      &::placeholder { color: $vsk-text-soft; }
     }
 
     .quick-reply-footer,
     .composer-actions {
       display: flex;
       justify-content: flex-end;
-      gap: $jv-space-3;
-      margin-top: $jv-space-4;
+      gap: $vsk-space-3;
+      margin-top: $vsk-space-4;
     }
   }
 
@@ -896,23 +896,23 @@ body.template-topic {
   [component="post/parent"] {
     background: transparent !important;
     border: none !important;
-    border-left: 2px solid $jv-border-strong !important;
+    border-left: 2px solid $vsk-border-strong !important;
     border-radius: 0 !important;
-    padding: $jv-space-1 0 $jv-space-1 $jv-space-3 !important;
-    margin-bottom: $jv-space-2 !important;
-    margin-left: $jv-space-1 !important;
-    transition: border-color $jv-transition-fast;
+    padding: $vsk-space-1 0 $vsk-space-1 $vsk-space-3 !important;
+    margin-bottom: $vsk-space-2 !important;
+    margin-left: $vsk-space-1 !important;
+    transition: border-color $vsk-transition-fast;
     cursor: pointer;
     display: flex !important;
     align-items: center !important;
-    gap: $jv-space-2 !important;
+    gap: $vsk-space-2 !important;
     flex-direction: row !important;
 
     &:hover {
-      border-left-color: $jv-primary !important;
+      border-left-color: $vsk-primary !important;
 
       .fw-semibold {
-        color: $jv-primary !important;
+        color: $vsk-primary !important;
       }
     }
 
@@ -927,16 +927,16 @@ body.template-topic {
 
     // Username
     .fw-semibold {
-      font-size: $jv-font-size-xs !important;
+      font-size: $vsk-font-size-xs !important;
       font-weight: 600;
-      color: $jv-text-muted;
-      transition: color $jv-transition-fast;
+      color: $vsk-text-muted;
+      transition: color $vsk-transition-fast;
     }
 
     // Parent content preview - inline, truncated
     [component="post/parent/content"] {
-      font-size: $jv-font-size-xs !important;
-      color: $jv-text-soft !important;
+      font-size: $vsk-font-size-xs !important;
+      color: $vsk-text-soft !important;
       line-height: 1.4;
       white-space: nowrap;
       overflow: hidden;
@@ -970,11 +970,11 @@ body.template-topic {
 
   @keyframes postHighlightFlash {
     0% {
-      background-color: rgba($jv-primary, 0.15);
-      box-shadow: 0 0 0 4px rgba($jv-primary, 0.1);
+      background-color: rgba($vsk-primary, 0.15);
+      box-shadow: 0 0 0 4px rgba($vsk-primary, 0.1);
     }
     100% {
-      background-color: $jv-surface;
+      background-color: $vsk-surface;
       box-shadow: none;
     }
   }
@@ -985,15 +985,15 @@ body.template-topic {
   [component="post/reply-count"] {
     display: inline-flex;
     align-items: center;
-    gap: $jv-space-2;
+    gap: $vsk-space-2;
     background: transparent !important;
     border: none !important;
-    border-radius: $jv-radius-sm !important;
-    padding: $jv-space-1 $jv-space-2 !important;
-    font-size: $jv-font-size-xs !important;
-    color: $jv-text-muted !important;
+    border-radius: $vsk-radius-sm !important;
+    padding: $vsk-space-1 $vsk-space-2 !important;
+    font-size: $vsk-font-size-xs !important;
+    color: $vsk-text-muted !important;
     cursor: pointer;
-    transition: all $jv-transition-fast;
+    transition: all $vsk-transition-fast;
     text-decoration: none !important;
 
     // Respect the hidden class when there are no replies
@@ -1002,12 +1002,12 @@ body.template-topic {
     }
 
     &:hover {
-      background: $jv-hover-bg !important;
-      color: $jv-primary !important;
+      background: $vsk-hover-bg !important;
+      color: $vsk-primary !important;
 
       [component="post/reply-count/text"],
       .replies-count {
-        color: $jv-primary !important;
+        color: $vsk-primary !important;
       }
     }
 
@@ -1020,9 +1020,9 @@ body.template-topic {
     .replies-count,
     [component="post/reply-count/text"] {
       font-weight: 600;
-      font-size: $jv-font-size-xs;
-      color: $jv-text-muted;
-      transition: color $jv-transition-fast;
+      font-size: $vsk-font-size-xs;
+      color: $vsk-text-muted;
+      transition: color $vsk-transition-fast;
     }
 
     // Hide last reply time - too verbose
@@ -1033,13 +1033,13 @@ body.template-topic {
     // Chevron icon
     .fa-chevron-down {
       font-size: 10px;
-      color: $jv-text-soft;
-      transition: transform $jv-transition-fast;
+      color: $vsk-text-soft;
+      transition: transform $vsk-transition-fast;
     }
 
     // Expanded state
     &[aria-expanded="true"] {
-      color: $jv-primary !important;
+      color: $vsk-primary !important;
 
       .fa-chevron-down {
         transform: rotate(180deg);
@@ -1047,7 +1047,7 @@ body.template-topic {
 
       [component="post/reply-count/text"],
       .replies-count {
-        color: $jv-primary !important;
+        color: $vsk-primary !important;
       }
     }
   }
@@ -1057,9 +1057,9 @@ body.template-topic {
   // Inspired by Reddit/GitHub - compact, minimal
   // ===========================================================
   [component="post/replies/container"] {
-    margin-top: $jv-space-3 !important;
+    margin-top: $vsk-space-3 !important;
     margin-bottom: 0 !important;
-    margin-left: $jv-space-4;
+    margin-left: $vsk-space-4;
     padding: 0 !important;
     background: transparent !important;
     border: none !important;
@@ -1070,18 +1070,18 @@ body.template-topic {
     &::before {
       content: "";
       position: absolute;
-      left: -$jv-space-2;
+      left: -$vsk-space-2;
       top: 0;
       bottom: 0;
       width: 2px;
-      background: $jv-border-subtle;
+      background: $vsk-border-subtle;
       border-radius: 1px;
-      transition: background $jv-transition-fast;
+      transition: background $vsk-transition-fast;
     }
 
     // Hover effect on thread line
     &:hover::before {
-      background: $jv-border-strong;
+      background: $vsk-border-strong;
     }
 
     // Replies list - compact spacing
@@ -1091,7 +1091,7 @@ body.template-topic {
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: $jv-space-2;
+      gap: $vsk-space-2;
     }
 
     // Individual reply posts - clean, compact
@@ -1110,15 +1110,15 @@ body.template-topic {
       .post-container-parent {
         background: transparent !important;
         border: none !important;
-        border-radius: $jv-radius-sm !important;
-        padding: $jv-space-2 $jv-space-3 !important;
+        border-radius: $vsk-radius-sm !important;
+        padding: $vsk-space-2 $vsk-space-3 !important;
         margin-left: 0;
         margin-right: 0;
-        gap: $jv-space-2 !important;
-        transition: background $jv-transition-fast;
+        gap: $vsk-space-2 !important;
+        transition: background $vsk-transition-fast;
 
         &:hover {
-          background: $jv-hover-bg !important;
+          background: $vsk-hover-bg !important;
         }
 
         // Smaller avatar for replies
@@ -1141,22 +1141,22 @@ body.template-topic {
 
       // Reply header - inline, compact
       .post-header {
-        font-size: $jv-font-size-xs !important;
+        font-size: $vsk-font-size-xs !important;
         min-height: auto !important;
         margin-bottom: 0 !important;
         display: flex;
         align-items: center;
-        gap: $jv-space-2;
+        gap: $vsk-space-2;
 
         .fw-bold,
         a[data-username] {
-          font-size: $jv-font-size-xs !important;
+          font-size: $vsk-font-size-xs !important;
           font-weight: 600;
-          color: $jv-text-main;
+          color: $vsk-text-main;
         }
 
         .text-muted {
-          font-size: $jv-font-size-xs !important;
+          font-size: $vsk-font-size-xs !important;
         }
 
         // Hide post index in replies
@@ -1167,27 +1167,27 @@ body.template-topic {
 
       // Reply content - tighter
       [component="post/content"] {
-        font-size: $jv-font-size-sm !important;
-        line-height: $jv-line-height-base;
-        color: $jv-text-main;
-        margin-top: $jv-space-1;
+        font-size: $vsk-font-size-sm !important;
+        line-height: $vsk-line-height-base;
+        color: $vsk-text-main;
+        margin-top: $vsk-space-1;
       }
 
       // Reply footer - override main post styles (no border, tighter spacing)
       [component="post/footer"],
       .post-footer {
-        margin-top: $jv-space-1 !important;
+        margin-top: $vsk-space-1 !important;
         border-top: none !important;
       }
 
       // Smaller action buttons for compact reply layout (inherits opacity/hover behavior from main rule)
       [component="post/actions"] {
-        gap: $jv-space-1 !important;
+        gap: $vsk-space-1 !important;
 
         .btn,
         .btn-ghost {
-          padding: $jv-space-1 $jv-space-2 !important;
-          font-size: $jv-font-size-xs !important;
+          padding: $vsk-space-1 $vsk-space-2 !important;
+          font-size: $vsk-font-size-xs !important;
 
           i {
             font-size: 12px !important;
@@ -1204,7 +1204,7 @@ body.template-topic {
 @media (max-width: 991px) {
   body.template-topic {
     .topic [component="post"] .post-container {
-      padding: $jv-space-4;
+      padding: $vsk-space-4;
     }
 
     .post-header {
@@ -1212,7 +1212,7 @@ body.template-topic {
     }
 
     [component="post/actions"] {
-      gap: $jv-space-1;
+      gap: $vsk-space-1;
 
       .btn,
       [component="post/reply"],
@@ -1220,7 +1220,7 @@ body.template-topic {
       [component="post/bookmark"],
       [component="post/upvote"],
       [component="post/downvote"] {
-        padding: $jv-space-2;
+        padding: $vsk-space-2;
         span:not(.fa):not(.fas):not(.far):not(.fab) { display: none; }
       }
     }
@@ -1231,24 +1231,24 @@ body.template-topic {
   body.template-topic {
     .topic-header h1,
     .topic-header [component="topic/title"] {
-      font-size: $jv-font-size-xl;
+      font-size: $vsk-font-size-xl;
     }
 
     .quick-reply,
     [component="topic/quickreply"] {
-      padding: $jv-space-4;
+      padding: $vsk-space-4;
     }
 
     // Mobile adjustments for threaded replies
     [component="post/replies/container"] {
-      margin-left: $jv-space-3;
+      margin-left: $vsk-space-3;
 
       &::before {
-        left: -$jv-space-2;
+        left: -$vsk-space-2;
       }
 
       [component="post"] .post-container-parent {
-        padding: $jv-space-2 $jv-space-3 !important;
+        padding: $vsk-space-2 $vsk-space-3 !important;
         margin-left: 0;
         margin-right: 0;
       }
@@ -1256,7 +1256,7 @@ body.template-topic {
 
     // Mobile adjustments for parent context
     [component="post/parent"] {
-      padding: $jv-space-1 0 $jv-space-1 $jv-space-2 !important;
+      padding: $vsk-space-1 0 $vsk-space-1 $vsk-space-2 !important;
       margin-left: 0 !important;
     }
   }

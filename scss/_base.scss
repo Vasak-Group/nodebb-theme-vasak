@@ -34,7 +34,7 @@ nav[component="sidebar/left"] {
   z-index: 10;
 
   [component="sidebar/toggle"] {
-    padding: $jv-space-4 $jv-space-5 !important; // 16px vertical, 20px horizontal
+    padding: $vsk-space-4 $vsk-space-5 !important; // 16px vertical, 20px horizontal
     pointer-events: auto !important;
     cursor: pointer !important;
   }
@@ -48,7 +48,7 @@ nav[component="sidebar/left"] {
   justify-content: center; // Center the columns
 
   // Gap between columns
-  gap: $jv-space-8; // 32px
+  gap: $vsk-space-8; // 32px
 
   // Adjust column widths for better proportions
   > [data-widget-area="left"] {
@@ -87,53 +87,53 @@ body {
 
 // Typography Reset
 h1, h2, h3, h4, h5, h6 {
-  color: $jv-text-main;
+  color: $vsk-text-main;
   font-weight: 600;
-  line-height: $jv-line-height-tight;
+  line-height: $vsk-line-height-tight;
 }
 
 h1 {
-  font-size: $jv-font-size-xxl;
-  margin-bottom: $jv-space-8;
+  font-size: $vsk-font-size-xxl;
+  margin-bottom: $vsk-space-8;
 }
 
 h2 {
   font-size: 26px;
-  margin-bottom: $jv-space-8;
+  margin-bottom: $vsk-space-8;
 }
 
 h3 {
-  font-size: $jv-font-size-xl;
+  font-size: $vsk-font-size-xl;
   font-weight: 600;
-  margin-bottom: $jv-space-6;
+  margin-bottom: $vsk-space-6;
 }
 
 h4 {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: $jv-space-6;
+  margin-bottom: $vsk-space-6;
 }
 
 h5 {
   font-size: 17px;
   font-weight: 600;
-  margin-bottom: $jv-space-6;
+  margin-bottom: $vsk-space-6;
 }
 
 h6 {
-  font-size: $jv-font-size-base;
+  font-size: $vsk-font-size-base;
   font-weight: 600;
-  margin-bottom: $jv-space-4;
+  margin-bottom: $vsk-space-4;
 }
 
 // Links
 a {
-  color: $jv-primary;
+  color: $vsk-primary;
   text-decoration: none;
-  transition: color $jv-transition-fast; // Modern transition
+  transition: color $vsk-transition-fast; // Modern transition
 
   &:hover {
-    color: $jv-primary-hover;
+    color: $vsk-primary-hover;
   }
 
   // Focus state for accessibility
@@ -208,12 +208,12 @@ img.not-responsive {
 
   // The list group for Change Picture, Username, etc.
   .list-group {
-    border-radius: $jv-radius-sm;
+    border-radius: $vsk-radius-sm;
     overflow: hidden;
 
     .list-group-item {
       text-align: left;
-      padding: $jv-space-4 $jv-space-6;
+      padding: $vsk-space-4 $vsk-space-6;
       border-left: none;
       border-right: none;
 
@@ -230,14 +230,14 @@ img.not-responsive {
 
   // SSO section label - align with list items above
   > label.form-label {
-    margin-top: $jv-space-6;
-    padding-left: $jv-space-6; // Match list-group-item padding
+    margin-top: $vsk-space-6;
+    padding-left: $vsk-space-6; // Match list-group-item padding
   }
 
   // Delete account button container
   .d-flex.justify-content-center {
     justify-content: flex-start !important;
-    margin-top: $jv-space-6;
+    margin-top: $vsk-space-6;
   }
 }
 
@@ -260,7 +260,7 @@ img.not-responsive {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding-top: $jv-space-12;
+    padding-top: $vsk-space-12;
   }
 
   // The form container
@@ -286,11 +286,11 @@ img.not-responsive {
   .card,
   .login-card,
   .register-card {
-    background: $jv-surface;
-    border: 1px solid $jv-border-subtle;
-    border-radius: $jv-radius-lg;
-    box-shadow: $jv-shadow-md;
-    padding: $jv-space-8;
+    background: $vsk-surface;
+    border: 1px solid $vsk-border-subtle;
+    border-radius: $vsk-radius-lg;
+    box-shadow: $vsk-shadow-md;
+    padding: $vsk-space-8;
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
@@ -300,27 +300,27 @@ img.not-responsive {
   h1,
   .page-title {
     text-align: center;
-    margin-bottom: $jv-space-8;
+    margin-bottom: $vsk-space-8;
   }
 
   // Form labels
   label {
     font-weight: 500;
-    color: $jv-text-main;
-    margin-bottom: $jv-space-2;
+    color: $vsk-text-main;
+    margin-bottom: $vsk-space-2;
   }
 
   // Form inputs
   .form-control {
-    border-radius: $jv-radius-sm;
-    border: 1px solid $jv-border-subtle;
-    padding: $jv-space-3 $jv-space-4;
-    font-size: $jv-font-size-base;
-    transition: border-color $jv-transition-fast, box-shadow $jv-transition-fast;
+    border-radius: $vsk-radius-sm;
+    border: 1px solid $vsk-border-subtle;
+    padding: $vsk-space-3 $vsk-space-4;
+    font-size: $vsk-font-size-base;
+    transition: border-color $vsk-transition-fast, box-shadow $vsk-transition-fast;
 
     &:focus {
-      border-color: $jv-primary;
-      box-shadow: $jv-focus-ring;
+      border-color: $vsk-primary;
+      box-shadow: $vsk-focus-ring;
       outline: none;
     }
   }
@@ -328,20 +328,20 @@ img.not-responsive {
   // Login/Register button
   .btn-primary {
     width: 100%;
-    padding: $jv-space-3 $jv-space-6;
+    padding: $vsk-space-3 $vsk-space-6;
     font-weight: 600;
-    border-radius: $jv-radius-sm;
-    margin-top: $jv-space-4;
+    border-radius: $vsk-radius-sm;
+    margin-top: $vsk-space-4;
   }
 
   // Forgot password and other links
   .forgot-password,
   a.text-muted {
-    font-size: $jv-font-size-sm;
-    color: $jv-text-muted;
+    font-size: $vsk-font-size-sm;
+    color: $vsk-text-muted;
 
     &:hover {
-      color: $jv-primary;
+      color: $vsk-primary;
     }
   }
 
@@ -349,9 +349,9 @@ img.not-responsive {
   .register-link,
   .login-link {
     text-align: center;
-    margin-top: $jv-space-6;
-    padding-top: $jv-space-6;
-    border-top: 1px solid $jv-border-subtle;
+    margin-top: $vsk-space-6;
+    padding-top: $vsk-space-6;
+    border-top: 1px solid $vsk-border-subtle;
   }
 }
 
@@ -398,7 +398,7 @@ img.not-responsive {
     width: 100% !important;
     padding: 0 !important;
     border: none !important;
-    margin-bottom: $jv-space-4 !important;
+    margin-bottom: $vsk-space-4 !important;
   }
 
   // Inner container - structured grid layout
@@ -406,21 +406,21 @@ img.not-responsive {
   .account .sticky-md-top.d-flex {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    gap: $jv-space-2 !important;
-    padding: $jv-space-3 !important;
-    background: $jv-surface !important;
-    border-radius: $jv-radius-md !important;
-    border: 1px solid $jv-border-subtle !important;
+    gap: $vsk-space-2 !important;
+    padding: $vsk-space-3 !important;
+    background: $vsk-surface !important;
+    border-radius: $vsk-radius-md !important;
+    border: 1px solid $vsk-border-subtle !important;
   }
 
   // Menu items - consistent sizing
   .account [component="sidebar/left"] a.btn {
     margin: 0 !important;
-    padding: $jv-space-3 !important;
-    border-radius: $jv-radius-sm !important;
-    background: $jv-bg !important;
-    border: 1px solid $jv-border-subtle !important;
-    transition: all $jv-transition-fast !important;
+    padding: $vsk-space-3 !important;
+    border-radius: $vsk-radius-sm !important;
+    background: $vsk-bg !important;
+    border: 1px solid $vsk-border-subtle !important;
+    transition: all $vsk-transition-fast !important;
     min-height: 56px !important;
     display: flex !important;
     flex-direction: column !important;
@@ -428,14 +428,14 @@ img.not-responsive {
     justify-content: center !important;
 
     &:hover {
-      background: $jv-hover-bg !important;
-      border-color: $jv-border-strong !important;
+      background: $vsk-hover-bg !important;
+      border-color: $vsk-border-strong !important;
     }
 
     &.active {
-      background: $jv-primary !important;
+      background: $vsk-primary !important;
       color: white !important;
-      border-color: $jv-primary !important;
+      border-color: $vsk-primary !important;
 
       .text-xs {
         color: rgba(255, 255, 255, 0.9) !important;
@@ -444,15 +444,15 @@ img.not-responsive {
 
     // Text content
     .flex-grow-1 {
-      font-size: $jv-font-size-sm !important;
+      font-size: $vsk-font-size-sm !important;
       font-weight: 600 !important;
       margin-bottom: 2px !important;
     }
 
     // Count badges
     .text-xs {
-      font-size: $jv-font-size-xs !important;
-      color: $jv-text-soft !important;
+      font-size: $vsk-font-size-xs !important;
+      color: $vsk-text-soft !important;
       font-weight: 500 !important;
     }
   }
@@ -460,8 +460,8 @@ img.not-responsive {
   // Horizontal rules - full width dividers
   .account [component="sidebar/left"] hr {
     grid-column: 1 / -1 !important;
-    margin: $jv-space-2 0 !important;
-    border-color: $jv-border-subtle !important;
+    margin: $vsk-space-2 0 !important;
+    border-color: $vsk-border-subtle !important;
   }
 
   // Settings and action links - full width buttons
@@ -470,7 +470,7 @@ img.not-responsive {
   .account [component="sidebar/left"] a[component*="account/"] {
     grid-column: 1 / -1 !important;
     flex-direction: row !important;
-    gap: $jv-space-2 !important;
+    gap: $vsk-space-2 !important;
     align-items: center !important;
 
     i {
