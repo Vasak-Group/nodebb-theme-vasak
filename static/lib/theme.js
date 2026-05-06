@@ -1373,12 +1373,7 @@
 
 		navigator.serviceWorker
 			.register(swUrl, {
-				// Scope "/" lets the SW intercept all requests on the origin.
-				// This works because the server sets Service-Worker-Allowed: /
 				scope: "/",
-				// updateViaCache: 'none' ensures the browser always fetches
-				// the SW script fresh (bypassing HTTP cache), so version
-				// bumps in sw.js are picked up immediately.
 				updateViaCache: "none",
 			})
 			.then(function (registration) {
@@ -1387,7 +1382,9 @@
 				// Check for updates on every page load
 				registration.update();
 
-				// When a new SW is waiting, activate it on next navigation
+				// When a new SW is waiting, send SKIP_WAITING so it activates
+				// immediately. clients.claim() in the SW takes control without
+				// requiring a page reload — no reload loop.
 				registration.addEventListener("updatefound", function () {
 					var newWorker = registration.installing;
 					if (!newWorker) return;
@@ -1397,8 +1394,6 @@
 							newWorker.state === "installed" &&
 							navigator.serviceWorker.controller
 						) {
-							// New version available — tell it to skip waiting
-							// so it activates without requiring a full browser close.
 							newWorker.postMessage({ type: "SKIP_WAITING" });
 							vasak.log("SW nueva versión activada");
 						}
@@ -1409,14 +1404,9 @@
 				vasak.warn("SW registro fallido:", err.message);
 			});
 
-		// When the SW takes control (after SKIP_WAITING), reload to use
-		// the new SW for all subsequent fetches.
-		var refreshing = false;
-		navigator.serviceWorker.addEventListener("controllerchange", function () {
-			if (refreshing) return;
-			refreshing = true;
-			window.location.reload();
-		});
+		// NOTE: We intentionally do NOT listen to 'controllerchange' + reload.
+		// The SW uses skipWaiting() + clients.claim() to take control immediately.
+		// Adding a reload here creates an infinite reload loop on every page load.
 	}
 
 	// ========================================
