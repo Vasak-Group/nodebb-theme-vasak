@@ -172,44 +172,30 @@ define("forum/vasak-virtual-list", [], function () {
 	// ── Métricas de performance ────────────────────────────────────────────
 
 	function logContentVisibilitySupport() {
-		var supported = CSS.supports("content-visibility", "auto");
-		if (!supported) {
-			console.info(
-				"[Vasak] content-visibility: auto no soportado en este navegador. " +
-					"El DOM recycling JS está activo como fallback.",
-			);
+		// Silencioso en producción — activar con VASAK_DEBUG
+		if (typeof vasak !== "undefined") {
+			vasak.log("content-visibility: auto", CSS.supports("content-visibility", "auto") ? "soportado" : "no soportado");
 		}
 	}
 
 	function measureLayoutShift(containerEl) {
 		if (!window.PerformanceObserver) return;
 
-		// Medir Cumulative Layout Shift (CLS) en la lista
 		try {
 			var clsValue = 0;
-			var clsEntries = [];
 
 			var observer = new PerformanceObserver(function (list) {
 				list.getEntries().forEach(function (entry) {
-					// Solo contar shifts que no son causados por interacción del usuario
-					if (!entry.hadRecentInput) {
-						clsValue += entry.value;
-						clsEntries.push(entry);
-					}
+					if (!entry.hadRecentInput) clsValue += entry.value;
 				});
 			});
 
 			observer.observe({ type: "layout-shift", buffered: true });
 
-			// Reportar después de un tiempo
 			setTimeout(function () {
 				observer.disconnect();
-				if (clsValue > 0.1) {
-					console.warn(
-						"[Vasak] CLS alto detectado en lista: " +
-							clsValue.toFixed(3) +
-							". Considera ajustar contain-intrinsic-size en _content-visibility.scss",
-					);
+				if (clsValue > 0.1 && typeof vasak !== "undefined") {
+					vasak.warn("CLS alto en lista:", clsValue.toFixed(3), "— ajustar contain-intrinsic-size en _content-visibility.scss");
 				}
 			}, MEASURE_INTERVAL);
 		} catch (e) {

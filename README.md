@@ -49,8 +49,16 @@ Tema premium para NodeBB, construido sobre [Harmony](https://github.com/NodeBB/n
 | **Notificaciones Push** | Web Push API, banner opt-in no intrusivo, handler en Service Worker |
 | **Menciones** | @usuario en el composer con dropdown de avatares y navegación por teclado |
 | **Modo Lectura** | Vista limpia sin sidebar, tipografía optimizada, botón en sidebar del topic |
-| **Filtros de Feed** | Filtrar posts por: Todo / Imágenes / Videos / Popular (≥5 votos) |
+| **Filtros de Feed** | Filtrar posts por: Todo / Imágenes / Videos / Popular (≥5 votos), persistido |
 | **Estadísticas de Lectura** | Barra de progreso de lectura + tracking de tiempo en localStorage |
+| **Indicador offline** | Banner sutil online/offline + página offline branded con auto-reload |
+| **Keyboard shortcuts** | `?` cheatsheet, `/` búsqueda, `n` composer, `j/k` navegación, `g+X` secuencias |
+| **Prefetch inteligente** | `<link rel="prefetch">` al hover 200ms, respeta Save-Data y conexiones lentas |
+| **Toast system** | `vasak.toast.success/error/info/warning()` — toasts integrados al diseño |
+| **User card** | Popover con avatar, bio, stats y botón follow al hover sobre un usuario |
+| **Modo compacto** | Toggle feed/lista compacto (solo título + meta), persistido en localStorage |
+| **Búsqueda en topic** | Panel con input, resultados y navegación, activado con Ctrl+F |
+| **TOC automático** | Tabla de contenidos en sidebar para posts con 3+ headings, scroll spy |
 | **Carousels** | Múltiples imágenes en posts se convierten automáticamente en carousels Bootstrap |
 | **Animaciones** | Sistema completo: page transitions, slide-up en cards, ripple en botones, spring easing |
 
@@ -174,8 +182,9 @@ nodebb-theme-vasak/
 │   ├── _reactions.scss            # Sistema de reacciones en posts
 │   ├── _share.scss                # Modal de compartir
 │   ├── _push.scss                 # Banner de notificaciones push
-│   ├── _extras.scss               # Reader mode, feed filters, reading progress
-│   └── _a11y.scss                 # Accesibilidad: skip links, focus ring, sr-only
+│   ├── _extras.scss               # Reader mode, feed filters, reading progress, connection banner, keyboard shortcuts
+│   ├── _a11y.scss                 # Accesibilidad: skip links, focus ring, sr-only
+│   └── _new-features.scss         # Toast, user card, compact mode, topic search, TOC
 │
 ├── public/
 │   ├── admin.js                   # Panel de administración del tema
@@ -195,9 +204,17 @@ nodebb-theme-vasak/
 │       ├── push-notifications.js  # Web Push API opt-in
 │       ├── composer-mentions.js   # @menciones en el composer
 │       ├── reader-mode.js         # Modo lectura limpia
-│       ├── feed-filters.js        # Filtros visuales del feed
+│       ├── feed-filters.js        # Filtros visuales del feed (persistidos)
 │       ├── reading-stats.js       # Progreso y estadísticas de lectura
-│       └── accessibility.js       # Skip links, focus management, aria-labels
+│       ├── accessibility.js       # Skip links, focus management, aria-labels
+│       ├── connection-status.js   # Banner online/offline
+│       ├── keyboard-shortcuts.js  # Atajos de teclado globales + cheatsheet
+│       ├── prefetch.js            # Prefetch inteligente al hover
+│       ├── toast.js               # Sistema de toasts (vasak.toast.*)
+│       ├── user-card.js           # Popover de usuario al hover
+│       ├── compact-mode.js        # Modo compacto para feed/listas
+│       ├── topic-search.js        # Búsqueda dentro de un topic (Ctrl+F)
+│       └── topic-toc.js           # Tabla de contenidos automática
 │       └── account/
 │           └── categories.js      # Página de categorías del perfil
 │
@@ -259,14 +276,14 @@ Para cambiar la paleta, editar `scss/_tokens.scss`.
 Todos los componentes consumen CSS custom properties. Los SCSS bridge variables en `_variables.scss` apuntan a ellas:
 
 ```scss
-// En _variables.scss
-$vsk-primary:   var(--use-primary);
-$vsk-surface:   var(--use-ui-surface);
-$vsk-text-main: var(--use-text-main);
+// En _variables.scss — bridge vars que apuntan a CSS custom properties
+$jv-primary:   var(--use-primary);
+$jv-surface:   var(--use-ui-surface);
+$jv-text-main: var(--use-text-main);
 
 // Spacing (estático — no cambia en dark mode)
-$vsk-space-4: 16px;
-$vsk-space-6: 24px;
+$jv-space-4: 16px;
+$jv-space-6: 24px;
 ```
 
 ### Tipografía
@@ -315,6 +332,14 @@ El JS del tema está dividido en módulos AMD que NodeBB carga bajo demanda:
 | `forum/vasak-feed-filters` | `feed-filters.js` | Global |
 | `forum/vasak-reading-stats` | `reading-stats.js` | Global |
 | `forum/vasak-a11y` | `accessibility.js` | Global |
+| `forum/vasak-connection` | `connection-status.js` | Global |
+| `forum/vasak-shortcuts` | `keyboard-shortcuts.js` | Global |
+| `forum/vasak-prefetch` | `prefetch.js` | Global |
+| `forum/vasak-toast` | `toast.js` | Global |
+| `forum/vasak-user-card` | `user-card.js` | Global |
+| `forum/vasak-compact` | `compact-mode.js` | Global |
+| `forum/vasak-topic-search` | `topic-search.js` | Global |
+| `forum/vasak-toc` | `topic-toc.js` | Topics |
 
 El core `static/lib/theme.js` solo contiene comportamientos globales (sidebar, dark mode, lazy loading, animaciones) y carga los módulos de página bajo demanda con `require()`.
 
@@ -379,6 +404,76 @@ O en el archivo de configuración de NodeBB (`config.json`):
 ```
 
 > Si `VAPID_PUBLIC_KEY` no está configurada, el endpoint `/vasak-push/vapid-public-key` devuelve 503 y el módulo de push se desactiva silenciosamente. El resto del tema funciona con normalidad.
+
+---
+
+## Debugging
+
+### Activar logs de desarrollo
+
+El tema no emite ningún output en consola en producción. Para activar los logs internos:
+
+```js
+// En la consola del navegador
+localStorage.setItem('VASAK_DEBUG', 'true');
+location.reload();
+
+// Para desactivar
+localStorage.removeItem('VASAK_DEBUG');
+location.reload();
+```
+
+Los logs aparecen con el prefijo `[Vasak]`.
+
+### Verificar estado del Service Worker
+
+```js
+// Estado de las cachés
+navigator.serviceWorker.controller.postMessage(
+  { type: 'GET_CACHE_STATUS' },
+  [new MessageChannel().port1]
+);
+
+// Limpiar todas las cachés
+navigator.serviceWorker.controller.postMessage({ type: 'CLEAR_CACHE' });
+```
+
+---
+
+## Keyboard Shortcuts
+
+| Atajo | Acción |
+|---|---|
+| `?` | Mostrar/ocultar cheatsheet de atajos |
+| `/` | Enfocar la búsqueda del header |
+| `n` | Abrir el composer (nueva discusión) |
+| `r` | Responder al post activo (en topic) |
+| `j` / `k` | Navegar entre posts/topics (abajo/arriba) |
+| `g h` | Ir al feed |
+| `g s` | Ir a búsqueda |
+| `g r` | Ir a recientes |
+| `g u` | Ir a no leídos |
+| `Ctrl+F` | Buscar dentro del topic actual |
+| `Escape` | Cerrar modales y dropdowns |
+
+Los atajos se desactivan automáticamente cuando el foco está en un input o textarea.
+
+---
+
+## Toast API
+
+El sistema de toasts está disponible globalmente como `vasak.toast`:
+
+```js
+// Desde cualquier módulo o la consola del navegador
+vasak.toast.success('Post guardado correctamente');
+vasak.toast.error('No se pudo conectar al servidor');
+vasak.toast.info('Hay nuevas respuestas en este topic');
+vasak.toast.warning('Tu sesión expira en 5 minutos');
+
+// Con duración personalizada (ms)
+vasak.toast.show('Mensaje personalizado', 'info', 8000);
+```
 
 ---
 
@@ -528,6 +623,25 @@ navigator.serviceWorker.controller.postMessage({ type: "CLEAR_CACHE" });
 ```
 
 O desde DevTools: **Application → Storage → Clear site data**.
+
+### Los keyboard shortcuts no funcionan
+
+Los atajos se desactivan cuando el foco está en un input. Si no responden en ningún lado, verificar que el módulo esté cargado:
+
+```js
+// En la consola del navegador
+localStorage.setItem('VASAK_DEBUG', 'true');
+location.reload();
+// Buscar "[Vasak]" en los logs
+```
+
+### El TOC no aparece en el topic
+
+El TOC solo se genera si el **primer post** del topic tiene 3 o más headings (`h1`, `h2`, `h3`). Si el contenido usa texto plano sin headings, el TOC no se activa.
+
+### La user card no aparece al hacer hover
+
+La user card requiere que el link del usuario tenga `/user/` en la URL. Verificar que los avatares y nombres de autor usen el formato estándar de NodeBB.
 
 ---
 

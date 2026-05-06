@@ -38,9 +38,9 @@ const ALL_CACHES = [CACHE_STATIC, CACHE_PAGES, CACHE_IMAGES];
 // Los assets de NodeBB (client.css, nodebb.min.js) NO se pre-cachean
 // porque sus URLs cambian con cada rebuild (query string con hash).
 const PRECACHE_ASSETS = [
-	// Logos del tema (rutas relativas al origen, no al SW)
 	"/plugins/nodebb-theme-vasak/static/images/logo-icon.png",
 	"/plugins/nodebb-theme-vasak/static/images/logo-full.png",
+	"/plugins/nodebb-theme-vasak/static/offline.html",
 ];
 
 // ── Patrones de URL ────────────────────────────────────────────────────────
@@ -227,11 +227,14 @@ async function networkFirst(request, cacheName) {
 	} catch (err) {
 		const cached = await cache.match(request);
 		if (cached) {
-			console.log(
-				"[SW] Network-First: sirviendo desde caché (offline)",
-				request.url,
-			);
 			return cached;
+		}
+		// Fallback a la página offline para navegación HTML
+		if (request.headers.get("accept")?.includes("text/html")) {
+			const offline = await caches.match(
+				"/plugins/nodebb-theme-vasak/static/offline.html",
+			);
+			if (offline) return offline;
 		}
 		throw err;
 	}

@@ -5,14 +5,23 @@
  * ==================
  * Filtros visuales en el feed: All / Images / Videos / Popular.
  * Filtra los posts ya cargados en el DOM sin hacer nuevas requests.
+ * El filtro activo se persiste en localStorage.
  */
 define("forum/vasak-feed-filters", [], function () {
 	var Filters = {};
+	var STORAGE_KEY = "vasak:feed-filter";
 	var ACTIVE_FILTER = "all";
 
 	Filters.init = function () {
 		if (!$(".feed").length) return;
+
+		// Restaurar filtro guardado
+		try {
+			ACTIVE_FILTER = localStorage.getItem(STORAGE_KEY) || "all";
+		} catch (e) {}
+
 		injectFilterBar();
+
 		$(window).on("action:posts.loaded", function () {
 			applyFilter(ACTIVE_FILTER);
 		});
@@ -22,23 +31,31 @@ define("forum/vasak-feed-filters", [], function () {
 		if ($(".vasak-feed-filter-bar").length) return;
 
 		var $bar = $(
-			'<div class="vasak-feed-filter-bar">' +
-				'<button class="vasak-filter-btn active" data-filter="all">Todo</button>' +
-				'<button class="vasak-filter-btn" data-filter="images"><i class="fa fa-image"></i> Imágenes</button>' +
-				'<button class="vasak-filter-btn" data-filter="videos"><i class="fa fa-play-circle"></i> Videos</button>' +
-				'<button class="vasak-filter-btn" data-filter="popular"><i class="fa fa-fire"></i> Popular</button>' +
+			'<div class="vasak-feed-filter-bar" role="group" aria-label="Filtrar posts">' +
+				'<button class="vasak-filter-btn" data-filter="all">Todo</button>' +
+				'<button class="vasak-filter-btn" data-filter="images"><i class="fa fa-image" aria-hidden="true"></i> Imágenes</button>' +
+				'<button class="vasak-filter-btn" data-filter="videos"><i class="fa fa-play-circle" aria-hidden="true"></i> Videos</button>' +
+				'<button class="vasak-filter-btn" data-filter="popular"><i class="fa fa-fire" aria-hidden="true"></i> Popular</button>' +
 				"</div>",
 		);
+
+		// Marcar el filtro activo restaurado
+		$bar.find('[data-filter="' + ACTIVE_FILTER + '"]').addClass("active");
 
 		$bar.on("click", ".vasak-filter-btn", function () {
 			$bar.find(".vasak-filter-btn").removeClass("active");
 			$(this).addClass("active");
 			ACTIVE_FILTER = $(this).attr("data-filter");
+			try {
+				localStorage.setItem(STORAGE_KEY, ACTIVE_FILTER);
+			} catch (e) {}
 			applyFilter(ACTIVE_FILTER);
 		});
 
-		// Insertar antes de la lista de posts
 		$('[component="posts"]').before($bar);
+
+		// Aplicar filtro restaurado a los posts ya en el DOM
+		applyFilter(ACTIVE_FILTER);
 	}
 
 	function applyFilter(filter) {

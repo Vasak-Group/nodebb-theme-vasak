@@ -4,6 +4,32 @@
 //
 // Naming convention matches all other Vasak projects.
 // Toggle dark mode by adding/removing .dark on <html>.
+//
+// USO:
+//   Todos los componentes deben consumir var(--use-*) en lugar
+//   de valores hardcodeados. Los SCSS bridge vars en _variables.scss
+//   apuntan a estas custom properties.
+//
+// ESTRUCTURA:
+//   :root          → Paleta raw + logic assignments (modo claro)
+//   html.dark      → Overrides para modo oscuro (activado por JS)
+//   @media dark    → Fallback para preferencia del sistema operativo
+//
+// PARA CAMBIAR LA PALETA:
+//   Editar los valores en :root (--primary, --ui-background, etc.)
+//   Los --use-* se actualizan automáticamente.
+//
+// VARIABLES EXPUESTAS:
+//   --use-primary          Color primario (botones, links, accents)
+//   --use-ui-background    Fondo de la app
+//   --use-ui-surface       Fondo de cards y paneles
+//   --use-ui-border        Bordes sutiles
+//   --use-text-main        Texto principal
+//   --use-text-muted       Texto secundario
+//   --use-status-*         Colores semánticos (error, success, warning)
+//   --use-state-hover      Fondo en hover
+//   --use-state-selected   Fondo en estado seleccionado
+//   --use-focus-ring       Box-shadow del focus ring
 // ============================================
 
 :root {

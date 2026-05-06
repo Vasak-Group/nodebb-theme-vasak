@@ -116,6 +116,43 @@
 			A11y.init();
 		});
 
+		// Connection status indicator
+		require(["forum/vasak-connection"], function (Conn) {
+			Conn.init();
+		});
+
+		// Keyboard shortcuts
+		require(["forum/vasak-shortcuts"], function (Shortcuts) {
+			Shortcuts.init();
+		});
+
+		// Intelligent prefetch on hover
+		require(["forum/vasak-prefetch"], function (Prefetch) {
+			Prefetch.init();
+		});
+
+		// Toast notification system
+		require(["forum/vasak-toast"], function (Toast) {
+			// Exponer globalmente para que otros módulos puedan usarlo
+			window.vasak = window.vasak || {};
+			window.vasak.toast = Toast;
+		});
+
+		// User card on hover
+		require(["forum/vasak-user-card"], function (UserCard) {
+			UserCard.init();
+		});
+
+		// Compact mode toggle
+		require(["forum/vasak-compact"], function (Compact) {
+			Compact.init();
+		});
+
+		// Topic search panel
+		require(["forum/vasak-topic-search"], function (TopicSearch) {
+			TopicSearch.init();
+		});
+
 		// ── Lazy-load page-specific modules ─────────────────────────────
 		loadPageModules();
 

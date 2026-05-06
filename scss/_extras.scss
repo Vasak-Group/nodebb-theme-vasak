@@ -119,3 +119,165 @@ html.vasak-reader-mode {
   #vasak-reading-progress { transition: none !important; }
   .vasak-filter-btn       { transition: none !important; }
 }
+
+// ── Connection Status Banner ───────────────────────────────────────────────
+
+#vasak-connection-banner {
+  position: fixed;
+  bottom: $jv-space-6;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  z-index: 1090;
+  display: flex;
+  align-items: center;
+  gap: $jv-space-2;
+  padding: $jv-space-3 $jv-space-5;
+  border-radius: $jv-radius-pill;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  box-shadow: $jv-shadow-lg;
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+
+  &.vasak-conn-visible {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  &.vasak-conn-offline {
+    background: #1f2937;
+    color: #f9fafb;
+  }
+
+  &.vasak-conn-online {
+    background: var(--use-status-success);
+    color: #fff;
+  }
+}
+
+// ── Keyboard Shortcuts Modal ───────────────────────────────────────────────
+
+.vasak-shortcuts-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $jv-space-4;
+
+  &[hidden] { display: none; }
+}
+
+.vasak-shortcuts-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+  animation: vasak-fade-in 200ms ease both;
+}
+
+.vasak-shortcuts-content {
+  position: relative;
+  background: var(--use-ui-surface);
+  border: 1px solid var(--use-ui-border);
+  border-radius: $jv-radius-lg;
+  box-shadow: $jv-shadow-xl;
+  width: 100%;
+  max-width: 420px;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: vasak-scale-in 220ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.vasak-shortcuts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $jv-space-5 $jv-space-6;
+  border-bottom: 1px solid var(--use-ui-border);
+
+  h2 {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+.vasak-shortcuts-close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--use-state-hover);
+  color: var(--use-text-muted);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 150ms ease;
+
+  &:hover { background: var(--use-state-active); }
+}
+
+.vasak-shortcuts-table {
+  width: 100%;
+  border-collapse: collapse;
+  padding: $jv-space-3 $jv-space-6;
+  display: block;
+
+  td {
+    padding: $jv-space-2 $jv-space-3;
+    font-size: var(--text-sm);
+    color: var(--use-text-main);
+    vertical-align: middle;
+
+    &:first-child { width: 120px; }
+  }
+
+  tr:hover td { background: var(--use-state-hover); }
+}
+
+kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  background: var(--use-ui-background);
+  border: 1px solid var(--use-ui-border);
+  border-bottom-width: 2px;
+  border-radius: $jv-radius-xs;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--use-text-main);
+  white-space: nowrap;
+}
+
+.vasak-shortcuts-footer {
+  padding: $jv-space-4 $jv-space-6;
+  font-size: var(--text-xs);
+  color: var(--use-text-soft);
+  border-top: 1px solid var(--use-ui-border);
+  text-align: center;
+}
+
+// ── Keyboard navigation focus ──────────────────────────────────────────────
+
+.vasak-shortcut-focused {
+  outline: 2px solid var(--use-primary);
+  outline-offset: 2px;
+  border-radius: $jv-radius-sm;
+}
+
+// ── Reduced motion ─────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  #vasak-connection-banner,
+  .vasak-shortcuts-content,
+  .vasak-shortcuts-backdrop {
+    animation: none !important;
+    transition: opacity 0.01ms !important;
+    transform: translateX(-50%) !important;
+  }
+}

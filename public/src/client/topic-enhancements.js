@@ -23,6 +23,11 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 			Reactions.init();
 		});
 
+		// Table of contents (for posts with 3+ headings)
+		require(["forum/vasak-toc"], function (TOC) {
+			TOC.init();
+		});
+
 		// Re-run on new posts (quick reply, infinite scroll)
 		$(window).on("action:posts.loaded action:topic.loaded", function () {
 			initPostImageCarousels();

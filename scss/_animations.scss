@@ -4,13 +4,26 @@
 // Sistema completo de animaciones y transiciones.
 // Respeta prefers-reduced-motion en todos los casos.
 //
-// Secciones:
-//  1. Keyframes
-//  2. Utility classes
-//  3. Page transitions (SPA navigation)
-//  4. Component-level transitions
-//  5. Micro-interactions
-//  6. Reduced motion overrides
+// USO:
+//   Clases utilitarias: .vasak-duration-fast, .vasak-ease-spring, etc.
+//   Animaciones de entrada: .vasak-new-post, .vasak-new-topic
+//   Spinners: .vasak-spinner, .vasak-spinner-sm, .vasak-spinner-lg
+//   Page transitions: JS añade .vasak-page-entering / .vasak-page-leaving en #content
+//
+// KEYFRAMES DISPONIBLES:
+//   vasak-fade-in/out       Opacidad 0→1 / 1→0
+//   vasak-slide-up/down     Slide + fade desde abajo/arriba
+//   vasak-scale-in/out      Scale 0.96→1 con fade (modales)
+//   vasak-slide-in-left     Slide desde la izquierda (sidebar mobile)
+//   vasak-pulse-soft        Pulso suave 1→1.08→1 (badges)
+//   vasak-bounce-in         Bounce de entrada (botones)
+//   vasak-spin              Rotación continua (spinners)
+//   vasak-ripple-expand     Expansión del ripple en botones
+//
+// PARA AGREGAR UNA ANIMACIÓN NUEVA:
+//   1. Definir el @keyframes aquí
+//   2. Crear la clase utilitaria o aplicarla directamente al selector
+//   3. Agregar el override en @media (prefers-reduced-motion: reduce)
 // ============================================
 
 // ── 1. KEYFRAMES ──────────────────────────────────────────────────────────

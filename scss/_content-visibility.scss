@@ -6,10 +6,24 @@
 // Equivalente al virtual scrolling pero sin tocar el DOM,
 // lo que preserva todos los handlers de NodeBB intactos.
 //
-// Soporte: Chrome 85+, Edge 85+, Firefox 125+, Safari 18+
-// Fallback: sin efecto en navegadores no soportados (graceful degradation)
+// SOPORTE: Chrome 85+, Edge 85+, Firefox 125+, Safari 18+
+// FALLBACK: Sin efecto en navegadores no soportados (graceful degradation)
 //
-// Referencia: https://web.dev/content-visibility/
+// USO:
+//   Los selectores ya están configurados para los componentes principales.
+//   Para agregar un nuevo componente:
+//     .mi-lista > .mi-item {
+//       content-visibility: auto;
+//       contain-intrinsic-size: auto 150px; // altura estimada del item
+//     }
+//
+// AJUSTAR contain-intrinsic-size:
+//   Si el scrollbar "salta" al hacer scroll, el valor estimado es muy diferente
+//   a la altura real. Medir la altura promedio de los items y ajustar.
+//   Usar "auto Xpx" (con "auto") para que el navegador recuerde la altura real
+//   después del primer render.
+//
+// REFERENCIA: https://web.dev/content-visibility/
 // ============================================
 
 // ── Feed posts ────────────────────────────────────────────────────────────

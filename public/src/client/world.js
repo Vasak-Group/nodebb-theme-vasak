@@ -112,7 +112,6 @@ define("forum/world", [
 		};
 
 		let visibility = localStorage.getItem("world:show-categories");
-		console.log("got value", visibility);
 		visibility = visibility ? visibility === "true" : true; // localStorage values are strings
 		update();
 
