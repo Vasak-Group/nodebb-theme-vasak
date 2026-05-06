@@ -1023,11 +1023,11 @@ html.composing .composer.reply {
   z-index: 200;
   background: var(--use-ui-surface);
   border: 1px solid var(--use-ui-border);
-  border-radius: $jv-radius-md;
-  box-shadow: $jv-shadow-lg;
+  border-radius: $vsk-radius-md;
+  box-shadow: $vsk-shadow-lg;
   list-style: none;
   margin: 0;
-  padding: $jv-space-1 0;
+  padding: $vsk-space-1 0;
   max-height: 240px;
   overflow-y: auto;
   animation: vasak-slide-down 160ms ease both;
@@ -1036,8 +1036,8 @@ html.composing .composer.reply {
 .vasak-mentions-item {
   display: flex;
   align-items: center;
-  gap: $jv-space-3;
-  padding: $jv-space-2 $jv-space-4;
+  gap: $vsk-space-3;
+  padding: $vsk-space-2 $vsk-space-4;
   cursor: pointer;
   transition: background 100ms ease;
 

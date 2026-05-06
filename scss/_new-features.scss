@@ -6,19 +6,19 @@
 
 #vasak-toast-container {
   position: fixed;
-  bottom: $jv-space-6;
-  right: $jv-space-6;
+  bottom: $vsk-space-6;
+  right: $vsk-space-6;
   z-index: 1095;
   display: flex;
   flex-direction: column;
-  gap: $jv-space-2;
+  gap: $vsk-space-2;
   pointer-events: none;
   max-width: min(360px, calc(100vw - 32px));
 
   @media (max-width: 576px) {
-    bottom: $jv-space-4;
-    right: $jv-space-4;
-    left: $jv-space-4;
+    bottom: $vsk-space-4;
+    right: $vsk-space-4;
+    left: $vsk-space-4;
     max-width: none;
   }
 }
@@ -26,12 +26,12 @@
 .vasak-toast {
   display: flex;
   align-items: flex-start;
-  gap: $jv-space-3;
-  padding: $jv-space-3 $jv-space-4;
+  gap: $vsk-space-3;
+  padding: $vsk-space-3 $vsk-space-4;
   background: var(--use-ui-surface);
   border: 1px solid var(--use-ui-border);
-  border-radius: $jv-radius-md;
-  box-shadow: $jv-shadow-lg;
+  border-radius: $vsk-radius-md;
+  box-shadow: $vsk-shadow-lg;
   pointer-events: auto;
   opacity: 0;
   transform: translateX(16px);
@@ -63,9 +63,9 @@
   z-index: 1060;
   background: var(--use-ui-surface);
   border: 1px solid var(--use-ui-border);
-  border-radius: $jv-radius-lg;
-  box-shadow: $jv-shadow-xl;
-  padding: $jv-space-4;
+  border-radius: $vsk-radius-lg;
+  box-shadow: $vsk-shadow-xl;
+  padding: $vsk-space-4;
   width: 280px;
   opacity: 0;
   transform: translateY(6px) scale(0.97);
@@ -82,7 +82,7 @@
 .vasak-user-card-skeleton {
   display: flex;
   align-items: center;
-  gap: $jv-space-3;
+  gap: $vsk-space-3;
 }
 
 .vasak-uc-avatar-sk {
@@ -93,7 +93,7 @@
   flex-shrink: 0;
 }
 
-.vasak-uc-lines { flex: 1; display: flex; flex-direction: column; gap: $jv-space-2; }
+.vasak-uc-lines { flex: 1; display: flex; flex-direction: column; gap: $vsk-space-2; }
 .vasak-uc-line {
   height: 14px; border-radius: 4px;
   background: linear-gradient(90deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.10) 50%, rgba(0,0,0,0.06) 100%);
@@ -107,8 +107,8 @@
 .vasak-uc-header {
   display: flex;
   align-items: center;
-  gap: $jv-space-3;
-  margin-bottom: $jv-space-3;
+  gap: $vsk-space-3;
+  margin-bottom: $vsk-space-3;
 }
 
 .vasak-uc-avatar {
@@ -128,13 +128,13 @@
 
 .vasak-uc-bio {
   font-size: var(--text-xs); color: var(--use-text-muted);
-  line-height: 1.5; margin-bottom: $jv-space-3;
+  line-height: 1.5; margin-bottom: $vsk-space-3;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
 
 .vasak-uc-stats {
-  display: flex; gap: $jv-space-4;
-  padding-top: $jv-space-3; border-top: 1px solid var(--use-ui-border);
+  display: flex; gap: $vsk-space-4;
+  padding-top: $vsk-space-3; border-top: 1px solid var(--use-ui-border);
 }
 
 .vasak-uc-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
@@ -164,11 +164,11 @@ html.vasak-compact-mode {
     }
 
     .feed-content-section {
-      padding: $jv-space-3 $jv-space-4 !important;
+      padding: $vsk-space-3 $vsk-space-4 !important;
     }
 
     .feed-action-bar {
-      padding: $jv-space-1 $jv-space-4 !important;
+      padding: $vsk-space-1 $vsk-space-4 !important;
     }
   }
 
@@ -190,9 +190,9 @@ html.vasak-compact-transitioning * {
 .vasak-topic-search-panel {
   background: var(--use-ui-surface);
   border: 1px solid var(--use-ui-border);
-  border-radius: $jv-radius-md;
-  box-shadow: $jv-shadow-md;
-  margin-bottom: $jv-space-4;
+  border-radius: $vsk-radius-md;
+  box-shadow: $vsk-shadow-md;
+  margin-bottom: $vsk-space-4;
   overflow: hidden;
   opacity: 0;
   transform: translateY(-8px);
@@ -209,8 +209,8 @@ html.vasak-compact-transitioning * {
 .vasak-ts-header {
   display: flex;
   align-items: center;
-  gap: $jv-space-2;
-  padding: $jv-space-3 $jv-space-4;
+  gap: $vsk-space-2;
+  padding: $vsk-space-3 $vsk-space-4;
   border-bottom: 1px solid var(--use-ui-border);
 }
 
@@ -218,11 +218,11 @@ html.vasak-compact-transitioning * {
   flex: 1;
   display: flex;
   align-items: center;
-  gap: $jv-space-2;
+  gap: $vsk-space-2;
   background: var(--use-ui-background);
   border: 1px solid var(--use-ui-border);
-  border-radius: $jv-radius-sm;
-  padding: $jv-space-2 $jv-space-3;
+  border-radius: $vsk-radius-sm;
+  padding: $vsk-space-2 $vsk-space-3;
 }
 
 .vasak-ts-icon { color: var(--use-text-soft); font-size: 13px; flex-shrink: 0; }
@@ -236,12 +236,12 @@ html.vasak-compact-transitioning * {
 
 .vasak-ts-count { font-size: var(--text-xs); color: var(--use-text-soft); white-space: nowrap; }
 
-.vasak-ts-nav { display: flex; gap: $jv-space-1; flex-shrink: 0; }
+.vasak-ts-nav { display: flex; gap: $vsk-space-1; flex-shrink: 0; }
 
 .vasak-ts-results {
   max-height: 240px;
   overflow-y: auto;
-  padding: $jv-space-2 0;
+  padding: $vsk-space-2 0;
 }
 
 .vasak-ts-result {
@@ -249,7 +249,7 @@ html.vasak-compact-transitioning * {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: $jv-space-2 $jv-space-4;
+    padding: $vsk-space-2 $vsk-space-4;
     text-decoration: none;
     transition: background 100ms ease;
     &:hover { background: var(--use-state-hover); }
@@ -288,9 +288,9 @@ html.vasak-compact-transitioning * {
 .vasak-toc {
   background: var(--use-ui-surface);
   border: 1px solid var(--use-ui-border);
-  border-radius: $jv-radius-md;
+  border-radius: $vsk-radius-md;
   overflow: hidden;
-  margin-bottom: $jv-space-4;
+  margin-bottom: $vsk-space-4;
 }
 
 .vasak-toc-toggle {
@@ -298,7 +298,7 @@ html.vasak-compact-transitioning * {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: $jv-space-3 $jv-space-4;
+  padding: $vsk-space-3 $vsk-space-4;
   background: none;
   border: none;
   border-bottom: 1px solid var(--use-ui-border);
@@ -319,7 +319,7 @@ html.vasak-compact-transitioning * {
 }
 
 .vasak-toc-list {
-  padding: $jv-space-2 0;
+  padding: $vsk-space-2 0;
   max-height: 300px;
   overflow-y: auto;
   transition: max-height 250ms ease, opacity 200ms ease;
@@ -336,7 +336,7 @@ html.vasak-compact-transitioning * {
 
 .vasak-toc-link {
   display: block;
-  padding: $jv-space-1 $jv-space-4;
+  padding: $vsk-space-1 $vsk-space-4;
   font-size: var(--text-xs);
   color: var(--use-text-muted);
   text-decoration: none;
@@ -351,6 +351,6 @@ html.vasak-compact-transitioning * {
 }
 
 // Indentación por nivel
-.vasak-toc-h1 .vasak-toc-link { padding-left: $jv-space-4; }
-.vasak-toc-h2 .vasak-toc-link { padding-left: $jv-space-6; }
-.vasak-toc-h3 .vasak-toc-link { padding-left: $jv-space-8; font-size: 11px; }
+.vasak-toc-h1 .vasak-toc-link { padding-left: $vsk-space-4; }
+.vasak-toc-h2 .vasak-toc-link { padding-left: $vsk-space-6; }
+.vasak-toc-h3 .vasak-toc-link { padding-left: $vsk-space-8; font-size: 11px; }

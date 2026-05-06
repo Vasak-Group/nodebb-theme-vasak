@@ -174,7 +174,12 @@ define("forum/vasak-virtual-list", [], function () {
 	function logContentVisibilitySupport() {
 		// Silencioso en producción — activar con VASAK_DEBUG
 		if (typeof vasak !== "undefined") {
-			vasak.log("content-visibility: auto", CSS.supports("content-visibility", "auto") ? "soportado" : "no soportado");
+			vasak.log(
+				"content-visibility: auto",
+				CSS.supports("content-visibility", "auto")
+					? "soportado"
+					: "no soportado",
+			);
 		}
 	}
 
@@ -195,7 +200,11 @@ define("forum/vasak-virtual-list", [], function () {
 			setTimeout(function () {
 				observer.disconnect();
 				if (clsValue > 0.1 && typeof vasak !== "undefined") {
-					vasak.warn("CLS alto en lista:", clsValue.toFixed(3), "— ajustar contain-intrinsic-size en _content-visibility.scss");
+					vasak.warn(
+						"CLS alto en lista:",
+						clsValue.toFixed(3),
+						"— ajustar contain-intrinsic-size en _content-visibility.scss",
+					);
 				}
 			}, MEASURE_INTERVAL);
 		} catch (e) {
