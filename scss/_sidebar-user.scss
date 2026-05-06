@@ -1,0 +1,187 @@
+// ===========================================================
+// SIDEBAR USER SECTION
+// User profile in left sidebar - collapsed/expanded states
+// ===========================================================
+
+// User section container
+.sidebar-user-section {
+  border-top: 1px solid $jv-border-subtle;
+  padding-top: $jv-space-4;
+  margin-top: auto;
+}
+
+// User trigger button
+.sidebar-user-trigger {
+  padding: $jv-space-4 $jv-space-4;
+  border-radius: $jv-radius-sm;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+// Avatar wrapper with status indicator
+.sidebar-avatar-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // The avatar image
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  // Status dot positioning
+  .sidebar-status-dot {
+    width: 10px;
+    height: 10px;
+    bottom: 0;
+    right: 0;
+
+    &.online {
+      background-color: #22c55e;
+    }
+    &.away {
+      background-color: #f59e0b;
+    }
+    &.dnd {
+      background-color: #ef4444;
+    }
+    &.offline {
+      background-color: #9ca3af;
+    }
+  }
+}
+
+// Collapsed state - just show avatar
+.sidebar-left:not(.open) {
+  .sidebar-user-section {
+    .sidebar-user-trigger {
+      justify-content: center;
+      padding: $jv-space-4 0;
+    }
+  }
+
+  .sidebar-avatar-wrapper .avatar {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+// Expanded state - show avatar + name
+.sidebar-left.open {
+  .sidebar-user-section {
+    .sidebar-user-trigger {
+      padding: $jv-space-4 $jv-space-6;
+    }
+  }
+
+  .sidebar-avatar-wrapper .avatar {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+// Auth section for logged-out users
+// Structure: .sidebar-auth-section.mx-2.mb-2 > .nav-item > .nav-link
+// Skins structure: .dropend.m-2 > .nav-link
+// To match Skins: container has no margin, nav-item gets m-2
+.sidebar-auth-section.mx-2.mb-2 {
+  border-top: 1px solid $jv-border-subtle;
+  padding-top: $jv-space-4;
+  margin-top: auto;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.sidebar-auth-section {
+  .nav-item {
+    // Match Skins .dropend.m-2
+    margin: 8px !important;
+  }
+
+  .nav-link {
+    border-radius: $jv-radius-sm;
+    font-size: $jv-font-size-sm;
+    color: $jv-text-muted;
+    font-weight: 600;
+
+    &:hover {
+      background-color: rgba(0, 81, 255, 0.06);
+      color: $jv-primary;
+    }
+
+    i {
+      width: 1.25em;
+      text-align: center;
+      color: inherit;
+    }
+
+    .nav-text {
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+    }
+  }
+}
+
+// Bottom section layout
+.sidebar-bottom-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+
+// Ensure the dropup container has proper positioning context
+.sidebar-user-section .dropup {
+  position: relative;
+}
+
+// User dropdown menu styling
+.sidebar-user-section .dropdown-menu {
+  min-width: 220px;
+  padding: $jv-space-2;
+  border-radius: $jv-radius-md;
+  border: 1px solid $jv-border-subtle;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+
+  // Fix the shifting issue - disable Popper transforms and use fixed position
+  // Position dropdown to open upward from the bottom of the trigger
+  transform: none !important;
+  inset: auto auto 100% 0 !important;  // bottom: 100%, left: 0
+  margin-bottom: $jv-space-2;
+  top: auto !important;
+  bottom: 100% !important;
+  left: 0 !important;
+
+  // Remove animation that could cause visual shifting
+  animation: none;
+
+  .dropdown-item {
+    padding: $jv-space-2 $jv-space-4;
+    font-size: $jv-font-size-sm;
+    border-radius: $jv-radius-sm;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  .dropdown-header {
+    font-size: $jv-font-size-xs;
+    color: $jv-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: $jv-space-2 $jv-space-4;
+  }
+
+  .dropdown-divider {
+    margin: $jv-space-2 0;
+    border-color: $jv-border-subtle;
+  }
+}

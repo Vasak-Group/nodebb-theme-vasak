@@ -1,0 +1,33 @@
+// Import Harmony's overrides first (inherits their Bootstrap customizations)
+@import "nodebb-theme-harmony/scss/overrides";
+
+// JAVIS Brand Colors
+$primary: #0051ff;
+$link-color: #0051ff;
+
+// Typography
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", Arial, sans-serif;
+
+// Body
+$body-bg: #f5f6f8;
+$body-color: #111111;
+
+// Borders
+$border-radius: 8px;
+$border-radius-sm: 4px;
+$border-radius-lg: 12px;
+$border-radius-pill: 999px;
+
+// Buttons
+$btn-border-radius: 999px;
+$btn-border-radius-sm: 999px;
+$btn-border-radius-lg: 999px;
+
+// Cards
+$card-border-radius: 16px;
+$card-border-color: rgba(0, 0, 0, 0.05);
+
+// Inputs
+$input-border-radius: 999px;
+$input-focus-border-color: #0051ff;
+$input-focus-box-shadow: 0 0 0 3px rgba(0, 81, 255, 0.12);

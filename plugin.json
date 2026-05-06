@@ -1,0 +1,31 @@
+{
+	"id": "nodebb-theme-vasak",
+	"name": "Vasak Community Oficial Theme",
+	"description": "Modern, premium NodeBB theme for Vasak Community - Extends Harmony with custom styling and selective template overrides",
+	"url": "https://github.com/vasak-group/nodebb-theme-vasak",
+	"library": "./theme.js",
+	"baseTheme": "nodebb-theme-harmony",
+	"hooks": [
+		{ "hook": "static:app.load", "method": "init" },
+		{ "hook": "filter:widgets.getAreas", "method": "defineWidgetAreas" },
+		{ "hook": "filter:admin.header.build", "method": "addAdminNavigation" },
+		{ "hook": "filter:config.get", "method": "getThemeConfig" }
+	],
+	"staticDirs": {
+		"static": "./static"
+	},
+	"scripts": ["static/lib/theme.js"],
+	"modules": {
+		"../admin/plugins/vasak.js": "public/admin.js",
+		"forum/search": "public/src/client/search.js",
+		"forum/category": "public/src/client/category.js",
+		"forum/world": "public/src/client/world.js",
+		"forum/account/categories": "public/src/client/account/categories.js"
+	},
+	"templates": "templates",
+	"screenshot": "screenshot.png",
+	"version": "3.0.3",
+	"nbbpm": {
+		"compatibility": "^4.0.0"
+	}
+}

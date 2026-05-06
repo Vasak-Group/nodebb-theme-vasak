@@ -1,0 +1,503 @@
+// ===========================================================
+// TOPIC CARDS – Reddit-Style Feed
+// Clean, modern design with vote column
+// ===========================================================
+
+// TOPIC CARD (Main container)
+.topic-card {
+  display: flex;
+  background: $jv-surface;
+  border-radius: $jv-radius-sm; // 8px - shadcn standard
+  border: 1px solid $jv-border-subtle;
+  margin-bottom: $jv-space-2; // 8dp grid
+  box-shadow: $jv-shadow-sm; // shadcn subtle shadow
+  transition: $jv-transition-shadow, border-color $jv-transition-fast; // Modern smooth transitions
+  overflow: hidden;
+
+  &:hover {
+    box-shadow: $jv-shadow-md; // shadcn hover shadow
+    border-color: $jv-border-strong; // Subtle border darkening
+  }
+
+  // Focus state for accessibility
+  &:focus-within {
+    outline: none;
+    box-shadow: $jv-shadow-md, $jv-focus-ring;
+  }
+
+  // Deleted/scheduled states
+  &.deleted {
+    opacity: 0.5;
+  }
+
+  &.pinned {
+    border-left: 3px solid $jv-primary;
+  }
+}
+
+// ===========================================================
+// VOTE COLUMN (Left side - Reddit style)
+// ===========================================================
+.vote-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: $jv-space-6 $jv-space-4; // 24dp vertical, 16dp horizontal - Material grid
+  background: rgba(0, 0, 0, 0.02);
+  min-width: 44px;
+  gap: $jv-space-1; // 4dp - Material grid
+}
+
+.vote-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: $jv-text-muted;
+  cursor: pointer;
+  border-radius: $jv-radius-xs;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  text-decoration: none;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+  }
+
+  // Upvote - orange/red on hover and when active
+  &.vote-up:hover,
+  &.vote-up.upvoted {
+    color: #ff4500; // Reddit orange-red
+    background: rgba(255, 69, 0, 0.1);
+  }
+
+  // Downvote - blue/periwinkle on hover and when active
+  &.vote-down:hover,
+  &.vote-down.downvoted {
+    color: #7193ff; // Reddit periwinkle/blue
+    background: rgba(113, 147, 255, 0.1);
+  }
+
+  // Legacy active class support
+  &.active.vote-up {
+    color: #ff4500;
+    background: rgba(255, 69, 0, 0.1);
+  }
+
+  &.active.vote-down {
+    color: #7193ff;
+    background: rgba(113, 147, 255, 0.1);
+  }
+
+  i {
+    font-size: 14px;
+  }
+}
+
+.vote-count {
+  font-size: $jv-font-size-sm;
+  font-weight: 600;
+  color: $jv-text-main;
+  line-height: 1;
+  padding: 4px 0;
+}
+
+// ===========================================================
+// TOPIC CONTENT (Right side)
+// ===========================================================
+.topic-content {
+  flex: 1;
+  padding: $jv-space-3; // 12dp - Material grid
+  display: flex;
+  flex-direction: column;
+  gap: $jv-space-3; // 12dp - Material grid
+  min-width: 0; // Allow text truncation
+}
+
+// Meta Row (category, author, time)
+.topic-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $jv-space-3; // 12dp - Material grid
+  font-size: 14px; // Slightly larger for readability
+  color: $jv-text-soft; // More subtle
+
+  .meta-separator {
+    color: $jv-text-soft;
+  }
+
+  .author-link {
+    color: $jv-text-soft; // More subtle - not competing with title
+    text-decoration: none;
+    font-weight: 400; // Normal weight
+
+    &:hover {
+      color: $jv-primary;
+    }
+  }
+
+  .meta-time {
+    color: $jv-text-soft;
+    font-size: 13px;
+  }
+
+  // Category badge override
+  .badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: $jv-radius-pill;
+  }
+}
+
+// Topic Title
+.topic-card .topic-title {
+  margin: 0;
+  font-size: 20px; // Larger for prominence - consistent with feed
+  font-weight: 700; // Bolder for better hierarchy
+  line-height: 1.4; // Better readability
+  letter-spacing: -0.02em; // Tighter for modern feel
+
+  a {
+    color: $jv-text-main;
+    text-decoration: none;
+
+    &:hover {
+      color: $jv-primary;
+    }
+  }
+}
+
+// Topic Labels/Badges
+.topic-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $jv-space-2; // 8dp - Material grid
+
+  .topic-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: $jv-radius-xs;
+    background: rgba(0, 0, 0, 0.05);
+    color: $jv-text-muted;
+
+    &.pinned {
+      background: rgba(0, 81, 255, 0.1);
+      color: $jv-primary;
+    }
+
+    &.locked {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    &.scheduled {
+      background: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+}
+
+// Tags
+.topic-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $jv-space-2; // 8dp - Material grid
+
+  .topic-tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: $jv-radius-pill;
+    background: rgba(0, 0, 0, 0.04);
+    color: $jv-text-muted;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: $jv-primary-soft;
+      color: $jv-primary;
+    }
+  }
+}
+
+// Thumbnail Preview
+.topic-thumbnail {
+  display: block;
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: $jv-radius-sm; // 8px - Material Design standard
+  overflow: hidden;
+
+  img {
+    display: block;
+    max-height: 200px;
+    max-width: 100%;
+    width: auto;
+    object-fit: cover;
+    border-radius: $jv-radius-sm; // 8px - Material Design standard
+  }
+
+  .thumb-count {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: $jv-radius-xs;
+  }
+}
+
+// Teaser/Preview Content
+.topic-teaser {
+  font-size: $jv-font-size-sm;
+  color: $jv-text-muted;
+  line-height: $jv-line-height-base;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  // Reset any nested styles
+  p {
+    margin: 0;
+  }
+}
+
+// ===========================================================
+// ACTION BAR (Bottom - Reddit style)
+// ===========================================================
+.topic-actions {
+  display: flex;
+  align-items: center;
+  gap: $jv-space-3; // 12dp - Material grid
+  padding-top: $jv-space-3; // 12dp - Material grid
+  margin-top: auto;
+  border-top: none !important; // Remove any border-top
+
+  // Hide hr element if present
+  hr {
+    display: none !important;
+  }
+}
+
+// Hide hr elements within topic cards globally
+.topic-card hr,
+.topic-content hr,
+li[component="post"] hr,
+[component="post"] hr {
+  display: none !important;
+}
+
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $jv-space-2; // 8dp grid
+  padding: $jv-space-2 $jv-space-3; // 8dp vertical, 12dp horizontal
+  font-size: 14px;
+  font-weight: 600;
+  color: $jv-text-muted;
+  background: transparent;
+  border: none;
+  border-radius: $jv-radius-sm; // 8px shadcn standard
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+
+  &:hover {
+    background: $jv-hover-bg; // Consistent hover state
+    color: $jv-text-main;
+  }
+
+  // Focus state for accessibility
+  &:focus-visible {
+    outline: none;
+    box-shadow: $jv-focus-ring;
+  }
+
+  i {
+    font-size: 18px; // Larger icons
+  }
+
+  // Make numbers bold
+  span {
+    font-weight: 700;
+  }
+}
+
+.action-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: $jv-space-1; // 4dp - Material grid
+  font-size: $jv-font-size-xs;
+  color: $jv-text-soft;
+  margin-left: auto;
+
+  i {
+    font-size: 12px;
+  }
+}
+
+// ===========================================================
+// RESPONSIVE ADJUSTMENTS
+// ===========================================================
+@media (max-width: 768px) {
+  .topic-card {
+    flex-direction: column;
+  }
+
+  .vote-column {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: $jv-space-4 $jv-space-6;
+    min-width: auto;
+    border-bottom: 1px solid $jv-border-subtle;
+  }
+
+  .topic-content {
+    padding: $jv-space-4 $jv-space-6 $jv-space-6;
+  }
+
+  .topic-actions {
+    flex-wrap: wrap;
+    gap: $jv-space-2; // 8dp - Material grid
+  }
+
+  .action-btn span {
+    display: none;
+  }
+
+  .action-btn i {
+    font-size: 16px;
+  }
+}
+
+// ===========================================================
+// POSTS LIST ITEM (for posts_list_item.tpl)
+// ===========================================================
+li[component="post"].posts-list-item {
+  background: $jv-surface;
+  border-radius: $jv-radius-sm; // 8px - shadcn standard
+  border: 1px solid $jv-border-subtle;
+  padding: $jv-space-4 $jv-space-3; // 16dp vertical, 12dp horizontal
+  margin-bottom: $jv-space-2; // 8dp grid
+  box-shadow: $jv-shadow-sm; // shadcn subtle shadow
+  transition: $jv-transition-shadow, border-color $jv-transition-fast; // Modern transitions
+
+  &:hover {
+    box-shadow: $jv-shadow-md; // shadcn hover shadow
+    border-color: $jv-border-strong;
+  }
+
+  // Focus state for accessibility
+  &:focus-within {
+    outline: none;
+    box-shadow: $jv-shadow-md, $jv-focus-ring;
+  }
+}
+
+li[component="post"] {
+  .topic-title {
+    font-size: 20px; // Larger for prominence
+    font-weight: 700; // Bolder for better hierarchy
+    line-height: 1.4; // Better readability
+    margin-bottom: $jv-space-3; // 12dp - Material grid
+    letter-spacing: -0.02em; // Tighter for modern feel
+
+    a {
+      color: $jv-text-main;
+      text-decoration: none;
+
+      &:hover {
+        color: $jv-primary;
+      }
+    }
+  }
+
+  .post-body {
+    display: flex;
+    flex-direction: column;
+    gap: $jv-space-2; // 8dp - Material grid
+  }
+
+  .post-info {
+    font-size: 14px; // Slightly larger for readability
+    color: $jv-text-soft; // More subtle
+
+    a {
+      color: $jv-text-soft; // More subtle
+      font-weight: 400; // Normal weight
+
+      &:hover {
+        color: $jv-primary;
+      }
+    }
+  }
+
+  .content {
+    font-size: 15px; // Slightly larger for better readability
+    line-height: 1.6;
+    color: $jv-text-muted;
+
+    p {
+      margin-bottom: $jv-space-4;
+    }
+  }
+
+  .timeago {
+    color: $jv-text-soft;
+    font-size: 13px;
+  }
+}
+
+// ===========================================================
+// TOPICS LIST WRAPPER
+// ===========================================================
+.topics-list {
+  padding: 0;
+  margin: 0;
+}
+
+// Category/Topic List Item (fallback for other templates)
+.category-item {
+  background: $jv-surface;
+  border-radius: $jv-radius-sm; // 8px - shadcn standard
+  border: 1px solid $jv-border-subtle;
+  padding: $jv-space-3; // 12dp grid
+  margin-bottom: $jv-space-2; // 8dp grid
+  box-shadow: $jv-shadow-sm; // shadcn subtle shadow
+  transition: $jv-transition-shadow, border-color $jv-transition-fast; // Modern transitions
+
+  &:hover {
+    box-shadow: $jv-shadow-md; // shadcn hover shadow
+    border-color: $jv-border-strong;
+  }
+
+  // Focus state for accessibility
+  &:focus-within {
+    outline: none;
+    box-shadow: $jv-shadow-md, $jv-focus-ring;
+  }
+
+  // Override default border-bottom
+  &.border-bottom {
+    border-bottom: 1px solid $jv-border-subtle !important;
+  }
+}

@@ -1,0 +1,401 @@
+// ============================================
+// HEADER / TOPBAR - Sticky Navigation Bar
+// ============================================
+// Industry-standard sticky header with centered search
+// Inspired by: Slack, Linear, Notion, GitHub
+
+// ===========================================================
+// BRAND CONTAINER (Top Bar) - Reddit-style compact header
+// ===========================================================
+.brand-container {
+  position: sticky;
+  top: 0;
+  z-index: 1020; // Below modals (1050) but above content
+  background: $jv-surface;
+  border-bottom: 1px solid $jv-border-subtle;
+  margin: 0 !important; // No margins - ever
+  padding: $jv-space-2 $jv-space-4 !important; // 8px vertical, 16px horizontal (tighter)
+  min-height: 56px; // Compact like Reddit (was 64px)
+  max-width: 100% !important; // Override container-lg max-width
+  width: 100% !important; // Full width always
+  display: flex;
+  align-items: center;
+  transition: box-shadow $jv-transition-base;
+  box-sizing: border-box;
+
+  // Override Bootstrap container classes
+  &.container-lg,
+  &.container-md,
+  &.container {
+    max-width: 100% !important;
+    padding-left: $jv-space-4 !important;
+    padding-right: $jv-space-4 !important;
+  }
+
+  // Subtle shadow on scroll (added via JS)
+  &.scrolled {
+    box-shadow: $jv-shadow-sm;
+  }
+
+  // Inner flex container
+  > .col-12 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $jv-space-4;
+    border-bottom: none !important; // Remove Harmony's border
+    padding: 0 $jv-space-4 !important; // Horizontal padding
+    margin: 0 !important;
+    width: 100% !important; // Ensure full width - no right margin
+  }
+
+  // Brand/Logo wrapper - compact padding
+  [component="brand/wrapper"] {
+    flex-shrink: 0;
+    padding: $jv-space-1 !important; // Minimal padding
+    border-radius: $jv-radius-sm;
+    transition: background $jv-transition-fast;
+    gap: $jv-space-2 !important; // Tighter gap
+
+    &:hover {
+      background: $jv-hover-bg;
+    }
+  }
+
+  // Logo sizing - compact
+  [component="brand/logo"] {
+    max-height: 28px; // Compact logo height - matches sidebar logo
+    width: auto;
+  }
+
+  // Site title (if shown)
+  [component="siteTitle"] {
+    h1 {
+      font-size: $jv-font-size-base !important; // Smaller title
+      font-weight: 600 !important;
+      margin: 0 !important;
+    }
+  }
+}
+
+// ===========================================================
+// SEARCH BAR - Shifted left to align with feed content
+// ===========================================================
+[data-widget-area="brand-header"] {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 $jv-space-4 !important;
+  // Shift the entire search area to the left
+  margin-left: -100px !important;
+  margin-right: 100px !important;
+}
+
+// Search widget in header
+.brand-container .search-widget,
+[data-widget-area="brand-header"] .search-widget {
+  width: 100%;
+  max-width: 560px;
+
+  .input-group {
+    display: flex;
+    align-items: center;
+    background: $jv-bg; // Light gray background (matches app bg)
+    border-radius: $jv-radius-pill;
+    border: 1px solid transparent;
+    transition: all $jv-transition-fast;
+    padding: 0;
+    overflow: hidden;
+
+    // Hover state
+    &:hover {
+      background: darken($jv-bg, 2%);
+    }
+
+    // Focus-within state
+    &:focus-within {
+      background: $jv-surface;
+      border-color: $jv-primary;
+      box-shadow: $jv-focus-ring;
+    }
+
+    // Search icon button
+    .btn-outline-secondary,
+    .input-group-text {
+      background: transparent !important;
+      border: none !important;
+      padding: $jv-space-2 $jv-space-3;
+      padding-right: 0;
+      color: $jv-text-soft !important;
+
+      i {
+        font-size: 14px;
+      }
+
+      &:hover {
+        background: transparent !important;
+        color: $jv-text-muted !important;
+      }
+    }
+
+    // Search input field
+    .form-control {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: $jv-space-2 $jv-space-3;
+      padding-left: $jv-space-2;
+      font-size: $jv-font-size-base;
+      color: $jv-text-main;
+      height: 36px; // Slightly shorter for compact header
+
+      // Placeholder styling
+      &::placeholder {
+        color: $jv-text-soft;
+        opacity: 1;
+        font-weight: 400;
+      }
+
+      &:focus {
+        outline: none;
+        box-shadow: none !important;
+
+        &::placeholder {
+          color: $jv-text-muted;
+        }
+      }
+    }
+
+    // Search submit button (blue button)
+    .btn-primary,
+    .btn[type="submit"] {
+      height: 36px; // Match input height
+      min-width: 36px;
+      padding: 0 $jv-space-3;
+      border-radius: 0 $jv-radius-pill $jv-radius-pill 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    // Keyboard shortcut hint (optional enhancement)
+    &::after {
+      content: "⌘K";
+      display: none; // Enable when JS shortcut is implemented
+      padding: $jv-space-1 $jv-space-2;
+      margin-right: $jv-space-2;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: $jv-radius-xs;
+      font-size: $jv-font-size-xs;
+      color: $jv-text-soft;
+      font-family: $jv-font-sans;
+    }
+  }
+}
+
+// ===========================================================
+// SEARCH DROPDOWN RESULTS
+// ===========================================================
+.brand-container .search-dropdown,
+.search-widget .dropdown-menu {
+  width: 100%;
+  min-width: 400px;
+  max-width: 560px;
+  margin-top: $jv-space-2 !important;
+  padding: $jv-space-2;
+  border-radius: $jv-radius-md;
+  border: 1px solid $jv-border-subtle;
+  box-shadow: $jv-shadow-lg;
+  background: $jv-surface;
+
+  // Quick search results
+  .quick-search-results-container {
+    max-height: 400px;
+    overflow-y: auto;
+
+    // Individual result items
+    .search-result {
+      padding: $jv-space-2 $jv-space-3;
+      border-radius: $jv-radius-sm;
+      transition: background $jv-transition-fast;
+
+      &:hover {
+        background: $jv-hover-bg;
+      }
+    }
+  }
+
+  // Advanced search link
+  .advanced-search-link {
+    color: $jv-text-muted;
+    transition: color $jv-transition-fast;
+
+    &:hover {
+      color: $jv-primary;
+    }
+  }
+}
+
+// ===========================================================
+// NOTIFICATION DROPDOWN - Reduced width with optimized text
+// ===========================================================
+.notifications-dropdown {
+  min-width: 300px !important;
+  max-width: 340px !important;
+  width: 300px !important;
+  padding: $jv-space-2 !important;
+
+  // Individual notification items (actual class is .unread or .read)
+  .unread, .read {
+    padding: $jv-space-2 !important;
+
+    // Make hover effect rectangular instead of pill-shaped
+    .btn, .btn-ghost {
+      border-radius: $jv-radius-sm !important;
+    }
+
+    // The link containing notification text
+    a[component="notifications/item/link"] {
+      font-size: 12px !important;
+      line-height: 1.5 !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+      word-break: break-word !important;
+      white-space: normal !important;
+      text-overflow: clip !important;
+      display: block !important;
+
+      strong {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+      }
+    }
+
+    // Timestamp
+    .text-xs.text-muted {
+      font-size: 11px !important;
+      margin-top: $jv-space-1 !important;
+    }
+  }
+}
+
+// ===========================================================
+// RESPONSIVE ADJUSTMENTS
+// ===========================================================
+@media (max-width: 991px) {
+  .brand-container {
+    // On tablet/mobile, maintain proper spacing
+    min-height: 52px !important; // Even more compact on mobile
+    margin: 0 !important;
+    padding: $jv-space-2 0 !important;
+
+    > .col-12 {
+      padding: 0 $jv-space-2 !important;
+      width: 100% !important;
+    }
+
+    [data-widget-area="brand-header"] {
+      padding: 0 $jv-space-2 !important;
+    }
+
+    .search-widget {
+      max-width: 100%;
+    }
+  }
+}
+
+// ===========================================================
+// MOBILE HEADER LOGO (hidden on desktop)
+// ===========================================================
+.javis-mobile-header-logo {
+  display: none !important; // Hidden by default on desktop
+
+  .javis-mobile-logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .javis-mobile-logo-img {
+    max-width: 120px; // Logo width on mobile
+    height: 32px; // Logo height on mobile
+    object-fit: contain;
+  }
+}
+
+@media (max-width: 767px) {
+  .brand-container {
+    // Hide search in header on mobile (use mobile header instead)
+    [data-widget-area="brand-header"] {
+      display: none;
+    }
+
+    > .col-12 {
+      justify-content: center;
+    }
+
+    // Show mobile logo on mobile devices only
+    .javis-mobile-header-logo {
+      display: flex !important; // Show on mobile
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    // Reduce notification dropdown width on mobile to prevent cutoff
+    .notifications-dropdown {
+      min-width: 280px !important;
+      max-width: 90vw !important;
+      width: 280px !important;
+      padding: $jv-space-2 !important;
+
+      // Even smaller text on mobile for better fit
+      .notification-item,
+      [component="notifications/item"],
+      .list-group-item {
+        padding: $jv-space-2 $jv-space-3 !important;
+        font-size: 11px !important;
+        line-height: 1.3 !important;
+
+        p, .notification-text, .text-muted, div {
+          font-size: 11px !important;
+          line-height: 1.3 !important;
+          white-space: normal !important;
+        }
+
+        time, .timeago, small {
+          font-size: 10px !important;
+          margin-top: 4px !important;
+        }
+
+        strong, .fw-semibold, a {
+          font-size: 11px !important;
+          white-space: normal !important;
+        }
+      }
+
+      .dropdown-header {
+        padding: $jv-space-2 !important;
+        font-size: 11px !important;
+      }
+
+      .dropdown-footer,
+      .list-group-item:last-child {
+        padding: $jv-space-2 !important;
+
+        a, button {
+          font-size: 11px !important;
+        }
+      }
+    }
+  }
+}
+
+// ===========================================================
+// MAIN PANEL - Remove top margin for cohesive layout
+// ===========================================================
+#panel {
+  margin-top: 0 !important; // Remove mt-3 class margin
+}

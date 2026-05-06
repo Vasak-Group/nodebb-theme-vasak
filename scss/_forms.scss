@@ -1,0 +1,531 @@
+// ===========================================================
+// INPUT SYSTEM – Global Form Controls
+// ===========================================================
+
+.form-control,
+input[type="text"],
+input[type="search"],
+input[type="email"],
+input[type="password"],
+textarea,
+.form-select {
+  background: $jv-surface;
+  border: 1px solid $jv-border-subtle;
+  border-radius: $jv-radius-pill;
+  padding: 10px 16px;
+  font-size: $jv-font-size-base;
+  color: $jv-text-main;
+  line-height: $jv-line-height-tight;
+  box-shadow: none;
+  transition: border-color $jv-transition-fast, box-shadow $jv-transition-fast; // Modern transitions
+
+  &::placeholder {
+    color: $jv-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $jv-primary;
+    box-shadow: $jv-focus-ring; // Consistent focus ring
+  }
+}
+
+// Textarea specific - override pill shape for multi-line inputs
+textarea,
+textarea.form-control,
+.form-control[type="textarea"] {
+  border-radius: $jv-radius-sm !important; // 8px rounded rectangle, not pill
+  resize: vertical;
+  min-height: 100px;
+}
+
+// ===========================================================
+// COMPOSER TRIGGER (Write a Post…)
+// ===========================================================
+
+.jlc-trigger {
+  width: 100%;
+  background: $jv-surface;
+  border: 1px solid $jv-border-subtle;
+  border-radius: $jv-radius-pill;
+  padding: 12px 18px;
+  font-size: $jv-font-size-base;
+  font-weight: 400;
+  text-align: left;
+  color: $jv-text-muted;
+  box-shadow: $jv-shadow-sm; // shadcn subtle shadow
+  transition: border-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+
+  &:hover,
+  &:focus {
+    background: $jv-surface;
+    border-color: $jv-primary;
+    color: $jv-primary;
+    box-shadow: $jv-shadow-sm; // shadcn subtle shadow
+    outline: none;
+  }
+
+  // Override Bootstrap button states
+  &.btn,
+  &.btn:focus,
+  &.btn:hover,
+  &.btn:active {
+    background: $jv-surface;
+    border-radius: $jv-radius-pill;
+    box-shadow: $jv-shadow-sm; // shadcn subtle shadow
+    border-color: $jv-border-subtle;
+    outline: none;
+  }
+
+  &.btn:hover,
+  &.btn:focus {
+    border-color: $jv-primary;
+    color: $jv-primary;
+  }
+}
+
+// ===========================================================
+// DROPDOWN MENUS
+// ===========================================================
+.dropdown-menu {
+  border: 1px solid $jv-border-subtle;
+  border-radius: $jv-radius-md;
+  box-shadow: $jv-shadow-lg; // shadcn large shadow for dropdowns
+  padding: $jv-space-2 0;
+  min-width: 180px;
+  background: $jv-surface;
+  animation: dropdownFade $jv-transition-fast;
+
+  @keyframes dropdownFade {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .dropdown-item {
+    padding: $jv-space-4 $jv-space-8;
+    font-size: $jv-font-size-sm;
+    color: $jv-text-main;
+    transition: background-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+    display: flex;
+    align-items: center;
+    gap: $jv-space-4;
+
+    i {
+      width: 16px;
+      flex-shrink: 0;
+      color: $jv-text-muted;
+    }
+
+    // Hide bookmark option from dropdown menu
+    &[component="post/bookmark"] {
+      display: none !important;
+    }
+
+    &:hover {
+      background: rgba(0, 81, 255, 0.06);
+      color: $jv-primary;
+
+      i {
+        color: $jv-primary;
+      }
+    }
+
+    &:active {
+      background: $jv-active-bg; // Consistent active state
+    }
+
+    &.active {
+      background: $jv-primary-soft;
+      color: $jv-primary;
+      font-weight: 500;
+    }
+
+    // Focus state for accessibility
+    &:focus-visible {
+      outline: none;
+      background: rgba(0, 81, 255, 0.06);
+      color: $jv-primary;
+    }
+  }
+
+  .dropdown-divider {
+    margin: $jv-space-2 0;
+    border-top-color: $jv-border-subtle;
+  }
+
+  .dropdown-header {
+    padding: $jv-space-2 $jv-space-8;
+    font-size: $jv-font-size-xs;
+    font-weight: 600;
+    color: $jv-text-soft;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}
+
+// ===========================================================
+// BADGES & LABELS
+// ===========================================================
+.badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: $jv-radius-pill;
+  line-height: 1.2;
+}
+
+.badge-primary,
+.bg-primary {
+  background-color: $jv-primary !important;
+  color: #fff;
+}
+
+.badge-secondary,
+.bg-secondary {
+  background-color: #6b7280 !important;
+  color: #fff;
+}
+
+.badge-success,
+.bg-success {
+  background-color: #10b981 !important;
+  color: #fff;
+}
+
+.badge-danger,
+.bg-danger {
+  background-color: #ef4444 !important;
+  color: #fff;
+}
+
+.badge-warning,
+.bg-warning {
+  background-color: #f59e0b !important;
+  color: #fff;
+}
+
+.badge-info,
+.bg-info {
+  background-color: #3b82f6 !important;
+  color: #fff;
+}
+
+.badge-light,
+.bg-light {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+  color: $jv-text-main;
+}
+
+// ===========================================================
+// ALERTS
+// ===========================================================
+.alert {
+  border-radius: $jv-radius-md;
+  border: none;
+  padding: $jv-space-8;
+  font-size: $jv-font-size-sm;
+
+  .alert-link {
+    font-weight: 600;
+  }
+}
+
+.alert-primary {
+  background: rgba(0, 81, 255, 0.1);
+  color: #0044dd;
+}
+
+.alert-success {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.alert-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.alert-warning {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.alert-info {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+}
+
+// ===========================================================
+// TOOLTIPS
+// ===========================================================
+.tooltip {
+  font-size: $jv-font-size-xs;
+
+  .tooltip-inner {
+    background: #1f2937;
+    border-radius: $jv-radius-xs;
+    padding: 4px 8px;
+    max-width: 240px;
+  }
+
+  .tooltip-arrow::before {
+    border-top-color: #1f2937;
+  }
+}
+
+// ===========================================================
+// MODALS
+// ===========================================================
+.modal-content {
+  border: none;
+  border-radius: $jv-radius-lg;
+  box-shadow: $jv-shadow-xl; // shadcn extra large shadow for modals
+}
+
+.modal-header {
+  border-bottom: 1px solid $jv-border-subtle;
+  padding: $jv-space-8 $jv-space-10;
+
+  .modal-title {
+    font-weight: 600;
+    font-size: $jv-font-size-lg;
+  }
+
+  .btn-close {
+    opacity: 0.5;
+    transition: opacity $jv-transition-fast; // Modern transition
+
+    &:hover {
+      opacity: 1;
+    }
+
+    // Focus state for accessibility
+    &:focus-visible {
+      outline: none;
+      box-shadow: $jv-focus-ring;
+    }
+  }
+}
+
+.modal-body {
+  padding: $jv-space-10;
+}
+
+.modal-footer {
+  border-top: 1px solid $jv-border-subtle;
+  padding: $jv-space-8 $jv-space-10;
+  gap: $jv-space-4;
+}
+
+// ===========================================================
+// CHECKBOX & RADIO
+// ===========================================================
+.form-check-input {
+  width: 18px;
+  height: 18px;
+  margin-top: 0;
+  border: 2px solid $jv-border-strong;
+  transition: background-color $jv-transition-fast, border-color $jv-transition-fast; // Modern transitions
+
+  &:checked {
+    background-color: $jv-primary;
+    border-color: $jv-primary;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: $jv-focus-ring; // Consistent focus ring
+    border-color: $jv-primary;
+  }
+}
+
+.form-check-label {
+  margin-left: $jv-space-2;
+  font-size: $jv-font-size-sm;
+  cursor: pointer;
+}
+
+// ===========================================================
+// TOGGLE SWITCH
+// ===========================================================
+.form-switch {
+  .form-check-input {
+    width: 40px;
+    height: 22px;
+    border-radius: $jv-radius-pill;
+    background-color: #d1d5db;
+    border: none;
+
+    &:checked {
+      background-color: $jv-primary;
+    }
+  }
+}
+
+// ===========================================================
+// LIST GROUPS
+// ===========================================================
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid $jv-border-subtle;
+  padding: $jv-space-6 $jv-space-8;
+  transition: background-color $jv-transition-fast; // Modern transition
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: $jv-hover-bg; // Consistent hover state
+  }
+
+  &.active {
+    background: $jv-primary-soft;
+    border-color: transparent;
+    color: $jv-primary;
+  }
+
+  // Focus state for accessibility
+  &:focus-visible {
+    outline: none;
+    background: $jv-hover-bg;
+  }
+}
+
+// ===========================================================
+// TABLES
+// ===========================================================
+.table {
+  th {
+    font-weight: 600;
+    font-size: $jv-font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $jv-text-muted;
+    border-bottom-width: 1px;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+
+  &.table-hover tbody tr {
+    transition: background-color $jv-transition-fast; // Modern transition
+
+    &:hover {
+      background: $jv-hover-bg; // Consistent hover state
+    }
+  }
+}
+
+// ===========================================================
+// PAGINATION
+// ===========================================================
+.pagination {
+  gap: 4px;
+
+  .page-link {
+    border: none;
+    border-radius: $jv-radius-sm;
+    padding: 6px 12px;
+    font-size: $jv-font-size-sm;
+    color: $jv-text-main;
+    background: transparent;
+    transition: background-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+
+    &:hover {
+      background: $jv-hover-bg; // Consistent hover state
+      color: $jv-primary;
+    }
+
+    // Focus state for accessibility
+    &:focus-visible {
+      outline: none;
+      box-shadow: $jv-focus-ring;
+    }
+  }
+
+  .page-item.active .page-link {
+    background: $jv-primary;
+    color: #fff;
+  }
+
+  .page-item.disabled .page-link {
+    color: $jv-text-soft;
+    background: transparent;
+  }
+}
+
+// ===========================================================
+// NAV TABS
+// ===========================================================
+.nav-tabs {
+  border-bottom: 1px solid $jv-border-subtle;
+  gap: 4px;
+
+  .nav-link {
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    padding: $jv-space-4 $jv-space-6;
+    font-size: $jv-font-size-sm;
+    font-weight: 500;
+    color: $jv-text-muted;
+    transition: color $jv-transition-fast, border-bottom-color $jv-transition-fast; // Modern transitions
+
+    &:hover {
+      color: $jv-text-main;
+      border-bottom-color: $jv-border-strong;
+    }
+
+    &.active {
+      color: $jv-primary;
+      border-bottom-color: $jv-primary;
+      background: transparent;
+    }
+
+    // Focus state for accessibility
+    &:focus-visible {
+      outline: none;
+      box-shadow: $jv-focus-ring;
+    }
+  }
+}
+
+// ===========================================================
+// NAV PILLS
+// ===========================================================
+.nav-pills {
+  gap: 4px;
+
+  .nav-link {
+    border-radius: $jv-radius-pill;
+    padding: $jv-space-4 $jv-space-8;
+    font-size: $jv-font-size-sm;
+    font-weight: 500;
+    color: $jv-text-muted;
+    transition: background-color $jv-transition-fast, color $jv-transition-fast; // Modern transitions
+
+    &:hover {
+      background: $jv-hover-bg; // Consistent hover state
+      color: $jv-text-main;
+    }
+
+    &.active {
+      background: $jv-primary;
+      color: #fff;
+    }
+
+    // Focus state for accessibility
+    &:focus-visible {
+      outline: none;
+      box-shadow: $jv-focus-ring;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+// Brand Colors
+$jv-primary: #0051ff;
+$jv-primary-hover: #0044dd;
+$jv-primary-soft: rgba(0, 81, 255, 0.12);
+
+// Neutrals
+$jv-bg: #f5f6f8;              // app background
+$jv-surface: #ffffff;         // cards, panels
+$jv-border-subtle: rgba(0,0,0,0.1);  // More visible than Material (was 0.06) - shadcn style
+$jv-border-strong: rgba(0,0,0,0.15); // Stronger borders (was 0.12)
+
+// Text
+$jv-text-main: #111111;
+$jv-text-muted: #6b7280;
+$jv-text-soft: #9ca3af;
+
+// Radii
+$jv-radius-xs: 4px;
+$jv-radius-sm: 8px;
+$jv-radius-md: 12px;
+$jv-radius-lg: 16px;
+$jv-radius-pill: 999px;
+
+// shadcn-Style Shadow System (Compact, Grounded, Notion/Linear-like)
+// Subtle shadows that let borders do the heavy lifting
+$jv-shadow-none: none;
+$jv-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05); // Barely visible
+$jv-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1); // Card resting - SUBTLE
+$jv-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); // Card hover
+$jv-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); // Modals/Dropdowns
+$jv-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); // Popovers
+
+// Legacy compatibility - map old names to new system
+$jv-shadow-soft: $jv-shadow-sm;
+$jv-shadow-card: $jv-shadow-sm;
+$jv-elevation-0: $jv-shadow-none;
+$jv-elevation-1: $jv-shadow-sm;
+$jv-elevation-2: $jv-shadow-sm;
+$jv-elevation-4: $jv-shadow-md;
+$jv-elevation-6: $jv-shadow-md;
+$jv-elevation-8: $jv-shadow-md;
+
+// Button shadows (keep branded)
+$jv-shadow-button: 0 4px 12px rgba(0, 81, 255, 0.25);
+$jv-shadow-button-hover: 0 6px 16px rgba(0, 81, 255, 0.35);
+
+// Spacing (8dp baseline grid - shadcn/Tailwind compatible)
+$jv-space-1: 4px;   // 4dp
+$jv-space-2: 8px;   // 8dp (1 unit)
+$jv-space-3: 12px;  // 12dp (1.5 units)
+$jv-space-4: 16px;  // 16dp (2 units)
+$jv-space-5: 20px;  // 20dp (2.5 units)
+$jv-space-6: 24px;  // 24dp (3 units)
+$jv-space-8: 32px;  // 32dp (4 units)
+$jv-space-10: 40px; // 40dp (5 units)
+$jv-space-12: 48px; // 48dp (6 units)
+
+// Typography
+$jv-font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", Arial, sans-serif;
+$jv-font-size-base: 15px;
+$jv-font-size-sm: 13px;
+$jv-font-size-xs: 12px;
+$jv-font-size-lg: 18px;
+$jv-font-size-xl: 22px;
+$jv-font-size-xxl: 32px;
+
+// Line Heights
+$jv-line-height-base: 1.52;
+$jv-line-height-tight: 1.4;
+$jv-line-height-relaxed: 1.6;
+
+// Modern Polish - Transitions & Interactions (2025 standard)
+$jv-transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+$jv-transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+$jv-transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+$jv-transition-shadow: box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
+
+// Focus States (Accessibility + Modern Look)
+$jv-focus-ring: 0 0 0 3px rgba(0, 81, 255, 0.12);
+$jv-focus-ring-offset: 0 0 0 2px $jv-surface, 0 0 0 4px $jv-primary;
+
+// Interactive States
+$jv-hover-bg: rgba(0, 0, 0, 0.04);
+$jv-active-bg: rgba(0, 0, 0, 0.08);
+$jv-selected-bg: rgba(0, 81, 255, 0.08);
+
+// Semantic Colors
+$jv-success: #10b981;
+$jv-success-hover: #059669;
+$jv-danger: #ef4444;
+$jv-danger-hover: #dc2626;
+$jv-warning: #f59e0b;
+$jv-warning-hover: #d97706;
+$jv-info: #3b82f6;
+$jv-info-hover: #2563eb;

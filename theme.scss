@@ -1,0 +1,24 @@
+// ============================================
+// Vasak Community Theme
+// Extends NodeBB Harmony Theme
+// ============================================
+
+// Note: When using baseTheme, NodeBB loads the parent theme (Harmony) first.
+// This file contains Vasak specific style overrides that are applied on top.
+
+// Import Harmony's theme styles (required for inheritance)
+@import "nodebb-theme-harmony/scss/harmony";
+
+// JAVIS Custom Styles
+@import "./scss/variables";
+@import "./scss/base";
+@import "./scss/header";
+@import "./scss/buttons";
+@import "./scss/forms";
+@import "./scss/cards";
+@import "./scss/sidebar";
+@import "./scss/sidebar-user";
+@import "./scss/categories";
+@import "./scss/feed";
+@import "./scss/topic";
+@import "./scss/composer";

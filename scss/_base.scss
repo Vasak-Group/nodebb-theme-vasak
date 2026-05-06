@@ -1,0 +1,433 @@
+// ============================================
+// BASE STYLES – Core Layout + Typography
+// ============================================
+
+// Hide Harmony's right navigation sidebar (user profile moved to left sidebar)
+// Note: This targets the nav sidebar, NOT the widget area sidebar
+nav[component="sidebar/right"],
+.sidebar-right:not([data-widget-area]) {
+  display: none !important;
+}
+
+// No custom layout overrides - use Harmony defaults
+
+// Left sidebar layout - navigation at top, profile/collapse at bottom
+nav[component="sidebar/left"] {
+  justify-content: flex-start !important; // Remove space-between
+
+  // Main navigation list - keep at top with no extra margin
+  #main-nav {
+    margin-top: 0 !important; // Remove top margin to be close to logo
+    flex-grow: 0 !important; // Don't grow to fill space
+  }
+
+  // Sidebar toggle container - push to bottom
+  .sidebar-toggle-container {
+    margin-top: auto !important; // Push to bottom
+    width: 100% !important;
+  }
+}
+
+// Sidebar toggle link padding
+.sidebar-toggle {
+  position: relative;
+  z-index: 10;
+
+  [component="sidebar/toggle"] {
+    padding: $jv-space-4 $jv-space-5 !important; // 16px vertical, 20px horizontal
+    pointer-events: auto !important;
+    cursor: pointer !important;
+  }
+}
+
+// Reddit-style layout: Equal spacing and wider feed
+.feed > .row {
+  max-width: 1400px; // Reddit's approximate max-width
+  margin: 0 auto;
+  padding: 0 20px; // Reddit-style horizontal padding
+  justify-content: center; // Center the columns
+
+  // Gap between columns
+  gap: $jv-space-8; // 32px
+
+  // Adjust column widths for better proportions
+  > [data-widget-area="left"] {
+    flex: 0 0 auto;
+    width: 280px; // Fixed width for left sidebar (not using Bootstrap col-lg-3)
+  }
+
+  // Center feed content - make it wider
+  > .col-lg-6 {
+    flex: 1 1 auto; // Take remaining space
+    max-width: 700px; // Reddit's feed is ~640-700px
+    margin-left: 0 !important; // Remove ms-auto
+    padding-left: 0 !important; // Remove left padding
+    padding-right: 0 !important; // Remove right padding
+  }
+
+  // Right sidebar (Trending)
+  > [data-widget-area="right"] {
+    flex: 0 0 auto;
+    width: 320px; // Fixed width for right sidebar
+    padding-left: 0 !important; // Remove left padding
+    padding-right: 0 !important; // Remove right padding
+  }
+}
+
+body {
+  font-family: $jv-font-sans;
+  font-size: $jv-font-size-base;
+  line-height: $jv-line-height-base;
+  color: $jv-text-main;
+  background: linear-gradient(180deg, #ffffff 0%, #e0f0ff 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Typography Reset
+h1, h2, h3, h4, h5, h6 {
+  color: $jv-text-main;
+  font-weight: 600;
+  line-height: $jv-line-height-tight;
+}
+
+h1 {
+  font-size: $jv-font-size-xxl;
+  margin-bottom: $jv-space-8;
+}
+
+h2 {
+  font-size: 26px;
+  margin-bottom: $jv-space-8;
+}
+
+h3 {
+  font-size: $jv-font-size-xl;
+  font-weight: 600;
+  margin-bottom: $jv-space-6;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: $jv-space-6;
+}
+
+h5 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: $jv-space-6;
+}
+
+h6 {
+  font-size: $jv-font-size-base;
+  font-weight: 600;
+  margin-bottom: $jv-space-4;
+}
+
+// Links
+a {
+  color: $jv-primary;
+  text-decoration: none;
+  transition: color $jv-transition-fast; // Modern transition
+
+  &:hover {
+    color: $jv-primary-hover;
+  }
+
+  // Focus state for accessibility
+  &:focus-visible {
+    outline: none;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+  }
+}
+
+// ===========================================================
+// PROFILE PAGE - Hide Push Notifications link
+// ===========================================================
+#web-push {
+  display: none !important;
+}
+
+// ===========================================================
+// PROFILE EDIT PAGE - Right side options alignment
+// ===========================================================
+.account .col-xl-6:last-child {
+  // Remove text-center, align left
+  text-align: left !important;
+
+  // The list group for Change Picture, Username, etc.
+  .list-group {
+    border-radius: $jv-radius-sm;
+    overflow: hidden;
+
+    .list-group-item {
+      text-align: left;
+      padding: $jv-space-4 $jv-space-6;
+      border-left: none;
+      border-right: none;
+
+      &:first-child {
+        border-top: none;
+      }
+
+      a {
+        display: block;
+        font-weight: 500;
+      }
+    }
+  }
+
+  // SSO section label - align with list items above
+  > label.form-label {
+    margin-top: $jv-space-6;
+    padding-left: $jv-space-6; // Match list-group-item padding
+  }
+
+  // Delete account button container
+  .d-flex.justify-content-center {
+    justify-content: flex-start !important;
+    margin-top: $jv-space-6;
+  }
+}
+
+// ===========================================================
+// LOGIN PAGE ONLY - Hide search bar
+// ===========================================================
+.template-login {
+  .brand-container {
+    display: none !important;
+  }
+}
+
+// ===========================================================
+// LOGIN & REGISTER PAGES - Center aligned forms
+// ===========================================================
+.login,
+.register {
+  // Center the main content area
+  #content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: $jv-space-12;
+  }
+
+  // The form container
+  .row {
+    justify-content: center !important;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto !important;
+  }
+
+  // Make sure columns don't offset
+  .col-12,
+  .col-md-6,
+  .col-lg-4,
+  [class*="col-"] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  // Card styling for the form
+  .card,
+  .login-card,
+  .register-card {
+    background: $jv-surface;
+    border: 1px solid $jv-border-subtle;
+    border-radius: $jv-radius-lg;
+    box-shadow: $jv-shadow-md;
+    padding: $jv-space-8;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  // Page title
+  h1,
+  .page-title {
+    text-align: center;
+    margin-bottom: $jv-space-8;
+  }
+
+  // Form labels
+  label {
+    font-weight: 500;
+    color: $jv-text-main;
+    margin-bottom: $jv-space-2;
+  }
+
+  // Form inputs
+  .form-control {
+    border-radius: $jv-radius-sm;
+    border: 1px solid $jv-border-subtle;
+    padding: $jv-space-3 $jv-space-4;
+    font-size: $jv-font-size-base;
+    transition: border-color $jv-transition-fast, box-shadow $jv-transition-fast;
+
+    &:focus {
+      border-color: $jv-primary;
+      box-shadow: $jv-focus-ring;
+      outline: none;
+    }
+  }
+
+  // Login/Register button
+  .btn-primary {
+    width: 100%;
+    padding: $jv-space-3 $jv-space-6;
+    font-weight: 600;
+    border-radius: $jv-radius-sm;
+    margin-top: $jv-space-4;
+  }
+
+  // Forgot password and other links
+  .forgot-password,
+  a.text-muted {
+    font-size: $jv-font-size-sm;
+    color: $jv-text-muted;
+
+    &:hover {
+      color: $jv-primary;
+    }
+  }
+
+  // Register link section
+  .register-link,
+  .login-link {
+    text-align: center;
+    margin-top: $jv-space-6;
+    padding-top: $jv-space-6;
+    border-top: 1px solid $jv-border-subtle;
+  }
+}
+
+// ===========================================================
+// MOBILE NAVIGATION - Hide Chat and Notification Widgets
+// ===========================================================
+// Hide chat and notifications from mobile bottom navbar only
+@media (max-width: 767px) {
+  // Hide notifications widget - multiple selectors for comprehensive coverage
+  li[component="notifications"],
+  nav[component="sidebar/left"] li[component="notifications"],
+  .sidebar-left li[component="notifications"],
+  .nav-item.notifications {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  // Hide chat widget - multiple selectors for comprehensive coverage
+  li.chats,
+  nav[component="sidebar/left"] li.chats,
+  .sidebar-left li.chats,
+  .nav-item.chats {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  // Also hide drafts widget if present
+  li[component="sidebar/drafts"],
+  nav[component="sidebar/left"] li[component="sidebar/drafts"],
+  .sidebar-left li[component="sidebar/drafts"],
+  .nav-item.drafts {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+// ===========================================================
+// ACCOUNT/PROFILE SIDEBAR - Structured layout for mobile
+// ===========================================================
+@media (max-width: 767px) {
+  // Account sidebar container - force column layout
+  .account [component="sidebar/left"] .flex-shrink-0,
+  .account .flex-shrink-0.pe-2.border-end-md {
+    width: 100% !important;
+    padding: 0 !important;
+    border: none !important;
+    margin-bottom: $jv-space-4 !important;
+  }
+
+  // Inner container - structured grid layout
+  .account [component="sidebar/left"] .sticky-md-top,
+  .account .sticky-md-top.d-flex {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: $jv-space-2 !important;
+    padding: $jv-space-3 !important;
+    background: $jv-surface !important;
+    border-radius: $jv-radius-md !important;
+    border: 1px solid $jv-border-subtle !important;
+  }
+
+  // Menu items - consistent sizing
+  .account [component="sidebar/left"] a.btn {
+    margin: 0 !important;
+    padding: $jv-space-3 !important;
+    border-radius: $jv-radius-sm !important;
+    background: $jv-bg !important;
+    border: 1px solid $jv-border-subtle !important;
+    transition: all $jv-transition-fast !important;
+    min-height: 56px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+
+    &:hover {
+      background: $jv-hover-bg !important;
+      border-color: $jv-border-strong !important;
+    }
+
+    &.active {
+      background: $jv-primary !important;
+      color: white !important;
+      border-color: $jv-primary !important;
+
+      .text-xs {
+        color: rgba(255, 255, 255, 0.9) !important;
+      }
+    }
+
+    // Text content
+    .flex-grow-1 {
+      font-size: $jv-font-size-sm !important;
+      font-weight: 600 !important;
+      margin-bottom: 2px !important;
+    }
+
+    // Count badges
+    .text-xs {
+      font-size: $jv-font-size-xs !important;
+      color: $jv-text-soft !important;
+      font-weight: 500 !important;
+    }
+  }
+
+  // Horizontal rules - full width dividers
+  .account [component="sidebar/left"] hr {
+    grid-column: 1 / -1 !important;
+    margin: $jv-space-2 0 !important;
+    border-color: $jv-border-subtle !important;
+  }
+
+  // Settings and action links - full width buttons
+  .account [component="sidebar/left"] a.btn.ff-secondary.text-xs,
+  .account [component="sidebar/left"] a[href*="/edit"],
+  .account [component="sidebar/left"] a[component*="account/"] {
+    grid-column: 1 / -1 !important;
+    flex-direction: row !important;
+    gap: $jv-space-2 !important;
+    align-items: center !important;
+
+    i {
+      flex-shrink: 0 !important;
+    }
+  }
+}

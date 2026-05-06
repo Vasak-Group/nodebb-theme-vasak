@@ -1,0 +1,48 @@
+{
+	"name": "nodebb-theme-vasak",
+	"version": "6.0.4",
+	"description": "Modern, premium NodeBB theme for JAVIS Community - Extends Harmony with custom styling",
+	"main": "theme.js",
+	"scripts": {
+		"lint": "bunx --bun @biomejs/biome format ./",
+		"lint:fix": "bunx --bun @biomejs/biome format --write ./"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vasak-group/nodebb-theme-vasak.git"
+	},
+	"bugs": {
+		"url": "https://github.com/vasak-group/nodebb-theme-vasak/issues"
+	},
+	"homepage": "https://github.com/vasak-group/nodebb-theme-vasak#readme",
+	"keywords": [
+		"nodebb-theme",
+		"nodebb",
+		"theme",
+		"vasak",
+		"community",
+		"vasak community",
+		"harmony"
+	],
+	"author": "Joaquin (Pato) Decima <jdecima@vasak.net.ar>",
+	"license": "MIT",
+	"peerDependencies": {
+		"nodebb-theme-harmony": "^2"
+	},
+	"nbbpm": {
+		"compatibility": "^4"
+	},
+	"files": [
+		"scss/",
+		"static/",
+		"templates/",
+		"public/",
+		"theme.js",
+		"theme.scss",
+		"theme.json",
+		"plugin.json"
+	],
+	"devDependencies": {
+		"@biomejs/biome": "2.4.14"
+	}
+}

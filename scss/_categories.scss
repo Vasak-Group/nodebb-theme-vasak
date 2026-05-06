@@ -1,0 +1,521 @@
+// ===========================================================
+// CATEGORIES – Reddit/Community Style Cards
+// Matches topic-card design for visual consistency
+// ===========================================================
+
+// Category Header
+.feed h2 {
+  font-size: $jv-font-size-base;
+  font-weight: 600;
+  margin: 0 0 $jv-space-6 0;
+  padding: 0;
+  color: $jv-text-main;
+  letter-spacing: -0.2px;
+}
+
+// Wrapper list spacing - cards with gaps
+ul.categories-list.list-unstyled {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $jv-space-3;
+
+  // First category gets subtle featured treatment
+  > li[component="categories/category"]:first-child {
+    background: linear-gradient(135deg, rgba($jv-primary, 0.04) 0%, rgba($jv-primary, 0.01) 100%);
+    border-color: rgba($jv-primary, 0.2);
+
+    &:hover {
+      border-color: rgba($jv-primary, 0.35);
+    }
+  }
+}
+
+// ===========================================================
+// PARENT CATEGORY CARD (Consolidated selector)
+// ===========================================================
+
+li[component="categories/category"] {
+  position: relative;
+  background: $jv-surface;
+  border-radius: $jv-radius-sm;
+  border: 1px solid $jv-border-subtle;
+  box-shadow: $jv-shadow-sm;
+  padding: $jv-space-5;
+  transition: box-shadow $jv-transition-base, border-color $jv-transition-fast, transform $jv-transition-fast;
+
+  &:hover {
+    box-shadow: $jv-shadow-md;
+    border-color: $jv-border-strong;
+    transform: translateY(-1px);
+
+    .subcategory-pill {
+      background: $jv-surface;
+    }
+  }
+
+  &:focus-within {
+    outline: none;
+    box-shadow: $jv-shadow-md, $jv-focus-ring;
+  }
+
+  // Unread state
+  &.unread {
+    border-left: 3px solid $jv-primary;
+
+    .title a {
+      font-weight: 700;
+    }
+  }
+
+  // New posts indicator
+  &.new-posts {
+    .activity-badge.active {
+      animation: pulse 2s ease-in-out infinite;
+    }
+  }
+
+  // ------------------------------------
+  // Title
+  // ------------------------------------
+  .title {
+    font-size: $jv-font-size-lg;
+    font-weight: 600;
+    color: $jv-text-main;
+    margin-bottom: $jv-space-1; // Tighter spacing to description
+    display: flex;
+    align-items: center;
+    gap: $jv-space-3;
+    letter-spacing: -0.02em;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        color: $jv-primary;
+      }
+    }
+
+    i {
+      font-size: $jv-font-size-base;
+      opacity: 0.95;
+    }
+  }
+
+  // ------------------------------------
+  // Description
+  // ------------------------------------
+  .description {
+    font-size: $jv-font-size-sm;
+    color: $jv-text-muted;
+    line-height: $jv-line-height-base;
+    margin-bottom: $jv-space-3;
+    max-width: 100%;
+  }
+
+  // ------------------------------------
+  // Category Icon
+  // ------------------------------------
+  .category-icon,
+  [component="category/icon"] {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: $jv-radius-sm !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $jv-font-size-lg !important;
+    flex-shrink: 0;
+    box-shadow: $jv-shadow-xs;
+  }
+
+  // ------------------------------------
+  // Stats - Minimal inline design
+  // ------------------------------------
+  .stats-minimal {
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .stat-number {
+      font-size: $jv-font-size-lg;
+      font-weight: 600;
+      color: $jv-text-main;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: $jv-font-size-xs;
+      color: $jv-text-soft;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      font-weight: 500;
+    }
+  }
+
+  // ------------------------------------
+  // Last Post Teaser
+  // ------------------------------------
+  .teaser {
+    // Reset inherited spacing from NodeBB
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    border-top: none !important;
+
+    .teaser-enhanced {
+      border-left: 3px solid var(--teaser-color, $jv-primary);
+      height: auto !important;
+      border-radius: 0 $jv-radius-sm $jv-radius-sm 0;
+      background: $jv-bg;
+      padding: $jv-space-3;
+      transition: background $jv-transition-fast;
+
+      &:hover {
+        background: darken($jv-bg, 2%);
+      }
+
+      .teaser-header {
+        .avatar-tooltip img,
+        [component="user/picture"] {
+          width: 24px !important;
+          height: 24px !important;
+          border-radius: $jv-radius-pill;
+        }
+
+        .teaser-meta {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          line-height: 1.2;
+
+          .teaser-user {
+            font-size: $jv-font-size-xs;
+            font-weight: 600;
+            color: $jv-text-main;
+          }
+
+          .teaser-time {
+            font-size: $jv-font-size-xs;
+            color: $jv-text-soft;
+            text-decoration: none;
+          }
+        }
+      }
+
+      .teaser-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: $jv-space-1;
+      }
+
+      .teaser-content {
+        font-size: $jv-font-size-sm;
+        color: $jv-text-muted;
+        line-height: $jv-line-height-base;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .teaser-read-more {
+        font-size: $jv-font-size-xs;
+        font-weight: 500;
+        color: $jv-primary;
+        text-decoration: none;
+        transition: color $jv-transition-fast;
+
+        &:hover {
+          color: darken($jv-primary, 10%);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+// ===========================================================
+// CHILD CATEGORY ITEMS – Subcategory pills
+// ===========================================================
+
+.category-children {
+  display: flex;
+  flex-direction: column;
+  gap: $jv-space-2;
+  margin-top: $jv-space-1;
+}
+
+.category-children-item {
+  small > .d-flex {
+    display: flex;
+    align-items: center;
+    gap: $jv-space-2;
+    font-size: $jv-font-size-sm;
+    color: $jv-text-main;
+  }
+
+  i {
+    font-size: 6px;
+    color: $jv-text-soft;
+    margin-top: 1px;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: $jv-font-size-sm;
+    color: $jv-text-main;
+    transition: color $jv-transition-fast;
+
+    &:focus-visible {
+      outline: none;
+      color: $jv-primary;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+    }
+  }
+
+  &:hover {
+    i {
+      color: $jv-primary;
+    }
+
+    a {
+      color: $jv-primary;
+    }
+  }
+}
+
+// ===========================================================
+// ACTIVITY BADGES
+// ===========================================================
+
+.category-activity-row {
+  margin-top: $jv-space-1;
+}
+
+.activity-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $jv-space-1;
+  padding: $jv-space-1 $jv-space-2;
+  font-size: $jv-font-size-xs;
+  font-weight: 500;
+  color: $jv-text-soft;
+  background: $jv-bg;
+  border-radius: $jv-radius-pill;
+  transition: all $jv-transition-fast;
+  cursor: default;
+
+  i {
+    font-size: $jv-font-size-xs;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  // Removed .active green styling - now uses default muted style for time badge
+
+  &.hot {
+    background: rgba($jv-warning, 0.12);
+    color: $jv-warning;
+
+    i {
+      color: $jv-warning;
+    }
+  }
+
+  &.new {
+    background: $jv-primary-soft;
+    color: $jv-primary;
+
+    i {
+      color: $jv-primary;
+    }
+  }
+}
+
+// ===========================================================
+// CATEGORY ICON ENHANCED (with glow effect)
+// ===========================================================
+
+.category-icon-enhanced {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: inherit;
+    opacity: 0.2;
+    z-index: -1;
+    filter: blur(4px);
+  }
+}
+
+// ===========================================================
+// EMPTY STATE
+// ===========================================================
+
+.empty-state {
+  color: $jv-text-soft !important;
+  font-style: italic;
+}
+
+.empty-category-state {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  .empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: $jv-radius-pill;
+    background: $jv-bg;
+    color: $jv-text-soft;
+    font-size: $jv-font-size-sm;
+  }
+
+  .empty-text {
+    font-size: $jv-font-size-xs;
+    color: $jv-text-soft;
+    font-weight: 500;
+  }
+}
+
+// ===========================================================
+// SUBCATEGORY PILLS
+// ===========================================================
+
+.subcategory-pills {
+  margin-top: $jv-space-2;
+}
+
+.subcategory-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: $jv-space-2;
+  padding: $jv-space-1 $jv-space-3 $jv-space-1 $jv-space-1;
+  background: $jv-bg;
+  border: 1px solid transparent;
+  border-radius: $jv-radius-pill;
+  text-decoration: none;
+  transition: all $jv-transition-fast;
+
+  .pill-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: $jv-radius-pill;
+    color: white;
+    font-size: $jv-font-size-xs;
+    flex-shrink: 0;
+
+    i {
+      line-height: 1;
+    }
+  }
+
+  .pill-name {
+    font-size: $jv-font-size-xs;
+    font-weight: 500;
+    color: $jv-text-main;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    background: $jv-surface;
+    border-color: var(--pill-color, $jv-border-subtle);
+    box-shadow: $jv-shadow-sm;
+    transform: translateY(-1px);
+
+    .pill-name {
+      color: var(--pill-color, $jv-primary);
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: $jv-focus-ring;
+  }
+}
+
+// ===========================================================
+// ANIMATIONS
+// ===========================================================
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+// ===========================================================
+// RESPONSIVE ADJUSTMENTS
+// ===========================================================
+
+@media (max-width: 991px) {
+  li[component="categories/category"] {
+    padding: $jv-space-4;
+
+    .teaser {
+      margin-top: $jv-space-3;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  ul.categories-list.list-unstyled {
+    gap: $jv-space-2;
+  }
+
+  li[component="categories/category"] {
+    padding: $jv-space-4;
+    border-radius: $jv-radius-sm;
+
+    .title {
+      font-size: $jv-font-size-base;
+    }
+
+    .description {
+      font-size: $jv-font-size-xs;
+    }
+
+    .category-activity-row {
+      flex-wrap: wrap;
+    }
+  }
+
+  .subcategory-pills {
+    gap: $jv-space-1 !important;
+  }
+
+  .subcategory-pill {
+    padding: $jv-space-1 $jv-space-2 $jv-space-1 $jv-space-1;
+
+    .pill-icon {
+      width: 18px;
+      height: 18px;
+      font-size: $jv-font-size-xs;
+    }
+
+    .pill-name {
+      font-size: $jv-font-size-xs;
+    }
+  }
+}
