@@ -81,7 +81,7 @@ Tema premium para NodeBB, construido sobre [Harmony](https://github.com/NodeBB/n
 
 ```bash
 # En el directorio raíz de NodeBB
-npm install nodebb-theme-vasak
+npm install @vasakgroup/nodebb-theme-vasak
 ./nodebb build
 ```
 
@@ -328,7 +328,7 @@ El SW se sirve desde `/vasak-sw.js` (raíz del origen) con el header `Service-Wo
 
 | Tipo de recurso | Estrategia | Caché |
 |---|---|---|
-| Assets del tema (`/plugins/nodebb-theme-vasak/`) | Cache-First | `vasak-static-v1` |
+| Assets del tema (`/plugins/@vasakgroup/nodebb-theme-vasak/`) | Cache-First | `vasak-static-v1` |
 | Assets compilados NodeBB (`client.css`, `nodebb.min.js`) | Cache-First | `vasak-static-v1` |
 | Fuentes (`.woff2`, `.ttf`) | Cache-First | `vasak-static-v1` |
 | Imágenes | Cache-First | `vasak-images-v1` |
@@ -466,7 +466,7 @@ Editar `scss/_tokens.scss`:
 bun publish
 
 # Instalar en NodeBB
-npm install nodebb-theme-vasak
+npm install @vasakgroup/nodebb-theme-vasak
 ./nodebb build
 ```
 

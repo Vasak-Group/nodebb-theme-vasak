@@ -1,5 +1,5 @@
 {
-	"id": "nodebb-theme-vasak",
+	"id": "@vasakgroup/nodebb-theme-vasak",
 	"name": "Vasak Community Oficial Theme",
 	"description": "Modern, premium NodeBB theme for Vasak Community",
 	"url": "https://github.com/vasak-group/nodebb-theme-vasak",

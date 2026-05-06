@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "nodebb-theme-vasak",
+      "name": "@vasakgroup/nodebb-theme-vasak",
       "devDependencies": {
         "@biomejs/biome": "2.4.14",
       },
