@@ -7,7 +7,7 @@
  * Handles: composer prompt card, category filter navigation,
  * share handlers, mobile dropdown fix.
  */
-define("forum/vasak-feed", [], function () {
+define("forum/vasak-feed", ["forum/vasak-reactions"], function (Reactions) {
 	var FeedEnhancements = {};
 
 	FeedEnhancements.init = function () {
@@ -16,10 +16,7 @@ define("forum/vasak-feed", [], function () {
 		initShareHandlers();
 		fixMobileFeedCategoryDropdown();
 
-		// Reactions on feed posts
-		require(["forum/vasak-reactions"], function (Reactions) {
-			Reactions.init();
-		});
+		Reactions.init();
 
 		$(window).on("action:posts.loaded action:ajaxify.end", function () {
 			initFeedComposerPromptHandler();

@@ -46,8 +46,8 @@
 		"@biomejs/biome": "2.4.14"
 	},
 	"packageManager": "bun",
-	"private":"false",
+	"private": "false",
 	"publishConfig": {
-    "access": "public"
-  }
+		"access": "public"
+	}
 }

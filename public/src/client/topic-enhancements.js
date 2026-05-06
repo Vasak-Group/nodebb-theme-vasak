@@ -7,7 +7,11 @@
  * Handles: image carousels, bookmark fix, parent post navigation,
  * post hover actions.
  */
-define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
+define("forum/topic/vasak-enhancements", [
+	"hooks",
+	"forum/vasak-reactions",
+	"forum/vasak-toc",
+], function (hooks, Reactions, TOC) {
 	var carouselCounter = 0;
 
 	var TopicEnhancements = {};
@@ -18,15 +22,8 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 		initParentPostNavigation();
 		initPostHoverActions();
 
-		// Reactions
-		require(["forum/vasak-reactions"], function (Reactions) {
-			Reactions.init();
-		});
-
-		// Table of contents (for posts with 3+ headings)
-		require(["forum/vasak-toc"], function (TOC) {
-			TOC.init();
-		});
+		Reactions.init();
+		TOC.init();
 
 		// Re-run on new posts (quick reply, infinite scroll)
 		$(window).on("action:posts.loaded action:topic.loaded", function () {
