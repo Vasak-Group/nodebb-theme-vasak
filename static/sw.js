@@ -261,6 +261,58 @@ async function staleWhileRevalidate(request, cacheName) {
 	return cached || fetchPromise;
 }
 
+// ── PUSH NOTIFICATIONS ────────────────────────────────────────────────────
+
+self.addEventListener("push", (event) => {
+	if (!event.data) return;
+
+	let data = {};
+	try {
+		data = event.data.json();
+	} catch (e) {
+		data = { title: "Vasak Community", body: event.data.text() };
+	}
+
+	const title = data.title || "Vasak Community";
+	const options = {
+		body: data.body || "",
+		icon:
+			data.icon || "/plugins/nodebb-theme-vasak/static/images/logo-icon.png",
+		badge:
+			data.badge || "/plugins/nodebb-theme-vasak/static/images/logo-icon.png",
+		tag: data.tag || "vasak-notification",
+		data: { url: data.url || "/" },
+		vibrate: [100, 50, 100],
+		renotify: false,
+	};
+
+	event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener("notificationclick", (event) => {
+	event.notification.close();
+	const url = (event.notification.data && event.notification.data.url) || "/";
+
+	event.waitUntil(
+		clients
+			.matchAll({ type: "window", includeUncontrolled: true })
+			.then((clientList) => {
+				// Si ya hay una pestaña abierta, enfocarla y navegar
+				for (const client of clientList) {
+					if (client.url.includes(self.location.origin) && "focus" in client) {
+						client.focus();
+						client.navigate(url);
+						return;
+					}
+				}
+				// Si no hay pestaña abierta, abrir una nueva
+				if (clients.openWindow) {
+					return clients.openWindow(url);
+				}
+			}),
+	);
+});
+
 // ── MENSAJES DESDE EL CLIENTE ──────────────────────────────────────────────
 self.addEventListener("message", (event) => {
 	if (!event.data) return;

@@ -74,6 +74,41 @@ theme.init = async function (params) {
 			res.status(404).send("/* Critical CSS not found */");
 		}
 	});
+
+	// ── Push Notifications routes ─────────────────────────────────────────
+	// Almacenamiento en memoria para subscripciones.
+	// En producción reemplazar con persistencia en DB via NodeBB hooks.
+	const pushSubscriptions = new Map();
+
+	// Exponer la VAPID public key al cliente
+	router.get("/vasak-push/vapid-public-key", (req, res) => {
+		const publicKey = process.env.VAPID_PUBLIC_KEY || "";
+		if (!publicKey) {
+			return res.status(503).json({ error: "Push not configured" });
+		}
+		res.json({ publicKey });
+	});
+
+	// Guardar suscripción
+	router.post("/vasak-push/subscribe", (req, res) => {
+		const { subscription, uid } = req.body || {};
+		if (!subscription || !subscription.endpoint) {
+			return res.status(400).json({ error: "Invalid subscription" });
+		}
+		pushSubscriptions.set(subscription.endpoint, {
+			subscription,
+			uid,
+			ts: Date.now(),
+		});
+		res.json({ success: true });
+	});
+
+	// Eliminar suscripción
+	router.post("/vasak-push/unsubscribe", (req, res) => {
+		const { endpoint } = req.body || {};
+		if (endpoint) pushSubscriptions.delete(endpoint);
+		res.json({ success: true });
+	});
 };
 
 /**

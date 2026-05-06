@@ -46,6 +46,11 @@ Tema premium para NodeBB, construido sobre [Harmony](https://github.com/NodeBB/n
 | **Compartir** | Web Share API en mobile, modal con 7 redes en desktop, clipboard con feedback |
 | **Autosave** | Borrador del composer guardado cada 2s, recuperación automática, expira en 72h |
 | **Autocompletado** | Sugerencias de topics en el header, historial de búsquedas, navegación por teclado |
+| **Notificaciones Push** | Web Push API, banner opt-in no intrusivo, handler en Service Worker |
+| **Menciones** | @usuario en el composer con dropdown de avatares y navegación por teclado |
+| **Modo Lectura** | Vista limpia sin sidebar, tipografía optimizada, botón en sidebar del topic |
+| **Filtros de Feed** | Filtrar posts por: Todo / Imágenes / Videos / Popular (≥5 votos) |
+| **Estadísticas de Lectura** | Barra de progreso de lectura + tracking de tiempo en localStorage |
 | **Carousels** | Múltiples imágenes en posts se convierten automáticamente en carousels Bootstrap |
 | **Animaciones** | Sistema completo: page transitions, slide-up en cards, ripple en botones, spring easing |
 
@@ -167,7 +172,10 @@ nodebb-theme-vasak/
 │   ├── _infinite-scroll.scss      # Progress bar, back-to-top, end state, load more
 │   ├── _content-visibility.scss   # content-visibility: auto para listas largas
 │   ├── _reactions.scss            # Sistema de reacciones en posts
-│   └── _share.scss                # Modal de compartir
+│   ├── _share.scss                # Modal de compartir
+│   ├── _push.scss                 # Banner de notificaciones push
+│   ├── _extras.scss               # Reader mode, feed filters, reading progress
+│   └── _a11y.scss                 # Accesibilidad: skip links, focus ring, sr-only
 │
 ├── public/
 │   ├── admin.js                   # Panel de administración del tema
@@ -184,6 +192,12 @@ nodebb-theme-vasak/
 │       ├── share-enhanced.js      # Web Share API + modal con redes sociales
 │       ├── composer-autosave.js   # Autosave de borradores en localStorage
 │       ├── search-autocomplete.js # Autocompletado en el header
+│       ├── push-notifications.js  # Web Push API opt-in
+│       ├── composer-mentions.js   # @menciones en el composer
+│       ├── reader-mode.js         # Modo lectura limpia
+│       ├── feed-filters.js        # Filtros visuales del feed
+│       ├── reading-stats.js       # Progreso y estadísticas de lectura
+│       └── accessibility.js       # Skip links, focus management, aria-labels
 │       └── account/
 │           └── categories.js      # Página de categorías del perfil
 │
@@ -295,6 +309,12 @@ El JS del tema está dividido en módulos AMD que NodeBB carga bajo demanda:
 | `forum/vasak-share` | `share-enhanced.js` | Global |
 | `forum/vasak-autosave` | `composer-autosave.js` | Global |
 | `forum/vasak-autocomplete` | `search-autocomplete.js` | Global |
+| `forum/vasak-push` | `push-notifications.js` | Global |
+| `forum/vasak-mentions` | `composer-mentions.js` | Global |
+| `forum/vasak-reader` | `reader-mode.js` | Global |
+| `forum/vasak-feed-filters` | `feed-filters.js` | Global |
+| `forum/vasak-reading-stats` | `reading-stats.js` | Global |
+| `forum/vasak-a11y` | `accessibility.js` | Global |
 
 El core `static/lib/theme.js` solo contiene comportamientos globales (sidebar, dark mode, lazy loading, animaciones) y carga los módulos de página bajo demanda con `require()`.
 
@@ -326,6 +346,39 @@ const CACHE_VERSION = "v2"; // era "v1"
 ```
 
 Al hacer deploy, el SW detecta la nueva versión, activa `SKIP_WAITING` y recarga la página automáticamente.
+
+---
+
+## Notificaciones Push
+
+Las notificaciones push requieren VAPID keys. Generarlas con:
+
+```bash
+# Instalar web-push globalmente
+bun add -g web-push
+
+# Generar el par de claves
+bunx web-push generate-vapid-keys
+```
+
+Configurar las variables de entorno en NodeBB:
+
+```bash
+# En el entorno donde corre NodeBB
+export VAPID_PUBLIC_KEY="tu_clave_publica_aqui"
+export VAPID_PRIVATE_KEY="tu_clave_privada_aqui"
+```
+
+O en el archivo de configuración de NodeBB (`config.json`):
+
+```json
+{
+  "vapid_public_key": "tu_clave_publica_aqui",
+  "vapid_private_key": "tu_clave_privada_aqui"
+}
+```
+
+> Si `VAPID_PUBLIC_KEY` no está configurada, el endpoint `/vasak-push/vapid-public-key` devuelve 503 y el módulo de push se desactiva silenciosamente. El resto del tema funciona con normalidad.
 
 ---
 

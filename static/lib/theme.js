@@ -51,6 +51,36 @@
 			AC.init();
 		});
 
+		// Push notifications opt-in
+		require(["forum/vasak-push"], function (Push) {
+			Push.init();
+		});
+
+		// Composer @mentions autocomplete
+		require(["forum/vasak-mentions"], function (Mentions) {
+			Mentions.init();
+		});
+
+		// Reader mode (topic pages only — module self-guards)
+		require(["forum/vasak-reader"], function (Reader) {
+			Reader.init();
+		});
+
+		// Feed filters (feed page only — module self-guards)
+		require(["forum/vasak-feed-filters"], function (FeedFilters) {
+			FeedFilters.init();
+		});
+
+		// Reading progress + stats (topic pages only — module self-guards)
+		require(["forum/vasak-reading-stats"], function (ReadingStats) {
+			ReadingStats.init();
+		});
+
+		// Accessibility improvements
+		require(["forum/vasak-a11y"], function (A11y) {
+			A11y.init();
+		});
+
 		// ── Lazy-load page-specific modules ─────────────────────────────
 		loadPageModules();
 

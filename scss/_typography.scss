@@ -173,7 +173,7 @@ pre {
 
 // ── 7. UTILITY CLASSES ────────────────────────────────────────────────────
 // Clases de conveniencia que usan las custom properties.
-// Reemplazan los $jv-font-size-* de SCSS en templates.
+// Reemplazan los $vsk-font-size-* de SCSS en templates.
 
 .text-xs   { font-size: var(--text-xs) !important; }
 .text-sm   { font-size: var(--text-sm) !important; }

@@ -1010,3 +1010,70 @@ html.composing .composer.reply {
     height: auto !important;
   }
 }
+
+// ===========================================================
+// MENTIONS DROPDOWN
+// ===========================================================
+
+.vasak-mentions-dropdown {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 200;
+  background: var(--use-ui-surface);
+  border: 1px solid var(--use-ui-border);
+  border-radius: $jv-radius-md;
+  box-shadow: $jv-shadow-lg;
+  list-style: none;
+  margin: 0;
+  padding: $jv-space-1 0;
+  max-height: 240px;
+  overflow-y: auto;
+  animation: vasak-slide-down 160ms ease both;
+}
+
+.vasak-mentions-item {
+  display: flex;
+  align-items: center;
+  gap: $jv-space-3;
+  padding: $jv-space-2 $jv-space-4;
+  cursor: pointer;
+  transition: background 100ms ease;
+
+  &:hover,
+  &.vasak-mentions-active {
+    background: var(--use-state-hover);
+  }
+}
+
+.vasak-mentions-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vasak-mentions-name {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--use-text-main);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vasak-mentions-slug {
+  font-size: var(--text-xs);
+  color: var(--use-text-soft);
+  flex-shrink: 0;
+}

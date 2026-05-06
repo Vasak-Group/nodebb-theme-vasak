@@ -31,7 +31,13 @@
 		"forum/vasak-reactions": "public/src/client/reactions.js",
 		"forum/vasak-share": "public/src/client/share-enhanced.js",
 		"forum/vasak-autosave": "public/src/client/composer-autosave.js",
-		"forum/vasak-autocomplete": "public/src/client/search-autocomplete.js"
+		"forum/vasak-autocomplete": "public/src/client/search-autocomplete.js",
+		"forum/vasak-push": "public/src/client/push-notifications.js",
+		"forum/vasak-mentions": "public/src/client/composer-mentions.js",
+		"forum/vasak-reader": "public/src/client/reader-mode.js",
+		"forum/vasak-feed-filters": "public/src/client/feed-filters.js",
+		"forum/vasak-reading-stats": "public/src/client/reading-stats.js",
+		"forum/vasak-a11y": "public/src/client/accessibility.js"
 	},
 	"templates": "templates",
 	"screenshot": "screenshot.png",

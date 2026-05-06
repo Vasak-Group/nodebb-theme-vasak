@@ -1,0 +1,121 @@
+// ============================================
+// EXTRAS — Reader Mode, Feed Filters, Reading Progress
+// ============================================
+
+// ── Reader Mode ────────────────────────────────────────────────────────────
+
+html.vasak-reader-mode {
+  // Ocultar elementos de UI
+  nav[component="sidebar/left"],
+  .sidebar-left,
+  .brand-container,
+  .topic-sidebar-container,
+  [component="post/footer"],
+  [component="post/actions"],
+  .topic-info,
+  .topic-header .topic-back-btn {
+    display: none !important;
+  }
+
+  // Expandir el contenido al ancho completo
+  .topic-main {
+    max-width: 680px !important;
+    margin: 0 auto !important;
+    padding: $jv-space-8 $jv-space-4 !important;
+  }
+
+  // Tipografía optimizada para lectura
+  [component="post/content"] {
+    font-size: 17px !important;
+    line-height: 1.75 !important;
+    color: var(--use-text-main) !important;
+  }
+
+  // Barra de salida del reader mode
+  &::after {
+    content: 'Modo lectura activo — hacé clic en el botón del sidebar para salir';
+    position: fixed;
+    bottom: $jv-space-4;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--use-ui-surface);
+    border: 1px solid var(--use-ui-border);
+    border-radius: $jv-radius-pill;
+    padding: $jv-space-2 $jv-space-5;
+    font-size: var(--text-xs);
+    color: var(--use-text-muted);
+    box-shadow: $jv-shadow-md;
+    pointer-events: none;
+    z-index: 100;
+  }
+}
+
+// ── Feed Filters ───────────────────────────────────────────────────────────
+
+.vasak-feed-filter-bar {
+  display: flex;
+  gap: $jv-space-2;
+  padding: $jv-space-2 0 $jv-space-3;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.vasak-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $jv-space-2;
+  padding: $jv-space-2 $jv-space-4;
+  background: var(--use-ui-surface);
+  border: 1px solid var(--use-ui-border);
+  border-radius: $jv-radius-pill;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--use-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+
+  &:hover {
+    background: var(--use-state-hover);
+    border-color: var(--use-ui-border-strong);
+    color: var(--use-text-main);
+  }
+
+  &.active {
+    background: var(--use-primary-soft);
+    border-color: var(--use-primary);
+    color: var(--use-primary);
+  }
+}
+
+// Posts ocultos por filtro
+[component="post"].vasak-filter-hidden {
+  display: none !important;
+}
+
+// ── Reading Progress Bar ───────────────────────────────────────────────────
+
+#vasak-reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: var(--use-primary);
+  z-index: 9998;
+  border-radius: 0 2px 2px 0;
+  transition: width 100ms linear;
+  pointer-events: none;
+
+  &.vasak-reading-complete {
+    background: var(--use-status-success);
+  }
+}
+
+// ── Reduced motion ─────────────────────────────────────────────────────────
+
+@media (prefers-reduced-motion: reduce) {
+  #vasak-reading-progress { transition: none !important; }
+  .vasak-filter-btn       { transition: none !important; }
+}
