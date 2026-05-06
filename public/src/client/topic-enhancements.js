@@ -18,6 +18,11 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 		initParentPostNavigation();
 		initPostHoverActions();
 
+		// Reactions
+		require(["forum/vasak-reactions"], function (Reactions) {
+			Reactions.init();
+		});
+
 		// Re-run on new posts (quick reply, infinite scroll)
 		$(window).on("action:posts.loaded action:topic.loaded", function () {
 			initPostImageCarousels();

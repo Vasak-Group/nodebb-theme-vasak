@@ -16,6 +16,11 @@ define("forum/vasak-feed", [], function () {
 		initShareHandlers();
 		fixMobileFeedCategoryDropdown();
 
+		// Reactions on feed posts
+		require(["forum/vasak-reactions"], function (Reactions) {
+			Reactions.init();
+		});
+
 		$(window).on("action:posts.loaded action:ajaxify.end", function () {
 			initFeedComposerPromptHandler();
 			initFeedCategoryFilter();
