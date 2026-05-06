@@ -9,7 +9,7 @@
 // Import Harmony's theme styles (required for inheritance)
 @import "nodebb-theme-harmony/scss/harmony";
 
-// JAVIS Custom Styles
+// Vasak Custom Styles
 @import "./scss/variables";
 @import "./scss/base";
 @import "./scss/header";
@@ -22,3 +22,4 @@
 @import "./scss/feed";
 @import "./scss/topic";
 @import "./scss/composer";
+@import "./scss/skeletons";

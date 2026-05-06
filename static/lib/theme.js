@@ -66,6 +66,9 @@
 		// Initialize lazy loading for all images
 		initLazyLoading();
 
+		// Initialize skeleton screens for AJAX-loaded content
+		initSkeletonScreens();
+
 		// Re-initialize carousels when new posts are loaded (infinite scroll, etc.)
 		// Also handle post edits by clearing the processed flag
 		$(window).on(
@@ -1333,4 +1336,208 @@
 			}
 		});
 	});
+
+	// ========================================
+	// SKELETON SCREENS
+	// ========================================
+	// Shows shimmer placeholders while AJAX content loads.
+	// Skeletons are injected before the request fires and
+	// removed (with a fade-out) once real content arrives.
+
+	/**
+	 * Build the HTML for N feed-post skeleton cards
+	 */
+	function buildFeedSkeletons(count) {
+		var items = "";
+		for (var i = 0; i < count; i++) {
+			items +=
+				'<li class="skeleton-feed-post">' +
+				'<div class="skeleton-feed-content">' +
+				'<div class="skeleton-title"></div>' +
+				'<div class="skeleton-meta">' +
+				'<span class="skeleton-avatar"></span>' +
+				'<span class="skeleton-author"></span>' +
+				'<span class="skeleton-time"></span>' +
+				"</div>" +
+				'<div class="skeleton-content">' +
+				'<span class="skeleton-line"></span>' +
+				'<span class="skeleton-line"></span>' +
+				'<span class="skeleton-line"></span>' +
+				"</div>" +
+				"</div>" +
+				'<div class="skeleton-feed-actions">' +
+				'<span class="skeleton-action"></span>' +
+				'<span class="skeleton-action"></span>' +
+				'<span class="skeleton-action"></span>' +
+				"</div>" +
+				"</li>";
+		}
+		return '<ul class="vasak-skeleton-list list-unstyled">' + items + "</ul>";
+	}
+
+	/**
+	 * Build the HTML for N topic-card skeleton items
+	 */
+	function buildTopicSkeletons(count) {
+		var items = "";
+		for (var i = 0; i < count; i++) {
+			items +=
+				'<li class="skeleton-topic-card mb-2">' +
+				'<div class="skeleton-vote-col">' +
+				'<span class="skeleton-vote-btn"></span>' +
+				'<span class="skeleton-vote-count"></span>' +
+				'<span class="skeleton-vote-btn"></span>' +
+				"</div>" +
+				'<div class="skeleton-topic-content">' +
+				'<div class="skeleton-topic-meta">' +
+				'<span class="skeleton-badge"></span>' +
+				'<span class="skeleton-meta-text"></span>' +
+				"</div>" +
+				'<span class="skeleton-topic-title"></span>' +
+				'<div class="skeleton-topic-actions">' +
+				'<span class="skeleton-action-btn"></span>' +
+				'<span class="skeleton-action-btn"></span>' +
+				"</div>" +
+				"</div>" +
+				"</li>";
+		}
+		return '<ul class="vasak-skeleton-list list-unstyled">' + items + "</ul>";
+	}
+
+	/**
+	 * Build the HTML for N notification skeleton items
+	 */
+	function buildNotificationSkeletons(count) {
+		var items = "";
+		for (var i = 0; i < count; i++) {
+			items +=
+				'<div class="skeleton-notification">' +
+				'<span class="skeleton-notif-avatar"></span>' +
+				'<div class="skeleton-notif-body">' +
+				'<span class="skeleton-notif-line"></span>' +
+				'<span class="skeleton-notif-line"></span>' +
+				'<span class="skeleton-notif-time"></span>' +
+				"</div>" +
+				'<span class="skeleton-notif-dot"></span>' +
+				"</div>";
+		}
+		return items;
+	}
+
+	/**
+	 * Build the HTML for N post-item skeletons (account/posts page)
+	 */
+	function buildPostItemSkeletons(count) {
+		var items = "";
+		for (var i = 0; i < count; i++) {
+			items +=
+				'<li class="skeleton-post-item">' +
+				'<span class="skeleton-post-title"></span>' +
+				'<div class="skeleton-post-meta">' +
+				'<span class="skeleton-avatar"></span>' +
+				'<span class="skeleton-author"></span>' +
+				'<span class="skeleton-time"></span>' +
+				"</div>" +
+				'<div class="skeleton-post-content">' +
+				'<span class="skeleton-line"></span>' +
+				'<span class="skeleton-line"></span>' +
+				"</div>" +
+				'<div class="skeleton-post-tags">' +
+				'<span class="skeleton-tag"></span>' +
+				'<span class="skeleton-tag"></span>' +
+				"</div>" +
+				"</li>";
+		}
+		return '<ul class="vasak-skeleton-list list-unstyled">' + items + "</ul>";
+	}
+
+	/**
+	 * Remove a skeleton container with a smooth fade-out
+	 */
+	function removeSkeleton($skeleton) {
+		if (!$skeleton || !$skeleton.length) return;
+		$skeleton.addClass("vasak-skeleton-hiding");
+		setTimeout(function () {
+			$skeleton.remove();
+		}, 220);
+	}
+
+	/**
+	 * Main skeleton initializer — hooks into NodeBB's AJAX lifecycle
+	 */
+	function initSkeletonScreens() {
+		// ── INFINITE SCROLL – FEED ─────────────────────────────────
+		// NodeBB fires action:posts.loading before fetching more posts
+		$(window).on("action:posts.loading", function () {
+			var $postsList = $('[component="posts"]');
+			if (!$postsList.length) return;
+			if (!$(".feed").length) return;
+			if ($postsList.next(".vasak-skeleton-list").length) return;
+			$postsList.after(buildFeedSkeletons(3));
+		});
+
+		$(window).on("action:posts.loaded", function () {
+			removeSkeleton($('[component="posts"]').next(".vasak-skeleton-list"));
+		});
+
+		// ── INFINITE SCROLL – TOPICS ───────────────────────────────
+		$(window).on("action:topics.loading", function () {
+			var $topicsList = $('[component="category"]');
+			if (!$topicsList.length) return;
+			if ($topicsList.next(".vasak-skeleton-list").length) return;
+			$topicsList.after(buildTopicSkeletons(4));
+		});
+
+		$(window).on("action:topics.loaded", function () {
+			removeSkeleton($('[component="category"]').next(".vasak-skeleton-list"));
+		});
+
+		// ── NOTIFICATIONS DROPDOWN ─────────────────────────────────
+		$(document).on(
+			"show.bs.dropdown",
+			'[component="notifications"]',
+			function () {
+				var $list = $(this).find('[component="notifications/list"]');
+				if (!$list.length) return;
+
+				var hasRealContent =
+					$list.find("[data-nid]").length > 0 ||
+					$list.find(".no-notifs").length > 0;
+
+				if (!hasRealContent && !$list.find(".skeleton-notification").length) {
+					$list.html(buildNotificationSkeletons(4));
+				}
+			},
+		);
+
+		// ── AJAXIFY NAVIGATION – category / list pages ─────────────
+		// Inject topic skeletons into #content while the new page loads
+		$(window).on("action:ajaxify.start", function (ev, data) {
+			var url = String(data.url || "");
+			var isCategory = url.startsWith("category/");
+			var isListPage =
+				url === "recent" ||
+				url === "unread" ||
+				url === "popular" ||
+				url === "top" ||
+				url.startsWith("recent?") ||
+				url.startsWith("unread?") ||
+				url.startsWith("popular?") ||
+				url.startsWith("top?");
+
+			if (!isCategory && !isListPage) return;
+
+			var $content = $("#content");
+			if (!$content.length) return;
+			if ($content.find('[component="category/topic"]').length) return;
+			if ($content.find(".vasak-skeleton-list").length) return;
+
+			$content.append(buildTopicSkeletons(5));
+		});
+
+		// Remove navigation skeletons when new page content is ready
+		$(window).on("action:ajaxify.end", function () {
+			removeSkeleton($("#content > .vasak-skeleton-list"));
+		});
+	}
 })();

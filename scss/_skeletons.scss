@@ -1,0 +1,406 @@
+// ===========================================================
+// SKELETON SCREENS – Vasak Design System
+// Shimmer placeholders shown while content loads via AJAX
+// Matches exact dimensions of real components to prevent
+// layout shift (CLS = 0) when content replaces skeletons.
+// ===========================================================
+
+// ----------------------------------------------------------
+// SHIMMER ANIMATION (shared keyframe)
+// ----------------------------------------------------------
+@keyframes vasak-shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+// ----------------------------------------------------------
+// BASE SKELETON ELEMENT
+// All skeleton "bones" extend this mixin
+// ----------------------------------------------------------
+%skeleton-bone {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.06) 0%,
+    rgba(0, 0, 0, 0.10) 40%,
+    rgba(0, 0, 0, 0.06) 80%
+  );
+  background-size: 600px 100%;
+  animation: vasak-shimmer 1.4s ease-in-out infinite;
+  border-radius: $jv-radius-xs;
+  display: block;
+  flex-shrink: 0;
+}
+
+// Dark-mode aware (if dark mode is ever added)
+[data-theme="dark"] %skeleton-bone {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(255, 255, 255, 0.12) 40%,
+    rgba(255, 255, 255, 0.06) 80%
+  );
+  background-size: 600px 100%;
+}
+
+// ----------------------------------------------------------
+// SKELETON WRAPPER
+// Wraps a group of skeleton items
+// ----------------------------------------------------------
+.vasak-skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: $jv-space-2;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+// ----------------------------------------------------------
+// FEED POST SKELETON
+// Mirrors: li[component="post"].posts-list-item in feed.tpl
+// Structure: content section → action bar
+// ----------------------------------------------------------
+.skeleton-feed-post {
+  background: $jv-surface;
+  border: 1px solid $jv-border-subtle;
+  border-radius: $jv-radius-lg;
+  overflow: hidden;
+  box-shadow: $jv-shadow-sm;
+
+  // Content section (mirrors .feed-content-section)
+  .skeleton-feed-content {
+    padding: $jv-space-4 $jv-space-4 $jv-space-3;
+    display: flex;
+    flex-direction: column;
+    gap: $jv-space-3;
+  }
+
+  // Title line (mirrors .topic-title)
+  .skeleton-title {
+    @extend %skeleton-bone;
+    height: 22px;
+    width: 75%;
+    border-radius: $jv-radius-xs;
+  }
+
+  // Author row (mirrors .post-info)
+  .skeleton-meta {
+    display: flex;
+    align-items: center;
+    gap: $jv-space-2;
+
+    .skeleton-avatar {
+      @extend %skeleton-bone;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .skeleton-author {
+      @extend %skeleton-bone;
+      height: 13px;
+      width: 100px;
+    }
+
+    .skeleton-time {
+      @extend %skeleton-bone;
+      height: 13px;
+      width: 60px;
+    }
+  }
+
+  // Content lines (mirrors .content)
+  .skeleton-content {
+    display: flex;
+    flex-direction: column;
+    gap: $jv-space-2;
+
+    .skeleton-line {
+      @extend %skeleton-bone;
+      height: 14px;
+
+      &:nth-child(1) { width: 100%; }
+      &:nth-child(2) { width: 92%; }
+      &:nth-child(3) { width: 78%; }
+    }
+  }
+
+  // Action bar (mirrors .feed-action-bar)
+  .skeleton-feed-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $jv-space-2 $jv-space-4;
+    border-top: 1px solid $jv-border-subtle;
+
+    .skeleton-action {
+      @extend %skeleton-bone;
+      height: 28px;
+      width: 64px;
+      border-radius: $jv-radius-pill;
+    }
+  }
+}
+
+// ----------------------------------------------------------
+// TOPIC CARD SKELETON
+// Mirrors: li[component="category/topic"].topic-card in topics_list.tpl
+// Structure: vote column | content (meta + title + actions)
+// ----------------------------------------------------------
+.skeleton-topic-card {
+  display: flex;
+  background: $jv-surface;
+  border: 1px solid $jv-border-subtle;
+  border-radius: $jv-radius-sm;
+  overflow: hidden;
+  box-shadow: $jv-shadow-sm;
+
+  // Vote column (mirrors .vote-column)
+  .skeleton-vote-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: $jv-space-6 $jv-space-4;
+    background: rgba(0, 0, 0, 0.02);
+    min-width: 44px;
+    gap: $jv-space-2;
+
+    .skeleton-vote-btn {
+      @extend %skeleton-bone;
+      width: 20px;
+      height: 20px;
+      border-radius: $jv-radius-xs;
+    }
+
+    .skeleton-vote-count {
+      @extend %skeleton-bone;
+      width: 24px;
+      height: 16px;
+    }
+  }
+
+  // Main content (mirrors .topic-content)
+  .skeleton-topic-content {
+    flex: 1;
+    padding: $jv-space-3;
+    display: flex;
+    flex-direction: column;
+    gap: $jv-space-3;
+    min-width: 0;
+  }
+
+  // Meta row (mirrors .topic-meta)
+  .skeleton-topic-meta {
+    display: flex;
+    align-items: center;
+    gap: $jv-space-2;
+
+    .skeleton-badge {
+      @extend %skeleton-bone;
+      height: 18px;
+      width: 70px;
+      border-radius: $jv-radius-pill;
+    }
+
+    .skeleton-meta-text {
+      @extend %skeleton-bone;
+      height: 13px;
+      width: 140px;
+    }
+  }
+
+  // Title (mirrors .topic-title h3)
+  .skeleton-topic-title {
+    @extend %skeleton-bone;
+    height: 20px;
+    width: 80%;
+  }
+
+  // Action bar (mirrors .topic-actions)
+  .skeleton-topic-actions {
+    display: flex;
+    align-items: center;
+    gap: $jv-space-3;
+    padding-top: $jv-space-2;
+
+    .skeleton-action-btn {
+      @extend %skeleton-bone;
+      height: 28px;
+      width: 90px;
+      border-radius: $jv-radius-sm;
+    }
+  }
+
+  // Mobile: stack vertically
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .skeleton-vote-col {
+      flex-direction: row;
+      justify-content: flex-start;
+      padding: $jv-space-3 $jv-space-4;
+      min-width: auto;
+      border-bottom: 1px solid $jv-border-subtle;
+    }
+  }
+}
+
+// ----------------------------------------------------------
+// NOTIFICATION SKELETON
+// Mirrors: each item in notifications_list.tpl
+// Structure: avatar | text lines | mark-read button
+// ----------------------------------------------------------
+.skeleton-notification {
+  display: flex;
+  align-items: flex-start;
+  gap: $jv-space-2;
+  padding: $jv-space-2;
+
+  .skeleton-notif-avatar {
+    @extend %skeleton-bone;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .skeleton-notif-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $jv-space-2;
+
+    .skeleton-notif-line {
+      @extend %skeleton-bone;
+      height: 12px;
+
+      &:nth-child(1) { width: 90%; }
+      &:nth-child(2) { width: 65%; }
+    }
+
+    .skeleton-notif-time {
+      @extend %skeleton-bone;
+      height: 11px;
+      width: 50px;
+      margin-top: $jv-space-1;
+    }
+  }
+
+  .skeleton-notif-dot {
+    @extend %skeleton-bone;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+}
+
+// Divider between notification skeletons
+.skeleton-notification + .skeleton-notification {
+  border-top: 1px solid $jv-border-subtle;
+}
+
+// ----------------------------------------------------------
+// POST ITEM SKELETON (account/posts page)
+// Mirrors: li[component="post"].posts-list-item
+// ----------------------------------------------------------
+.skeleton-post-item {
+  background: $jv-surface;
+  border: 1px solid $jv-border-subtle;
+  border-radius: $jv-radius-sm;
+  padding: $jv-space-4 $jv-space-3;
+  box-shadow: $jv-shadow-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $jv-space-3;
+
+  .skeleton-post-title {
+    @extend %skeleton-bone;
+    height: 20px;
+    width: 70%;
+  }
+
+  .skeleton-post-meta {
+    display: flex;
+    align-items: center;
+    gap: $jv-space-2;
+
+    .skeleton-avatar {
+      @extend %skeleton-bone;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+
+    .skeleton-author {
+      @extend %skeleton-bone;
+      height: 12px;
+      width: 80px;
+    }
+
+    .skeleton-time {
+      @extend %skeleton-bone;
+      height: 12px;
+      width: 50px;
+    }
+  }
+
+  .skeleton-post-content {
+    display: flex;
+    flex-direction: column;
+    gap: $jv-space-2;
+
+    .skeleton-line {
+      @extend %skeleton-bone;
+      height: 13px;
+
+      &:nth-child(1) { width: 100%; }
+      &:nth-child(2) { width: 85%; }
+    }
+  }
+
+  .skeleton-post-tags {
+    display: flex;
+    gap: $jv-space-2;
+
+    .skeleton-tag {
+      @extend %skeleton-bone;
+      height: 20px;
+      width: 60px;
+      border-radius: $jv-radius-pill;
+    }
+  }
+}
+
+// ----------------------------------------------------------
+// STAGGER ANIMATION DELAYS
+// Each skeleton item animates slightly offset for a wave effect
+// ----------------------------------------------------------
+.vasak-skeleton-list {
+  > *:nth-child(1) { animation-delay: 0ms; }
+  > *:nth-child(2) { animation-delay: 80ms; }
+  > *:nth-child(3) { animation-delay: 160ms; }
+  > *:nth-child(4) { animation-delay: 240ms; }
+  > *:nth-child(5) { animation-delay: 320ms; }
+
+  // Apply stagger to all skeleton bones inside each item
+  > *:nth-child(1) %skeleton-bone { animation-delay: 0ms; }
+  > *:nth-child(2) %skeleton-bone { animation-delay: 80ms; }
+  > *:nth-child(3) %skeleton-bone { animation-delay: 160ms; }
+  > *:nth-child(4) %skeleton-bone { animation-delay: 240ms; }
+  > *:nth-child(5) %skeleton-bone { animation-delay: 320ms; }
+}
+
+// ----------------------------------------------------------
+// FADE OUT when real content replaces skeleton
+// ----------------------------------------------------------
+.vasak-skeleton-list {
+  transition: opacity 0.2s ease-out;
+
+  &.vasak-skeleton-hiding {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
