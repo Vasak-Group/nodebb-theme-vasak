@@ -19,14 +19,11 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 		initPostHoverActions();
 
 		// Re-run on new posts (quick reply, infinite scroll)
-		$(window).on(
-			"action:posts.loaded action:topic.loaded",
-			function () {
-				initPostImageCarousels();
-				initParentPostNavigation();
-				initPostHoverActions();
-			},
-		);
+		$(window).on("action:posts.loaded action:topic.loaded", function () {
+			initPostImageCarousels();
+			initParentPostNavigation();
+			initPostHoverActions();
+		});
 
 		// Re-process edited posts
 		$(window).on("action:posts.edited", function (ev, data) {
@@ -72,10 +69,10 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 
 					if (!isContentImage) return false;
 
-					var width  = $img.attr("width");
+					var width = $img.attr("width");
 					var height = $img.attr("height");
 					if (
-						(width  && parseInt(width,  10) < 50) ||
+						(width && parseInt(width, 10) < 50) ||
 						(height && parseInt(height, 10) < 50)
 					) {
 						return false;
@@ -94,38 +91,63 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 	function createCarousel($content, $images) {
 		var carouselId = "post-carousel-" + ++carouselCounter;
 
-		var html = '<div id="' + carouselId + '" class="carousel slide post-image-carousel" data-bs-ride="false">';
+		var html =
+			'<div id="' +
+			carouselId +
+			'" class="carousel slide post-image-carousel" data-bs-ride="false">';
 
 		// Indicators
 		html += '<div class="carousel-indicators">';
 		$images.each(function (i) {
-			var active     = i === 0 ? "active" : "";
+			var active = i === 0 ? "active" : "";
 			var ariaCurrent = i === 0 ? 'aria-current="true"' : "";
-			html += '<button type="button" data-bs-target="#' + carouselId +
-				'" data-bs-slide-to="' + i + '" class="' + active + '" ' +
-				ariaCurrent + ' aria-label="Slide ' + (i + 1) + '"></button>';
+			html +=
+				'<button type="button" data-bs-target="#' +
+				carouselId +
+				'" data-bs-slide-to="' +
+				i +
+				'" class="' +
+				active +
+				'" ' +
+				ariaCurrent +
+				' aria-label="Slide ' +
+				(i + 1) +
+				'"></button>';
 		});
 		html += "</div>";
 
 		// Slides
 		html += '<div class="carousel-inner">';
 		$images.each(function (i) {
-			var $img    = $(this);
-			var src     = $img.attr("src");
-			var alt     = $img.attr("alt") || "Image " + (i + 1);
-			var active  = i === 0 ? "active" : "";
+			var $img = $(this);
+			var src = $img.attr("src");
+			var alt = $img.attr("alt") || "Image " + (i + 1);
+			var active = i === 0 ? "active" : "";
 			var loading = i === 0 ? "eager" : "lazy";
 			html += '<div class="carousel-item ' + active + '">';
-			html += '<img src="' + src + '" class="d-block w-100" alt="' + alt + '" loading="' + loading + '">';
+			html +=
+				'<img src="' +
+				src +
+				'" class="d-block w-100" alt="' +
+				alt +
+				'" loading="' +
+				loading +
+				'">';
 			html += "</div>";
 		});
 		html += "</div>";
 
 		// Controls
-		html += '<button class="carousel-control-prev" type="button" data-bs-target="#' + carouselId + '" data-bs-slide="prev">' +
+		html +=
+			'<button class="carousel-control-prev" type="button" data-bs-target="#' +
+			carouselId +
+			'" data-bs-slide="prev">' +
 			'<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
 			'<span class="visually-hidden">Previous</span></button>';
-		html += '<button class="carousel-control-next" type="button" data-bs-target="#' + carouselId + '" data-bs-slide="next">' +
+		html +=
+			'<button class="carousel-control-next" type="button" data-bs-target="#' +
+			carouselId +
+			'" data-bs-slide="next">' +
 			'<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
 			'<span class="visually-hidden">Next</span></button>';
 
@@ -133,7 +155,10 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 
 		// Find insertion point (direct child of $content)
 		var $insertBefore = $images.first();
-		while ($insertBefore.parent().length && !$insertBefore.parent().is($content)) {
+		while (
+			$insertBefore.parent().length &&
+			!$insertBefore.parent().is($content)
+		) {
 			$insertBefore = $insertBefore.parent();
 		}
 		$insertBefore.before(html);
@@ -171,10 +196,12 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 				}
 
 				require(["storage", "alerts"], function (storage, alerts) {
-					var tid          = ajaxify.data.tid;
-					var bookmark     = ajaxify.data.bookmark || storage.getItem("topic:" + tid + ":bookmark");
-					var postIndex    = ajaxify.data.postIndex || 1;
-					var bookmarkInt  = parseInt(bookmark, 10) || 0;
+					var tid = ajaxify.data.tid;
+					var bookmark =
+						ajaxify.data.bookmark ||
+						storage.getItem("topic:" + tid + ":bookmark");
+					var postIndex = ajaxify.data.postIndex || 1;
+					var bookmarkInt = parseInt(bookmark, 10) || 0;
 					var postIndexInt = parseInt(postIndex, 10) || 1;
 
 					var shouldRemove =
@@ -205,7 +232,9 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 				if (!parentPid) return;
 
 				var $parentPost = $(
-					'[component="topic"] > [component="post"][data-pid="' + parentPid + '"]',
+					'[component="topic"] > [component="post"][data-pid="' +
+						parentPid +
+						'"]',
 				);
 
 				if ($parentPost.length) {
@@ -219,11 +248,16 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 	function smoothScrollToPost($el) {
 		if (!$el.length) return;
 		var headerHeight = $("header").outerHeight() || 60;
-		var scrollTop    = $el.offset().top - headerHeight - 20;
+		var scrollTop = $el.offset().top - headerHeight - 20;
 
-		$("html, body").animate({ scrollTop: scrollTop }, 400, "swing", function () {
-			highlightPost($el);
-		});
+		$("html, body").animate(
+			{ scrollTop: scrollTop },
+			400,
+			"swing",
+			function () {
+				highlightPost($el);
+			},
+		);
 	}
 
 	function highlightPost($el) {
@@ -238,18 +272,29 @@ define("forum/topic/vasak-enhancements", ["hooks"], function (hooks) {
 	// ── Post Hover Actions ─────────────────────────────────────────────────
 
 	function initPostHoverActions() {
-		$(document).off("mouseenter.vasak-hover mouseleave.vasak-hover", ".post-container-parent");
+		$(document).off(
+			"mouseenter.vasak-hover mouseleave.vasak-hover",
+			".post-container-parent",
+		);
 
-		$(document).on("mouseenter.vasak-hover", ".post-container-parent", function (e) {
-			e.stopPropagation();
-			$(".post-container-parent.post-hovered").removeClass("post-hovered");
-			$(this).addClass("post-hovered");
-		});
+		$(document).on(
+			"mouseenter.vasak-hover",
+			".post-container-parent",
+			function (e) {
+				e.stopPropagation();
+				$(".post-container-parent.post-hovered").removeClass("post-hovered");
+				$(this).addClass("post-hovered");
+			},
+		);
 
-		$(document).on("mouseleave.vasak-hover", ".post-container-parent", function (e) {
-			e.stopPropagation();
-			$(this).removeClass("post-hovered");
-		});
+		$(document).on(
+			"mouseleave.vasak-hover",
+			".post-container-parent",
+			function (e) {
+				e.stopPropagation();
+				$(this).removeClass("post-hovered");
+			},
+		);
 	}
 
 	return TopicEnhancements;

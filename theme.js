@@ -154,7 +154,9 @@ theme.injectCriticalCSS = async function (data) {
 
 /**
  * Hook: filter:scripts.get
- * Injects the critical CSS <style> block into the page <head>.
+ * Injects into the page <head>:
+ *   1. Resource hints (dns-prefetch for Font Awesome)
+ *   2. Critical CSS <style> block (above-the-fold styles)
  * NodeBB calls this hook to collect extra <head> content.
  */
 theme.addHeadContent = async function (scripts) {
@@ -163,6 +165,17 @@ theme.addHeadContent = async function (scripts) {
 
 	const criticalPath = path.join(__dirname, "static", "critical.css");
 
+	// ── Resource hints ────────────────────────────────────────────────────
+	// Font Awesome is loaded by NodeBB/Harmony for icons.
+	// dns-prefetch resolves the DNS in parallel with other page resources.
+	// We do NOT add preconnect for Google Fonts — we use system fonts only.
+	const resourceHints = [
+		'<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">',
+		'<link rel="dns-prefetch" href="//use.fontawesome.com">',
+	].join("\n");
+
+	// ── Critical CSS ──────────────────────────────────────────────────────
+	let criticalStyle = "";
 	try {
 		const css = fs.readFileSync(criticalPath, "utf8");
 		const minified = css
@@ -170,12 +183,14 @@ theme.addHeadContent = async function (scripts) {
 			.replace(/\s{2,}/g, " ")
 			.replace(/\n/g, "")
 			.trim();
-
-		// Prepend so it loads before any other scripts/styles
-		scripts.unshift(`<style id="vasak-critical">${minified}</style>`);
+		criticalStyle = `<style id="vasak-critical">${minified}</style>`;
 	} catch (e) {
-		// Non-fatal
+		// Non-fatal — page renders fine without critical CSS
 	}
+
+	// Prepend both so they load before any other scripts/styles
+	if (criticalStyle) scripts.unshift(criticalStyle);
+	scripts.unshift(resourceHints);
 
 	return scripts;
 };

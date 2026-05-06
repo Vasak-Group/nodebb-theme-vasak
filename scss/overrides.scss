@@ -12,7 +12,10 @@ $primary:    #dd7878;   // Catppuccin Red — must be a static value for Bootstr
 $link-color: #dd7878;
 
 // Typography
-$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", Arial, sans-serif;
+// Bootstrap necesita un valor estático en tiempo de compilación SCSS,
+// pero apuntamos a la misma stack que --font-sans para consistencia.
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace:  "SF Mono", "Cascadia Code", "Fira Code", "Consolas", "Liberation Mono", "Courier New", monospace;
 
 // Body — Bootstrap uses these at compile time; runtime theming
 // is handled by the CSS custom properties in _tokens.scss

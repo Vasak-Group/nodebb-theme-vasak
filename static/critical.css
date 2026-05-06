@@ -71,15 +71,20 @@ html.dark {
 
 /* ── Body ─────────────────────────────────────────────────────────── */
 body {
-	font-family:
-		-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui,
+	/* --font-sans se define aquí para que esté disponible antes del CSS principal */
+	--font-sans:
+		-apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui,
 		"Helvetica Neue", Arial, sans-serif;
+	font-family: var(--font-sans);
 	font-size: 15px;
 	line-height: 1.52;
 	color: var(--use-text-main);
 	background-color: var(--use-ui-background);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	/* Mejora el rendering antes de que cargue el CSS completo */
+	text-rendering: optimizeLegibility;
+	-webkit-text-size-adjust: 100%;
 }
 
 /* ── Layout principal (evita CLS) ─────────────────────────────────── */

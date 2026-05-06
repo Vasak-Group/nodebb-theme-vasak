@@ -42,9 +42,12 @@
 		});
 
 		// Composer mobile fix
-		$(window).on("action:composer.loaded action:composer.enhanced", function () {
-			fixMobileComposerCategoryDropdown();
-		});
+		$(window).on(
+			"action:composer.loaded action:composer.enhanced",
+			function () {
+				fixMobileComposerCategoryDropdown();
+			},
+		);
 	});
 
 	/**
@@ -52,13 +55,17 @@
 	 * NodeBB's require() fetches the file only once and caches it.
 	 */
 	function loadPageModules() {
-		var url = (typeof ajaxify !== "undefined" && ajaxify.data)
-			? (ajaxify.data.template && ajaxify.data.template.name) || ""
-			: window.location.pathname;
+		var url =
+			typeof ajaxify !== "undefined" && ajaxify.data
+				? (ajaxify.data.template && ajaxify.data.template.name) || ""
+				: window.location.pathname;
 
 		// Topic page
 		if (
-			(typeof ajaxify !== "undefined" && ajaxify.data && ajaxify.data.template && ajaxify.data.template.topic) ||
+			(typeof ajaxify !== "undefined" &&
+				ajaxify.data &&
+				ajaxify.data.template &&
+				ajaxify.data.template.topic) ||
 			$('[component="topic"]').length
 		) {
 			require(["forum/topic/vasak-enhancements"], function (mod) {

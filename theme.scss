@@ -12,7 +12,10 @@
 // 2. SCSS bridge variables (reference the custom properties)
 @import "./scss/variables";
 
-// 3. Component styles
+// 3. Typography system (before components — establishes base)
+@import "./scss/typography";
+
+// 4. Component styles
 @import "./scss/base";
 @import "./scss/header";
 @import "./scss/buttons";
@@ -26,5 +29,5 @@
 @import "./scss/composer";
 @import "./scss/skeletons";
 
-// 4. Animations & transitions (last — can override component transitions)
+// 5. Animations & transitions (last — can override component transitions)
 @import "./scss/animations";

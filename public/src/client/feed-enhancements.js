@@ -45,27 +45,40 @@ define("forum/vasak-feed", [], function () {
 				'[component="header/avatar"] img, [component="header/avatar"] [component="avatar/picture"]',
 			).first();
 			if ($headerAvatar.length) {
-				avatarHtml = '<img src="' + $headerAvatar.attr("src") + '" alt="Avatar" class="avatar avatar-rounded" />';
+				avatarHtml =
+					'<img src="' +
+					$headerAvatar.attr("src") +
+					'" alt="Avatar" class="avatar avatar-rounded" />';
 			} else {
-				var $headerIcon = $('[component="header/avatar"] [component="avatar/icon"]').first();
+				var $headerIcon = $(
+					'[component="header/avatar"] [component="avatar/icon"]',
+				).first();
 				avatarHtml = $headerIcon.length
-					? $headerIcon.clone().addClass("avatar avatar-rounded").get(0).outerHTML
+					? $headerIcon.clone().addClass("avatar avatar-rounded").get(0)
+							.outerHTML
 					: '<div class="avatar avatar-rounded avatar-placeholder"><i class="fa fa-user"></i></div>';
 			}
 		} else {
-			avatarHtml = '<div class="avatar avatar-rounded avatar-placeholder"><i class="fa fa-user"></i></div>';
+			avatarHtml =
+				'<div class="avatar avatar-rounded avatar-placeholder"><i class="fa fa-user"></i></div>';
 		}
 
 		var cardHtml =
-			'<div class="composer-prompt-card' + (isLoggedIn ? "" : " composer-prompt-guest") + '">' +
-				'<div class="composer-prompt-inner">' +
-					'<div class="composer-prompt-avatar">' + avatarHtml + "</div>" +
-					'<button class="composer-prompt-input" type="button" id="composer-prompt-btn">' +
-						'<span class="composer-prompt-placeholder">' +
-							(isLoggedIn ? "Start a discussion..." : "Sign in to start a discussion...") +
-						"</span>" +
-					"</button>" +
-				"</div>" +
+			'<div class="composer-prompt-card' +
+			(isLoggedIn ? "" : " composer-prompt-guest") +
+			'">' +
+			'<div class="composer-prompt-inner">' +
+			'<div class="composer-prompt-avatar">' +
+			avatarHtml +
+			"</div>" +
+			'<button class="composer-prompt-input" type="button" id="composer-prompt-btn">' +
+			'<span class="composer-prompt-placeholder">' +
+			(isLoggedIn
+				? "Start a discussion..."
+				: "Sign in to start a discussion...") +
+			"</span>" +
+			"</button>" +
+			"</div>" +
 			"</div>";
 
 		$controlsRow.before(cardHtml);
@@ -94,28 +107,32 @@ define("forum/vasak-feed", [], function () {
 		if (!$dropdown.length || $dropdown.attr("data-filter-initialized")) return;
 		$dropdown.attr("data-filter-initialized", "true");
 
-		$dropdown.on("click", '[component="category/list"] [data-cid]', function (e) {
-			e.preventDefault();
-			e.stopPropagation();
+		$dropdown.on(
+			"click",
+			'[component="category/list"] [data-cid]',
+			function (e) {
+				e.preventDefault();
+				e.stopPropagation();
 
-			var cid    = $(this).attr("data-cid");
-			var params = utils.params();
+				var cid = $(this).attr("data-cid");
+				var params = utils.params();
 
-			if (cid === "all") {
-				delete params.cid;
-			} else {
-				params.cid = cid;
-			}
-			delete params.page;
+				if (cid === "all") {
+					delete params.cid;
+				} else {
+					params.cid = cid;
+				}
+				delete params.page;
 
-			var url = "/feed";
-			if (Object.keys(params).length) {
-				url += "?" + $.param(params);
-			}
+				var url = "/feed";
+				if (Object.keys(params).length) {
+					url += "?" + $.param(params);
+				}
 
-			$dropdown.find(".dropdown-toggle").dropdown("hide");
-			ajaxify.go(url);
-		});
+				$dropdown.find(".dropdown-toggle").dropdown("hide");
+				ajaxify.go(url);
+			},
+		);
 	}
 
 	// ── Share Handlers ─────────────────────────────────────────────────────
@@ -140,7 +157,7 @@ define("forum/vasak-feed", [], function () {
 		var $filter = $('.feed-category-filter [component="category/dropdown"]');
 		if (!$filter.length) return;
 
-		var $btn  = $filter.find(".dropdown-toggle");
+		var $btn = $filter.find(".dropdown-toggle");
 		var $menu = $filter.find(".dropdown-menu");
 		if (!$btn.length || !$menu.length) return;
 
@@ -156,13 +173,13 @@ define("forum/vasak-feed", [], function () {
 				requestAnimationFrame(function () {
 					$menu.css({
 						position: "absolute",
-						top:      "100%",
-						right:    "0",
-						left:     "auto",
-						bottom:   "auto",
+						top: "100%",
+						right: "0",
+						left: "auto",
+						bottom: "auto",
 						transform: "none",
-						margin:   "4px 0 0 0",
-						inset:    "auto",
+						margin: "4px 0 0 0",
+						inset: "auto",
 					});
 					$menu.removeAttr("data-popper-placement");
 				});

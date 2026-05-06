@@ -101,13 +101,17 @@ $jv-space-10: 40px;
 $jv-space-12: 48px;
 
 // Typography
-$jv-font-sans:         -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Helvetica Neue", Arial, sans-serif;
-$jv-font-size-base:    15px;
-$jv-font-size-sm:      13px;
-$jv-font-size-xs:      12px;
-$jv-font-size-lg:      18px;
-$jv-font-size-xl:      22px;
-$jv-font-size-xxl:     32px;
+// Font stack apunta a la custom property definida en _typography.scss
+// Todos los componentes que usen $jv-font-sans heredan automáticamente
+// cualquier cambio en la stack sin necesidad de tocar cada archivo.
+$jv-font-sans:         var(--font-sans);
+$jv-font-mono:         var(--font-mono);
+$jv-font-size-base:    var(--text-base);
+$jv-font-size-sm:      var(--text-sm);
+$jv-font-size-xs:      var(--text-xs);
+$jv-font-size-lg:      var(--text-lg);
+$jv-font-size-xl:      var(--text-xl);
+$jv-font-size-xxl:     var(--text-3xl);
 
 // Line Heights
 $jv-line-height-base:    1.52;

@@ -26,15 +26,15 @@ define("forum/vasak-list", [], function () {
 		if ($('[component="topic"]').length) return;
 
 		$(".vote-column:not([data-vote-initialized])").each(function () {
-			var $col       = $(this);
+			var $col = $(this);
 			$col.attr("data-vote-initialized", "true");
 
-			var pid        = $col.attr("data-pid");
+			var pid = $col.attr("data-pid");
 			if (!pid) return;
 
-			var $upBtn     = $col.find('[component="post/upvote"]');
-			var $downBtn   = $col.find('[component="post/downvote"]');
-			var $count     = $col.find('[component="post/vote-count"]');
+			var $upBtn = $col.find('[component="post/upvote"]');
+			var $downBtn = $col.find('[component="post/downvote"]');
+			var $count = $col.find('[component="post/vote-count"]');
 
 			function vote(delta, $activeBtn, $otherBtn) {
 				if (!config.loggedIn) {
@@ -43,14 +43,14 @@ define("forum/vasak-list", [], function () {
 				}
 
 				var isActive = $activeBtn.hasClass(delta > 0 ? "upvoted" : "downvoted");
-				var method   = isActive ? "del" : "put";
+				var method = isActive ? "del" : "put";
 
 				$.ajax({
-					url:         config.relative_path + "/api/v3/posts/" + pid + "/vote",
-					method:      method,
-					data:        JSON.stringify({ delta: delta }),
+					url: config.relative_path + "/api/v3/posts/" + pid + "/vote",
+					method: method,
+					data: JSON.stringify({ delta: delta }),
 					contentType: "application/json",
-					headers:     { "x-csrf-token": config.csrf_token },
+					headers: { "x-csrf-token": config.csrf_token },
 					success: function (res) {
 						$activeBtn.toggleClass(delta > 0 ? "upvoted" : "downvoted");
 						$otherBtn.removeClass(delta > 0 ? "downvoted" : "upvoted");
@@ -59,14 +59,20 @@ define("forum/vasak-list", [], function () {
 						if (votes !== null) {
 							$count.text(votes).attr("data-votes", votes).attr("title", votes);
 						} else {
-							var current = parseInt($count.attr("data-votes") || $count.text()) || 0;
-							var wasActive = !$activeBtn.hasClass(delta > 0 ? "upvoted" : "downvoted");
+							var current =
+								parseInt($count.attr("data-votes") || $count.text()) || 0;
+							var wasActive = !$activeBtn.hasClass(
+								delta > 0 ? "upvoted" : "downvoted",
+							);
 							votes = wasActive ? current - delta : current + delta;
 							$count.text(votes).attr("data-votes", votes).attr("title", votes);
 						}
 					},
 					error: function (xhr) {
-						var msg = xhr.responseJSON && xhr.responseJSON.status && xhr.responseJSON.status.message;
+						var msg =
+							xhr.responseJSON &&
+							xhr.responseJSON.status &&
+							xhr.responseJSON.status.message;
 						if (msg) alert(msg);
 					},
 				});
@@ -88,10 +94,11 @@ define("forum/vasak-list", [], function () {
 
 	function extractVotes(res) {
 		if (!res) return null;
-		if (res.response && res.response.post)            return res.response.post.votes;
-		if (res.response && res.response.votes !== undefined) return res.response.votes;
-		if (res.post && res.post.votes !== undefined)     return res.post.votes;
-		if (res.votes !== undefined)                      return res.votes;
+		if (res.response && res.response.post) return res.response.post.votes;
+		if (res.response && res.response.votes !== undefined)
+			return res.response.votes;
+		if (res.post && res.post.votes !== undefined) return res.post.votes;
+		if (res.votes !== undefined) return res.votes;
 		return null;
 	}
 
