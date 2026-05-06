@@ -16,7 +16,7 @@
  * Se registra como módulo AMD y se carga desde theme.js
  * en todas las páginas con listas (feed, category, recent, etc.)
  */
-define("forum/vasak-scroll-ux", ["hooks"], function (hooks) {
+define("vasak/scroll-ux", ["hooks"], function (hooks) {
 	var ScrollUX = {};
 
 	// ── Configuración ──────────────────────────────────────────────────────

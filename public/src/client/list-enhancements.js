@@ -6,7 +6,7 @@
  * Loaded on category/topic-list pages (recent, unread, popular, top, category).
  * Handles: client-side voting on topic cards.
  */
-define("forum/vasak-list", [], function () {
+define("vasak/list", [], function () {
 	var ListEnhancements = {};
 
 	ListEnhancements.init = function () {

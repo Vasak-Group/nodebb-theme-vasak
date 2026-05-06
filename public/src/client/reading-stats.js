@@ -7,7 +7,7 @@
  * Muestra un indicador de progreso de lectura en la parte superior.
  * Los datos se guardan en localStorage (sin enviar al servidor).
  */
-define("forum/vasak-reading-stats", [], function () {
+define("vasak/reading-stats", [], function () {
 	var Stats = {};
 
 	var startTime = null;

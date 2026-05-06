@@ -12,7 +12,7 @@
  *  - Highlight del heading activo al hacer scroll (IntersectionObserver)
  *  - Colapsable con toggle
  */
-define("forum/vasak-toc", [], function () {
+define("vasak/toc", [], function () {
 	var TOC = {};
 
 	var MIN_HEADINGS = 3;

@@ -7,7 +7,7 @@
  * Filtra los posts ya cargados en el DOM sin hacer nuevas requests.
  * El filtro activo se persiste en localStorage.
  */
-define("forum/vasak-feed-filters", [], function () {
+define("vasak/feed-filters", [], function () {
 	var Filters = {};
 	var STORAGE_KEY = "vasak:feed-filter";
 	var ACTIVE_FILTER = "all";

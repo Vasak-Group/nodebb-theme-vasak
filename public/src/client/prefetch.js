@@ -13,7 +13,7 @@
  * Solo prefetchea links internos del foro (no externos).
  * Respeta Save-Data y conexiones lentas.
  */
-define("forum/vasak-prefetch", [], function () {
+define("vasak/prefetch", [], function () {
 	var Prefetch = {};
 
 	var HOVER_DELAY = 200; // ms de hover antes de prefetchear

@@ -21,7 +21,7 @@
  *  - Botón component="share/linkedin" en feed.tpl (reemplazado)
  *  - Cualquier elemento con data-action="share"
  */
-define("forum/vasak-share", [], function () {
+define("vasak/share", [], function () {
 	var Share = {};
 
 	// ── Redes sociales ─────────────────────────────────────────────────────

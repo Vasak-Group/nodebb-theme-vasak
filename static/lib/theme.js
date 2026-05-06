@@ -62,99 +62,99 @@
 
 		// Infinite scroll UX (progress bar, back-to-top, end state)
 		// Loaded as AMD module so it's cached after first load
-		require(["forum/vasak-scroll-ux"], function (scrollUX) {
+		require(["vasak/scroll-ux"], function (scrollUX) {
 			scrollUX.init();
 		});
 
 		// Virtual list / content-visibility optimization
-		require(["forum/vasak-virtual-list"], function (virtualList) {
+		require(["vasak/virtual-list"], function (virtualList) {
 			virtualList.init();
 		});
 
 		// Enhanced share (Web Share API + modal)
-		require(["forum/vasak-share"], function (Share) {
+		require(["vasak/share"], function (Share) {
 			Share.init();
 		});
 
 		// Composer autosave
-		require(["forum/vasak-autosave"], function (Autosave) {
+		require(["vasak/autosave"], function (Autosave) {
 			Autosave.init();
 		});
 
 		// Search autocomplete (header input)
-		require(["forum/vasak-autocomplete"], function (AC) {
+		require(["vasak/autocomplete"], function (AC) {
 			AC.init();
 		});
 
 		// Push notifications opt-in
-		require(["forum/vasak-push"], function (Push) {
+		require(["vasak/push"], function (Push) {
 			Push.init();
 		});
 
 		// Composer @mentions autocomplete
-		require(["forum/vasak-mentions"], function (Mentions) {
+		require(["vasak/mentions"], function (Mentions) {
 			Mentions.init();
 		});
 
 		// Reader mode (topic pages only — module self-guards)
-		require(["forum/vasak-reader"], function (Reader) {
+		require(["vasak/reader"], function (Reader) {
 			Reader.init();
 		});
 
 		// Feed filters (feed page only — module self-guards)
-		require(["forum/vasak-feed-filters"], function (FeedFilters) {
+		require(["vasak/feed-filters"], function (FeedFilters) {
 			FeedFilters.init();
 		});
 
 		// Reading progress + stats (topic pages only — module self-guards)
-		require(["forum/vasak-reading-stats"], function (ReadingStats) {
+		require(["vasak/reading-stats"], function (ReadingStats) {
 			ReadingStats.init();
 		});
 
 		// Accessibility improvements
-		require(["forum/vasak-a11y"], function (A11y) {
+		require(["vasak/a11y"], function (A11y) {
 			A11y.init();
 		});
 
 		// Connection status indicator
-		require(["forum/vasak-connection"], function (Conn) {
+		require(["vasak/connection"], function (Conn) {
 			Conn.init();
 		});
 
 		// Keyboard shortcuts
-		require(["forum/vasak-shortcuts"], function (Shortcuts) {
+		require(["vasak/shortcuts"], function (Shortcuts) {
 			Shortcuts.init();
 		});
 
 		// Intelligent prefetch on hover
-		require(["forum/vasak-prefetch"], function (Prefetch) {
+		require(["vasak/prefetch"], function (Prefetch) {
 			Prefetch.init();
 		});
 
 		// Toast notification system
-		require(["forum/vasak-toast"], function (Toast) {
+		require(["vasak/toast"], function (Toast) {
 			// Exponer globalmente para que otros módulos puedan usarlo
 			window.vasak = window.vasak || {};
 			window.vasak.toast = Toast;
 		});
 
 		// User card on hover
-		require(["forum/vasak-user-card"], function (UserCard) {
+		require(["vasak/user-card"], function (UserCard) {
 			UserCard.init();
 		});
 
 		// User settings panel (preferences modal)
-		require(["forum/vasak-settings"], function (UserSettings) {
+		require(["vasak/settings"], function (UserSettings) {
 			UserSettings.init();
 		});
 
 		// Compact mode toggle
-		require(["forum/vasak-compact"], function (Compact) {
+		require(["vasak/compact"], function (Compact) {
 			Compact.init();
 		});
 
 		// Topic search panel
-		require(["forum/vasak-topic-search"], function (TopicSearch) {
+		require(["vasak/topic-search"], function (TopicSearch) {
 			TopicSearch.init();
 		});
 
@@ -201,7 +201,7 @@
 				ajaxify.data.template.topic) ||
 			$('[component="topic"]').length
 		) {
-			require(["forum/topic/vasak-enhancements"], function (mod) {
+			require(["vasak/topic-enhancements"], function (mod) {
 				mod.init();
 			});
 			return;
@@ -209,7 +209,7 @@
 
 		// Feed page
 		if ($(".feed").length || window.location.pathname.indexOf("/feed") !== -1) {
-			require(["forum/vasak-feed"], function (mod) {
+			require(["vasak/feed"], function (mod) {
 				mod.init();
 			});
 			return;
@@ -220,7 +220,7 @@
 			$('[component="category/topic"]').length ||
 			$('[component="category"]').length
 		) {
-			require(["forum/vasak-list"], function (mod) {
+			require(["vasak/list"], function (mod) {
 				mod.init();
 			});
 			return;

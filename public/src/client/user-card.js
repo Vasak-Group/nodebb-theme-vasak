@@ -11,7 +11,7 @@
  *  - Links de autor en posts (.post-author-name, .author-link)
  *  - Avatares en el feed
  */
-define("forum/vasak-user-card", ["api"], function (api) {
+define("vasak/user-card", ["api"], function (api) {
 	var UserCard = {};
 
 	var HOVER_DELAY = 400; // ms antes de mostrar

@@ -11,7 +11,7 @@
  *  - Mejorar aria-labels en botones sin texto visible
  *  - Trap de foco en modales (composer, share modal)
  */
-define("forum/vasak-a11y", [], function () {
+define("vasak/a11y", [], function () {
 	var A11y = {};
 
 	A11y.init = function () {

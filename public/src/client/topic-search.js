@@ -8,7 +8,7 @@
  * Resalta los matches en el DOM.
  * Se activa con el botón en el sidebar del topic o con Ctrl+F (en topic).
  */
-define("forum/vasak-topic-search", ["api"], function (api) {
+define("vasak/topic-search", ["api"], function (api) {
 	var TopicSearch = {};
 
 	var DEBOUNCE_MS = 350;

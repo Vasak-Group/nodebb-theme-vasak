@@ -17,7 +17,7 @@
  * Tipos: "success" | "error" | "info" | "warning"
  * Duración: ms (default 3500, error 6000)
  */
-define("forum/vasak-toast", [], function () {
+define("vasak/toast", [], function () {
 	var Toast = {};
 
 	var CONTAINER_ID = "vasak-toast-container";

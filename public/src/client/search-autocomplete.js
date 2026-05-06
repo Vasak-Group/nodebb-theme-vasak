@@ -19,7 +19,7 @@
  *    .search-widget input[type="text"]  — input principal
  *    .search-widget .input-group        — contenedor
  */
-define("forum/vasak-autocomplete", ["api"], function (api) {
+define("vasak/autocomplete", ["api"], function (api) {
 	var Autocomplete = {};
 
 	// ── Configuración ──────────────────────────────────────────────────────

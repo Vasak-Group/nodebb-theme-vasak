@@ -11,7 +11,7 @@
  *  - Seleccionar con click o teclado (↑↓ Enter Escape)
  *  - Insertar "@username " en el cursor
  */
-define("forum/vasak-mentions", ["api"], function (api) {
+define("vasak/mentions", ["api"], function (api) {
 	var Mentions = {};
 
 	var DEBOUNCE_MS = 250;

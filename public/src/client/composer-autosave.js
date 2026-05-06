@@ -16,11 +16,33 @@
  *
  * STORAGE KEY: "vasak:draft:{cid}:{tid|new}" → { title, content, cid, tid, ts }
  */
-define("forum/vasak-autosave", ["alerts", "forum/vasak-storage"], function (
-	alerts,
-	VasakStorage,
-) {
+define("vasak/autosave", ["alerts"], function (alerts) {
 	var Autosave = {};
+
+	// ── Storage helpers (inline — evita dependencia AMD cruzada) ──────────
+	var VasakStorage = {
+		set: function (key, value) {
+			try {
+				localStorage.setItem(key, JSON.stringify(value));
+				return true;
+			} catch (e) {
+				return false;
+			}
+		},
+		get: function (key) {
+			try {
+				var raw = localStorage.getItem(key);
+				return raw === null ? null : JSON.parse(raw);
+			} catch (e) {
+				return null;
+			}
+		},
+		remove: function (key) {
+			try {
+				localStorage.removeItem(key);
+			} catch (e) {}
+		},
+	};
 
 	// ── Configuración ──────────────────────────────────────────────────────
 	var SAVE_DELAY = 2000; // ms de inactividad antes de guardar

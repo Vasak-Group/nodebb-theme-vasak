@@ -16,7 +16,7 @@
  *
  * Usado por: composer-autosave.js, reactions.js, feed-filters.js
  */
-define("forum/vasak-storage", [], function () {
+define("vasak/storage", [], function () {
 	var Storage = {};
 
 	var COMPRESS_THRESHOLD = 512; // bytes — comprimir si el JSON supera este tamaño

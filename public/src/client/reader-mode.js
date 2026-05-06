@@ -7,7 +7,7 @@
  * deja solo el contenido del post con tipografía optimizada.
  * Activado con el botón en el sidebar del topic.
  */
-define("forum/vasak-reader", [], function () {
+define("vasak/reader", [], function () {
 	var Reader = {};
 	var STORAGE_KEY = "vasak:reader-mode";
 	var isActive = false;

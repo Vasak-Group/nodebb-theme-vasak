@@ -14,7 +14,7 @@
  * Las preferencias se guardan en localStorage y se aplican inmediatamente.
  * No requiere recarga de página.
  */
-define("forum/vasak-settings", [], function () {
+define("vasak/settings", [], function () {
 	var Settings = {};
 
 	var STORAGE_KEY = "vasak:user-settings";

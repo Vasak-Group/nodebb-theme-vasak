@@ -7,7 +7,7 @@
  * Vista compacta: solo título + meta, sin preview de contenido ni imágenes.
  * Estado persistido en localStorage.
  */
-define("forum/vasak-compact", [], function () {
+define("vasak/compact", [], function () {
 	var Compact = {};
 
 	var STORAGE_KEY = "vasak:compact-mode";

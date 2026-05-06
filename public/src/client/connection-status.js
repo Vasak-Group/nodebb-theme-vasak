@@ -6,7 +6,7 @@
  * Banner sutil que aparece cuando el usuario pierde/recupera la conexión.
  * Usa los eventos nativos online/offline del navegador.
  */
-define("forum/vasak-connection", [], function () {
+define("vasak/connection", [], function () {
 	var Connection = {};
 
 	var $banner = null;

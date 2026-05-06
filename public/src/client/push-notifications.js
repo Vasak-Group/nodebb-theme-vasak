@@ -20,7 +20,7 @@
  *  - "vasak:push:dismissed" → timestamp de cuando el usuario cerró el banner
  *  - "vasak:push:subscribed" → "true" si ya está suscrito
  */
-define("forum/vasak-push", [], function () {
+define("vasak/push", [], function () {
 	var Push = {};
 
 	// ── Configuración ──────────────────────────────────────────────────────

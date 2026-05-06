@@ -7,10 +7,10 @@
  * Handles: image carousels, bookmark fix, parent post navigation,
  * post hover actions.
  */
-define("forum/topic/vasak-enhancements", [
+define("vasak/topic-enhancements", [
 	"hooks",
-	"forum/vasak-reactions",
-	"forum/vasak-toc",
+	"vasak/reactions",
+	"vasak/toc",
 ], function (hooks, Reactions, TOC) {
 	var carouselCounter = 0;
 

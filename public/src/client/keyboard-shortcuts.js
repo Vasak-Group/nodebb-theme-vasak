@@ -17,7 +17,7 @@
  *
  * Los atajos se desactivan cuando el foco está en un input/textarea.
  */
-define("forum/vasak-shortcuts", [], function () {
+define("vasak/shortcuts", [], function () {
 	var Shortcuts = {};
 
 	var STORAGE_KEY = "vasak:shortcuts:enabled";

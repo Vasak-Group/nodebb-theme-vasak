@@ -21,7 +21,7 @@
  * de NodeBB con su propia tabla en la DB. Esta implementación es
  * completamente funcional sin backend adicional.
  */
-define("forum/vasak-reactions", ["api", "alerts"], function (api, alerts) {
+define("vasak/reactions", ["api", "alerts"], function (api, alerts) {
 	var Reactions = {};
 
 	// ── Configuración ──────────────────────────────────────────────────────
