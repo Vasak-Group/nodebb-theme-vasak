@@ -1609,8 +1609,10 @@
 			if (!$btn.length) return;
 			$btn.attr("aria-pressed", dark ? "true" : "false");
 			$btn.attr("title", dark ? "Switch to light mode" : "Switch to dark mode");
-			$btn.attr("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+			$btn.attr(
+				"aria-label",
+				dark ? "Switch to light mode" : "Switch to dark mode",
+			);
 		}
 	}
-
 })();

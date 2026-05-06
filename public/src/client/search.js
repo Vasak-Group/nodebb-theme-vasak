@@ -24,6 +24,34 @@ define("forum/search", [
 	let selectedTags = [];
 	let selectedCids = [];
 	let searchFilters = {};
+
+	// ── Debounce timings ────────────────────────────────────────────
+	// All search-triggering interactions share a single pending timer
+	// so rapid changes (typing + filter tweak) collapse into one request.
+	const DEBOUNCE_INPUT = 350; // ms — main search input (was: no debounce)
+	const DEBOUNCE_FILTER = 400; // ms — filter dropdowns (was: fired on close, no delay)
+	const DEBOUNCE_TAGS = 300; // ms — tag autocomplete (was: 1000ms)
+	const MIN_QUERY_LEN = 2; // chars — don't search on 0–1 chars
+
+	// Shared pending-search timer so overlapping triggers collapse
+	let pendingSearchTimer = null;
+
+	/**
+	 * Schedule a search query, cancelling any already-pending one.
+	 * @param {number} delay  ms to wait before firing
+	 */
+	function scheduleSearch(delay) {
+		clearTimeout(pendingSearchTimer);
+		pendingSearchTimer = setTimeout(function () {
+			const data = getSearchDataFromDOM();
+			if (JSON.stringify(searchFilters) !== JSON.stringify(data)) {
+				searchFilters = data;
+				searchModule.query(searchFilters);
+			}
+		}, delay);
+	}
+
+	// ── Init ────────────────────────────────────────────────────────
 	Search.init = function () {
 		const searchIn = $("#search-in");
 		searchIn.on("change", function () {
@@ -36,10 +64,35 @@ define("forum/search", [
 			$(".search-results .content p, .search-results .topic-title"),
 		);
 
+		// ── Main search input — debounced live search ──────────────
+		// NodeBB's default only fires on form submit. We add a live
+		// debounced handler so results update as the user types.
+		$("#search-input")
+			.off("input.vasak keyup.vasak")
+			.on("input.vasak keyup.vasak", function (e) {
+				// Let Enter submit immediately (no delay)
+				if (e.type === "keyup" && e.key === "Enter") {
+					clearTimeout(pendingSearchTimer);
+					searchModule.query(getSearchDataFromDOM());
+					return;
+				}
+
+				const term = $(this).val().trim();
+
+				// Don't fire for very short queries (avoids expensive wildcard searches)
+				if (term.length > 0 && term.length < MIN_QUERY_LEN) {
+					return;
+				}
+
+				scheduleSearch(DEBOUNCE_INPUT);
+			});
+
+		// ── Form submit (keep original behaviour) ──────────────────
 		$("#advanced-search form")
 			.off("submit")
 			.on("submit", function (e) {
 				e.preventDefault();
+				clearTimeout(pendingSearchTimer);
 				searchModule.query(getSearchDataFromDOM());
 				return false;
 			});
@@ -56,6 +109,9 @@ define("forum/search", [
 			ajaxify.data.tagFilterSelected,
 		);
 
+		// ── Filter dropdowns — debounced on close ──────────────────
+		// Original code fired immediately on hidden.bs.dropdown.
+		// We add a short delay so rapid filter changes collapse.
 		$('[component="search/filters"]').on(
 			"hidden.bs.dropdown",
 			".dropdown",
@@ -67,17 +123,12 @@ define("forum/search", [
 					tag: updateTagFilter,
 				};
 
-				if (updateFns[$(this).attr("data-filter-name")]) {
-					updateFns[$(this).attr("data-filter-name")]();
+				const filterName = $(this).attr("data-filter-name");
+				if (updateFns[filterName]) {
+					updateFns[filterName]();
 				}
 
-				const searchFiltersNew = getSearchDataFromDOM();
-				if (
-					JSON.stringify(searchFilters) !== JSON.stringify(searchFiltersNew)
-				) {
-					searchFilters = searchFiltersNew;
-					searchModule.query(searchFilters);
-				}
+				scheduleSearch(DEBOUNCE_FILTER);
 			},
 		);
 
@@ -88,6 +139,8 @@ define("forum/search", [
 
 		searchFilters = getSearchDataFromDOM();
 	};
+
+	// ── Filter label updaters (unchanged logic) ─────────────────────
 
 	function updateTagFilter() {
 		const isActive = selectedTags.length > 0;
@@ -141,6 +194,8 @@ define("forum/search", [
 					: `[[search:replies]]`,
 			);
 	}
+
+	// ── DOM helpers ─────────────────────────────────────────────────
 
 	function getSearchDataFromDOM() {
 		const form = $("#advanced-search");
@@ -255,6 +310,8 @@ define("forum/search", [
 		}
 	}
 
+	// ── Preferences ─────────────────────────────────────────────────
+
 	function handleSavePreferences() {
 		$("#save-preferences").on("click", function () {
 			const data = getSearchDataFromDOM();
@@ -295,28 +352,23 @@ define("forum/search", [
 		});
 	}
 
+	// ── Category filter dropdown ─────────────────────────────────────
+
 	function categoryFilterDropdown(_selectedCids) {
 		ajaxify.data.allCategoriesUrl = "";
 		selectedCids = _selectedCids || [];
 		const dropdownEl = $('[component="category/filter"]');
 		categoryFilter.init(dropdownEl, {
 			selectedCids: _selectedCids,
-			updateButton: false, // prevent categoryFilter module from updating the button
-			states: [], // FIX: Disable watch states to remove "Watched categories" from dropdown
-			showLinks: true, // FIX: Show regular category links
+			updateButton: false,
+			states: [],
+			showLinks: true,
 			onSelect: function (data) {
-				// FIX: Update selectedCids immediately when a category is clicked
 				ajaxify.data.selectedCids = data.selectedCids;
 				selectedCids = data.selectedCids;
 
-				// FIX: Trigger search immediately without requiring additional clicks
-				const searchFiltersNew = getSearchDataFromDOM();
-				if (
-					JSON.stringify(searchFilters) !== JSON.stringify(searchFiltersNew)
-				) {
-					searchFilters = searchFiltersNew;
-					searchModule.query(searchFilters);
-				}
+				// Debounced: rapid category clicks collapse into one request
+				scheduleSearch(DEBOUNCE_FILTER);
 			},
 			onHidden: async function (data) {
 				const isActive =
@@ -346,6 +398,8 @@ define("forum/search", [
 		});
 	}
 
+	// ── User filter dropdown ─────────────────────────────────────────
+
 	function userFilterDropdown(el, _selectedUsers) {
 		selectedUsers = _selectedUsers || [];
 		userFilter.init(el, {
@@ -371,18 +425,20 @@ define("forum/search", [
 		});
 	}
 
+	// ── Tag filter dropdown ──────────────────────────────────────────
+
 	function tagFilterDropdown(el, _selectedTags) {
 		selectedTags = _selectedTags;
+
 		async function renderSelectedTags() {
 			const html = await app.parseAndTranslate(
 				"partials/search-filters",
 				"tagFilterSelected",
-				{
-					tagFilterSelected: selectedTags,
-				},
+				{ tagFilterSelected: selectedTags },
 			);
 			el.find('[component="tag/filter/selected"]').html(html);
 		}
+
 		function tagValueToObject(value) {
 			const escapedTag = utils.escapeHTML(value);
 			return {
@@ -402,9 +458,7 @@ define("forum/search", [
 						query: query,
 					});
 				} else {
-					result = {
-						tags: [tagValueToObject(query)],
-					};
+					result = { tags: [tagValueToObject(query)] };
 				}
 			}
 
@@ -423,9 +477,7 @@ define("forum/search", [
 			const html = await app.parseAndTranslate(
 				"partials/search-filters",
 				"tagFilterResults",
-				{
-					tagFilterResults: result.tags,
-				},
+				{ tagFilterResults: result.tags },
 			);
 			el.find('[component="tag/filter/results"]').html(html);
 			el.find('[component="tag/filter/results"] [data-tag]').on(
@@ -437,21 +489,17 @@ define("forum/search", [
 			);
 		}
 
+		// Tag autocomplete — was 1000ms, now 300ms
 		el.find('[component="tag/filter/search"]').on(
 			"keyup",
 			utils.debounce(function () {
 				if (app.user.privileges["search:tags"]) {
 					doSearch();
 				}
-			}, 1000),
+			}, DEBOUNCE_TAGS),
 		);
 
-		el.on("click", '[component="tag/filter/delete"]', function () {
-			const deleteTag = $(this).attr("data-tag");
-			selectedTags = selectedTags.filter((tag) => tag.value !== deleteTag);
-			renderSelectedTags();
-		});
-
+		// Enter key for users without tag-search privilege (no debounce needed)
 		el.find('[component="tag/filter/search"]').on("keyup", (e) => {
 			if (e.key === "Enter" && !app.user.privileges["search:tags"]) {
 				const value = el.find('[component="tag/filter/search"]').val();
@@ -461,6 +509,12 @@ define("forum/search", [
 				}
 				el.find('[component="tag/filter/search"]').val("");
 			}
+		});
+
+		el.on("click", '[component="tag/filter/delete"]', function () {
+			const deleteTag = $(this).attr("data-tag");
+			selectedTags = selectedTags.filter((tag) => tag.value !== deleteTag);
+			renderSelectedTags();
 		});
 
 		el.on("shown.bs.dropdown", function () {
