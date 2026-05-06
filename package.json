@@ -1,6 +1,6 @@
 {
 	"name": "@vasakgroup/nodebb-theme-vasak",
-	"version": "1.4.2",
+	"version": "1.4.3",
 	"description": "Modern, premium NodeBB theme for Vasak Community - Extends Harmony with custom styling",
 	"main": "theme.js",
 	"scripts": {
