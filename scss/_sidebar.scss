@@ -55,6 +55,9 @@
 .sidebar.bg-light,
 nav.sidebar.bg-light {
   background-color: $vsk-surface !important; // Pure white - cohesive with header
+  height: calc(100vh - 16px) !important;
+  margin: 8px !important;
+  border-radius: var(--corner-radius);
 }
 
 .sidebar {
