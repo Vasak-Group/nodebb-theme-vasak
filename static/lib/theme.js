@@ -1,320 +1,104 @@
 /**
  * Vasak Community Theme - Client-side JavaScript
- * Handles theme-specific interactions and behaviors
+ * Core: global behaviors loaded on every page.
+ *
+ * Page-specific code lives in separate AMD modules loaded on demand:
+ *   forum/topic/vasak-enhancements  → topic pages
+ *   forum/vasak-feed                → /feed page
+ *   forum/vasak-list                → category / list pages
+ *   forum/search                    → /search page (already split)
  */
 
 (function () {
 	"use strict";
 
-	var carouselCounter = 0;
+	// ── Global init ────────────────────────────────────────────────────────
+	$(document).ready(function () {
+		// Global behaviors (run on every page)
+		initSidebarToggle();
+		initSidebarAutoExpand();
+		fixMobileComposerCategoryDropdown();
+		fixNotificationDropdown();
+		initLazyLoading();
+		initSkeletonScreens();
+		initDarkMode();
+		initServiceWorker();
+		initAnimations();
 
-	// Patch search module to fix category filter
+		// ── Lazy-load page-specific modules ─────────────────────────────
+		loadPageModules();
+
+		// Re-run global behaviors after SPA navigation
+		$(window).on("action:ajaxify.end", function () {
+			fixMobileComposerCategoryDropdown();
+			fixNotificationDropdown();
+			setTimeout(initLazyLoading, 150);
+			loadPageModules();
+		});
+
+		// Re-run lazy loading after new content
+		$(window).on("action:posts.loaded action:topics.loaded", function () {
+			setTimeout(initLazyLoading, 150);
+		});
+
+		// Composer mobile fix
+		$(window).on("action:composer.loaded action:composer.enhanced", function () {
+			fixMobileComposerCategoryDropdown();
+		});
+	});
+
+	/**
+	 * Load the right module for the current page.
+	 * NodeBB's require() fetches the file only once and caches it.
+	 */
+	function loadPageModules() {
+		var url = (typeof ajaxify !== "undefined" && ajaxify.data)
+			? (ajaxify.data.template && ajaxify.data.template.name) || ""
+			: window.location.pathname;
+
+		// Topic page
+		if (
+			(typeof ajaxify !== "undefined" && ajaxify.data && ajaxify.data.template && ajaxify.data.template.topic) ||
+			$('[component="topic"]').length
+		) {
+			require(["forum/topic/vasak-enhancements"], function (mod) {
+				mod.init();
+			});
+			return;
+		}
+
+		// Feed page
+		if ($(".feed").length || window.location.pathname.indexOf("/feed") !== -1) {
+			require(["forum/vasak-feed"], function (mod) {
+				mod.init();
+			});
+			return;
+		}
+
+		// Category / list pages (recent, unread, popular, top, category/*)
+		if (
+			$('[component="category/topic"]').length ||
+			$('[component="category"]').length
+		) {
+			require(["forum/vasak-list"], function (mod) {
+				mod.init();
+			});
+			return;
+		}
+
+		// Search page — patchSearchCategoryFilter is in forum/search module,
+		// but we keep the global patch here for the ajaxify.end case
+		if (window.location.pathname.indexOf("/search") !== -1) {
+			patchSearchCategoryFilter();
+		}
+	}
+
+	// Also patch search on ajaxify navigation to search
 	$(window).on("action:ajaxify.end", function (ev, data) {
-		if (data.url && data.url.startsWith("search")) {
+		if (data && data.url && data.url.startsWith("search")) {
 			patchSearchCategoryFilter();
 		}
 	});
-
-	// Theme initialization
-	$(document).ready(function () {
-		console.log("Vasak Community Theme initialized");
-
-		// Patch search if we're already on the search page
-		if (window.location.pathname.includes("/search")) {
-			setTimeout(patchSearchCategoryFilter, 500);
-		}
-
-		// Initialize sidebar toggle handler
-		initSidebarToggle();
-
-		// Auto-expand sidebar on desktop (Reddit-style default)
-		initSidebarAutoExpand();
-
-		// Initialize image carousels for posts with multiple images
-		initPostImageCarousels();
-
-		// Fix bookmark alert - only show when bookmark is meaningfully ahead
-		fixBookmarkAlert();
-
-		// Initialize parent post click navigation with smooth scroll
-		initParentPostNavigation();
-
-		// Initialize post hover actions (show actions only on directly hovered post)
-		initPostHoverActions();
-
-		// Initialize click handler for composer prompt card (rendered server-side in feed.tpl)
-		initFeedComposerPromptHandler();
-
-		// Initialize voting handlers for category/topics listing pages
-		initTopicListVoting();
-
-		// Initialize immediate category filter navigation on feed page
-		initFeedCategoryFilter();
-
-		// Fix mobile category dropdown positioning on feed page
-		fixMobileFeedCategoryDropdown();
-
-		// Fix mobile category dropdown positioning in composer
-		fixMobileComposerCategoryDropdown();
-
-		// Fix notification dropdown inline styles
-		fixNotificationDropdown();
-
-		// Initialize share button handlers
-		initShareHandlers();
-
-		// Initialize lazy loading for all images
-		initLazyLoading();
-
-		// Initialize skeleton screens for AJAX-loaded content
-		initSkeletonScreens();
-
-		// Initialize dark mode toggle
-		initDarkMode();
-
-		// Register Service Worker
-		initServiceWorker();
-
-		// Initialize page transitions and micro-interactions
-		initAnimations();
-
-		// Re-initialize carousels when new posts are loaded (infinite scroll, etc.)
-		// Also handle post edits by clearing the processed flag
-		$(window).on(
-			"action:posts.loaded action:topic.loaded action:ajaxify.end",
-			function () {
-				initPostImageCarousels();
-				initParentPostNavigation();
-				fixMobileFeedCategoryDropdown();
-				fixMobileComposerCategoryDropdown();
-				fixNotificationDropdown();
-				initPostHoverActions();
-				initFeedComposerPromptHandler();
-				initTopicListVoting();
-				initFeedCategoryFilter();
-				initShareHandlers();
-				// Re-apply lazy loading to any new images loaded via AJAX
-				setTimeout(initLazyLoading, 150);
-			},
-		);
-
-		// Handle post edits - need to re-process the edited post
-		$(window).on("action:posts.edited", function (ev, data) {
-			if (data && data.post && data.post.pid) {
-				// Find the edited post and remove the processed flag so it gets re-scanned
-				var $post = $('[data-pid="' + data.post.pid + '"]');
-				var $content = $post.find('[component="post/content"]');
-				$content.removeAttr("data-carousel-processed");
-				// Remove any existing carousel in this post
-				$content.find(".post-image-carousel").remove();
-				// Re-initialize
-				initPostImageCarousels();
-			}
-		});
-
-		// Handle composer events - fix category dropdown on mobile when composer is shown
-		$(window).on(
-			"action:composer.loaded action:composer.enhanced",
-			function () {
-				fixMobileComposerCategoryDropdown();
-			},
-		);
-	});
-
-	/**
-	 * Convert multiple images in post content to Bootstrap carousels
-	 */
-	function initPostImageCarousels() {
-		// Find all post content areas that haven't been processed
-		$('[component="post/content"]:not([data-carousel-processed])').each(
-			function () {
-				var $content = $(this);
-				$content.attr("data-carousel-processed", "true");
-
-				// Find all images in post content - including those in links (lightbox) and paragraphs
-				var $images = $content.find("img").filter(function () {
-					var $img = $(this);
-
-					// Exclude images already in a carousel
-					if ($img.closest(".carousel, .post-image-carousel").length) {
-						return false;
-					}
-
-					// Exclude emojis and small icons by class
-					if (
-						$img.hasClass("emoji") ||
-						$img.hasClass("emoji-img") ||
-						$img.hasClass("icon") ||
-						$img.hasClass("not-responsive")
-					) {
-						return false;
-					}
-
-					// Check the image source to determine if it's a content image
-					var src = $img.attr("src") || "";
-
-					// Include images from uploads folder or with image extensions
-					var isContentImage =
-						src.indexOf("/assets/uploads/") !== -1 ||
-						src.indexOf("/files/") !== -1 ||
-						src.match(/\.(jpg|jpeg|png|gif|webp)(\?|$)/i);
-
-					if (!isContentImage) {
-						return false;
-					}
-
-					// Exclude tiny images by checking width/height attributes if present
-					var width = $img.attr("width");
-					var height = $img.attr("height");
-					if (
-						(width && parseInt(width, 10) < 50) ||
-						(height && parseInt(height, 10) < 50)
-					) {
-						return false;
-					}
-
-					return true;
-				});
-
-				// Only create carousel if 2+ images
-				if ($images.length >= 2) {
-					createCarousel($content, $images);
-					console.log(
-						"Vasak: Found " + $images.length + " images, creating carousel",
-					);
-				} else if ($images.length > 0) {
-					console.log(
-						"Vasak: Found " +
-							$images.length +
-							" image(s), not enough for carousel",
-					);
-				}
-			},
-		);
-	}
-
-	/**
-	 * Create a Bootstrap 5 carousel from a set of images
-	 */
-	function createCarousel($content, $images) {
-		var carouselId = "post-carousel-" + ++carouselCounter;
-
-		// Build carousel HTML
-		var carouselHtml =
-			'<div id="' +
-			carouselId +
-			'" class="carousel slide post-image-carousel" data-bs-ride="false">';
-
-		// Indicators (dots)
-		carouselHtml += '<div class="carousel-indicators">';
-		$images.each(function (index) {
-			var activeClass = index === 0 ? "active" : "";
-			var ariaCurrent = index === 0 ? 'aria-current="true"' : "";
-			carouselHtml +=
-				'<button type="button" data-bs-target="#' +
-				carouselId +
-				'" data-bs-slide-to="' +
-				index +
-				'" class="' +
-				activeClass +
-				'" ' +
-				ariaCurrent +
-				' aria-label="Slide ' +
-				(index + 1) +
-				'"></button>';
-		});
-		carouselHtml += "</div>";
-
-		// Carousel inner (slides)
-		carouselHtml += '<div class="carousel-inner">';
-		$images.each(function (index) {
-			var $img = $(this);
-			var src = $img.attr("src");
-			var alt = $img.attr("alt") || "Image " + (index + 1);
-			var activeClass = index === 0 ? "active" : "";
-			// First slide loads eagerly (visible), rest load lazily
-			var loadingAttr = index === 0 ? "eager" : "lazy";
-			carouselHtml += '<div class="carousel-item ' + activeClass + '">';
-			carouselHtml +=
-				'<img src="' +
-				src +
-				'" class="d-block w-100" alt="' +
-				alt +
-				'" loading="' +
-				loadingAttr +
-				'">';
-			carouselHtml += "</div>";
-		});
-		carouselHtml += "</div>";
-
-		// Navigation arrows
-		carouselHtml +=
-			'<button class="carousel-control-prev" type="button" data-bs-target="#' +
-			carouselId +
-			'" data-bs-slide="prev">';
-		carouselHtml +=
-			'<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
-		carouselHtml += '<span class="visually-hidden">Previous</span>';
-		carouselHtml += "</button>";
-		carouselHtml +=
-			'<button class="carousel-control-next" type="button" data-bs-target="#' +
-			carouselId +
-			'" data-bs-slide="next">';
-		carouselHtml +=
-			'<span class="carousel-control-next-icon" aria-hidden="true"></span>';
-		carouselHtml += '<span class="visually-hidden">Next</span>';
-		carouselHtml += "</button>";
-
-		carouselHtml += "</div>";
-
-		// Find the topmost element to insert carousel before
-		// Images can be in: <p><img></p>, <p><a><img></a></p>, <a><img></a>, or just <img>
-		var $firstImg = $images.first();
-		var $insertBefore = $firstImg;
-
-		// Walk up to find the direct child of $content
-		while (
-			$insertBefore.parent().length &&
-			!$insertBefore.parent().is($content)
-		) {
-			$insertBefore = $insertBefore.parent();
-		}
-
-		// Insert carousel before the first image's container
-		$insertBefore.before(carouselHtml);
-
-		// Collect elements to remove (images and their empty containers)
-		var elementsToRemove = [];
-		$images.each(function () {
-			var $img = $(this);
-			var $element = $img;
-
-			// Walk up to find the direct child of $content
-			while ($element.parent().length && !$element.parent().is($content)) {
-				$element = $element.parent();
-			}
-
-			// Mark for removal if not already marked
-			if (elementsToRemove.indexOf($element[0]) === -1) {
-				elementsToRemove.push($element[0]);
-			}
-		});
-
-		// Remove the original image containers
-		$(elementsToRemove).remove();
-
-		// Initialize Bootstrap carousel
-		var carouselEl = document.getElementById(carouselId);
-		if (carouselEl && typeof bootstrap !== "undefined") {
-			new bootstrap.Carousel(carouselEl, {
-				interval: false, // Don't auto-slide
-				touch: true,
-				wrap: true,
-			});
-		}
-
-		console.log("Vasak: Created carousel with " + $images.length + " images");
-	}
 
 	/**
 	 * Initialize sidebar toggle click handler

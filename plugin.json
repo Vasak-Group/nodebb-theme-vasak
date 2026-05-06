@@ -22,7 +22,10 @@
 		"forum/search": "public/src/client/search.js",
 		"forum/category": "public/src/client/category.js",
 		"forum/world": "public/src/client/world.js",
-		"forum/account/categories": "public/src/client/account/categories.js"
+		"forum/account/categories": "public/src/client/account/categories.js",
+		"forum/topic/vasak-enhancements": "public/src/client/topic-enhancements.js",
+		"forum/vasak-feed": "public/src/client/feed-enhancements.js",
+		"forum/vasak-list": "public/src/client/list-enhancements.js"
 	},
 	"templates": "templates",
 	"screenshot": "screenshot.png",
