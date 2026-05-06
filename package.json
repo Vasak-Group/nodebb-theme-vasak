@@ -44,5 +44,10 @@
 	],
 	"devDependencies": {
 		"@biomejs/biome": "2.4.14"
-	}
+	},
+	"packageManager": "bun",
+	"private":"false",
+	"publishConfig": {
+    "access": "public"
+  }
 }
