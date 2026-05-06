@@ -5,10 +5,10 @@
         <a href="{relative_path}/" class="vasak-logo-link" title="Vasak Community">
             <!-- Icon logo (shown when collapsed) -->
             <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-icon.png" alt="Vasak"
-                class="vasak-logo-icon visible-closed" />
+                class="vasak-logo-icon visible-closed" loading="eager" />
             <!-- Full logo (shown when expanded) -->
             <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-full.png" alt="Vasak Community"
-                class="vasak-logo-full visible-open" style="height:44px;width:auto;" />
+                class="vasak-logo-full visible-open" style="height:44px;width:auto;" loading="eager" />
         </a>
     </div>
 

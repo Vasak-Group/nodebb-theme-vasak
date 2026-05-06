@@ -13,7 +13,7 @@
             <a class="flex-grow-0 flex-shrink-0"
                 href="{{{ if ./user.userslug}}}{config.relative_path}/user/{./user.userslug}{{{ else }}}#{{{ end }}}">
                 {{{ if (./image && ./from) }}}
-                <img class="avatar avatar-rounded" style="--avatar-size: 32px;" src="{./image}"
+                <img class="avatar avatar-rounded" style="--avatar-size: 32px;" src="{./image}" loading="lazy"
                     onerror="this.onerror=null;this.style.display='none';this.nextElementSibling.classList.remove('hidden');" />
                 <div class="avatar avatar-rounded hidden"
                     style="--avatar-size: 32px; background-color: {./user.icon:bgColor};">{./user.icon:text}</div>

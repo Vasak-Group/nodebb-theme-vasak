@@ -88,14 +88,14 @@
 					<div class="p-1 position-relative feed-image-section">
 						<div class="overflow-hidden rounded-1" style="max-height: 300px;">
 							<a href="{config.relative_path}/topic/{./topic.slug}">
-								<img class="w-100" src="{./topic.thumbs.0.url}">
+								<img class="w-100" src="{./topic.thumbs.0.url}" loading="lazy">
 							</a>
 						</div>
 
 						<div class="position-absolute end-0 bottom-0 p-3 d-flex gap-2 align-items-center pe-none">
 							{{{ each ./topic.thumbs }}}
 							{{{ if (@index != 0) }}}
-							<img class="rounded-1" style="max-height: 64px; object-fit: contain;" src="{./url}">
+							<img class="rounded-1" style="max-height: 64px; object-fit: contain;" src="{./url}" loading="lazy">
 							{{{ end }}}
 							{{{ end }}}
 						</div>

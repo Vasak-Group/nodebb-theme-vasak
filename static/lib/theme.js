@@ -63,6 +63,9 @@
 		// Initialize share button handlers
 		initShareHandlers();
 
+		// Initialize lazy loading for all images
+		initLazyLoading();
+
 		// Re-initialize carousels when new posts are loaded (infinite scroll, etc.)
 		// Also handle post edits by clearing the processed flag
 		$(window).on(
@@ -78,6 +81,8 @@
 				initTopicListVoting();
 				initFeedCategoryFilter();
 				initShareHandlers();
+				// Re-apply lazy loading to any new images loaded via AJAX
+				setTimeout(initLazyLoading, 150);
 			},
 		);
 
@@ -215,13 +220,17 @@
 			var src = $img.attr("src");
 			var alt = $img.attr("alt") || "Image " + (index + 1);
 			var activeClass = index === 0 ? "active" : "";
+			// First slide loads eagerly (visible), rest load lazily
+			var loadingAttr = index === 0 ? "eager" : "lazy";
 			carouselHtml += '<div class="carousel-item ' + activeClass + '">';
 			carouselHtml +=
 				'<img src="' +
 				src +
 				'" class="d-block w-100" alt="' +
 				alt +
-				'" loading="lazy">';
+				'" loading="' +
+				loadingAttr +
+				'">';
 			carouselHtml += "</div>";
 		});
 		carouselHtml += "</div>";
@@ -1215,4 +1224,113 @@
 			share.addShareHandlers(pageTitle);
 		});
 	}
+
+	// ========================================
+	// LAZY LOADING IMPLEMENTATION
+	// ========================================
+	// Implements native lazy loading + IntersectionObserver fallback
+	// for all images across the entire site
+
+	/**
+	 * Initialize lazy loading for all images
+	 * Runs on page load and after AJAX navigation
+	 */
+	function initLazyLoading() {
+		addNativeLazyLoading();
+		if ("IntersectionObserver" in window) {
+			initIntersectionObserver();
+		}
+	}
+
+	/**
+	 * Add native loading="lazy" attribute to all images
+	 * Primary mechanism — supported in all modern browsers
+	 */
+	function addNativeLazyLoading() {
+		$("img").each(function () {
+			var $img = $(this);
+
+			// Skip if already has a loading attribute set
+			if ($img.attr("loading")) {
+				return;
+			}
+
+			// Skip emojis, icons and non-responsive images
+			if (
+				$img.hasClass("emoji") ||
+				$img.hasClass("emoji-img") ||
+				$img.hasClass("icon") ||
+				$img.hasClass("not-responsive")
+			) {
+				return;
+			}
+
+			// Skip avatars — they are small and often above the fold
+			if (
+				$img.hasClass("avatar") ||
+				$img.hasClass("avatar-rounded") ||
+				$img.closest('[component="user/picture"]').length ||
+				$img.closest('[component="header/avatar"]').length
+			) {
+				return;
+			}
+
+			// Logos in sidebar load eagerly (above the fold)
+			if ($img.closest(".vasak-sidebar-logo").length) {
+				$img.attr("loading", "eager");
+				return;
+			}
+
+			// Everything else gets lazy loading
+			$img.attr("loading", "lazy");
+		});
+	}
+
+	/**
+	 * IntersectionObserver for images with data-src (manual lazy loading)
+	 * Fallback for dynamically injected images
+	 */
+	function initIntersectionObserver() {
+		if (!window.vasakImageObserver) {
+			window.vasakImageObserver = new IntersectionObserver(
+				function (entries) {
+					entries.forEach(function (entry) {
+						if (entry.isIntersecting) {
+							var img = entry.target;
+							var dataSrc = img.getAttribute("data-src");
+							if (dataSrc) {
+								img.src = dataSrc;
+								img.removeAttribute("data-src");
+							}
+							img.addEventListener("load", function () {
+								img.classList.add("loaded");
+							});
+							if (img.complete) {
+								img.classList.add("loaded");
+							}
+							window.vasakImageObserver.unobserve(img);
+						}
+					});
+				},
+				{ rootMargin: "200px 0px", threshold: 0.01 },
+			);
+		}
+		document.querySelectorAll("img[data-src]").forEach(function (img) {
+			window.vasakImageObserver.observe(img);
+		});
+	}
+
+	// Mark lazy images as loaded when they finish loading (for CSS fade-in)
+	$(document).on("load", 'img[loading="lazy"]', function () {
+		$(this).addClass("loaded");
+	});
+
+	// Handle images already complete when the script runs
+	$(document).ready(function () {
+		$('img[loading="lazy"]').each(function () {
+			if (this.complete && this.naturalWidth > 0) {
+				$(this).addClass("loaded");
+			}
+		});
+	});
 })();

@@ -146,6 +146,53 @@ a {
 }
 
 // ===========================================================
+// LAZY LOADING – Fade-in transition for images
+// ===========================================================
+
+// Lazy images start invisible and fade in when loaded
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  // Loaded state: added by JS when load event fires
+  &.loaded,
+  &[data-loaded="true"] {
+    opacity: 1;
+  }
+}
+
+// Eager images and images without loading attribute are always visible
+img[loading="eager"],
+img:not([loading]) {
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+// Placeholder background while image loads (prevents layout shift)
+img[loading="lazy"] {
+  background-color: rgba(0, 0, 0, 0.04);
+  min-height: 1px; // Ensure element has dimensions even before src loads
+}
+
+// Avatars and small icons should never be invisible
+// (they use buildAvatar which may not have loading attr)
+.avatar,
+[component="user/picture"],
+[component="avatar/picture"],
+.avatar-rounded {
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+// Emojis and icons always visible
+img.emoji,
+img.emoji-img,
+img.not-responsive {
+  opacity: 1 !important;
+  transition: none !important;
+}
+
+// ===========================================================
 // PROFILE PAGE - Hide Push Notifications link
 // ===========================================================
 #web-push {

@@ -3,10 +3,10 @@
     <div
         class="col-12 d-flex border-bottom pb-3 {{{ if config.theme.centerHeaderElements }}}justify-content-center{{{ end }}}">
         <!-- Mobile Logo (only visible on mobile) -->
-        <div class="javis-mobile-header-logo d-none">
-            <a href="{relative_path}/" class="javis-mobile-logo-link" title="JAVIS Community">
-                <img src="{relative_path}/plugins/@okjavis/nodebb-theme-javis/static/images/logo-full.png"
-                    alt="JAVIS Community" class="javis-mobile-logo-img" />
+        <div class="vasak-mobile-header-logo d-none">
+            <a href="{relative_path}/" class="vasak-mobile-logo-link" title="Vasak Community">
+                <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-full.png"
+                    alt="Vasak Community" class="vasak-mobile-logo-img" loading="eager" />
             </a>
         </div>
 
