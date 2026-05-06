@@ -31,6 +31,11 @@
 			scrollUX.init();
 		});
 
+		// Virtual list / content-visibility optimization
+		require(["forum/vasak-virtual-list"], function (virtualList) {
+			virtualList.init();
+		});
+
 		// ── Lazy-load page-specific modules ─────────────────────────────
 		loadPageModules();
 

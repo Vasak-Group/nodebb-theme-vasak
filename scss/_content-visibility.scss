@@ -1,0 +1,81 @@
+// ============================================
+// CONTENT VISIBILITY — Virtual Rendering
+// ============================================
+// Usa la API nativa content-visibility: auto para que el
+// navegador omita el rendering de elementos fuera del viewport.
+// Equivalente al virtual scrolling pero sin tocar el DOM,
+// lo que preserva todos los handlers de NodeBB intactos.
+//
+// Soporte: Chrome 85+, Edge 85+, Firefox 125+, Safari 18+
+// Fallback: sin efecto en navegadores no soportados (graceful degradation)
+//
+// Referencia: https://web.dev/content-visibility/
+// ============================================
+
+// ── Feed posts ────────────────────────────────────────────────────────────
+// Cada post del feed tiene altura variable (~150-400px).
+// contain-intrinsic-size da una estimación para el scrollbar.
+
+.feed ul[component="posts"] > li[component="post"] {
+  content-visibility: auto;
+  // Altura estimada promedio de un post del feed
+  // El navegador la usa para calcular el scrollbar antes de renderizar
+  contain-intrinsic-size: auto 220px;
+}
+
+// ── Topic cards (category, recent, unread, popular, top) ──────────────────
+// Las topic cards tienen altura más uniforme (~120px).
+
+ul[component="category"] > li[component="category/topic"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 120px;
+}
+
+// ── Posts en topic page ───────────────────────────────────────────────────
+// Los posts de un topic tienen altura muy variable (puede ser 100px o 2000px).
+// Usamos un valor conservador alto para evitar que el scrollbar "salte".
+// NOTA: No aplicar en el primer post (above the fold) — se excluye via :first-child.
+
+ul[component="topic"] > li[component="post"]:not(:first-child):not(:nth-child(2)) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 400px;
+}
+
+// ── Categorías (lista de categorías) ─────────────────────────────────────
+
+ul.categories-list > li[component="categories/category"] {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 160px;
+}
+
+// ── CSS Containment adicional ─────────────────────────────────────────────
+// contain: layout style paint — le dice al navegador que el elemento
+// es independiente del resto del documento, permitiendo optimizaciones
+// adicionales de rendering.
+
+.feed ul[component="posts"] > li[component="post"],
+ul[component="category"] > li[component="category/topic"],
+ul.categories-list > li[component="categories/category"] {
+  // layout: el layout interno no afecta al externo
+  // style: los estilos no escapan del elemento
+  // paint: el contenido no se pinta fuera del bounding box
+  contain: layout style paint;
+}
+
+// ── Excluir elementos críticos ────────────────────────────────────────────
+// El primer post y el segundo siempre deben renderizarse inmediatamente
+// (above the fold). content-visibility: visible es el default, pero
+// lo hacemos explícito para claridad.
+
+.feed ul[component="posts"] > li[component="post"]:first-child,
+.feed ul[component="posts"] > li[component="post"]:nth-child(2),
+ul[component="category"] > li[component="category/topic"]:first-child,
+ul[component="category"] > li[component="category/topic"]:nth-child(2),
+ul[component="topic"] > li[component="post"]:first-child,
+ul[component="topic"] > li[component="post"]:nth-child(2) {
+  content-visibility: visible;
+  contain: none; // Sin containment en elementos críticos
+}
+
+// ── Reduced motion: sin cambios ───────────────────────────────────────────
+// content-visibility no genera animaciones, no necesita override.
