@@ -2,13 +2,34 @@
     class="{{{ if config.theme.openSidebars}}}open{{{ end }}} text-dark bg-light sidebar sidebar-left start-0 border-end vh-100 d-none d-lg-flex flex-column justify-content-between sticky-top">
     <!-- Vasak Logo Section -->
     <div class="vasak-sidebar-logo">
-        <a href="{relative_path}/" class="vasak-logo-link" title="Vasak Community">
-            <!-- Icon logo (shown when collapsed) -->
-            <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-icon.png" alt="Vasak"
-                class="vasak-logo-icon visible-closed" loading="eager" />
-            <!-- Full logo (shown when expanded) -->
-            <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-full.png" alt="Vasak Community"
-                class="vasak-logo-full visible-open" style="height:44px;width:auto;" loading="eager" />
+        <a href="{{{ if brand:logo:url }}}{brand:logo:url}{{{ else }}}{relative_path}/{{{ end }}}"
+            class="vasak-logo-link"
+            title="{{{ if config.siteTitle }}}{config.siteTitle}{{{ else }}}Vasak Community{{{ end }}}">
+
+            {{{ if brand:logo }}}
+            <!-- Logo configurado en el ACP (collapsed: recortado como ícono, expanded: completo) -->
+            <img src="{brand:logo}?{config.cache-buster}"
+                alt="{{{ if brand:logo:alt }}}{brand:logo:alt}{{{ else }}}{config.siteTitle}{{{ end }}}"
+                class="vasak-logo-icon visible-closed"
+                loading="eager" />
+            <img src="{brand:logo}?{config.cache-buster}"
+                alt="{{{ if brand:logo:alt }}}{brand:logo:alt}{{{ else }}}{config.siteTitle}{{{ end }}}"
+                class="vasak-logo-full visible-open"
+                style="height:44px;width:auto;"
+                loading="eager" />
+            {{{ else }}}
+            <!-- Fallback: imágenes del tema si no hay logo configurado en el ACP -->
+            <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-icon.png"
+                alt="{{{ if config.siteTitle }}}{config.siteTitle}{{{ else }}}Vasak{{{ end }}}"
+                class="vasak-logo-icon visible-closed"
+                loading="eager" />
+            <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-full.png"
+                alt="{{{ if config.siteTitle }}}{config.siteTitle}{{{ else }}}Vasak Community{{{ end }}}"
+                class="vasak-logo-full visible-open"
+                style="height:44px;width:auto;"
+                loading="eager" />
+            {{{ end }}}
+
         </a>
     </div>
 

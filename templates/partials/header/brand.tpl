@@ -4,9 +4,20 @@
         class="col-12 d-flex border-bottom pb-3 {{{ if config.theme.centerHeaderElements }}}justify-content-center{{{ end }}}">
         <!-- Mobile Logo (only visible on mobile) -->
         <div class="vasak-mobile-header-logo d-none">
-            <a href="{relative_path}/" class="vasak-mobile-logo-link" title="Vasak Community">
+            <a href="{{{ if brand:logo:url }}}{brand:logo:url}{{{ else }}}{relative_path}/{{{ end }}}"
+                class="vasak-mobile-logo-link"
+                title="{{{ if config.siteTitle }}}{config.siteTitle}{{{ else }}}Vasak Community{{{ end }}}">
+                {{{ if brand:logo }}}
+                <img src="{brand:logo}?{config.cache-buster}"
+                    alt="{{{ if brand:logo:alt }}}{brand:logo:alt}{{{ else }}}{config.siteTitle}{{{ end }}}"
+                    class="vasak-mobile-logo-img"
+                    loading="eager" />
+                {{{ else }}}
                 <img src="{relative_path}/plugins/nodebb-theme-vasak/static/images/logo-full.png"
-                    alt="Vasak Community" class="vasak-mobile-logo-img" loading="eager" />
+                    alt="{{{ if config.siteTitle }}}{config.siteTitle}{{{ else }}}Vasak Community{{{ end }}}"
+                    class="vasak-mobile-logo-img"
+                    loading="eager" />
+                {{{ end }}}
             </a>
         </div>
 
